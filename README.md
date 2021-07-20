@@ -5,6 +5,6 @@
 
 | Title     | Deadline   | Score    | Total
 |-----------|------------|----------|--------
-| Mid Prez  | 7,Sep      |          | 20%
+| Mid Prez  |  7,Sep     |          | 20%
 | Fin Prez  | 29,Oct     |          | 60%
-| Ind Reprt | 9,Nov      |          | 20%
+| Ind Reprt |  9,Nov     |          | 20%
