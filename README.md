@@ -1,5 +1,10 @@
 # deco3801-21s2
 
+## Up next
+
+| Title                | Deadline
+|----------------------|-----------------------
+| Build Task Sheet 1   | 1300 16th Aug
 
 ## Deadlines
 
