@@ -5,7 +5,10 @@
 ```bash
 sudo apt-get install python
 pip install virtualenv
-source Environments/deco-env/bin/activate
-pip install -r /Environments/requirments.txt
+cd Environments
+virtualenv deco-env
+source ./deco-env/bin/activate
+pip install -r ./requirments.txt
+cd ..
 python server.py
 ```
