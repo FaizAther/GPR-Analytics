@@ -1,7 +1,18 @@
-from flask import Flask, redirect, url_for, render_template, send_from_directory
 import os
+from flask import (
+    Flask, redirect, url_for,
+    render_template, send_from_directory,
+    request, session, flash
+)
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.secret_key = "gpr"
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
 
 @app.route('/favicon.ico')
 def favicon():
@@ -26,4 +37,3 @@ def hello(name):
 if __name__ == '__main__':
     app.debug = True
     app.run()
-
