@@ -12,3 +12,9 @@ pip install -r ./requirments.txt
 cd ..
 python server.py
 ```
+
+## References
+
+- [Flask docs](https://flask.palletsprojects.com/en/2.0.x/])
+
+- [SQLAlchemy docs](https://docs-sqlalchemy.readthedocs.io/ko/latest/)
