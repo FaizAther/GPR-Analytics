@@ -58,4 +58,4 @@ if __name__ == '__main__':
     if DATABASE_NAME not in os.listdir():
         db.create_all()
     app.debug = True
-    app.run()
+    app.run(host="0.0.0.0", port='8888', debug=True)
