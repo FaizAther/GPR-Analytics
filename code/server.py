@@ -23,6 +23,10 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.id}, {self.username}')"
 
+@app.route('/public/<file>')
+def public(file):
+    return send_from_directory(os.path.join(app.root_path, 'public'),
+                                file, mimetype='')
 
 @app.route('/favicon.ico')
 def favicon():
@@ -53,6 +57,10 @@ def add_user(name):
 
 def hello(name):
     return render_template("hello.html", content=f"Hello {name}")
+
+@app.route('/video')
+def video():
+    return render_template("video.html")
 
 if __name__ == '__main__':
     if DATABASE_NAME not in os.listdir():
