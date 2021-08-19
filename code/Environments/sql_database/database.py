@@ -5,7 +5,9 @@
 from __future__ import print_function
 import mysql.connector
 from mysql.connector import errorcode
+
 from table_lists import tables
+from populate import pop_student, pop_course, pop_course_info, pop_enrolment, pop_grade
 
 # establish the connection
 db = "university_db"
@@ -65,13 +67,55 @@ def create_tables(DB_NAME, cursor, TABLES):
     cursor.close()
     cnx.close()
 
+def insert_student(list):
+    sql = "INSERT INTO student (student_id, age, first_name,last_name, gender, degree)\
+           VALUES (%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_courses(list):
+    sql = "INSERT INTO course (course_id, course_name, year)\
+           VALUES (%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_course_info(list):
+    sql = "INSERT INTO course_info (course_id, lecturer)\
+           VALUES (%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit(list)
+    return
+
+def insert_enrolments(list):
+    sql = "INSERT INTO enrolments (course_id, student_id, enrol_date)\
+           VALUES (%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_grades(list):
+    sql = "INSERT INTO grades (course_id, student_id, year, semester, grade)\
+           VALUES (%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def retrieve_data(string):
+    mycursor.execute(string)
+    result = mycursor.fetchall()
+    for row in result:
+        print(row)
+
 def main():
     '''
     Can only execute one function because cursor can only execute 1 time.
     Comment out other functions to use the function you want.
     '''
-    create_tables(db, mycursor, tables()) # create tables
+    #create_tables(db, mycursor, tables()) # create tables
     #show_tables()
+    #insert_student(pop_student())
 
 if __name__=="__main__":
     main()
