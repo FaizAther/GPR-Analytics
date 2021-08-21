@@ -27,7 +27,7 @@ python server.py
 - <https://www.youtube.com/watch?v=WmR9IMUD_CY>
 - <https://www.youtube.com/watch?v=DvlyzDZDEq4>
 
-### ~~~TODO: Moodle plugin~~~
+### ~~TODO: Moodle plugin~~
 
 - <https://www.youtube.com/watch?v=JzYjPF5ybT8&list=PLnNniujrnp0lx-cD8sT9Eeq7l6CcxVwnY>
 - <https://www.youtube.com/watch?v=u54B7eFuG6w&list=PLnNniujrnp0mFwUNszRcI2OBCiBAh9Iqs>
