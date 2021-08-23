@@ -10,6 +10,7 @@
 
 | Title     | Deadline   | Score    | Total
 |-----------|------------|----------|--------
+| S.O.W     | 16,Aug     |   PASS   | N/A
 | Mid Prez  |  7,Sep     |          | 20%
 | Fin Prez  | 29,Oct     |          | 60%
 | Ind Reprt |  9,Nov     |          | 20%
