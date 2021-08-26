@@ -15,3 +15,11 @@ Allows user to write query
 
 ## table_lists.py
 Contains the list of tables in our database
+### Note: Performance table
+- at_risk Attribute is a boolean data type (0,1) where 0 is false and 1 is true.
+- For example, if we want to find all the students who are 'at risk', we can query:
+    - "SELECT * 
+        FROM student,enrolment,performance 
+        WHERE student.student_id = enrolment.student_id 
+        AND enrolment.performance_id = performance.performance_id 
+        AND performance.at_risk = '1';"

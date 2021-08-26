@@ -20,12 +20,14 @@ def pop_student():
         'Bachelor of Mathematics',
         'Bachelor of Laws'
     ]
+    id_list = random.sample(range(40000000, 49999999), n)
+    
     for i in range(n):
-        student_id = random.sample(range(40000000, 49999999), 1)
+        student_id = id_list[i]
         name = (names.get_full_name())
         age = random.sample(range(18, 60), 1)
         degree = random.choice(degrees)
-        list.append((student_id[0], name, age[0], degree))
+        list.append((student_id, name, age[0], degree))
     return list
 
 def pop_course():
@@ -48,17 +50,19 @@ def pop_enrolment(student_id_list, course_id_list, performance_id_list):
     # enrolment entry for table: [student_id, course_id, enrol_date, study_type, performance_id]
     list = []
     type = ["Full-time", "Part-time"]
+    enrolment_dates = ["2021-01-29", "2021-07-16", "2021-11-12"] # sem1, sem2, summer sem (2021)
+    id_list = random.sample(range(5000000, 9999999), n)
     for i in range(n):
-        student_id = student_id_list[i]
-        course_id = random.choice(course_id_list)
-        enrol_date = 0 # make a random date
+        enrolment_id = id_list[i]
+        student_id = student_id_list[i][0]
+        course_id = course_id_list[i][0]
+        enrol_date = random.choice(enrolment_dates)
         study_type = random.choice(type)
-        performance_id = performance_id_list[i]
+        performance_id = performance_id_list[i][0]
 
-        entry = (student_id, course_id, enrol_date, study_type, performance_id)
+        entry = (enrolment_id,student_id, course_id, enrol_date, study_type, performance_id)
         list.append(entry)
     return list
-
 
 def pop_performance(course_id_list):
     # enrolment entry for table: 
@@ -67,8 +71,9 @@ def pop_performance(course_id_list):
     # practical_attendance, personal_study, mid_sem_exam, quiz_score,
     # assignment_score, total_assessment_score, grade, at_risk]
     list = []
+    id_list = random.sample(range(100000, 500000), n)
     for i in range(n):
-        performance_id = random.sample(range(100000, 500000), 1)
+        performance_id = id_list[i]
         course_id = random.choice(course_id_list)
 
         mid_sem_exam = random.sample(range(0, 100), 1)
@@ -100,38 +105,40 @@ def pop_performance(course_id_list):
 
         if total_assessment_score >= 50 and total_assessment_score < 65:
             grade = 4
-            lecture_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            tutorial_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            practical_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            personal_study = random.sample(range(0, int(total_assessment_score)), 1)
+            lecture_attendance = random.sample(range(49, int(total_assessment_score)), 1)
+            tutorial_attendance = random.sample(range(49, int(total_assessment_score)), 1)
+            practical_attendance = random.sample(range(49, int(total_assessment_score)), 1)
+            personal_study = random.sample(range(49, int(total_assessment_score)), 1)
 
         if total_assessment_score >= 65 and total_assessment_score < 75:
             grade = 5
-            lecture_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            tutorial_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            practical_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            personal_study = random.sample(range(0, int(total_assessment_score)), 1)
+            lecture_attendance = random.sample(range(64, int(total_assessment_score)), 1)
+            tutorial_attendance = random.sample(range(64, int(total_assessment_score)), 1)
+            practical_attendance = random.sample(range(64, int(total_assessment_score)), 1)
+            personal_study = random.sample(range(64, int(total_assessment_score)), 1)
 
         if total_assessment_score >= 75 and total_assessment_score < 85:
             grade = 6
-            lecture_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            tutorial_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            practical_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            personal_study = random.sample(range(0, int(total_assessment_score)), 1)
+            lecture_attendance = random.sample(range(74, int(total_assessment_score)), 1)
+            tutorial_attendance = random.sample(range(74, int(total_assessment_score)), 1)
+            practical_attendance = random.sample(range(74, int(total_assessment_score)), 1)
+            personal_study = random.sample(range(74, int(total_assessment_score)), 1)
 
         if total_assessment_score >= 85:
             grade = 7
-            lecture_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            tutorial_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            practical_attendance = random.sample(range(0, int(total_assessment_score)), 1)
-            personal_study = random.sample(range(0, int(total_assessment_score)), 1)
+            lecture_attendance = random.sample(range(84, int(total_assessment_score)), 1)
+            tutorial_attendance = random.sample(range(84, int(total_assessment_score)), 1)
+            practical_attendance = random.sample(range(84, int(total_assessment_score)), 1)
+            personal_study = random.sample(range(84, int(total_assessment_score)), 1)
 
-        if grade == 3:
+        if grade <= 3:
             at_risk = 1 # 0 is false, 1 is true
-        at_risk = 0
+        if grade > 3:
+            at_risk = 0
 
-        entry = (performance_id[0], course_id, lecture_attendance[0], tutorial_attendance[0],
+        entry = (performance_id, course_id[0], lecture_attendance[0], tutorial_attendance[0],
                 practical_attendance[0], personal_study[0], mid_sem_exam[0], quiz_score[0],
                 assignment_score[0], total_assessment_score, grade, at_risk)
         list.append(entry)
     return list
+

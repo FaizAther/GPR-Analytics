@@ -7,7 +7,7 @@ import mysql.connector
 from mysql.connector import errorcode
 
 from table_lists import tables
-from populate import pop_student, pop_course
+from populate import pop_student, pop_course, pop_enrolment, pop_performance
 
 # establish the connection to azure sql database
 db = "university_db"
@@ -89,7 +89,51 @@ def query_data(string):
         print(row)
         save_query.append(row)
     return save_query
+
+def insert_enrolment():
+    # we need to get student_id from student table
+    student_id_list = []
+    mycursor.execute("SELECT student_id from student")
+    result = mycursor.fetchall()
+    for row in result:
+        student_id_list.append(row)
+
+    # we need to get performance_id and course_id from Performance table
+    performance_id_list = []
+    mycursor.execute("SELECT performance_id from performance")
+    result = mycursor.fetchall()
+    for row in result:
+        performance_id_list.append(row)
     
+    course_id_list = []
+    mycursor.execute("SELECT course_id from performance")
+    result = mycursor.fetchall()
+    for row in result:
+        course_id_list.append(row)
+
+    list = pop_enrolment(student_id_list, course_id_list, performance_id_list)
+    sql = "INSERT INTO enrolment (enrolment_id, student_id, course_id, enrol_date, study_type, performance_id)\
+            VALUES (%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_performance():
+    # we need to get course_id
+    save_query = []
+    mycursor.execute("SELECT course_id from course")
+    result = mycursor.fetchall()
+    for row in result:
+        save_query.append(row)
+    
+    list = pop_performance(save_query)
+
+    sql = "INSERT INTO performance (performance_id, course_id, lecture_attendance_percent,tutorial_attendance_percent,practical_attendance_percent, personal_study_percent,mid_sem_exam_percent, quiz_score_percent, assignment_score_percent,total_assessment_score_percent, grade, at_risk)\
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
 def main():
     '''
     Can only execute one function because cursor can only execute 1 time.
@@ -97,10 +141,12 @@ def main():
 
     Mainly use this part for populating the database.
     '''
-    #create_tables(db, mycursor, tables()) # create tables
+    # create_tables(db, mycursor, tables()) # create tables
     # show_tables()
-    #insert_student(pop_student())
-    #insert_course(pop_course())
+    # insert_student(pop_student())
+    # insert_course(pop_course())
+    insert_enrolment()
+    # insert_performance()
 
 
 if __name__=="__main__":
