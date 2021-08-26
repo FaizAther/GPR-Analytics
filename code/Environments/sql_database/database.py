@@ -2,19 +2,19 @@
 # from pip._internal import main
 # main(['install','mysql-connector-python-rf'])
 
-from __future__ import print_function
+from __future__ import print_function # this line needs to be first, make sure to comment out above
 import mysql.connector
 from mysql.connector import errorcode
 
 from table_lists import tables
-from populate import pop_student, pop_course, pop_course_info, pop_enrolment, pop_grade
+from populate import pop_student, pop_course
 
-# establish the connection
+# establish the connection to azure sql database
 db = "university_db"
 cnx = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    passwd='1234567890password',
+    host="university-db-deco3801.mysql.database.azure.com",
+    user="gpr_deco3801@university-db-deco3801",
+    passwd="Abc1234567890",
     database=db
 )
 mycursor = cnx.cursor()
@@ -68,54 +68,40 @@ def create_tables(DB_NAME, cursor, TABLES):
     cnx.close()
 
 def insert_student(list):
-    sql = "INSERT INTO student (student_id, age, first_name,last_name, gender, degree)\
-           VALUES (%s,%s,%s,%s,%s,%s)"
+    sql = "INSERT INTO student (student_id, name, age, degree)\
+           VALUES (%s,%s,%s,%s)"
     mycursor.executemany(sql, list)
     cnx.commit()
     return
 
-def insert_courses(list):
-    sql = "INSERT INTO course (course_id, course_name, year)\
+def insert_course(list):
+    sql = "INSERT INTO course (course_id, name, level)\
            VALUES (%s,%s,%s)"
     mycursor.executemany(sql, list)
     cnx.commit()
     return
 
-def insert_course_info(list):
-    sql = "INSERT INTO course_info (course_id, lecturer)\
-           VALUES (%s,%s)"
-    mycursor.executemany(sql, list)
-    cnx.commit(list)
-    return
-
-def insert_enrolments(list):
-    sql = "INSERT INTO enrolments (course_id, student_id, enrol_date)\
-           VALUES (%s,%s,%s)"
-    mycursor.executemany(sql, list)
-    cnx.commit()
-    return
-
-def insert_grades(list):
-    sql = "INSERT INTO grades (course_id, student_id, year, semester, grade)\
-           VALUES (%s,%s,%s,%s,%s)"
-    mycursor.executemany(sql, list)
-    cnx.commit()
-    return
-
-def retrieve_data(string):
+def query_data(string):
+    save_query = []
     mycursor.execute(string)
     result = mycursor.fetchall()
     for row in result:
         print(row)
-
+        save_query.append(row)
+    return save_query
+    
 def main():
     '''
     Can only execute one function because cursor can only execute 1 time.
     Comment out other functions to use the function you want.
+
+    Mainly use this part for populating the database.
     '''
     #create_tables(db, mycursor, tables()) # create tables
-    #show_tables()
+    # show_tables()
     #insert_student(pop_student())
+    #insert_course(pop_course())
+
 
 if __name__=="__main__":
     main()
