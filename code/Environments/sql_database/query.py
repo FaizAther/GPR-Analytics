@@ -2,7 +2,7 @@
 
 from database import query_data
 def write_query():
-    query = "SELECT * from student"
+    query = "SELECT * FROM student"
     return query
 
 if __name__ == "__main__":
