@@ -23,13 +23,8 @@ class University(IdClass):
         return f"University('{self.__str__()}')"
 
     def __str__(self):
-        faculties_str = ", faculties="
-        if len(self.get_faculties()) > 0:
-            faculties_str += "\n"
-            for faculty in self.get_faculties():
-                faculties_str += "----\n"
-                faculties_str += (faculty.__str__())
-                faculties_str += ("\n----\n")
+        faculties_str = IdClass.__LIST_STR__(
+            self.get_faculties(), ", faculties=")
         return super().__str__() + faculties_str
     
     def __whitetest__(self, result):

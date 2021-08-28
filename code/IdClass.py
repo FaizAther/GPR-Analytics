@@ -4,6 +4,16 @@
 
 class IdClass():
     
+    def __LIST_STR__(list, name):
+        list_str = name
+        if len(list) > 0:
+            list_str += "\n"
+            for faculty in list:
+                list_str += "----\n"
+                list_str += (faculty.__str__())
+                list_str += ("\n----\n")
+        return list_str
+
     def __init__(self, id):
         self._id = id
         self._name = str(id)
