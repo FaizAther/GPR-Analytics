@@ -1,10 +1,7 @@
-# from pip._internal import main
-# main(['install','names'])
-
 import random
 import names
 
-n = 1000 # number of students to generate
+n = 5000 # number of students to generate
 def pop_student():
     list = []
     # student format: (student_id, name, age, degree)
@@ -108,12 +105,12 @@ def pop_course_statistic(course_id_list):
     list = []
     num = len(course_id_list)
     for i in range(num):
-        pass_rate = random.sample(range(50, 100), 1)
-        drop_out_rate = random.sample(range(0, 50), 1)
-        real_word_app = random.sample(range(50, 100), 1)
-        effectiveness = random.sample(range(50, 100), 1)
+        pass_rate = random.randint(50, 100)
+        drop_out_rate = random.randint(0, 100 - pass_rate)
+        real_world_app = random.randint(40, 100)
+        effectiveness = random.randint(real_world_app, 100)
 
-        entry = (course_id_list[i][0], pass_rate[0], drop_out_rate[0], real_word_app[0], effectiveness[0])
+        entry = (course_id_list[i][0], pass_rate, drop_out_rate, real_world_app, effectiveness)
         list.append(entry)
     return list
 

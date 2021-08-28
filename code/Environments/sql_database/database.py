@@ -1,10 +1,3 @@
-####################################################################
-#### If mysql is not installed, uncomment the code block below and run this file.####
-
-# from pip._internal import main
-# main(['install','mysql-connector-python-rf'])
-
-####################################################################
 
 import mysql.connector
 from mysql.connector import errorcode
@@ -154,7 +147,7 @@ def insert_statistic():
     for row in result:
         save_query.append(row)
     
-    list = populate.pop_topics(save_query)
+    list = populate.pop_course_statistic(save_query)
     sql = "INSERT INTO course_statistic (course_id, pass_rate_percent, drop_out_percent, real_world_app_percent, effectiveness_percent)\
             VALUES (%s,%s,%s,%s, %s)"
     mycursor.executemany(sql, list)
@@ -283,7 +276,7 @@ def main():
     # insert_course()
     # insert_enrolment()
     # insert_topics()
-    # insert_statistic()
+    insert_statistic()
     # insert_attendance()
     # insert_interaction()
     # insert_assessments()
