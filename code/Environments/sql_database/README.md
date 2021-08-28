@@ -8,7 +8,7 @@
     - Username: gpr_deco3801@university-db-deco3801
     - Password: Abc1234567890
     - Port: 3306
-4) Now we can write queries in the window for the database
+4) Now we can write queries in the window for the database. Make sure to add "USE university_db;" before writing queuries. 
 
 ## install_scripts.py
 - installs the necessary packages to run the files
