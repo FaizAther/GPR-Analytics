@@ -5,9 +5,21 @@ from IdClass import IdClass
 
 class User(IdClass):
     
+    def HASH_HEX_DIGEST(value):
+        import hashlib
+        return hashlib.sha256(value.encode('utf-8')).hexdigest()
+
     def __init__(self, id):
         super().__init__(id)
         self._engagements = []
+        self._password = ""
+        self.set_password("password")
+
+    def validate_password(self, password):
+        return self._password == User.HASH_HEX_DIGEST(password)
+
+    def set_password(self, password):
+        self._password = User.HASH_HEX_DIGEST(password)
 
     def get_engagements(self):
         return self._engagements
