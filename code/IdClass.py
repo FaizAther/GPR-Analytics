@@ -15,9 +15,16 @@ class IdClass():
         return list_str
 
     def __init__(self, id):
-        self._id = id
-        self._name = str(id)
-        self._html = ""
+        self._id            = id
+        self._name          = str(id)
+        self._description   = ""
+        self._html          = ""
+
+    def get_description(self):
+        return self._description
+    
+    def set_description(self, description):
+        self._description = description
 
     def get_id(self):
         return self._id

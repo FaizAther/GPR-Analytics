@@ -8,7 +8,18 @@ class University(IdClass):
     def __init__(self, id):
         super().__init__(id)
         self._faculties = []
+        self._users     = []
     
+    def get_users(self):
+        return self._users
+    
+    def add_user(self, user):
+        self._users.append(user)
+
+    def add_users(self, users):
+        for user in users:
+            self.add_user(user)
+
     def get_faculties(self):
         return self._faculties
     
