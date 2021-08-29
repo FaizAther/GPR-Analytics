@@ -1,19 +1,13 @@
 '''
-    IdClass
+    Base Class
 '''
 
-class IdClass():
+class Base():
     
     def __LIST_STR__(list, name):
-        from functools import reduce
-        sep = lambda a:             \
-                "" if a == "" else  \
-                "----\n" + a.__str__() + "\n----\n"
-        add_line = (lambda n, l:    \
-                n if len(l) == 0    \
-                else n + "\n")
-        return add_line(name, list) \
-                    + reduce(lambda a, b: (sep(a)) + sep(b), list, "")
+        sep = lambda e: "\n----\n" + e.__str__() + "\n----\n"
+        fold = lambda f, z, l: z if len(l) == 0 else f(l[0]) + fold(f, z, l[1:])
+        return name + fold(sep, "", list)
 
     def __init__(self, id):
         self._id            = id
@@ -54,5 +48,5 @@ class IdClass():
         assert(self.get_html() == "")
 
 if __name__ == "__main__":
-    i0 = IdClass(0)
+    i0 = Base(0)
     i0.__whitetest__(f"IdClass('id=0, name=0')")

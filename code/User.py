@@ -1,9 +1,9 @@
-from IdClass import IdClass
+from Base import Base
 '''
     User class
 '''
 
-class User(IdClass):
+class User(Base):
     
     def HASH_HEX_DIGEST(value):
         import hashlib
@@ -28,20 +28,14 @@ class User(IdClass):
         self.get_engagements().append(engagement)
 
     def add_engagements(self, engagements):
-        for engagement in engagements:
-            self.add_engagement(engagement)
-
-    def get_username(self):
-        return self.get_name()
-
-    def set_username(self, username):
-        self.set_name(username)
+        for e in engagements:
+            self.add_engagement(e)
 
     def __repr__(self):            
         return f"User('{self.__str__()}')"
 
     def __str__(self):
-        engagements_str = IdClass.__LIST_STR__(
+        engagements_str = Base.__LIST_STR__(
             self.get_engagements(), ", engagements=")    
         return super().__str__() + engagements_str
 
@@ -55,6 +49,9 @@ class User(IdClass):
         print(self.__repr__())
         assert(self.__repr__() == results[2])
         assert(self.get_html() == results[3])
+        self.add_engagements(["doe", "jack"])
+        print(self.__repr__())
+        assert(self.__repr__() == results[4])
 
 if __name__ == "__main__":
     u0 = User(0)
@@ -62,5 +59,6 @@ if __name__ == "__main__":
         f"User('id=0, name=0, engagements=')",
         f"User('id=0, name=john, engagements=')",
         f"User('id=0, name=john, engagements=\n----\nsmith\n----\n')",
-        ""
+        "",
+        f"User('id=0, name=john, engagements=\n----\nsmith\n----\n\n----\ndoe\n----\n\n----\njack\n----\n')"
     ])

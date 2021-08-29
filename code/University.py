@@ -1,9 +1,8 @@
-from IdClass import IdClass
-
+from Base import Base
 '''
 	University class
 '''
-class University(IdClass):
+class University(Base):
 
     def __init__(self, id):
         super().__init__(id)
@@ -34,7 +33,7 @@ class University(IdClass):
         return f"University('{self.__str__()}')"
 
     def __str__(self):
-        faculties_str = IdClass.__LIST_STR__(
+        faculties_str = Base.__LIST_STR__(
             self.get_faculties(), ", faculties=")
         return super().__str__() + faculties_str
     
@@ -47,6 +46,8 @@ class University(IdClass):
         print(self.__repr__())
         assert(self.__repr__() == result[2])
         assert(self.get_html() == result[3])
+        self.add_faculties(["doe", "jack"])
+        print(self.__repr__())
     
 if __name__ == "__main__":
     uni0 = University(0)
@@ -54,5 +55,7 @@ if __name__ == "__main__":
         f"University('id=0, name=0, faculties=')",
         f"University('id=0, name=john, faculties=')",
         f"University('id=0, name=john, faculties=\n----\nsmith\n----\n')",
-        ""
+        "",
+        f"User('id=0, name=john, faculties=\n----\nsmith\n----\n\n----\ndoe\n----\n\n----\njack\n----\n')"
+
     ])

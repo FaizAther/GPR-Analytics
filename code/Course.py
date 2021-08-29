@@ -1,8 +1,8 @@
-from IdClass import IdClass
+from Base import Base
 '''
     Course class
 '''
-class Course(IdClass):
+class Course(Base):
     def __init__(self, id):
         super().__init__(id)
         self._lecturers = []

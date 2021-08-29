@@ -1,9 +1,9 @@
-from IdClass import IdClass
+from Base import Base
 from datetime import datetime
 '''
     Event Class
 '''
-class Event(IdClass):
+class Event(Base):
     def __init__(self, id, type):
         super().__init__(id)
         self._date_duration = {datetime.now : 0}
