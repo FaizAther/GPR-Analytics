@@ -23,5 +23,7 @@ To predict the satisfaction, we will use:
 
 Goal: To predict if a student is satisfied or is not satisfied with the course with the provided information above. 
 
+We will use SVM(Support Vector Machine) as our machine learning model as it supports binary classification. In our case, we have binary classifications of 0 (for unsatisfied) and 1 (for satisfied). 
+
 ## Generated Data
 - The data in the CSV files each have 17,560 entries (enrolments).
