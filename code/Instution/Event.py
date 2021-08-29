@@ -14,5 +14,4 @@ class Event(Base):
         self._attendance    = []
         self._locations     = []
         self._resources     = []
-        self._weighting     = 0
         self._type          = type

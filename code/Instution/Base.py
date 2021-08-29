@@ -6,7 +6,7 @@ class Base():
     
     def __LIST_STR__(list, name):
         sep = lambda e: "\n----\n" + e.__str__() + "\n----\n"
-        fold = lambda f, z, l: z if len(l) == 0 else f(l[0]) + fold(f, z, l[1:])
+        fold = lambda f, z, l: z if l == [] else f(l[0]) + fold(f, z, l[1:])
         return name + fold(sep, "", list)
 
     def __init__(self, id):
