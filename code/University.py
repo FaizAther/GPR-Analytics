@@ -51,8 +51,8 @@ class University(IdClass):
 if __name__ == "__main__":
     uni0 = University(0)
     uni0.__whitetest__(result=[
-        "University('id=0, name=0, faculties=')",
-        "University('id=0, name=john, faculties=')",
+        f"University('id=0, name=0, faculties=')",
+        f"University('id=0, name=john, faculties=')",
         f"University('id=0, name=john, faculties=\n----\nsmith\n----\n')",
         ""
     ])

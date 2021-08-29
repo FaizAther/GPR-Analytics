@@ -5,14 +5,15 @@
 class IdClass():
     
     def __LIST_STR__(list, name):
-        list_str = name
-        if len(list) > 0:
-            list_str += "\n"
-            for elem in list:
-                list_str += "----\n"
-                list_str += (elem.__str__())
-                list_str += ("\n----\n")
-        return list_str
+        from functools import reduce
+        sep = lambda a:             \
+                "" if a == "" else  \
+                "----\n" + a.__str__() + "\n----\n"
+        add_line = (lambda n, l:    \
+                n if len(l) == 0    \
+                else n + "\n")
+        return add_line(name, list) \
+                    + reduce(lambda a, b: (sep(a)) + sep(b), list, "")
 
     def __init__(self, id):
         self._id            = id

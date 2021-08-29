@@ -1,11 +1,10 @@
 from IdClass import IdClass
-from EventType import EventType
 from datetime import datetime
 '''
     Event Class
 '''
 class Event(IdClass):
-    def __init__(self, id):
+    def __init__(self, id, type):
         super().__init__(id)
         self._date_duration = {datetime.now : 0}
         self._manager       = None
@@ -16,4 +15,4 @@ class Event(IdClass):
         self._locations     = []
         self._resources     = []
         self._weighting     = 0
-        self._type = EventType.DEFAULT
+        self._type          = type
