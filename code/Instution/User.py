@@ -11,35 +11,35 @@ class User(Base):
 
     def __init__(self, id):
         super().__init__(id)
-        self._engagements = []
-        self._password = ""
+        self._engagements:  list = []
+        self._password:     str = ""
         self.set_password("password")
 
-    def validate_password(self, password):
+    def validate_password(self, password) -> bool:
         return self._password == User.HASH_HEX_DIGEST(password)
 
-    def set_password(self, password):
+    def set_password(self, password) -> None:
         self._password = User.HASH_HEX_DIGEST(password)
 
-    def get_engagements(self):
+    def get_engagements(self) -> list:
         return self._engagements
 
-    def add_engagement(self, engagement):
+    def add_engagement(self, engagement) -> None:
         self.get_engagements().append(engagement)
 
-    def add_engagements(self, engagements):
+    def add_engagements(self, engagements) -> None:
         for e in engagements:
             self.add_engagement(e)
 
-    def __repr__(self):            
+    def __repr__(self) -> str:            
         return f"User('{self.__str__()}')"
 
-    def __str__(self):
+    def __str__(self) -> str:
         engagements_str = Base.__LIST_STR__(
             self.get_engagements(), ", engagements=")    
         return super().__str__() + engagements_str
 
-    def __whitetest__(self, results):
+    def __whitetest__(self, results) -> bool:
         print(self.__repr__())
         assert(self.__repr__() == results[0])
         self.set_name("john")
@@ -52,6 +52,7 @@ class User(Base):
         self.add_engagements(["doe", "jack"])
         print(self.__repr__())
         assert(self.__repr__() == results[4])
+        return True
 
 if __name__ == "__main__":
     u0 = User(0)
