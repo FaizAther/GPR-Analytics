@@ -3,7 +3,7 @@ from User       import User
 from Location   import Location
 from EventType  import EventType
 from datetime   import datetime
-from typing import List, Dict
+from typing     import List, Dict
 '''
     Event Class
 '''

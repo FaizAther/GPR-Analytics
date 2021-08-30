@@ -15,9 +15,9 @@ class User(Base):
 
     def __init__(self, id: int, type: UserType):
         super().__init__(id)
-        self._engagements   :List   = []
-        self._password      :str    = ""
-        self._type:UserType = type
+        self._engagements   :List       = []
+        self._password      :str        = ""
+        self._type          :UserType   = type
         self.set_password(User.DEFAULT_PASSWORD)
     
     @abstractmethod
