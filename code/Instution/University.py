@@ -2,6 +2,7 @@ from Base       import Base
 from User       import User
 from Faculty    import Faculty
 from User       import User
+from typing     import List
 '''
 	University class
 '''
@@ -9,8 +10,8 @@ class University(Base):
 
     def __init__(self, id: int):
         super().__init__(id)
-        self._faculties = []
-        self._users     = []
+        self._faculties :List[Faculty]  = []
+        self._users     :List[User]     = []
 
     def generate_html(self):
         ## TODO
@@ -20,22 +21,20 @@ class University(Base):
         return self._users
     
     def add_user(self, user: User):
-        self._users.append(user)
+        Base.add_something(user, self.get_faculties())
 
     def add_users(self, users: list[User]):
-        for user in users:
-            self.add_user(user)
+        Base.add_somethings(users, self.get_faculties())
 
     def get_faculties(self):
         return self._faculties
-    
+
     def add_faculty(self, faculty: Faculty):
-        self._faculties.append(faculty)
+        Base.add_something(faculty, self.get_faculties())
 
     def add_faculties(self, faculties: list[Faculty]):
-        for faculty in faculties:
-            self.add_faculty(faculty)
-    
+        Base.add_somethings(faculties, self.get_faculties())
+
     def __repr__(self):
         return f"University('{self.__str__()}')"
 

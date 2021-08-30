@@ -1,8 +1,15 @@
 from abc import ABC, abstractmethod
+from typing import List
 '''
     Base Class
 '''
 class Base(ABC):
+    
+    add_something = lambda s, to: to.append(s)
+
+    def add_somethings(somethings: List[object], to: List[object]):
+        for s in somethings:
+            Base.add_something(s, to)
 
     FOLDL = lambda f, z, l:     \
                 z if l == []    \

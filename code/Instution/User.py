@@ -1,5 +1,7 @@
+from abc import abstractmethod
 from Base       import Base
 from UserType   import UserType
+from typing     import List
 '''
     User class
 '''
@@ -13,14 +15,18 @@ class User(Base):
 
     def __init__(self, id: int, type: UserType):
         super().__init__(id)
-        self._engagements   :list   = []
+        self._engagements   :List   = []
         self._password      :str    = ""
         self.set_password(User.DEFAULT_PASSWORD)
         self._type:UserType = type
     
+    @abstractmethod
     def generate_html(self):
-        ## TODO
-        return ""
+        pass
+    
+    @abstractmethod
+    def update(self, subject):
+        pass
 
     def get_type(self) -> UserType:
         return self._type
@@ -31,7 +37,7 @@ class User(Base):
     def set_password(self, password: str) -> None:
         self._password = User.HASH_HEX_DIGEST(password)
 
-    def get_engagements(self) -> list:
+    def get_engagements(self) -> List:
         return self._engagements
 
     def add_engagement(self, engagement) -> None:
@@ -50,19 +56,15 @@ class User(Base):
         return super().__str__() + engagements_str
 
     def __whitetest__(self, results) -> bool:
-        print(self.__repr__())
         assert(self.__repr__() == results[0])
         self.set_name("john")
-        print(self.__repr__())
         assert(self.__repr__() == results[1])
         self.add_engagement("smith")
-        print(self.__repr__())
         assert(self.__repr__() == results[2])
         assert(self.get_html() == results[3])
         self.add_engagements(["doe", "jack"])
-        print(self.__repr__())
         assert(self.__repr__() == results[4])
-        assert(u0.get_type() == results[5])
+        assert(self.get_type() == results[5])
         assert(self.validate_password(User.DEFAULT_PASSWORD))
         return True
 
