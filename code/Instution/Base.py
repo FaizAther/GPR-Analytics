@@ -1,13 +1,19 @@
 '''
     Base Class
 '''
+from abc import ABC, abstractmethod
 
-class Base():
+class Base(ABC):
+
+    FOLDL = lambda f, z, l:     \
+                z if l == []    \
+                else Base.FOLDL(f, (f(z, l[0])), l[1:])
+
+    SEP_OP  = lambda e1, e2: e1 + Base.SEP(e2)
+    SEP     = lambda e: "\n----\n" + e.__str__() + "\n----\n"
     
-    def __LIST_STR__(list, name) -> str:
-        sep = lambda e: "\n----\n" + e.__str__() + "\n----\n"
-        fold = lambda f, z, l: z if l == [] else f(l[0]) + fold(f, z, l[1:])
-        return name + fold(sep, "", list)
+    def __LIST_STR__(list, name) -> str:        
+        return name + Base.FOLDL(Base.SEP_OP, "", list)
 
     def __init__(self, id):
         self._id:           int = id
@@ -36,18 +42,14 @@ class Base():
     def set_html(self, html) -> None:
         self._html = html
 
-    def __repr__(self) -> str:
-        return f"IdClass('{self.__str__()}')"
+    @abstractmethod
+    def generate_html(self):
+        pass
 
+    @abstractmethod
+    def __repr__(self) -> str:
+        return f"Base('{self.__str__()}')"
+
+    @abstractmethod
     def __str__(self) -> str:
         return f"id={self.get_id()}, name={self.get_name()}"
-    
-    def __whitetest__(self, result) -> bool:
-        print(self.__repr__())
-        assert(self.__repr__() == result)
-        assert(self.get_html() == "")
-        return True
-
-if __name__ == "__main__":
-    i0 = Base(0)
-    i0.__whitetest__(f"IdClass('id=0, name=0')")

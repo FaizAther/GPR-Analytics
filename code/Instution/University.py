@@ -8,6 +8,10 @@ class University(Base):
         super().__init__(id)
         self._faculties = []
         self._users     = []
+
+    def generate_html(self):
+        ## TODO
+        return ""
     
     def get_users(self):
         return self._users
