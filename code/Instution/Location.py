@@ -1,5 +1,13 @@
-from Base           import Base
-from LocationType   import LocationType
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+from Base import Base
+from LocationType import LocationType
+
+if TYPE_CHECKING:
+    pass
+
 '''
     Location Class
 '''

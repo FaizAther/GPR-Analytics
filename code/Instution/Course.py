@@ -1,7 +1,15 @@
-from Base   import Base
-from User   import User
-from Event  import Event
-from typing import List
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+from Base import Base
+
+if TYPE_CHECKING:
+    from typing import List
+
+    from Event import Event
+    from User import User
+
 '''
     Course class
 '''

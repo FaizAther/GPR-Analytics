@@ -1,5 +1,5 @@
-from Student import Student
 from Course import Course
+from Student import Student
 from UserType import UserType
 
 if __name__ == "__main__":

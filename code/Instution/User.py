@@ -1,7 +1,14 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from abc import abstractmethod
-from Base       import Base
-from UserType   import UserType
-from typing     import List
+from Base import Base
+from UserType import UserType
+
+if TYPE_CHECKING:
+    from typing import List
+
 '''
     User class
 '''

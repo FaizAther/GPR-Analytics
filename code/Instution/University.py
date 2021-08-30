@@ -1,8 +1,9 @@
-from Base       import Base
-from User       import User
-from Faculty    import Faculty
-from User       import User
-from typing     import List
+from typing import List
+
+from Base import Base
+from Faculty import Faculty
+from User import User
+
 '''
 	University class
 '''

@@ -1,7 +1,14 @@
-from Base       import Base
-from Course     import Course
-from Location   import Location
-from typing     import List
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+from Base import Base
+
+if TYPE_CHECKING:
+    from typing import List
+    from Course import Course
+    from Location import Location
+
 '''
     Faculty class
 '''

@@ -1,6 +1,13 @@
-from Base   import Base
-from User   import User
-from Course import Course
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+from Base import Base
+
+if TYPE_CHECKING:
+    from Course import Course
+    from User import User
+
 '''
     Mark Class
 '''
