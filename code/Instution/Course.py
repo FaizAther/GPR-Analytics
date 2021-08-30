@@ -46,7 +46,7 @@ class Course(Base):
         return ""
     
     def __repr__(self) -> str:
-        return super().__repr__()
+        return "Course" + super().__repr__()
     
     def __str__(self) -> str:
         return super().__str__()

@@ -17,7 +17,7 @@ class Student(User):
         return ""
     
     def update(self, course: Course):
-        print(self.get_type().__str__() + self.get_id().__str__() + " in update")
+        print(self.get_type().__str__() + self.get_id().__str__() + " in update: " + course.__repr__())
 
     
     def __whitetest__(self, results) -> bool:
