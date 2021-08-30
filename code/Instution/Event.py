@@ -4,6 +4,7 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 
 from Base import Base
+from Attendance import Attendance
 
 if TYPE_CHECKING:
     from typing import Dict, List
@@ -19,12 +20,16 @@ if TYPE_CHECKING:
 class Event(Base):
     def __init__(self, id, type=EventType.DEFAULT):
         super().__init__(id)
-        self._date_duration :Dict               = {datetime.now : datetime.now}
+
         self._manager       :User               = None
         self._organizers    :List[User]         = []
+        self._invitees      :Attendance         = []
         self._guests        :List[User]         = []
-        self._invitees      :Dict[User, Mark]   = {}
-        self._attendance    :List[User]         = []
+
+        self._start_end     :Dict               = {datetime.now : datetime.now}
+        self._weighting     :int                = 0
+        self._total         :int                = 0
+        
         self._locations     :List[Location]     = []
-        self._resources     :List               = []
         self._type          :EventType          = type
+        self._resources     :List               = []
