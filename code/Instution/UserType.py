@@ -2,7 +2,6 @@ from enum import Enum
 '''
     User Type
 '''
-
 class UserType(Enum):
     LECTURER    = 0
     TUTOR       = 1

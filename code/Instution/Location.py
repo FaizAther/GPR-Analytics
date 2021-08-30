@@ -1,5 +1,5 @@
-from Base import Base
-from LocationType import LocationType
+from Base           import Base
+from LocationType   import LocationType
 '''
     Location Class
 '''

@@ -1,8 +1,7 @@
+from abc import ABC, abstractmethod
 '''
     Base Class
 '''
-from abc import ABC, abstractmethod
-
 class Base(ABC):
 
     FOLDL = lambda f, z, l:     \

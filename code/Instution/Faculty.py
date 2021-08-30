@@ -1,6 +1,6 @@
-from Course import Course
-from Location import Location
-from Base import Base
+from Base       import Base
+from Course     import Course
+from Location   import Location
 '''
     Faculty class
 '''

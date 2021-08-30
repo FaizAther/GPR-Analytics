@@ -1,9 +1,8 @@
-from Base import Base
-from UserType import UserType
+from Base       import Base
+from UserType   import UserType
 '''
     User class
 '''
-
 class User(Base):
     
     DEFAULT_PASSWORD    :str    = "password"

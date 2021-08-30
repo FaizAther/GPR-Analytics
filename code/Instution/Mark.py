@@ -1,6 +1,6 @@
-from User import User
+from Base   import Base
+from User   import User
 from Course import Course
-from Base import Base
 '''
     Mark Class
 '''

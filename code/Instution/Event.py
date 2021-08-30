@@ -1,7 +1,7 @@
-from User import User
-from EventType import EventType
-from Base import Base
-from datetime import datetime
+from User       import User
+from EventType  import EventType
+from Base       import Base
+from datetime   import datetime
 '''
     Event Class
 '''
