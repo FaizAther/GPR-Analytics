@@ -17,8 +17,8 @@ class User(Base):
         super().__init__(id)
         self._engagements   :List   = []
         self._password      :str    = ""
-        self.set_password(User.DEFAULT_PASSWORD)
         self._type:UserType = type
+        self.set_password(User.DEFAULT_PASSWORD)
     
     @abstractmethod
     def generate_html(self):
@@ -41,11 +41,10 @@ class User(Base):
         return self._engagements
 
     def add_engagement(self, engagement) -> None:
-        self.get_engagements().append(engagement)
+        Base.add_something(engagement, self.get_engagements())
 
     def add_engagements(self, engagements) -> None:
-        for e in engagements:
-            self.add_engagement(e)
+        Base.add_somethings(engagements, self.get_engagements())
 
     def __repr__(self) -> str:
         return f"{self.get_type().name}('{self.__str__()}')"
@@ -55,27 +54,16 @@ class User(Base):
             self.get_engagements(), ", engagements=")    
         return super().__str__() + engagements_str
 
+    @abstractmethod
     def __whitetest__(self, results) -> bool:
-        assert(self.__repr__() == results[0])
-        self.set_name("john")
-        assert(self.__repr__() == results[1])
-        self.add_engagement("smith")
-        assert(self.__repr__() == results[2])
-        assert(self.get_html() == results[3])
-        self.add_engagements(["doe", "jack"])
-        assert(self.__repr__() == results[4])
-        assert(self.get_type() == results[5])
-        assert(self.validate_password(User.DEFAULT_PASSWORD))
         return True
-
-if __name__ == "__main__":
-    u0 = User(0, UserType.UNDERGRAD)
-    u0.__whitetest__([
+    
+    DEFAULT_TEST = [
         f"UNDERGRAD('id=0, name=0, engagements=')",
         f"UNDERGRAD('id=0, name=john, engagements=')",
         f"UNDERGRAD('id=0, name=john, engagements=\n----\nsmith\n----\n')",
         "",
         f"UNDERGRAD('id=0, name=john, engagements=\n----\nsmith\n----\n\n----\ndoe\n----\n\n----\njack\n----\n')",
         UserType.UNDERGRAD
-    ])
+    ]
 
