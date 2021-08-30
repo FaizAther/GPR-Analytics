@@ -1,10 +1,12 @@
 from Base import Base
+from User import User
+from Faculty import Faculty
 '''
 	University class
 '''
 class University(Base):
 
-    def __init__(self, id):
+    def __init__(self, id: int):
         super().__init__(id)
         self._faculties = []
         self._users     = []
@@ -16,20 +18,20 @@ class University(Base):
     def get_users(self):
         return self._users
     
-    def add_user(self, user):
+    def add_user(self, user: User):
         self._users.append(user)
 
-    def add_users(self, users):
+    def add_users(self, users: list[User]):
         for user in users:
             self.add_user(user)
 
     def get_faculties(self):
         return self._faculties
     
-    def add_faculty(self, faculty):
+    def add_faculty(self, faculty: Faculty):
         self._faculties.append(faculty)
 
-    def add_faculties(self, faculties):
+    def add_faculties(self, faculties: list[Faculty]):
         for faculty in faculties:
             self.add_faculty(faculty)
     
@@ -61,5 +63,4 @@ if __name__ == "__main__":
         f"University('id=0, name=john, faculties=\n----\nsmith\n----\n')",
         "",
         f"User('id=0, name=john, faculties=\n----\nsmith\n----\n\n----\ndoe\n----\n\n----\njack\n----\n')"
-
     ])

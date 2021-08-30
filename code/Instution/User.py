@@ -6,28 +6,30 @@ from UserType import UserType
 
 class User(Base):
     
-    def HASH_HEX_DIGEST(value):
+    DEFAULT_PASSWORD    :str    = "password"
+
+    def HASH_HEX_DIGEST(value: str) -> str:
         import hashlib
         return hashlib.sha256(value.encode('utf-8')).hexdigest()
 
-    def __init__(self, id, type: UserType):
+    def __init__(self, id: int, type: UserType):
         super().__init__(id)
-        self._engagements:  list = []
-        self._password:     str = ""
-        self.set_password("password")
+        self._engagements   :list   = []
+        self._password      :str    = ""
+        self.set_password(User.DEFAULT_PASSWORD)
         self._type:UserType = type
     
     def generate_html(self):
         ## TODO
         return ""
 
-    def get_type(self):
+    def get_type(self) -> UserType:
         return self._type
 
-    def validate_password(self, password) -> bool:
+    def validate_password(self, password: str) -> bool:
         return self._password == User.HASH_HEX_DIGEST(password)
 
-    def set_password(self, password) -> None:
+    def set_password(self, password: str) -> None:
         self._password = User.HASH_HEX_DIGEST(password)
 
     def get_engagements(self) -> list:
@@ -40,8 +42,8 @@ class User(Base):
         for e in engagements:
             self.add_engagement(e)
 
-    def __repr__(self) -> str:            
-        return f"User('{self.__str__()}')"
+    def __repr__(self) -> str:
+        return f"{self.get_type().name}('{self.__str__()}')"
 
     def __str__(self) -> str:
         engagements_str = Base.__LIST_STR__(
@@ -61,15 +63,18 @@ class User(Base):
         self.add_engagements(["doe", "jack"])
         print(self.__repr__())
         assert(self.__repr__() == results[4])
+        assert(u0.get_type() == results[5])
+        assert(self.validate_password(User.DEFAULT_PASSWORD))
         return True
 
 if __name__ == "__main__":
     u0 = User(0, UserType.UNDERGRAD)
     u0.__whitetest__([
-        f"User('id=0, name=0, engagements=')",
-        f"User('id=0, name=john, engagements=')",
-        f"User('id=0, name=john, engagements=\n----\nsmith\n----\n')",
+        f"UNDERGRAD('id=0, name=0, engagements=')",
+        f"UNDERGRAD('id=0, name=john, engagements=')",
+        f"UNDERGRAD('id=0, name=john, engagements=\n----\nsmith\n----\n')",
         "",
-        f"User('id=0, name=john, engagements=\n----\nsmith\n----\n\n----\ndoe\n----\n\n----\njack\n----\n')"
+        f"UNDERGRAD('id=0, name=john, engagements=\n----\nsmith\n----\n\n----\ndoe\n----\n\n----\njack\n----\n')",
+        UserType.UNDERGRAD
     ])
-    assert(u0.get_type() == UserType.UNDERGRAD)
+

@@ -11,11 +11,11 @@ class Base(ABC):
 
     SEP_OP  = lambda e1, e2: e1 + Base.SEP(e2)
     SEP     = lambda e: "\n----\n" + e.__str__() + "\n----\n"
-    
-    def __LIST_STR__(list, name) -> str:        
-        return name + Base.FOLDL(Base.SEP_OP, "", list)
 
-    def __init__(self, id):
+    def __LIST_STR__(values: list, name: str) -> str:
+        return name + Base.FOLDL(Base.SEP_OP, "", values)
+
+    def __init__(self, id: int):
         self._id:           int = id
         self._name:         str = str(id)
         self._description:  str = ""
@@ -23,7 +23,7 @@ class Base(ABC):
 
     def get_description(self) -> str:
         return self._description
-    
+
     def set_description(self, description) -> None:
         self._description = description
 
@@ -33,13 +33,13 @@ class Base(ABC):
     def get_name(self) -> str:
         return self._name
 
-    def set_name(self, name) -> str:
+    def set_name(self, name: str) -> str:
         self._name = name
-    
+
     def get_html(self) -> str:
         return self._html
 
-    def set_html(self, html) -> None:
+    def set_html(self, html: str) -> None:
         self._html = html
 
     @abstractmethod

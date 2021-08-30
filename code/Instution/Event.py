@@ -1,3 +1,5 @@
+from User import User
+from EventType import EventType
 from Base import Base
 from datetime import datetime
 '''
@@ -6,12 +8,12 @@ from datetime import datetime
 class Event(Base):
     def __init__(self, id, type):
         super().__init__(id)
-        self._date_duration = {datetime.now : 0}
-        self._manager       = None
-        self._organizers    = []
-        self._guests        = []
-        self._invitees      = []
-        self._attendance    = []
-        self._locations     = []
-        self._resources     = []
-        self._type          = type
+        self._date_duration :dict       = {datetime.now : 0}
+        self._manager       :User       = None
+        self._organizers    :list[User] = list[User]
+        self._guests        :list[User] = list[User]
+        self._invitees      :list[User] = list[User]
+        self._attendance    :list[User] = list[User]
+        self._locations     :list[User] = list[User]
+        self._resources     :list[User] = list[User]
+        self._type          :EventType  = type
