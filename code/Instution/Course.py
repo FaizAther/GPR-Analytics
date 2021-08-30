@@ -40,9 +40,8 @@ class Course(Base):
         Base.add_somethings(users, self.get_users())
     
     def notify(self) -> None:
-        for user in self.get_users():
-            user.update(self)
-
+        Base.__DO_SOMETHINGS__(lambda x: x.update(self), self.get_users())
+        
     def generate_html(self) -> None:
         return ""
     

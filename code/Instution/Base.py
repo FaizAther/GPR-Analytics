@@ -10,12 +10,17 @@ if TYPE_CHECKING:
     Base Class
 '''
 class Base(ABC):
+
+    __DO_SOMETHING__ = lambda f, x: f(x)
     
-    add_something = lambda s, to: to.append(s)
+    add_something = lambda s, to: list.append(to, s)
+
+    def __DO_SOMETHINGS__(f, elems):
+        for e in elems:
+            Base.__DO_SOMETHING__(f, e)
 
     def add_somethings(somethings: List[object], to: List[object]) -> None:
-        for s in somethings:
-            Base.add_something(s, to)
+        Base.__DO_SOMETHINGS__(lambda x: to.append(x), somethings)
 
     FOLDL = lambda f, z, l:     \
                 z if l == []    \
