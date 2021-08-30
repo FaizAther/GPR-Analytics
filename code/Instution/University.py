@@ -23,7 +23,7 @@ class University(Base):
     def add_user(self, user: User):
         Base.add_something(user, self.get_faculties())
 
-    def add_users(self, users: list[User]):
+    def add_users(self, users: List[User]):
         Base.add_somethings(users, self.get_faculties())
 
     def get_faculties(self):
@@ -32,7 +32,7 @@ class University(Base):
     def add_faculty(self, faculty: Faculty):
         Base.add_something(faculty, self.get_faculties())
 
-    def add_faculties(self, faculties: list[Faculty]):
+    def add_faculties(self, faculties: List[Faculty]):
         Base.add_somethings(faculties, self.get_faculties())
 
     def __repr__(self):

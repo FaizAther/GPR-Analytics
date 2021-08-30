@@ -19,10 +19,10 @@ class Course(Base):
     def add_event(self, event: Event) -> None:
         Base.add_something(event, self.get_events())
     
-    def add_events(self, events: list[Event]) -> None:
+    def add_events(self, events: List[Event]) -> None:
         Base.add_somethings(events, self.get_events())
     
-    def get_users(self: List[User]) -> List[User]:
+    def get_users(self) -> List[User]:
         return self._users
 
     def add_user(self, user: User) -> None:
@@ -31,11 +31,11 @@ class Course(Base):
     def add_users(self, users: List[User]) -> None:
         Base.add_somethings(users, self.get_users())
     
-    def notify(self):
+    def notify(self) -> None:
         for user in self.get_users():
             user.update(self)
 
-    def generate_html(self):
+    def generate_html(self) -> None:
         return ""
     
     def __repr__(self) -> str:

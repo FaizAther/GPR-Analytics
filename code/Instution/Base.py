@@ -7,7 +7,7 @@ class Base(ABC):
     
     add_something = lambda s, to: to.append(s)
 
-    def add_somethings(somethings: List[object], to: List[object]):
+    def add_somethings(somethings: List[object], to: List[object]) -> None:
         for s in somethings:
             Base.add_something(s, to)
 
@@ -18,7 +18,7 @@ class Base(ABC):
     SEP_OP  = lambda e1, e2: e1 + Base.SEP(e2)
     SEP     = lambda e: "\n----\n" + e.__str__() + "\n----\n"
 
-    def __LIST_STR__(values: list, name: str) -> str:
+    def __LIST_STR__(values: List, name: str) -> str:
         return name + Base.FOLDL(Base.SEP_OP, "", values)
 
     def __init__(self, id: int):
@@ -49,7 +49,7 @@ class Base(ABC):
         self._html = html
 
     @abstractmethod
-    def generate_html(self):
+    def generate_html(self) -> str:
         pass
 
     @abstractmethod
