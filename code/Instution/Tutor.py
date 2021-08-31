@@ -34,6 +34,7 @@ class Tutor(User):
         return ""
     
     def update(self, course: Course):
+        super().update(course)
         print(self)
         print(course)
     

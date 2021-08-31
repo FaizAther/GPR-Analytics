@@ -12,8 +12,8 @@ if TYPE_CHECKING:
     Mark Class
 '''
 class Mark(Attendance):
-    def __init__(self):
-        super().__init__(self)
+    def __init__(self, attendee, marker=None):
+        super().__init__(self, attendee, marker)
 
         self._acheived      :int        = 0
         self._submission    :Dict[datetime, List] \

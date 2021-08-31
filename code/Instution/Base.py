@@ -11,6 +11,8 @@ if TYPE_CHECKING:
 '''
 class Base(ABC):
 
+    __ID__OFFSET__ = 1000000
+
     __DO_SOMETHING__ = lambda f, x: f(x)
     
     ADD_THING_TO = lambda s, to: list.append(to, s)
@@ -33,7 +35,7 @@ class Base(ABC):
         return name + Base.FOLDL(Base.SEP_OP, "", values)
 
     def __init__(self, id: int, name: str=None, description: str=None, html=None):
-        self._id:           int = id
+        self._id:           int = id + Base.__ID__OFFSET__
         self._name:         str = str(id)
         self._description:  str = "N.A."
         self._html:         str = "N.A."

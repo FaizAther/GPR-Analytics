@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from User import User
     from Student import Student
     from Tutor import Tutor
-
+    from Lecturer import Lecturer
 '''
     Course class
 '''
@@ -39,12 +39,16 @@ class Course(Base):
         Base.ADD_THING_TO(user, self.get_users())
         Base.ADD_THING_TO(self, user.get_engagements())
         self.handle_user(user)
-    
-    def handle_user(self, user: Student):
+
+    def handle_user(self, user: Student) -> None:
         pass
 
-    def handle_user(self, user: Tutor):
+    def handle_user(self, user: Tutor) -> None:
         pass
+
+    def handle_user(self, user: Lecturer) -> None:
+        if self._admin == None:
+            self._admin = user
 
     def add_users(self, users: List[User]) -> None:
         Base.__DO_SOMETHINGS__(lambda u:self.add_user(u), users)
@@ -55,6 +59,9 @@ class Course(Base):
     def generate_html(self) -> str:
         return ""
     
+    def get_admin(self) -> Lecturer:
+        return self._admin
+
     def __repr__(self) -> str:
         return super().__repr__()
 

@@ -33,7 +33,7 @@ class User(Base):
 
     @abstractmethod
     def update(self, subject):
-        pass
+        print("in update method")
 
     def get_type(self) -> UserType:
         return self._type

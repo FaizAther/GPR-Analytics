@@ -12,11 +12,11 @@ if TYPE_CHECKING:
     Mark Class
 '''
 class Attendance(Base):
-    def __init__(self):
+    def __init__(self, attendee, marker=None):
         super().__init__(self)
         
-        self._attandee  :User   = None
-        self._marker    :User   = None
+        self._attandee  :User   = attendee
+        self._marker    :User   = marker
 
         self._attended  :bool   = False
         self._duration  :int    = 0
