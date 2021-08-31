@@ -15,7 +15,7 @@ class Student(User):
         f"Student('id=0, name=0, type=UNDERGRAD, engagements=')",
         f"Student('id=0, name=john, type=UNDERGRAD, engagements=')",
         f"Student('id=0, name=john, type=UNDERGRAD, engagements=\n----\nsmith\n----\n')",
-        "",
+        "N.A.",
         f"Student('id=0, name=john, type=UNDERGRAD, engagements=\n----\nsmith\n----\n\n----\ndoe\n----\n\n----\njack\n----\n')",
         UserType.UNDERGRAD
     ]

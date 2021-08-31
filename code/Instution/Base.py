@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from abc import ABC, abstractmethod, abstractproperty
+from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -32,17 +32,21 @@ class Base(ABC):
     def __LIST_STR__(values: List, name: str) -> str:
         return name + Base.FOLDL(Base.SEP_OP, "", values)
 
-    def __init__(self, id: int):
+    def __init__(self, id: int, name: str=None, description: str=None, html=None):
         self._id:           int = id
         self._name:         str = str(id)
-        self._description:  str = ""
-        self._html:         str = ""
+        self._description:  str = "N.A."
+        self._html:         str = "N.A."
+        self.set_name(name)
+        self.set_description(description)
+        self.set_html(html)
 
     def get_description(self) -> str:
         return self._description
 
     def set_description(self, description) -> None:
-        self._description = description
+        if description != None:
+            self._description = description
 
     def get_id(self) -> int:
         return self._id
@@ -50,14 +54,16 @@ class Base(ABC):
     def get_name(self) -> str:
         return self._name
 
-    def set_name(self, name: str) -> str:
-        self._name = name
+    def set_name(self, name: str) -> None:
+        if name != None:
+            self._name = name
 
     def get_html(self) -> str:
         return self._html
 
     def set_html(self, html: str) -> None:
-        self._html = html
+        if html != None:
+            self._html = html
 
     @abstractmethod
     def generate_html(self) -> str:

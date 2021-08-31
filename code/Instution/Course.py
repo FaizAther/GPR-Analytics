@@ -19,9 +19,9 @@ class Course(Base):
         super().__init__(id)
         self._admin     :User        = admin
         self._users     :List[User]  = []
-        self._events    :List[User]  = []
+        self._events    :List[Event] = []
 
-    def get_events(self) -> Event:
+    def get_events(self) -> List[Event]:
         return self._events
     
     def add_event(self, event: Event) -> None:
@@ -43,7 +43,7 @@ class Course(Base):
     def notify(self) -> None:
         Base.__DO_SOMETHINGS__(lambda x: x.update(self), self.get_users())
         
-    def generate_html(self) -> None:
+    def generate_html(self) -> str:
         return ""
     
     def __repr__(self) -> str:
