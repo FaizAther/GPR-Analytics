@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from Base import Base
 from Attendance import Attendance
 from EventType import EventType
+from UserType import UserType
+from Mark import Mark
 
 if TYPE_CHECKING:
     from typing import Dict, List
@@ -13,6 +15,9 @@ if TYPE_CHECKING:
     from Location import Location
     from Mark import Mark
     from User import User
+    from Student import Student
+    from Tutor import Tutor
+    from Lecturer import Lecturer
     from Student import Student
     from Tutor import Tutor
     from Lecturer import Lecturer
@@ -57,31 +62,38 @@ class Event(Base):
         return self._weighting
     
     def add_user(self, user: User) -> None:
-        self.handle_user(user)
+        if user.get_type() == UserType.TUTOR:
+            self.handle_tutor(user),
+        elif user.get_type() == UserType.LECTURER:
+            self.handle_lecturer(user)
+        else:
+            self.handle_student(user)
     
     def add_users(self, users: List[User]):
         Base.__DO_SOMETHINGS__(lambda u: self.add_user(u), users)
 
     def find_marker(self):
-        Base.FOLDL(lambda z, m: \
-            m if m.get_capacity() > 0 \
-            else z, None, self.get_organizers())
-
-    def handle_user(self, user: Student) -> None:
+        return Base.FOLDL(lambda z, m: \
+                m if z == None and m.get_capacity() > 0 \
+                else z, None, self.get_organizers())
+            
+    def handle_student(self, user: Student) -> None:
         marker = self.find_marker()
+        print(marker)
         if (self.get_weighting() <= 0):
-            attendance = Attendance(self, user, marker)
+            attendance = Attendance(0, self, user, marker=marker)
         else:
-            attendance = Mark(self, user, marker)
+            attendance = Mark(0, self, user, self.get_weighting(), marker=marker)
 
         Base.ADD_THING_TO(attendance, self.get_invitees())
 
-    def handle_user(self, user: Tutor) -> None:
+    def handle_tutor(self, user: Tutor) -> None:
         if user.get_capacity() > 0:
             Base.ADD_THING_TO(user, self.get_organizers())
-        Base.ADD_THING_TO(user, self.get_guests())
+        else:
+            Base.ADD_THING_TO(user, self.get_guests())
 
-    def handle_user(self, user: Lecturer) -> None:
+    def handle_lecturer(self, user: Lecturer) -> None:
         if self._manager == None:
             self._manager = user
         

@@ -6,9 +6,12 @@ from enum import Enum
 class UserType(Enum):
     LECTURER    = 0
     TUTOR       = 1
-    RESEARCHER  = 2   
-    UNDERGRAD   = 3
-    POSTGRAD    = 4
-    PHD         = 5
-    EXCHANGE    = 6
-    DEFAULT     = 7
+    RESEARCHER  = 2
+    STUDENT     = 3
+    UNDERGRAD   = 4
+    POSTGRAD    = 5
+    PHD         = 6
+    EXCHANGE    = 7
+    DEFAULT     = 4
+
+

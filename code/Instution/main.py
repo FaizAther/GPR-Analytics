@@ -33,6 +33,6 @@ if __name__ == "__main__":
 
     e0 = Event(700, type=EventType.ASSIGNMENT)
     e0.set_weighting(5)
-    e0.add_users([l0,u0,u1,u2,t0])
+    e0.add_users([l0,u0,u1,t0,u2])
 
     print(t0.get_capacity())

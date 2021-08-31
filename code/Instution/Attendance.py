@@ -15,8 +15,8 @@ if TYPE_CHECKING:
     Mark Class
 '''
 class Attendance(Base):
-    def __init__(self, event, attendee, marker=None):
-        super().__init__(self)
+    def __init__(self, id, event, attendee, marker=None):
+        super().__init__(id)
         
         self._attandee  :User   = attendee
         self._marker    :User   = marker

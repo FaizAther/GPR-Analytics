@@ -17,7 +17,7 @@ class Lecturer(User):
         f"Lecturer('id=0, name=john, type=LECTURER, engagements=\n----\nsmith\n----\n')",
         "N.A.",
         f"Lecturer('id=0, name=john, type=LECTURER, engagements=\n----\nsmith\n----\n\n----\ndoe\n----\n\n----\njack\n----\n')",
-        UserType.UNDERGRAD
+        UserType.LECTURER
     ]
     
     def __init__(self, id: int, type: UserType=UserType.LECTURER):
