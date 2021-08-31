@@ -23,7 +23,7 @@ class University(Base):
     def generate_html(self) -> str:
         ## TODO
         return ""
-    
+
     def get_admin(self) -> User:
         return self._admin
 
@@ -32,7 +32,7 @@ class University(Base):
 
     def get_users(self) -> List[User]:
         return self._users
-    
+
     def add_user(self, user: User) -> None:
         Base.ADD_THING_TO(user, self.get_users())
 
@@ -53,7 +53,7 @@ class University(Base):
             self.get_faculties(), ", faculties=")
         return f"{super().__repr__()}" + \
             f"{faculties_str}"
-    
+
     DEFAULT_TEST =[
         f"University('id=0, name=0, faculties=')",
         f"University('id=0, name=john, faculties=')",
@@ -73,7 +73,7 @@ class University(Base):
         assert(self.get_html() == result[3])
         self.add_faculties(["doe", "jack"])
         print(self.__str__())
-    
+
 if __name__ == "__main__":
     uni0 = University(0)
     uni0.__whitetest__()

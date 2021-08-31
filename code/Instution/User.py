@@ -26,11 +26,11 @@ class User(Base):
         self._password      :str        = ""
         self._type          :UserType   = type
         self.set_password(User.DEFAULT_PASSWORD)
-    
+
     @abstractmethod
     def generate_html(self):
         pass
-    
+
     @abstractmethod
     def update(self, subject):
         pass
@@ -55,7 +55,7 @@ class User(Base):
 
     def __repr__(self) -> str:
         engagements_str = Base.__LIST_STR__(
-            self.get_engagements(), ", engagements=")    
+            self.get_engagements(), ", engagements=")
         return f"{super().__repr__()}" + \
             f", type={self.get_type().name}{engagements_str}"
 

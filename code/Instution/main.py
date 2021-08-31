@@ -12,7 +12,7 @@ if __name__ == "__main__":
     u1 = Student(1, UserType.POSTGRAD)
     u2 = Student(2, UserType.PHD)
 
-    
+
     c0 = Course(0)
     c0.add_user(u0)
     c0.add_users([u1,u2])

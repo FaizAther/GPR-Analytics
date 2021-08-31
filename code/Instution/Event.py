@@ -29,7 +29,7 @@ class Event(Base):
         self._start_end     :Dict               = {datetime.now : datetime.now}
         self._weighting     :int                = 0
         self._total         :int                = 0
-        
+
         self._locations     :List[Location]     = []
         self._type          :EventType          = type
         self._resources     :List               = []
