@@ -9,6 +9,8 @@ if TYPE_CHECKING:
 
     from Event import Event
     from User import User
+    from Student import Student
+    from Tutor import Tutor
 
 '''
     Course class
@@ -28,7 +30,7 @@ class Course(Base):
         Base.ADD_THING_TO(event, self.get_events())
     
     def add_events(self, events: List[Event]) -> None:
-        Base.ADD_THINGS_TO(events, self.get_events())
+        Base.__DO_SOMETHINGS__(lambda e: self.add_event(e), events)
     
     def get_users(self) -> List[User]:
         return self._users
@@ -36,6 +38,13 @@ class Course(Base):
     def add_user(self, user: User) -> None:
         Base.ADD_THING_TO(user, self.get_users())
         Base.ADD_THING_TO(self, user.get_engagements())
+        self.handle_user(user)
+    
+    def handle_user(self, user: Student):
+        pass
+
+    def handle_user(self, user: Tutor):
+        pass
 
     def add_users(self, users: List[User]) -> None:
         Base.__DO_SOMETHINGS__(lambda u:self.add_user(u), users)

@@ -13,6 +13,8 @@ if TYPE_CHECKING:
     from Location import Location
     from Mark import Mark
     from User import User
+    from Student import Student
+    from Tutor import Tutor
 
 '''
     Event Class
@@ -23,7 +25,7 @@ class Event(Base):
 
         self._manager       :User               = None
         self._organizers    :List[User]         = []
-        self._invitees      :Attendance         = []
+        self._invitees      :List[Attendance]   = []
         self._guests        :List[User]         = []
 
         self._start_end     :Dict               = {datetime.now : datetime.now}
@@ -33,3 +35,12 @@ class Event(Base):
         self._locations     :List[Location]     = []
         self._type          :EventType          = type
         self._resources     :List               = []
+    
+    def get_invitee(self) -> List[Attendance]:
+        return self._invitees
+
+    def add_user(self, user: Student) -> None:
+        pass
+
+    def add_user(self, user: Tutor) -> None:
+        pass
