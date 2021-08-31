@@ -28,9 +28,9 @@ class Student(User):
     
     def update(self, course: Course):
         super().update(course)
-
+        print("of course")
         print(self)
-        print(course)
+        #print(course)
     
     def __whitetest__(self, results=DEFAULT_TEST) -> bool:
         assert(self.__str__() == results[0])
