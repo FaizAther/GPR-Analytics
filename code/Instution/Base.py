@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, abstractproperty
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -13,13 +13,13 @@ class Base(ABC):
 
     __DO_SOMETHING__ = lambda f, x: f(x)
     
-    add_something = lambda s, to: list.append(to, s)
+    ADD_THING_TO = lambda s, to: list.append(to, s)
 
-    def __DO_SOMETHINGS__(f, elems):
+    def __DO_SOMETHINGS__(f, elems) -> None:
         for e in elems:
             Base.__DO_SOMETHING__(f, e)
 
-    def add_somethings(somethings: List[object], to: List[object]) -> None:
+    def ADD_THINGS_TO(somethings: List[object], to: List[object]) -> None:
         Base.__DO_SOMETHINGS__(lambda x: to.append(x), somethings)
 
     FOLDL = lambda f, z, l:     \
@@ -63,10 +63,16 @@ class Base(ABC):
     def generate_html(self) -> str:
         pass
 
-    @abstractmethod
-    def __repr__(self) -> str:
-        return f"Base('{self.__str__()}')"
+    def __str__(self) -> str:
+        return f"{self.__class__.__name__}('{self.__repr__()}'" \
+            + ")"
 
     @abstractmethod
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         return f"id={self.get_id()}, name={self.get_name()}"
+    
+    DEFAULT_TEST = []
+
+    @abstractmethod
+    def __whitetest__(self, result=DEFAULT_TEST) -> bool:
+        return True

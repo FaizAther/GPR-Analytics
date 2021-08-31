@@ -4,7 +4,8 @@ from UserType import UserType
 
 if __name__ == "__main__":
     u0 = Student(0, UserType.UNDERGRAD)
-    u0.__whitetest__(Student.DEFAULT_TEST)
+    u0.__whitetest__()
+    print(u0)
     
     u1 = Student(1, UserType.POSTGRAD)
     u2 = Student(2, UserType.PHD)

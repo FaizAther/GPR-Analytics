@@ -48,29 +48,14 @@ class User(Base):
         return self._engagements
 
     def add_engagement(self, engagement) -> None:
-        Base.add_something(engagement, self.get_engagements())
+        Base.ADD_THING_TO(engagement, self.get_engagements())
 
     def add_engagements(self, engagements) -> None:
-        Base.add_somethings(engagements, self.get_engagements())
+        Base.ADD_THINGS_TO(engagements, self.get_engagements())
 
     def __repr__(self) -> str:
-        return f"{self.get_type().name}('{self.__str__()}')"
-
-    def __str__(self) -> str:
         engagements_str = Base.__LIST_STR__(
             self.get_engagements(), ", engagements=")    
-        return super().__str__() + engagements_str
-
-    @abstractmethod
-    def __whitetest__(self, results) -> bool:
-        return True
-    
-    DEFAULT_TEST = [
-        f"UNDERGRAD('id=0, name=0, engagements=')",
-        f"UNDERGRAD('id=0, name=john, engagements=')",
-        f"UNDERGRAD('id=0, name=john, engagements=\n----\nsmith\n----\n')",
-        "",
-        f"UNDERGRAD('id=0, name=john, engagements=\n----\nsmith\n----\n\n----\ndoe\n----\n\n----\njack\n----\n')",
-        UserType.UNDERGRAD
-    ]
+        return f"{super().__repr__()}" + \
+            f", type={self.get_type().name}{engagements_str}"
 

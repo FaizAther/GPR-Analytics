@@ -25,19 +25,20 @@ class Course(Base):
         return self._events
     
     def add_event(self, event: Event) -> None:
-        Base.add_something(event, self.get_events())
+        Base.ADD_THING_TO(event, self.get_events())
     
     def add_events(self, events: List[Event]) -> None:
-        Base.add_somethings(events, self.get_events())
+        Base.ADD_THINGS_TO(events, self.get_events())
     
     def get_users(self) -> List[User]:
         return self._users
 
     def add_user(self, user: User) -> None:
-        Base.add_something(user, self.get_users())
+        Base.ADD_THING_TO(user, self.get_users())
+        Base.ADD_THING_TO(self, user.get_engagements())
 
     def add_users(self, users: List[User]) -> None:
-        Base.add_somethings(users, self.get_users())
+        Base.__DO_SOMETHINGS__(lambda u:self.add_user(u), users)
     
     def notify(self) -> None:
         Base.__DO_SOMETHINGS__(lambda x: x.update(self), self.get_users())
@@ -46,7 +47,7 @@ class Course(Base):
         return ""
     
     def __repr__(self) -> str:
-        return "Course" + super().__repr__()
-    
-    def __str__(self) -> str:
-        return super().__str__()
+        return super().__repr__()
+
+    def __whitetest__(self, result) -> bool:
+        return super().__whitetest__(result=result)
