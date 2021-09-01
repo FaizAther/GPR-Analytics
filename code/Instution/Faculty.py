@@ -25,7 +25,7 @@ class Faculty(Base):
         self._locations :List[Location]     = []
 
     def find_course(self, course_id: int) -> Course:
-        return self.get_courses()[course_id + Base.__ID__OFFSET__]
+        return self.get_courses().get(course_id + Base.__ID__OFFSET__)
 
     def add_user(self, user:User, course_id:int, course=None) -> None:
         if course == None:
@@ -56,7 +56,8 @@ class Faculty(Base):
         return self._courses
 
     def add_course(self, course:Course) -> None:
-        self.get_courses()[course.get_id()] = course
+        if self.find_course(course.get_id()) == None:
+            self.get_courses()[course.get_id()] = course
 
     def add_courses(self, courses:List[Course]) -> None:
         Base.__DO_SOMETHINGS__(
