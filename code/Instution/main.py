@@ -16,6 +16,9 @@ if __name__ == "__main__":
     u1 = Student(101, UserType.POSTGRAD)
     u2 = Student(102, UserType.PHD)
 
+    u3 = Student(104)
+
+
     t0 = Tutor(300)
 
     l0 = Lecturer(400)
@@ -33,6 +36,6 @@ if __name__ == "__main__":
 
     e0 = Event(700, type=EventType.ASSIGNMENT)
     e0.set_weighting(5)
-    e0.add_users([l0,u0,u1,t0,u2])
+    e0.add_users([l0,t0,u0,u1,u2,u3])
 
     print(t0.get_capacity())

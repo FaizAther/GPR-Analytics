@@ -13,5 +13,3 @@ class UserType(Enum):
     PHD         = 6
     EXCHANGE    = 7
     DEFAULT     = 4
-
-

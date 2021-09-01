@@ -60,3 +60,24 @@ class User(Base):
         return f"{super().__repr__()}" + \
             f", type={self.get_type().name}{engagements_str}"
 
+    DEFAULT_TEST = [
+        f"Student('id=0, name=0, type=UNDERGRAD, engagements=')",
+        f"Student('id=0, name=john, type=UNDERGRAD, engagements=')",
+        f"Student('id=0, name=john, type=UNDERGRAD, engagements=\n----\nsmith\n----\n')",
+        "N.A.",
+        f"Student('id=0, name=john, type=UNDERGRAD, engagements=\n----\nsmith\n----\n\n----\ndoe\n----\n\n----\njack\n----\n')",
+        UserType.UNDERGRAD
+    ]
+
+    def __whitetest__(self, results=DEFAULT_TEST) -> bool:
+        assert(self.__str__() == results[0])
+        self.set_name("john")
+        assert(self.__str__() == results[1])
+        self.add_engagement("smith")
+        assert(self.__str__() == results[2])
+        assert(self.get_html() == results[3])
+        self.add_engagements(["doe", "jack"])
+        assert(self.__str__() == results[4])
+        assert(self.get_type() == results[5])
+        assert(self.validate_password(User.DEFAULT_PASSWORD))
+        return True

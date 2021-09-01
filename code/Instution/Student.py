@@ -11,14 +11,7 @@ if TYPE_CHECKING:
 
 class Student(User):
     
-    DEFAULT_TEST = [
-        f"Student('id=0, name=0, type=UNDERGRAD, engagements=')",
-        f"Student('id=0, name=john, type=UNDERGRAD, engagements=')",
-        f"Student('id=0, name=john, type=UNDERGRAD, engagements=\n----\nsmith\n----\n')",
-        "N.A.",
-        f"Student('id=0, name=john, type=UNDERGRAD, engagements=\n----\nsmith\n----\n\n----\ndoe\n----\n\n----\njack\n----\n')",
-        UserType.UNDERGRAD
-    ]
+
     
     def __init__(self, id: int, type: UserType=UserType.UNDERGRAD):
         super().__init__(id, type)
@@ -35,15 +28,5 @@ class Student(User):
         print(self)
         #print(course)
     
-    def __whitetest__(self, results=DEFAULT_TEST) -> bool:
-        assert(self.__str__() == results[0])
-        self.set_name("john")
-        assert(self.__str__() == results[1])
-        self.add_engagement("smith")
-        assert(self.__str__() == results[2])
-        assert(self.get_html() == results[3])
-        self.add_engagements(["doe", "jack"])
-        assert(self.__str__() == results[4])
-        assert(self.get_type() == results[5])
-        assert(self.validate_password(User.DEFAULT_PASSWORD))
-        return True
+    def __whitetest__(self, results) -> bool:
+        return super().__whitetest__(results=results)

@@ -79,7 +79,6 @@ class Event(Base):
             
     def handle_student(self, user: Student) -> None:
         marker = self.find_marker()
-        print(marker)
         if (self.get_weighting() <= 0):
             attendance = Attendance(0, self, user, marker=marker)
         else:
