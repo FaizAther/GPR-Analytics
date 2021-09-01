@@ -154,7 +154,6 @@ def pop_grade(enrolment_id_list,assessment_list):
     num = len(enrolment_id_list)
     for i in range(num):
         total_assessment_score = assessment_list[i][4]
-
         # determine the gpa
         if total_assessment_score < 20:
             grade = 1
@@ -170,13 +169,13 @@ def pop_grade(enrolment_id_list,assessment_list):
             grade = 6
         if total_assessment_score >= 85:
             grade = 7
-
+        
         if grade <= 3:
             at_risk = 1 # 0 is false, 1 is true
         if grade > 3:
             at_risk = 0
 
-        entry = (enrolment_id_list[i][0], grade, at_risk)
+        entry = (assessment_list[i][0], grade, at_risk)
         list.append(entry)
 
     return list
@@ -195,9 +194,9 @@ def pop_assessment(enrolment_id_list, attendance_list, interaction_list, topics_
         avg_topics = (topics_list[i][1] + topics_list[i][2] + topics_list[i][3] + topics_list[i][4])/4
         minimum_range = (total_attendance + total_interaction + avg_topics) / 3
 
-        mid_sem = random.randint(int(minimum_range), 100)
-        quiz = random.randint(int(minimum_range), 100)
-        assignment = random.randint(int(minimum_range), 100)
+        mid_sem = random.randint(int(minimum_range) - 5, int(minimum_range) + 5)
+        quiz = random.randint(int(minimum_range) - 5, int(minimum_range) + 5)
+        assignment = random.randint(int(minimum_range) - 5, int(minimum_range) + 5)
         total_assessment = (mid_sem + quiz + assignment) / 3
 
         entry = (enrolment_id_list[i][0], mid_sem, quiz, assignment, total_assessment)

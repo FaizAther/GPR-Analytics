@@ -273,10 +273,11 @@ def main():
     # create_tables(db, mycursor, tables()) # create tables
     # insert_student()
     # insert_goals()
+    # insert_statistic()
     # insert_course()
+
     # insert_enrolment()
     # insert_topics()
-    insert_statistic()
     # insert_attendance()
     # insert_interaction()
     # insert_assessments()

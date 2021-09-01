@@ -1,8 +1,8 @@
 USE university_db;
 
 SELECT 
-interaction.total_interaction_percent,
-attendance.total_attendance_percent,
+enrolment.enrolment_id, interaction.total_interaction_percent,
+attendance.total_attendance_percent, 
 satisfaction.survey_rating_percent, satisfaction.satisfaction_rate_percent,
 satisfaction.is_satisfied
 FROM student, enrolment, attendance, interaction, satisfaction
