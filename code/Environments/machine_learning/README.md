@@ -11,6 +11,7 @@ To predict the grade, we need the following information (ORDER MATTERS):
 - Attendance %
 - All 4 topic % (topic_1 %, topic_2 %, topic_3 %,topic_4 %)
 - Total_assessment_score %
+
 Example entry: 
 [(Interaction %, Attendance %, topic_1 %, topic_2 %, topic_3 %,topic_4 %, Total_assessment_score %)] = [(34,66,10,43,22,93,45)]
 
@@ -26,6 +27,7 @@ To predict the satisfaction, we need the following information (ORDER MATTERS):
 - Attendance %
 - Survey rating %
 - Satisfaction_rate %
+
 Example prediction entry: [(Interaction %, Attendance %, Survey rating %, Satisfaction_rate %)] = [(20,44,57,40.3)]
 
 Goal: To predict if a student is satisfied or is not satisfied with the course with the provided information above. 
