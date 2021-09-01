@@ -4,7 +4,6 @@ from typing import TYPE_CHECKING
 
 from User import User
 from UserType import UserType
-from Mark import Mark
 
 if TYPE_CHECKING:
     from Course import Course
