@@ -30,6 +30,10 @@ class Attendance(Base):
             if user != None:
                 self.add_user(user)
 
+    def get_marker(self):
+        return self._marker
+
+
     def get_event(self) -> Event:
         return self._event
 

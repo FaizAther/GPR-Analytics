@@ -6,6 +6,7 @@ from Lecturer import Lecturer
 from UserType import UserType
 from EventType import EventType
 from Event import Event
+from Mark import Mark
 
 if __name__ == "__main__":
     uni0 = University(0, "UniQLD", "Purple")
@@ -36,6 +37,9 @@ if __name__ == "__main__":
 
     e0 = Event(700, type=EventType.ASSIGNMENT)
     e0.set_weighting(5)
+
+    print(t0.get_capacity())
+
     e0.add_users([l0,t0,u0,u1,u2,u3])
 
     print(t0.get_capacity())

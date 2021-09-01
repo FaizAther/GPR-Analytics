@@ -95,6 +95,8 @@ class Event(Base):
     def handle_lecturer(self, user: Lecturer) -> None:
         if self._manager == None:
             self._manager = user
+        else:
+            self.get_guests().append(user)
         
     def __repr__(self) -> str:
         return super().__repr__()

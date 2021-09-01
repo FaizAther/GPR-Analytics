@@ -11,8 +11,6 @@ if TYPE_CHECKING:
 
 class Student(User):
     
-
-    
     def __init__(self, id: int, type: UserType=UserType.UNDERGRAD):
         super().__init__(id, type)
     
