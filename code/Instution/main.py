@@ -1,4 +1,5 @@
 from University import University
+from Faculty import Faculty
 from Course import Course
 from Student import Student
 from Tutor import Tutor
@@ -23,25 +24,25 @@ if __name__ == "__main__":
     t0 = Tutor(300)
 
     l0 = Lecturer(400)
+    f0 = Faculty(0, name="COMP")
+    f0.make_course(3301)
+    f0.add_user(u0, 3301)
+    f0.add_user(l0, 3301)
 
-    c0 = Course(500)
-    c0.add_user(l0)
-
-    #print("admin is: ", c0.get_admin())
+    print("admin is: ", f0.find_course(3301).get_admin())
 
     #print(c0)
-    c0.add_user(u0)
-    c0.add_users([u1,u2])
-    c0.add_user(t0)
+    f0.add_users([u1,u2], 3301)
+    f0.add_user(t0, 3301)
     #c0.notify()
 
     e0 = Event(700, type=EventType.ASSIGNMENT)
     e0.set_weighting(5)
 
-    print(t0.get_capacity())
+    #print(t0.get_capacity())
 
     e0.add_users([l0,t0,u0,u1,u2,u3])
 
-    print(t0.get_capacity())
+    #print(t0.get_capacity())
 
-    print(u0)
+    #print(u0)

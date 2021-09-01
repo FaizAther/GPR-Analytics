@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from Base import Base
+from UserType import UserType
 
 if TYPE_CHECKING:
     from typing import List
@@ -17,8 +18,8 @@ if TYPE_CHECKING:
 '''
 class Course(Base):
     
-    def __init__(self, id: int, admin: User=None):
-        super().__init__(id)
+    def __init__(self, id: int, admin: User=None, name=None):
+        super().__init__(id, name)
         self._admin     :User        = admin
         self._users     :List[User]  = []
         self._events    :List[Event] = []
@@ -38,7 +39,8 @@ class Course(Base):
     def add_user(self, user: User) -> None:
         Base.ADD_THING_TO(user, self.get_users())
         Base.ADD_THING_TO(self, user.get_engagements())
-        self.handle_user(user)
+        if user.get_type() == UserType.LECTURER:
+            self.handle_lecturer(user)
 
     def handle_user(self, user: Student) -> None:
         pass
@@ -46,7 +48,7 @@ class Course(Base):
     def handle_user(self, user: Tutor) -> None:
         pass
 
-    def handle_user(self, user: Lecturer) -> None:
+    def handle_lecturer(self, user: Lecturer) -> None:
         if self._admin == None:
             self._admin = user
 
