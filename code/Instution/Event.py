@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from typing import TYPE_CHECKING, Any
+import typing
 
 from Base import Base
 from Attendance import Attendance
@@ -26,8 +27,8 @@ if TYPE_CHECKING:
     Event Class
 '''
 class Event(Base):
-    def __init__(self, id, type=EventType.DEFAULT):
-        super().__init__(id)
+    def __init__(self, id, name=None, type=EventType.DEFAULT):
+        super().__init__(id, name=name)
 
         self._manager       :User               = None
         self._organizers    :List[User]         = []
@@ -41,6 +42,12 @@ class Event(Base):
         self._type          :EventType          = type
         self._resources     :List               = []
     
+    def get_type(self):
+        return self._type
+    
+    def set_type(self, type):
+        self._type = type
+
     def set_weighting(self, weighting):
         if weighting >= 0:
             self._weighting = weighting

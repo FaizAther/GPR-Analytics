@@ -4,11 +4,12 @@ from typing import TYPE_CHECKING
 
 from Base import Base
 from UserType import UserType
+from EventType import EventType
+from Event import Event
 
 if TYPE_CHECKING:
     from typing import List
 
-    from Event import Event
     from User import User
     from Student import Student
     from Tutor import Tutor
@@ -24,11 +25,20 @@ class Course(Base):
         self._users     :List[User]  = []
         self._events    :List[Event] = []
 
+    def update(self, user):
+        if user != self.get_admin():
+            return
+        event = self.add_event()
+        return event
+
     def get_events(self) -> List[Event]:
         return self._events
     
-    def add_event(self, event: Event) -> None:
+    def add_event(self, event: Event=None) -> Event:
+        if event == None:
+            event = Event(len(self.get_events()))
         Base.ADD_THING_TO(event, self.get_events())
+        return event
     
     def add_events(self, events: List[Event]) -> None:
         Base.__DO_SOMETHINGS__(lambda e: self.add_event(e), events)
