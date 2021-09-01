@@ -47,6 +47,7 @@ class User(Base):
     def get_engagements(self) -> List:
         return self._engagements
 
+    @abstractmethod
     def add_engagement(self, engagement) -> None:
         Base.ADD_THING_TO(engagement, self.get_engagements())
 

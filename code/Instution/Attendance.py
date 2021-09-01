@@ -29,18 +29,9 @@ class Attendance(Base):
         for user in [attendee, marker]:
             if user != None:
                 self.add_user(user)
-    
 
     def get_event(self) -> Event:
         return self._event
 
     def add_user(self, user: User) -> None:
         user.add_engagement(self)
-        self.handle_user(user)
-    
-    def handle_user(self, user: Tutor) -> None:
-        pass
-
-    def handle_user(self, user: Student) -> None:
-        pass
-    

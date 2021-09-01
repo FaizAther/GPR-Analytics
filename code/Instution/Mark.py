@@ -29,16 +29,7 @@ class Mark(Attendance):
 
     def add_user(self, user: User) -> None:
         user.add_engagement(self)
-        if user.get_type() == UserType.TUTOR:
-            self.handle_tutor(user)
-        else:
-            self.handle_user(user)
-    
-    def handle_tutor(self, user: Tutor):
-        user.set_capacity(user.get_capacity() - 1)
-        if (user.get_capacity() <= 0):
-            self.get_event().move_organizer(self)
-        
+
     def __repr__(self) -> str:
         return super().__repr__()
     

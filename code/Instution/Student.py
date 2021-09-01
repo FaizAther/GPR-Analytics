@@ -23,6 +23,9 @@ class Student(User):
     def __init__(self, id: int, type: UserType=UserType.UNDERGRAD):
         super().__init__(id, type)
     
+    def add_engagement(self, engagement) -> None:
+        return super().add_engagement(engagement)
+
     def generate_html(self):
         return ""
     
