@@ -33,7 +33,6 @@ class Attendance(Base):
     def get_marker(self):
         return self._marker
 
-
     def get_event(self) -> Event:
         return self._event
 

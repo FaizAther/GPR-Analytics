@@ -16,11 +16,13 @@ class Tutor(User):
         super().__init__(id, type)
         self._capacity = capacity
 
+    def capacity_available(self):
+        return self._capacity > 0
+
+    def student_assigned(self):
+        self._capacity -= 1
+
     def add_engagement(self, engagement) -> None:
-        if (isinstance(engagement, Mark)):
-            self.set_capacity(self.get_capacity() - 1)
-            if (self.get_capacity() == 0):
-                engagement.get_event().move_organizer(self)
         return super().add_engagement(engagement)
     
     def get_capacity(self) -> int:

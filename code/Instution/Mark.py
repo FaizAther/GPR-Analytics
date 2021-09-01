@@ -26,9 +26,15 @@ class Mark(Attendance):
         self._penalty       :int        = 0
         self._weighting     :int        = weighting
 
-
     def add_user(self, user: User) -> None:
-        user.add_engagement(self)
+        super().add_user(user)
+        self.handle_user(user)
+
+    def handle_user(self, user: User) -> None:
+        if (user.get_type() == UserType.TUTOR):
+            user.student_assigned()
+            if (not user.capacity_available()):
+                self.get_event().move_organizer(user)
 
     def __repr__(self) -> str:
         return super().__repr__()

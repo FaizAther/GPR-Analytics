@@ -43,3 +43,5 @@ if __name__ == "__main__":
     e0.add_users([l0,t0,u0,u1,u2,u3])
 
     print(t0.get_capacity())
+
+    print(u0)

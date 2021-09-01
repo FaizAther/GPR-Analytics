@@ -74,7 +74,8 @@ class Event(Base):
 
     def find_marker(self):
         return Base.FOLDL(lambda z, m: \
-                m if z == None and m.get_capacity() > 0 \
+                m if z == None and m.get_type() == UserType.TUTOR \
+                    and m.capacity_available() \
                 else z, None, self.get_organizers())
             
     def handle_student(self, user: Student) -> None:
@@ -87,7 +88,7 @@ class Event(Base):
         Base.ADD_THING_TO(attendance, self.get_invitees())
 
     def handle_tutor(self, user: Tutor) -> None:
-        if user.get_capacity() > 0:
+        if user.capacity_available():
             Base.ADD_THING_TO(user, self.get_organizers())
         else:
             Base.ADD_THING_TO(user, self.get_guests())
