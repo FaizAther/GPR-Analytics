@@ -65,8 +65,8 @@ class Course(Base):
     def add_users(self, users: List[User]) -> None:
         Base.__DO_SOMETHINGS__(lambda u:self.add_user(u), users)
     
-    def notify(self) -> None:
-        Base.__DO_SOMETHINGS__(lambda x: x.update(self), self.get_users())
+    def notify(self, event) -> None:
+        Base.__DO_SOMETHINGS__(lambda x: x.update(event), self.get_users())
         
     def generate_html(self) -> str:
         return ""

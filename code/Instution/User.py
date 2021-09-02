@@ -33,7 +33,7 @@ class User(Base):
 
     @abstractmethod
     def update(self, subject):
-        print("in update method")
+        print(f"uuid={self.get_id()} reacted to\nengagement=\t{subject.__str__()}")
 
     def get_type(self) -> UserType:
         return self._type

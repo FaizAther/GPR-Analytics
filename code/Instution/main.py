@@ -38,7 +38,7 @@ f0.add_user(t0, 3301)
 c0 = Base.dict_find(3301, f0.get_courses())
 e0 = c0.update(l0)
 e0.set_type(EventType.ASSIGNMENT)
-c0.notify()
+c0.notify(e0)
 #e0 = Event(700, type=EventType.ASSIGNMENT)
 e0.set_weighting(5)
 
