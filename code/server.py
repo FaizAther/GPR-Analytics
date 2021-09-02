@@ -39,7 +39,14 @@ class User(db.Model):
 
 @app.route('/classes/<path>')
 def classes(path):
-    return render_template("hello.html", content=uni0.__str__())
+    if path == "UniQLD":
+        content = uni0.__str__()
+    elif path.split("=")[0] == "UniQLD-FAC":
+        print(path.split("=")[1])
+        content = uni0.find_faculty(int(path.split("=")[1])).__str__()
+    print(path.split("=")[0])
+    content=None
+    return render_template("hello.html", content=content)
 
 @app.route('/public/<file>')
 def public(file):

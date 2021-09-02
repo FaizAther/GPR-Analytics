@@ -39,6 +39,9 @@ class University(Base):
     def get_faculties(self) -> Dict[int, Faculty]:
         return self._faculties
 
+    def find_faculty(self, id) -> Faculty:
+        return Base.dict_find(id, self.get_faculties())
+
     def add_faculty(self, faculty: Faculty) -> None:
         Base.dict_insert(faculty, self.get_faculties())
 

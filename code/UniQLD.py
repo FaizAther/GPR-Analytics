@@ -10,7 +10,7 @@ from EventType import EventType
 from Event import Event
 from Mark import Mark
 
-uni0 = University(0, "UniQLD", "Purple")
+uni0 = University(0, name="UniQLD", description="Purple")
 #print(uni0)
 u0 = Student(100)
 #print(u0)

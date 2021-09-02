@@ -21,6 +21,8 @@ class Base(ABC):
         sid = s
         if type(s) != int:
             sid = s.get_id()
+        elif s >= 1000000:
+            s -= 1000000
         return to.get(sid)
 
     def dict_insert(s, to) -> None:
