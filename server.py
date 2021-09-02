@@ -1,6 +1,5 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
-from UniQLD import *
 
 from flask import (
     Flask, redirect, url_for,
@@ -36,10 +35,6 @@ class User(db.Model):
 
     def __repr__(self):
         return f"User('{self.id}, {self.username}')"
-
-@app.route('/classes/<path>')
-def classes(path):
-    return render_template("hello.html", content=uni0.__str__())
 
 @app.route('/public/<file>')
 def public(file):
