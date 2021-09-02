@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from Base import Base
 
 if TYPE_CHECKING:
-    from typing import List
+    from typing import List, Dict
     from Faculty import Faculty
     from User import User
 
@@ -14,11 +14,11 @@ if TYPE_CHECKING:
 '''
 class University(Base):
 
-    def __init__(self, id: int, name=None, description=None):
+    def __init__(self, id: int, admin=None, name=None, description=None):
         super().__init__(id, name, description)
-        self._admin     :User           = None
-        self._faculties :List[Faculty]  = []
-        self._users     :List[User]     = []
+        self._admin     :User               = admin
+        self._faculties :Dict[int, Faculty] = {}
+        self._users     :Dict[int, User]    = {}
 
     def generate_html(self) -> str:
         ## TODO
@@ -27,30 +27,27 @@ class University(Base):
     def get_admin(self) -> User:
         return self._admin
 
-    def set_admin(self, admin) -> None:
-        self._admin = admin
-
     def get_users(self) -> List[User]:
         return self._users
 
     def add_user(self, user: User) -> None:
-        Base.ADD_THING_TO(user, self.get_users())
+        Base.dict_insert(user, self.get_users())
 
     def add_users(self, users: List[User]) -> None:
         Base.ADD_THINGS_TO(users, self.get_users())
 
-    def get_faculties(self) -> List[Faculty]:
+    def get_faculties(self) -> Dict[int, Faculty]:
         return self._faculties
 
     def add_faculty(self, faculty: Faculty) -> None:
-        Base.ADD_THING_TO(faculty, self.get_faculties())
+        Base.dict_insert(faculty, self.get_faculties())
 
     def add_faculties(self, faculties: List[Faculty]) -> None:
         Base.ADD_THINGS_TO(faculties, self.get_faculties())
 
     def __repr__(self) -> str:
         faculties_str = Base.__LIST_STR__(
-            self.get_faculties(), ", faculties=")
+            list(self.get_faculties().values()), ", faculties=")
         return f"{super().__repr__()}" + \
             f"{faculties_str}"
 

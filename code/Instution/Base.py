@@ -17,6 +17,16 @@ class Base(ABC):
     
     ADD_THING_TO = lambda s, to: list.append(to, s)
 
+    def dict_find(s, to):
+        sid = s
+        if type(s) != int:
+            sid = s.get_id()
+        return to.get(sid)
+
+    def dict_insert(s, to) -> None:
+        if (Base.dict_find(s, to) == None):
+            to[s.get_id() - Base.__ID__OFFSET__] = s
+
     def __DO_SOMETHINGS__(f, elems) -> None:
         for e in elems:
             Base.__DO_SOMETHING__(f, e)

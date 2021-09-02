@@ -24,17 +24,15 @@ class Faculty(Base):
         self._courses   :Dict[int, Course]  = {}
         self._locations :List[Location]     = []
 
-    def find_course(self, course_id: int) -> Course:
-        return self.get_courses().get(course_id + Base.__ID__OFFSET__)
-
     def add_user(self, user:User, course_id:int, course=None) -> None:
         if course == None:
-            course = self.find_course(course_id)
-
+            course = self.get_courses().get(course_id)
+        if (course == None):
+            return
         course.add_user(user)
 
     def add_users(self, users:List[User], course_id:int) -> None:
-        course = self.find_course(course_id)
+        course = self.get_courses().get(course_id)
         Base.__DO_SOMETHINGS__(
             lambda u: self.add_user(u, course_id, course=course),
             users)
@@ -56,8 +54,7 @@ class Faculty(Base):
         return self._courses
 
     def add_course(self, course:Course) -> None:
-        if self.find_course(course.get_id()) == None:
-            self.get_courses()[course.get_id()] = course
+        Base.dict_insert(course, self.get_courses())
 
     def add_courses(self, courses:List[Course]) -> None:
         Base.__DO_SOMETHINGS__(
