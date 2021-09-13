@@ -35,7 +35,8 @@ class Faculty(Base):
         course = self.get_courses().get(course_id)
         Base.__DO_SOMETHINGS__(
             lambda u: self.add_user(u, course_id, course=course),
-            users)
+            users
+        )
 
     def make_course(self, id:int) -> None:
         self.add_course(Course(id, name=f"{self.get_name()}-{id}"))
@@ -63,8 +64,13 @@ class Faculty(Base):
         )
 
     def __repr__(self) -> str:
-        return super().__repr__()
+        courses_str = Base.__LIST_STR__(
+            list(self.get_courses().values()), ", courses=")
+        return f"{super().__repr__()}" + \
+            f"{courses_str}"
+
     def __whitetest__(self, result) -> bool:
         return super().__whitetest__(result=result)
+
     def generate_html(self) -> str:
         return super().generate_html()

@@ -30,6 +30,8 @@ f0.make_course(3301)
 f0.add_user(u0, 3301)
 f0.add_user(l0, 3301)
 
+f0.make_course(4403)
+
 #print("admin is: ", Base.dict_find(3301, f0.get_courses()).get_admin())
 
 #print(c0)
