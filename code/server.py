@@ -64,32 +64,37 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
+        session.pop('username', None)
         user = uni0.find_user(int(form.username.data))
         valid_pass = user.validate_password(form.password.data)
         print(valid_pass)
         if valid_pass:
-            print("ere")
-            return redirect(url_for('home', user=user.get_id()))
+            session['username'] = user.get_id()
+            return redirect(url_for('home', username=user.get_id()))
     return render_template("login.html", form=form)
-
-    if request.method == 'POST':
-        session['username'] = request.form['username']
-        return redirect(url_for('home'))
-    return render_template("login.html")
 
 @app.route('/logout')
 def logout():
     # remove the username from the session if it's there
-    print('username')
     session.pop('username', None)
     return redirect(url_for('index'))
 
-@app.route('/home/<user>')
-def home(user):
-    print(user)
-    return render_template("home.html", content=uni0.find_user(int(user)))
+@app.route('/home/<username>')
+def home(username):
+    if 'username' in session:
+        content=uni0.find_user(int(username))
+    else:
+        content="Not logged in"
+    return render_template("home.html", content=content)
 
-
+@app.route('/engagements/<username>')
+def engagements(username):
+    if 'username' in session:
+        user=uni0.find_user(int(username))
+        content = Base.__LIST_STR__(user.get_engagements(), "Engagements=")
+    else:
+        content="Not logged in"
+    return render_template("home.html", content=content)
 
 @app.route('/classes/<path>')
 def classes(path):
