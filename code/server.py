@@ -45,7 +45,6 @@ def classes(path):
         print(path.split("=")[1])
         content = uni0.find_faculty(int(path.split("=")[1])).__str__()
     print(path.split("=")[0])
-    content=None
     return render_template("hello.html", content=content)
 
 @app.route('/public/<file>')
