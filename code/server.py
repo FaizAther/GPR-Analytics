@@ -7,23 +7,39 @@ from flask import (
     render_template, send_from_directory,
     request, session, flash
 )
+
+# Forms
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField
+
 # Video call dependencies
 from flask_socketio import (
     SocketIO, emit, join_room, leave_room
 )
 from engineio.payload import Payload
+import flask
+from flask import session
+
 Payload.max_decode_packets = 200
+
 
 DATABASE_NAME = 'gpr.db'
 
 app = Flask(__name__)
 app.secret_key = "gpr"
 
+
+
+# Set the secret key to some random bytes. Keep this really secret!
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DATABASE_NAME
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 socketio = SocketIO(app)
 db = SQLAlchemy(app)
+
+# login_manager = LoginManager()
+# login_manager.init_app(app)
 
 # Video chat
 _users_in_room = {} # stores room wise user list
@@ -36,6 +52,44 @@ class User(db.Model):
 
     def __repr__(self):
         return f"User('{self.id}, {self.username}')"
+
+
+class LoginForm(FlaskForm):
+    username = StringField('username')
+    password = PasswordField('password')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user = uni0.find_user(int(form.username.data))
+        valid_pass = user.validate_password(form.password.data)
+        print(valid_pass)
+        if valid_pass:
+            print("ere")
+            return redirect(url_for('home', user=user.get_id()))
+    return render_template("login.html", form=form)
+
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        return redirect(url_for('home'))
+    return render_template("login.html")
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it's there
+    print('username')
+    session.pop('username', None)
+    return redirect(url_for('index'))
+
+@app.route('/home/<user>')
+def home(user):
+    print(user)
+    return render_template("home.html", content=uni0.find_user(int(user)))
+
+
 
 @app.route('/classes/<path>')
 def classes(path):
@@ -176,11 +230,14 @@ def on_data(data):
     socketio.emit('data', data, room=target_sid)
 
 
-if __name__ == "__main__":
-    socketio.run(app, debug=True)
 
-if __name__ == '__main__':
-    if DATABASE_NAME not in os.listdir():
-        db.create_all()
-    app.debug = True
-    app.run(host="0.0.0.0", port='8888', debug=True)
+if __name__ == "__main__":
+    sociio = True    
+
+    if sociio:
+        socketio.run(app, debug=True)
+    else:
+        if DATABASE_NAME not in os.listdir():
+            db.create_all()
+        app.debug = True
+        app.run(host="0.0.0.0", port='8888', debug=True)

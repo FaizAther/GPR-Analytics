@@ -25,6 +25,7 @@ class User(Base):
         self._engagements   :List       = []
         self._password      :str        = ""
         self._type          :UserType   = type
+        self._login         :bool       = False
         self.set_password(User.DEFAULT_PASSWORD)
 
     @abstractmethod
@@ -55,10 +56,13 @@ class User(Base):
         Base.ADD_THINGS_TO(engagements, self.get_engagements())
 
     def __repr__(self) -> str:
-        engagements_str = Base.__LIST_STR__(
-            self.get_engagements(), ", engagements=")
-        return f"{super().__repr__()}" + \
-            f", type={self.get_type().name}{engagements_str}"
+        return f"{super().__repr__()}"
+
+    # def __repr__(self) -> str:
+    #     engagements_str = Base.__LIST_STR__(
+    #         self.get_engagements(), ", engagements=")
+    #     return f"{super().__repr__()}" + \
+    #         f", type={self.get_type().name}{engagements_str}"
 
     DEFAULT_TEST = [
         f"Student('id=0, name=0, type=UNDERGRAD, engagements=')",

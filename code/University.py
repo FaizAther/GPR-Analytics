@@ -34,7 +34,7 @@ class University(Base):
         Base.dict_insert(user, self.get_users())
 
     def add_users(self, users: List[User]) -> None:
-        Base.ADD_THINGS_TO(users, self.get_users())
+        Base.__DO_SOMETHINGS__(lambda u: self.add_user(u), users)
 
     def get_faculties(self) -> Dict[int, Faculty]:
         return self._faculties
@@ -42,11 +42,14 @@ class University(Base):
     def find_faculty(self, id) -> Faculty:
         return Base.dict_find(id, self.get_faculties())
 
+    def find_user(self, id) -> User:
+        return Base.dict_find(id, self.get_users())
+
     def add_faculty(self, faculty: Faculty) -> None:
         Base.dict_insert(faculty, self.get_faculties())
 
     def add_faculties(self, faculties: List[Faculty]) -> None:
-        Base.ADD_THINGS_TO(faculties, self.get_faculties())
+        Base.__DO_SOMETHINGS__(lambda f: self.add_faculty(f), faculties)
 
     def __repr__(self) -> str:
         faculties_str = Base.__LIST_STR__(

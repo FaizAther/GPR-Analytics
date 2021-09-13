@@ -1,0 +1,16 @@
+{% extends "basic.html" %}
+{% block my_title %}Login{% endblock %}
+{% block my_h1 %}- Enter login details{% endblock %}
+{% block my_body %}
+<p>
+	{% if loggedin %}
+
+	you are logged in
+
+	{% else %}
+
+	wrong try again
+
+	{% endif %}
+</p>
+{% endblock %}

@@ -11,23 +11,21 @@ if TYPE_CHECKING:
 '''
 class Base(ABC):
 
-    __ID__OFFSET__ = 1000000
-
     __DO_SOMETHING__ = lambda f, x: f(x)
 
     ADD_THING_TO = lambda s, to: list.append(to, s)
 
     def dict_find(s, to):
         sid = s
+        if (type(s) == str):
+            sid = int(s)
         if type(s) != int:
             sid = s.get_id()
-        elif s >= 1000000:
-            s -= 1000000
         return to.get(sid)
 
     def dict_insert(s, to) -> None:
         if (Base.dict_find(s, to) == None):
-            to[s.get_id() - Base.__ID__OFFSET__] = s
+            to[s.get_id()] = s
 
     def __DO_SOMETHINGS__(f, elems) -> None:
         for e in elems:
@@ -47,7 +45,7 @@ class Base(ABC):
         return name + Base.FOLDL(Base.SEP_OP, "", values)
 
     def __init__(self, id: int, name: str=None, description: str=None, html=None):
-        self._id:           int = id + Base.__ID__OFFSET__
+        self._id:           int = id
         self._name:         str = str(id)
         self._description:  str = "N.A."
         self._html:         str = "N.A."

@@ -51,8 +51,11 @@ class Faculty(Base):
     def add_locations(self, locations:List[Location]) -> None:
         Base.ADD_THINGS_TO(locations, self.get_locations())
 
-    def get_courses(self) -> List[Course]:
+    def get_courses(self) -> Dict[Course]:
         return self._courses
+
+    def get_courses_list(self) -> List[Course]:
+        return self._courses.values()
 
     def add_course(self, course:Course) -> None:
         Base.dict_insert(course, self.get_courses())
@@ -65,7 +68,7 @@ class Faculty(Base):
 
     def __repr__(self) -> str:
         courses_str = Base.__LIST_STR__(
-            list(self.get_courses().values()), ", courses=")
+            list(self.get_courses_list()), ", courses=")
         return f"{super().__repr__()}" + \
             f"{courses_str}"
 

@@ -22,8 +22,10 @@ u3 = Student(104)
 
 
 t0 = Tutor(300)
-
 l0 = Lecturer(400)
+
+uni0.add_users([u0,u1,u2,u3,t0,l0])
+
 f0 = Faculty(0, name="COMP")
 uni0.add_faculty(f0)
 f0.make_course(3301)
@@ -38,6 +40,8 @@ f0.make_course(4403)
 f0.add_users([u1,u2], 3301)
 f0.add_user(t0, 3301)
 #c0.notify()
+print(f0.get_courses().values())
+print("here")
 c0 = Base.dict_find(3301, f0.get_courses())
 e0 = c0.update(l0)
 e0.set_type(EventType.ASSIGNMENT)

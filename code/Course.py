@@ -67,7 +67,7 @@ class Course(Base):
         Base.__DO_SOMETHINGS__(lambda u:self.add_user(u), users)
 
     def notify(self, event) -> None:
-        Base.__DO_SOMETHINGS__(lambda x: x.update(event), self.get_users())
+        Base.__DO_SOMETHINGS__(lambda u: u.update(event), self.get_users())
 
     def generate_html(self) -> str:
         return ""
@@ -76,7 +76,8 @@ class Course(Base):
         return self._admin
 
     def __repr__(self) -> str:
-        return super().__repr__()
+        return super().__repr__() + \
+            f", admin={self.get_admin().__str__()}"
 
     def __whitetest__(self, result) -> bool:
         return super().__whitetest__(result=result)
