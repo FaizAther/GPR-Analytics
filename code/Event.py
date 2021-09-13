@@ -27,6 +27,7 @@ if TYPE_CHECKING:
     Event Class
 '''
 class Event(Base):
+
     def __init__(self, id, name=None, type=EventType.DEFAULT):
         super().__init__(id, name=name)
 
@@ -41,10 +42,10 @@ class Event(Base):
         self._locations     :List[Location]     = []
         self._type          :EventType          = type
         self._resources     :List               = []
-    
+
     def get_type(self):
         return self._type
-    
+
     def set_type(self, type):
         self._type = type
 
@@ -61,13 +62,13 @@ class Event(Base):
 
     def get_organizers(self) -> List[User]:
         return self._organizers
-    
+
     def get_guests(self) -> List[User]:
         return self._guests
 
     def get_weighting(self) -> int:
         return self._weighting
-    
+
     def add_user(self, user: User) -> None:
         if user.get_type() == UserType.TUTOR:
             self.handle_tutor(user),
@@ -75,7 +76,7 @@ class Event(Base):
             self.handle_lecturer(user)
         else:
             self.handle_student(user)
-    
+
     def add_users(self, users: List[User]):
         Base.__DO_SOMETHINGS__(lambda u: self.add_user(u), users)
 
@@ -84,7 +85,7 @@ class Event(Base):
                 m if z == None and m.get_type() == UserType.TUTOR \
                     and m.capacity_available() \
                 else z, None, self.get_organizers())
-            
+
     def handle_student(self, user: Student) -> None:
         marker = self.find_marker()
         if (self.get_weighting() <= 0):
@@ -105,12 +106,12 @@ class Event(Base):
             self._manager = user
         else:
             self.get_guests().append(user)
-        
+
     def __repr__(self) -> str:
         return super().__repr__()
-    
+
     def __whitetest__(self, result) -> bool:
         return super().__whitetest__(result=result)
-    
+
     def generate_html(self) -> str:
         return super().generate_html()

@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     Location Class
 '''
 class Location(Base):
+
     def __init__(self, type: LocationType, page: str, address: str):
         super.__init__(self)
         self._type    :LocationType = type

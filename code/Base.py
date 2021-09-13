@@ -14,7 +14,7 @@ class Base(ABC):
     __ID__OFFSET__ = 1000000
 
     __DO_SOMETHING__ = lambda f, x: f(x)
-    
+
     ADD_THING_TO = lambda s, to: list.append(to, s)
 
     def dict_find(s, to):
@@ -89,7 +89,7 @@ class Base(ABC):
     @abstractmethod
     def __repr__(self) -> str:
         return f"id={self.get_id()}, name={self.get_name()}"
-    
+
     DEFAULT_TEST = []
 
     @abstractmethod

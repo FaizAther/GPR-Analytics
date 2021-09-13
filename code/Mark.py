@@ -38,9 +38,9 @@ class Mark(Attendance):
 
     def __repr__(self) -> str:
         return super().__repr__()
-    
+
     def __whitetest__(self, result) -> bool:
         return super().__whitetest__(result=result)
-    
+
     def generate_html(self) -> str:
         return super().generate_html()

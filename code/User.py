@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     User class
 '''
 class User(Base):
-    
+
     DEFAULT_PASSWORD    :str    = "password"
 
     def HASH_HEX_DIGEST(value: str) -> str:

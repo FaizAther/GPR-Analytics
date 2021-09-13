@@ -7,7 +7,7 @@ class EventType(Enum):
     LECTURE         = 0
     TUTORIAL        = 1
     PRACTICAL       = 2
-    
+
     ASSIGNMENT      = 3
     PROJECT         = 4
     EXAM            = 5

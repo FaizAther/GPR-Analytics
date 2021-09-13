@@ -22,6 +22,6 @@ class Lecturer(User):
     
     def update(self, course: Course):
         super().update(course)
-    
+
     def __whitetest__(self, results) -> bool:
         return super().__whitetest__(results=results)

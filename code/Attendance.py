@@ -15,15 +15,16 @@ if TYPE_CHECKING:
     Mark Class
 '''
 class Attendance(Base):
+
     def __init__(self, id, event, attendee, marker=None):
         super().__init__(id)
-        
+
         self._attandee  :User   = attendee
         self._marker    :User   = marker
 
         self._attended  :bool   = False
         self._duration  :int    = 0
-        
+
         self._event     :Event  = event
 
         for user in [attendee, marker]:

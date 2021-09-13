@@ -61,7 +61,7 @@ class Faculty(Base):
             lambda c: self.add_course(c),
             self.get_courses()
         )
-    
+
     def __repr__(self) -> str:
         return super().__repr__()
     def __whitetest__(self, result) -> bool:
