@@ -96,10 +96,11 @@ def engagements(username):
         content="Not logged in"
     return render_template("home.html", content=content)
 
-@app.route('/classes/<path>')
+@app.route('/university/<path>')
 def classes(path):
+    content = "Not found"
     if path == "UniQLD":
-        content = uni0.__str__()
+        content = uni0
     elif path.split("=")[0] == "UniQLD-FAC":
         print(path.split("=")[1])
         content = uni0.find_faculty(int(path.split("=")[1])).__str__()
