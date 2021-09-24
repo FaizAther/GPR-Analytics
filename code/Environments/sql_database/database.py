@@ -7,13 +7,25 @@ import populate
 
 # establish the connection to azure sql database
 db = "university_db"
+
+# MONEY RAN OUT SO CAN'T USE AZURE SQL DATABASE
+# cnx = mysql.connector.connect(
+#     host="university-db-deco3801.mysql.database.azure.com",
+#     user="gpr_deco3801@university-db-deco3801",
+#     passwd="Abc1234567890",
+#     database=db
+# )
+
+# desktop mySQL
 cnx = mysql.connector.connect(
-    host="university-db-deco3801.mysql.database.azure.com",
-    user="gpr_deco3801@university-db-deco3801",
-    passwd="Abc1234567890",
+    host="localhost",
+    user="root",
+    passwd="abcd1234",
     database=db
 )
+
 mycursor = cnx.cursor()
+
 
 def show_databases():
     '''
@@ -124,21 +136,6 @@ def insert_enrolment():
     cnx.commit()
     return
 
-def insert_topics():
-    # we need to get enrolment_id
-    save_query = []
-    mycursor.execute("SELECT enrolment_id from enrolment")
-    result = mycursor.fetchall()
-    for row in result:
-        save_query.append(row)
-    
-    list = populate.pop_topics(save_query)
-    sql = "INSERT INTO topics (enrolment_id, topic_one_percent, topic_two_percent, topic_three_percent, topic_four_percent)\
-            VALUES (%s,%s,%s,%s,%s)"
-    mycursor.executemany(sql, list)
-    cnx.commit()
-    return
-
 def insert_statistic():
     # we need to get course_id
     save_query = []
@@ -162,55 +159,8 @@ def insert_attendance():
         save_query.append(row)
     
     list = populate.pop_attendance(save_query)
-    sql = "INSERT INTO attendance (enrolment_id, lec_attendance_percent, tut_attendance_percent, personal_study_percent, lec_incompletion_percent, tut_incompletion_percent, total_attendance_percent)\
-            VALUES (%s,%s,%s,%s,%s,%s,%s)"
-    mycursor.executemany(sql, list)
-    cnx.commit()
-    return
-
-def insert_interaction():
-    save_query = []
-    mycursor.execute("SELECT enrolment_id from enrolment")
-    result = mycursor.fetchall()
-    for row in result:
-        save_query.append(row)
-    
-    list = populate.pop_interaction(save_query)
-    sql = "INSERT INTO interaction (enrolment_id, lec_interaction_percent, tut_interaction_percent, total_interaction_percent)\
-            VALUES (%s,%s,%s,%s)"
-    mycursor.executemany(sql, list)
-    cnx.commit()
-    return
-
-def insert_assessments():
-    enrol_query = []
-    mycursor.execute("SELECT enrolment_id from enrolment")
-    result = mycursor.fetchall()
-    for row in result:
-        enrol_query.append(row)
-
-    attend_query = []
-    mycursor.execute("SELECT * from attendance")
-    result = mycursor.fetchall()
-    for row in result:
-        attend_query.append(row)
-
-    interact_query = []
-    mycursor.execute("SELECT * from interaction")
-    result = mycursor.fetchall()
-    for row in result:
-        interact_query.append(row)
-
-    topics_query = []
-    mycursor.execute("SELECT * from topics")
-    result = mycursor.fetchall()
-    for row in result:
-        topics_query.append(row)
-
-    
-    list = populate.pop_assessment(enrol_query, attend_query, interact_query, topics_query)
-    sql = "INSERT INTO assessments (enrolment_id, mid_sem_exam_percent, quiz_score_percent, assignment_score_percent, total_assessment_score_percent)\
-            VALUES (%s,%s,%s,%s,%s)"
+    sql = "INSERT INTO attendance (enrolment_id, lec_attendance_percent, tut_attendance_percent, lec_incompletion_percent, tut_incompletion_percent, total_attendance_percent)\
+            VALUES (%s,%s,%s,%s,%s,%s)"
     mycursor.executemany(sql, list)
     cnx.commit()
     return
@@ -221,15 +171,21 @@ def insert_grade():
     result = mycursor.fetchall()
     for row in result:
         enrol_query.append(row)
+    
+    courses = set()
+    for i in range(len(enrol_query)):
+        courses.add(enrol_query[i][2])
 
-    ass_query = []
-    mycursor.execute("SELECT * from assessments")
-    result = mycursor.fetchall()
-    for row in result:
-        ass_query.append(row)
+    # get all the courses
+    course_query = []
+    for c in courses:
+        mycursor.execute("SELECT * from %s" % (c))
+        result = mycursor.fetchall()
+        for row in result:
+            course_query.append(row)
 
     
-    list = populate.pop_grade(enrol_query, ass_query)
+    list = populate.pop_grade(enrol_query, course_query)
     sql = "INSERT INTO grade (enrolment_id, gpa, at_risk)\
             VALUES (%s,%s,%s)"
     mycursor.executemany(sql, list)
@@ -243,21 +199,215 @@ def insert_satisfaction():
     for row in result:
         enrol_query.append(row)
 
-    inter_query = []
-    mycursor.execute("SELECT * from interaction")
-    result = mycursor.fetchall()
-    for row in result:
-        inter_query.append(row)
-
     att_query = []
     mycursor.execute("SELECT * from attendance")
     result = mycursor.fetchall()
     for row in result:
         att_query.append(row)
     
-    list = populate.pop_satisfaction(enrol_query, inter_query, att_query)
-    sql = "INSERT INTO satisfaction (enrolment_id, satisfaction_rate_percent, survey_rating_percent, is_satisfied)\
-            VALUES (%s,%s,%s,%s)"
+    list = populate.pop_satisfaction(enrol_query, att_query)
+    sql = "INSERT INTO satisfaction (enrolment_id, satisfaction_rate_percent, mid_sem_survey_rating_percent, final_survey_rating_percent, is_satisfied)\
+            VALUES (%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_CSSE2010():
+    enrol_query = []
+    mycursor.execute("SELECT * from enrolment")
+    result = mycursor.fetchall()
+    for row in result:
+        enrol_query.append(row)
+
+    attend_query = []
+    mycursor.execute("SELECT * from attendance")
+    result = mycursor.fetchall()
+    for row in result:
+        attend_query.append(row)
+
+    list = populate.pop_CSSE2010(enrol_query, attend_query)
+    sql = "INSERT INTO CSSE2010 (enrolment_id, course_id, weekly_quiz, assignment_1, assignment_2, final_exam, total_assessment_score_percent)\
+            VALUES (%s,%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_COMP3506():
+    enrol_query = []
+    mycursor.execute("SELECT * from enrolment")
+    result = mycursor.fetchall()
+    for row in result:
+        enrol_query.append(row)
+
+    attend_query = []
+    mycursor.execute("SELECT * from attendance")
+    result = mycursor.fetchall()
+    for row in result:
+        attend_query.append(row)
+
+    list = populate.pop_COMP3506(enrol_query, attend_query)
+    sql = "INSERT INTO COMP3506 (enrolment_id, course_id, weekly_quiz, Project, final_exam, total_assessment_score_percent)\
+            VALUES (%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_COMP2048():
+    enrol_query = []
+    mycursor.execute("SELECT * from enrolment")
+    result = mycursor.fetchall()
+    for row in result:
+        enrol_query.append(row)
+
+    attend_query = []
+    mycursor.execute("SELECT * from attendance")
+    result = mycursor.fetchall()
+    for row in result:
+        attend_query.append(row)
+
+    list = populate.pop_COMP2048(enrol_query, attend_query)
+    sql = "INSERT INTO COMP2048 (enrolment_id, course_id, Demo_1, Demo_2, Demo_3, Demo_4, final_exam, total_assessment_score_percent)\
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_CSSE1001():
+    enrol_query = []
+    mycursor.execute("SELECT * from enrolment")
+    result = mycursor.fetchall()
+    for row in result:
+        enrol_query.append(row)
+
+    attend_query = []
+    mycursor.execute("SELECT * from attendance")
+    result = mycursor.fetchall()
+    for row in result:
+        attend_query.append(row)
+
+    list = populate.pop_CSSE1001(enrol_query, attend_query)
+    sql = "INSERT INTO CSSE1001 (enrolment_id, course_id, online_quiz, assignment_0, assignment_1, assignment_2, assignment_3, final_exam, total_assessment_score_percent)\
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_CSSE2002():
+    enrol_query = []
+    mycursor.execute("SELECT * from enrolment")
+    result = mycursor.fetchall()
+    for row in result:
+        enrol_query.append(row)
+
+    attend_query = []
+    mycursor.execute("SELECT * from attendance")
+    result = mycursor.fetchall()
+    for row in result:
+        attend_query.append(row)
+
+    list = populate.pop_CSSE2002(enrol_query, attend_query)
+    sql = "INSERT INTO CSSE2002 (enrolment_id, course_id, problem_sets, assignment_1, assignment_2, final_exam, total_assessment_score_percent)\
+            VALUES (%s,%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_INFS1200():
+    enrol_query = []
+    mycursor.execute("SELECT * from enrolment")
+    result = mycursor.fetchall()
+    for row in result:
+        enrol_query.append(row)
+
+    attend_query = []
+    mycursor.execute("SELECT * from attendance")
+    result = mycursor.fetchall()
+    for row in result:
+        attend_query.append(row)
+
+    list = populate.pop_INFS1200(enrol_query, attend_query)
+    sql = "INSERT INTO INFS1200 (enrolment_id, course_id, ripple, assignment_1, assignment_2,assignment_3, assignment_4, final_exam, total_assessment_score_percent)\
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_MATH1061():
+    enrol_query = []
+    mycursor.execute("SELECT * from enrolment")
+    result = mycursor.fetchall()
+    for row in result:
+        enrol_query.append(row)
+
+    attend_query = []
+    mycursor.execute("SELECT * from attendance")
+    result = mycursor.fetchall()
+    for row in result:
+        attend_query.append(row)
+
+    list = populate.pop_MATH1061(enrol_query, attend_query)
+    sql = "INSERT INTO MATH1061 (enrolment_id, course_id, mid_sem_exam, assignment_1, assignment_2, assignment_3, assignment_4, final_exam, total_assessment_score_percent)\
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_STAT1201():
+    enrol_query = []
+    mycursor.execute("SELECT * from enrolment")
+    result = mycursor.fetchall()
+    for row in result:
+        enrol_query.append(row)
+
+    attend_query = []
+    mycursor.execute("SELECT * from attendance")
+    result = mycursor.fetchall()
+    for row in result:
+        attend_query.append(row)
+
+    list = populate.pop_STAT1201(enrol_query, attend_query)
+    sql = "INSERT INTO STAT1201 (enrolment_id, course_id, online_quizzes, article_review, essay, video, final_exam, total_assessment_score_percent)\
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+
+def insert_STAT1301():
+    enrol_query = []
+    mycursor.execute("SELECT * from enrolment")
+    result = mycursor.fetchall()
+    for row in result:
+        enrol_query.append(row)
+
+    attend_query = []
+    mycursor.execute("SELECT * from attendance")
+    result = mycursor.fetchall()
+    for row in result:
+        attend_query.append(row)
+
+    list = populate.pop_STAT1301(enrol_query, attend_query)
+    sql = "INSERT INTO STAT1301 (enrolment_id, course_id, online_quizzes, article_review_1, article_review_2, project, final_exam, total_assessment_score_percent)\
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+    mycursor.executemany(sql, list)
+    cnx.commit()
+    return
+    
+def insert_COMP4500():
+    enrol_query = []
+    mycursor.execute("SELECT * from enrolment")
+    result = mycursor.fetchall()
+    for row in result:
+        enrol_query.append(row)
+
+    attend_query = []
+    mycursor.execute("SELECT * from attendance")
+    result = mycursor.fetchall()
+    for row in result:
+        attend_query.append(row)
+
+    list = populate.pop_COMP4500(enrol_query, attend_query)
+    sql = "INSERT INTO COMP4500 (enrolment_id, course_id, online_quizzes, assignment_1, assignment_2, final_exam, total_assessment_score_percent)\
+            VALUES (%s,%s,%s,%s,%s,%s,%s)"
     mycursor.executemany(sql, list)
     cnx.commit()
     return
@@ -273,16 +423,25 @@ def main():
     # create_tables(db, mycursor, tables()) # create tables
     # insert_student()
     # insert_goals()
-    # insert_statistic()
     # insert_course()
-
+    # insert_statistic()
     # insert_enrolment()
-    # insert_topics()
     # insert_attendance()
-    # insert_interaction()
-    # insert_assessments()
-    # insert_grade()
     # insert_satisfaction()
+
+    # insert_CSSE2010()
+    # insert_COMP2048()
+    # insert_COMP3506()
+    # insert_CSSE1001()
+    # insert_CSSE2002()
+    # insert_INFS1200()
+    # insert_MATH1061()
+    # insert_STAT1201()
+    # insert_STAT1301()
+    # insert_COMP4500()
+
+    # insert_grade()
+    
 
 
 if __name__=="__main__":
