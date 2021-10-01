@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from Base import Base
+from Instution.Base import Base
 
 if TYPE_CHECKING:
     from typing import List, Dict
     from Faculty import Faculty
-    from User import User
+    from Instution.Users.User  import User
 
 '''
 	University class

@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "./Environments/deco-env/bin/python3"
+    "python.pythonPath": "./Environments/deco-env/bin/python3",
+    "terminal.integrated.env.osx": {"PYTHONPATH": "${workspaceFolder}"}
 }

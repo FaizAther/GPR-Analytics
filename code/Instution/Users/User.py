@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from abc import abstractmethod
-from Base import Base
-from UserType import UserType
+from Instution.Base import Base
+from Instution.Users.UserType import UserType
 
 if TYPE_CHECKING:
     from typing import List

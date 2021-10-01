@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from User import User
-from UserType import UserType
+from Instution.Users.User import User
+from Instution.Users.UserType import UserType
 
 if TYPE_CHECKING:
-    from Course import Course
+    from Instution.Universities.Course import Course
 
 
 class Tutor(User):

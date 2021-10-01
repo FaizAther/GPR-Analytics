@@ -4,24 +4,21 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Any
 import typing
 
-from Base import Base
-from Attendance import Attendance
-from EventType import EventType
-from UserType import UserType
-from Mark import Mark
+from Instution.Base import Base
+from Instution.Events.Attendance import Attendance
+from Instution.Events.EventType import EventType
+from Instution.Users.UserType import UserType
+from Instution.Events.Mark import Mark
 
 if TYPE_CHECKING:
     from typing import Dict, List
 
-    from Location import Location
-    from Mark import Mark
-    from User import User
-    from Student import Student
-    from Tutor import Tutor
-    from Lecturer import Lecturer
-    from Student import Student
-    from Tutor import Tutor
-    from Lecturer import Lecturer
+    from Instution.Events.Location import Location
+    from Instution.Events.Mark import Mark
+    from Instution.Users.User import User
+    from Instution.Users.Student import Student
+    from Instution.Users.Tutor import Tutor
+    from Instution.Users.Lecturer import Lecturer
 
 '''
     Event Class

@@ -1,14 +1,14 @@
-from Base import Base
-from University import University
-from Faculty import Faculty
-from Course import Course
-from Student import Student
-from Tutor import Tutor
-from Lecturer import Lecturer
-from UserType import UserType
-from EventType import EventType
-from Event import Event
-from Mark import Mark
+from Instution.Base import Base
+from Instution.Universities.University import University
+from Instution.Universities.Faculty import Faculty
+from Instution.Universities.Course import Course
+from Instution.Users.Student import Student
+from Instution.Users.Tutor import Tutor
+from Instution.Users.Lecturer import Lecturer
+from Instution.Users.UserType import UserType
+from Instution.Events.EventType import EventType
+from Instution.Events.Event import Event
+from Instution.Events.Mark import Mark
 
 uni0 = University(0, name="UniQLD", description="Purple")
 #print(uni0)

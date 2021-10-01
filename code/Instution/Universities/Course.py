@@ -2,18 +2,18 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from Base import Base
-from UserType import UserType
-from EventType import EventType
-from Event import Event
+from Instution.Base import Base
+from Instution.Users.UserType import UserType
+from Instution.Events.EventType import EventType
+from Instution.Events.Event import Event
 
 if TYPE_CHECKING:
     from typing import List
 
-    from User import User
-    from Student import Student
-    from Tutor import Tutor
-    from Lecturer import Lecturer
+    from Instution.Users.User import User
+    from Instution.Users.Student import Student
+    from Instution.Users.Tutor import Tutor
+    from Instution.Users.Lecturer import Lecturer
 
 '''
     Course class

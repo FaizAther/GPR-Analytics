@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from Base import Base
+from Instution.Base import Base
 
 if TYPE_CHECKING:
-    from Course import Course
-    from User import User
-    from Student import Student
-    from Tutor import Tutor
-    from Event import Event
+    from Instution.Universities.Course import Course
+    from Instution.Users.User import User
+    from Instution.Users.Student import Student
+    from Instution.Users.Tutor import Tutor
+    from Instution.Events.Event import Event
 
 '''
     Mark Class

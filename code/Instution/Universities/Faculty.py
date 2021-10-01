@@ -2,15 +2,15 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from Base import Base
-from Course import Course
+from Instution.Base import Base
+from Instution.Universities.Course import Course
 
 if TYPE_CHECKING:
     from typing import List, Dict
-    from Course import Course
-    from Location import Location
-    from Lecturer import Lecturer
-    from User import User
+    from Instution.Universities.Course import Course
+    from Instution.Events.Location import Location
+    from Instution.Users.Lecturer import Lecturer
+    from Instution.Users.User import User
 '''
     Faculty class
 '''

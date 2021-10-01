@@ -3,13 +3,13 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from Attendance import Attendance
-from UserType import UserType
+from Instution.Events.Attendance import Attendance
+from Instution.Users.UserType import UserType
 
 if TYPE_CHECKING:
     from typing import Dict, List
-    from Tutor import Tutor
-    from User import User
+    from Instution.Users.Tutor import Tutor
+    from Instution.Users.User import User
 
 '''
     Mark Class

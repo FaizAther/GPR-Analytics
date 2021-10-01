@@ -1,6 +1,6 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
-from UniQLD import *
+from Instution.UniQLD import *
 
 from flask import (
     Flask, redirect, url_for,
