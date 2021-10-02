@@ -12,4 +12,6 @@ class UserType(Enum):
     POSTGRAD    = 5
     PHD         = 6
     EXCHANGE    = 7
-    DEFAULT     = 4
+
+    ADMIN       = 8
+    DEFAULT     = 9

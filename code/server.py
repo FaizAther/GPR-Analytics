@@ -82,7 +82,7 @@ def logout():
 @app.route('/home/<username>')
 def home(username):
     if 'username' in session:
-        content=uni0.find_user(int(username))
+        content=uni0.find_user(int(session['username']))
     else:
         content="Not logged in"
     return render_template("home.html", content=content)
@@ -90,7 +90,7 @@ def home(username):
 @app.route('/engagements/<username>')
 def engagements(username):
     if 'username' in session:
-        user=uni0.find_user(int(username))
+        user=uni0.find_user(int(session['username']))
         content = Base.__LIST_STR__(user.get_engagements(), "Engagements=")
     else:
         content="Not logged in"
