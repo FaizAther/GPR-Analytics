@@ -77,3 +77,19 @@ CREATE TABLE Invite (
     foreign key (user_id) references User(id),
     primary key (event_id, user_id)
 );
+
+CREATE TABLE Member (
+    id numeric PRIMARY KEY,
+    user_id numeric,
+    university_id numeric,
+    foreign key (user_id) references User(id),
+    foreign key (university_id) references University(id)
+);
+
+CREATE TABLE Enrollment (
+    id numeric PRIMARY KEY,
+    user_id numeric,
+    course_id numeric,
+    foreign key (user_id) references User(id),
+    foreign key (course_id) references Course(id)
+);
