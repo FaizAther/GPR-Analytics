@@ -14,4 +14,5 @@ class UserType(Enum):
     EXCHANGE    = 7
 
     ADMIN       = 8
-    DEFAULT     = 9
+    SUDO        = 9
+    DEFAULT     = 10
