@@ -3,7 +3,13 @@
 CREATE TABLE User (
     id numeric PRIMARY KEY,
     name text NOT NULL,
+    type numeric NOT NULL,
     password text NOT NULL
+);
+
+CREATE TABLE Resource (
+    id numeric PRIMARY KEY,
+    location text
 );
 
 CREATE TABLE University (
@@ -34,6 +40,8 @@ CREATE TABLE Event (
     course_id numeric NOT NULL,
     name text NOT NULL,
     manager numeric NOT NULL,
+    resource_id numeric,
+    foreign key (resource_id) references Resource(id),
     foreign key (manager) references User(id),
     foreign key (course_id) references Course(id)
 );
@@ -54,9 +62,10 @@ CREATE TABLE Mark (
     attendance_id numeric,
     total numeric, 
     received numeric,
-    spec text,
+    resource_id numeric,
     duedate date,
-    foreign key (attendance_id) references Attendance(id)
+    foreign key (attendance_id) references Attendance(id),
+    foreign key (resource_id) references Resource(id),
     primary key (attendance_id, duedate)
 );
 
