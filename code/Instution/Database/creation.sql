@@ -1,4 +1,11 @@
 -- Comments
+
+CREATE TABLE User (
+    id numeric PRIMARY KEY,
+    name text NOT NULL,
+    password text NOT NULL
+);
+
 CREATE TABLE University (
     id numeric PRIMARY KEY,
     name text NOT NULL,
@@ -18,29 +25,28 @@ CREATE TABLE Faculty (
 CREATE TABLE Course (
     id numeric PRIMARY KEY,
     name text NOT NULL,
-    coordinator NOT NULL, 
-    foreign key (coordinator) references User(id),
-    primary key (id)
+    coordinator numeric NOT NULL, 
+    foreign key (coordinator) references User(id)
 );
 
 CREATE TABLE Event (
     id numeric PRIMARY KEY,
     name text NOT NULL,
-    manager NOT NULL, 
-    foreign key (manager) references User(id),
-    primary key (id)
+    manager numeric NOT NULL, 
+    foreign key (manager) references User(id)
 );
 
 CREATE TABLE Attendance (
     id numeric PRIMARY KEY,
     name text NOT NULL,
-    authority NOT NULL,
-    foreign key (authority) references User(id),
-    primary key (id)
+    authority numeric NOT NULL,
+    foreign key (authority) references User(id)
 );
 
-CREATE TABLE User (
-    id numeric PRIMARY KEY,
-    name text NOT NULL,
-    password text NOT NULL
+CREATE TABLE EventTicket (
+    event_id numeric NOT NULL,
+    user_id numeric NOT NULL,
+    foreign key (event_id) references Event(id),
+    foreign key (user_id) references User(id),
+    primary key (event_id, user_id)
 );
