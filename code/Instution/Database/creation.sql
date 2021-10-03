@@ -41,6 +41,7 @@ CREATE TABLE Event (
     name text NOT NULL,
     manager numeric NOT NULL,
     resource_id numeric,
+    type numeric NOT NULL,
     foreign key (resource_id) references Resource(id),
     foreign key (manager) references User(id),
     foreign key (course_id) references Course(id)
