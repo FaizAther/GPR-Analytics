@@ -14,7 +14,7 @@ import flask
 from flask import session
 from Forms.LoginForm import LoginForm
 
-from Instution.UniQLD import *
+from Instution.Run import *
 
 Payload.max_decode_packets = 200
 

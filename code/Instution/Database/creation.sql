@@ -2,9 +2,11 @@
 
 CREATE TABLE User (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    university_id INTEGER,
     name text NOT NULL,
     type numeric NOT NULL,
-    password text NOT NULL
+    password text NOT NULL,
+    foreign key (university_id) references University(id)
 );
 
 CREATE TABLE Resource (
@@ -30,9 +32,11 @@ CREATE TABLE Faculty (
 
 CREATE TABLE Course (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    faculty_id INTEGER,
     name text NOT NULL,
     coordinator INTEGER NOT NULL, 
-    foreign key (coordinator) references User(id)
+    foreign key (coordinator) references User(id),
+    foreign key (coordinator) references Faculty(id)
 );
 
 CREATE TABLE Event (
@@ -76,14 +80,6 @@ CREATE TABLE Invite (
     foreign key (event_id) references Event(id),
     foreign key (user_id) references User(id),
     primary key (event_id, user_id)
-);
-
-CREATE TABLE Member (
-    id INTEGER PRIMARY KEY,
-    user_id INTEGER,
-    university_id INTEGER,
-    foreign key (user_id) references User(id),
-    foreign key (university_id) references University(id)
 );
 
 CREATE TABLE Enrollment (
