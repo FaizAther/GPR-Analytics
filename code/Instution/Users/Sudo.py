@@ -29,6 +29,9 @@ class Sudo(User):
     
     def update(self, subject):
         return super().update(subject)
+    
+    def insert(self):
+        pass
 
 my_sudo = Sudo(5, 5)
 print(my_sudo)
