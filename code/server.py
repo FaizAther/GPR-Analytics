@@ -15,7 +15,6 @@ import flask
 from flask import session
 from Forms.LoginForm import LoginForm
 
-
 Payload.max_decode_packets = 200
 
 app = Flask(__name__)
