@@ -136,8 +136,6 @@ button > a{
     float: left;
     text-align: center;
     border-radius: 15px;
-    margin-top: 36px;
-    margin-left: 130px;
 }
 
 .class_schedule a{
@@ -194,7 +192,6 @@ button > a{
     top: 10%;
     right: 15%; */
     float: left;
-    margin-top: 20px;
 }
 
 .pass_rate > p{
@@ -221,8 +218,6 @@ button > a{
     right: 16%;
     top: 27%; */
     float: left;
-    margin-top: 50px;
-    margin-left: 125px;
 }
 
 .exam > span{
@@ -236,7 +231,7 @@ button > a{
     width: 1000px;
     height: 400px;
     border: 1px solid #8448BF;
-    margin-top: 120px;
+    margin-top: 150px;
     margin-left: 50px;
     /* position: absolute; */
     float: left;

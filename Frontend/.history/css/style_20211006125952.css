@@ -107,8 +107,6 @@ button > a{
     font-size: 60px;
     font-family: 'Roboto', sans-serif;
     font-style: italic;
-    float: left;
-    margin-right: 100px;
 }
 
 .enroll_info{
@@ -120,24 +118,20 @@ button > a{
     line-height: 50px;
     margin-top: 40px;
     margin-left: 80px;
-    float: left;
 }
 
 .class_schedule{
-    width: 15em;
-    height: 6em;
+    width: 240px;
+    height: 93px;
     /* border: 1px solid #8448BF; */
     font-family: 'Roboto', sans-serif;
     font-style: italic;
     line-height: 93px;
-    /* position: absolute;
+    position: absolute;
     top: 25%;
-    right: 32%; */
-    float: left;
+    right: 32%;
     text-align: center;
     border-radius: 15px;
-    margin-top: 36px;
-    margin-left: 130px;
 }
 
 .class_schedule a{
@@ -174,8 +168,6 @@ button > a{
     float: left;
     white-space: initial;
     font-weight: bold;
-    margin-top: 25px;
-    margin-right: 100px;
 }
 
 .course_coordinator > span{
@@ -187,14 +179,12 @@ button > a{
 }
 
 .pass_rate{
-    width: 15em;
-    height: 8em;
+    width: 240px;
+    height: 120px;
     border: 1px solid #8448BF;
-    /* position: absolute;
+    position: absolute;
     top: 10%;
-    right: 15%; */
-    float: left;
-    margin-top: 20px;
+    right: 15%;
 }
 
 .pass_rate > p{
@@ -214,15 +204,12 @@ button > a{
 }
 
 .exam{
-    width: 12em;
-    height: 5em;
+    width: 180px;
+    height: 82px;
     border: 1px solid #8448BF;
-    /* position: absolute;
+    position: absolute;
     right: 16%;
-    top: 27%; */
-    float: left;
-    margin-top: 50px;
-    margin-left: 125px;
+    top: 27%;
 }
 
 .exam > span{
@@ -236,10 +223,9 @@ button > a{
     width: 1000px;
     height: 400px;
     border: 1px solid #8448BF;
-    margin-top: 120px;
+    margin-top: 150px;
     margin-left: 50px;
-    /* position: absolute; */
-    float: left;
+    position: absolute;
 }
 
 .student_container{
