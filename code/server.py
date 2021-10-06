@@ -1,5 +1,4 @@
 import os
-from Instution.UniQLD import *
 
 from flask import (
     Flask, redirect, url_for,
@@ -14,6 +13,8 @@ from engineio.payload import Payload
 import flask
 from flask import session
 from Forms.LoginForm import LoginForm
+
+from Instution.UniQLD import *
 
 Payload.max_decode_packets = 200
 
