@@ -18,8 +18,8 @@ class Sudo(User):
     def get_admins(self) -> List[Admin]:
         return self._admins
 
-    def add_admin(self):
-        admin = Admin(len(self._admins))
+    def add_admin(self, name=None, description=None):
+        admin = Admin(len(self._admins), name=name, description=description)
         self.get_admins().append(admin)
         return admin
 

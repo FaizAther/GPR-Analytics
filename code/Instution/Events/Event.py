@@ -112,3 +112,6 @@ class Event(Base):
 
     def generate_html(self) -> str:
         return super().generate_html()
+
+    def insert(self) -> str:
+        return super().insert()

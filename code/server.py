@@ -39,7 +39,7 @@ def login():
         print(valid_pass)
         if valid_pass:
             session['username'] = user.get_id()
-            return redirect(url_for('home', username=user.get_id()))
+            return redirect(url_for('home'))
     return render_template("login.html", form=form)
 
 @app.route('/logout')
@@ -48,16 +48,16 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
-@app.route('/home/<username>')
-def home(username):
+@app.route('/home/')
+def home():
     if 'username' in session:
         content=uni0.find_user(int(session['username']))
     else:
         content="Not logged in"
     return render_template("home.html", content=content)
 
-@app.route('/engagements/<username>')
-def engagements(username):
+@app.route('/engagements/')
+def engagements():
     if 'username' in session:
         user=uni0.find_user(int(session['username']))
         content = Base.__LIST_STR__(user.get_engagements(), "Engagements=")

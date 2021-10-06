@@ -12,9 +12,9 @@ if TYPE_CHECKING:
 
 class Admin(User):
 
-    def __init__(self, id, type=UserType.ADMIN):
+    def __init__(self, id, name=None, description=None, type=UserType.ADMIN):
         super().__init__(id, type)
-        self._university = University(id, admin=self)
+        self._university = University(id, admin=self, name=name, description=description)
 
     def get_iniversity(self) -> University:
         return self._university
