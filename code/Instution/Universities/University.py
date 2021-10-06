@@ -3,10 +3,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from Instution.Base import Base
+from Instution.Universities.Faculty import Faculty
 
 if TYPE_CHECKING:
     from typing import List, Dict
-    from Faculty import Faculty
     from Instution.Users.User  import User
 
 '''
@@ -45,11 +45,20 @@ class University(Base):
     def find_user(self, id) -> User:
         return Base.dict_find(id, self.get_users())
 
+    def make_faculty(self, name: str) -> Faculty:
+        faculty = Faculty(len(self.get_faculties().values()))
+        self.add_faculty(faculty)
+        return faculty
+
     def add_faculty(self, faculty: Faculty) -> None:
         Base.dict_insert(faculty, self.get_faculties())
 
     def add_faculties(self, faculties: List[Faculty]) -> None:
         Base.__DO_SOMETHINGS__(lambda f: self.add_faculty(f), faculties)
+
+
+    def insert(self) -> str:
+        return super().insert()
 
     def __repr__(self) -> str:
         faculties_str = Base.__LIST_STR__(

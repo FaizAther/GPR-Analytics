@@ -19,7 +19,9 @@ class Sudo(User):
         return self._admins
 
     def add_admin(self):
-        self.get_admins().append(Admin(len(self._admins)))
+        admin = Admin(len(self._admins))
+        self.get_admins().append(admin)
+        return admin
 
     def add_engagement(self, engagement) -> None:
         return super().add_engagement(engagement)
@@ -33,5 +35,17 @@ class Sudo(User):
     def insert(self):
         pass
 
-my_sudo = Sudo(5, 5)
-print(my_sudo)
+if __name__ == "__main__":
+    print("just test")
+    my_sudo = Sudo(5, 5)
+    print(my_sudo)
+    my_admin = my_sudo.add_admin()
+    print(my_admin)
+    my_univeristy = my_admin.get_iniversity()
+    print(my_univeristy)
+    my_faculty = my_univeristy.make_faculty("COMP")
+    print(my_faculty)
+    course = my_faculty.make_course_annon()
+    print(course)
+    print(my_faculty)
+
