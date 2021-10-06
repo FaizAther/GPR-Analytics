@@ -31,7 +31,7 @@ class SqliteDB(Database):
  
     def connection(self) -> None:
         """Creates a connection to Sqlite3 DB"""
-        self.client = sqlite3.connect(self.bucket+'.db')
+        self.client = sqlite3.connect(self.bucket + '.db')
         self.cursor = self.client.cursor()
 
     def base(self, query: str) -> None:
