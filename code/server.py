@@ -1,17 +1,10 @@
 import os
-from flask_sqlalchemy import SQLAlchemy
-from Instution.UniQLD import *
 
 from flask import (
     Flask, redirect, url_for,
     render_template, send_from_directory,
     request, session, flash
 )
-
-# Forms
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
-
 # Video call dependencies
 from flask_socketio import (
     SocketIO, emit, join_room, leave_room
@@ -20,47 +13,25 @@ from engineio.payload import Payload
 import flask
 from flask import session
 
+from Forms.LoginForm import LoginForm
+from Forms.SelectionForm import SelectionForm
+
+from Instution.Run import *
+
 Payload.max_decode_packets = 200
-
-
-DATABASE_NAME = 'gpr.db'
 
 app = Flask(__name__)
 app.secret_key = "gpr"
-
-
-
-# Set the secret key to some random bytes. Keep this really secret!
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DATABASE_NAME
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 socketio = SocketIO(app)
-db = SQLAlchemy(app)
-
-# login_manager = LoginManager()
-# login_manager.init_app(app)
 
 # Video chat
 _users_in_room = {} # stores room wise user list
 _room_of_sid = {} # stores room joined by an used
 _name_of_sid = {} # stores display name of users
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-
-    def __repr__(self):
-        return f"User('{self.id}, {self.username}')"
-
-
-class LoginForm(FlaskForm):
-    username = StringField('username')
-    password = PasswordField('password')
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-
     form = LoginForm()
     user = True
     valid_pass = True
@@ -73,8 +44,8 @@ def login():
         #print(valid_pass)
         if user and valid_pass:
             session['username'] = user.get_id()
-            return redirect(url_for('home', username=user.get_id()))
-    return render_template("login.html", form=form, valid_login=(valid_pass and user != None))
+            return redirect(url_for('home'))
+    return render_template("login.html", form=form)
 
 @app.route('/logout')
 def logout():
@@ -82,33 +53,34 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
-@app.route('/home/<username>')
-def home(username):
+@app.route('/home/')
+def home():
     if 'username' in session:
-        content=uni0.find_user(int(username))
+        content=uni0.find_user(int(session['username']))
     else:
         content="Not logged in"
     return render_template("home.html", content=content)
 
-@app.route('/engagements/<username>')
-def engagements(username):
+@app.route('/engagements/')
+def engagements():
     if 'username' in session:
-        user=uni0.find_user(int(username))
+        user=uni0.find_user(int(session['username']))
         content = Base.__LIST_STR__(user.get_engagements(), "Engagements=")
     else:
         content="Not logged in"
     return render_template("home.html", content=content)
 
-@app.route('/university/<path>')
-def classes(path):
-    content = "Not found"
-    if path == "UniQLD":
-        content = uni0
-    elif path.split("=")[0] == "UniQLD-FAC":
-        print(path.split("=")[1])
-        content = uni0.find_faculty(int(path.split("=")[1])).__str__()
-    print(path.split("=")[0])
-    return render_template("hello.html", content=content)
+@app.route('/university/', methods=['GET', 'POST'])
+def classes():
+    content = "Selection"
+    uni_form = SelectionForm()
+    #print(my_sudo.get_universities())
+    uni_form.selection.choices = [(uni.get_id(), uni.get_name()) for uni in my_sudo.get_universities()]
+    if request.method == 'POST':
+        content=my_sudo.find_university(int(uni_form.selection.data))
+        #content = uni0.find_faculty(int(path.split("=")[1])).__str__()
+
+    return render_template("university.html", content=content, form=uni_form)
 
 @app.route('/public/<file>')
 def public(file):
@@ -128,19 +100,6 @@ def index():
 def admin():
     return redirect(url_for("hello_world", name="admin"))
 
-@app.route('/show/<name>')
-def show_hello(name):
-    id = User.query.filter_by(username=name).first()
-    return render_template("hello.html", content=f"Hello name={name}, id={id}")
-
-@app.route('/hello/<name>')
-def hello_world(name):
-    add_user(name)
-    return hello(name)
-
-def add_user(name):
-    db.session.add(User(id=len(User.query.all()), username=name))
-    db.session.commit()
 
 def hello(name):
     return render_template("hello.html", content=f"Hello {name}")
@@ -246,7 +205,5 @@ if __name__ == "__main__":
     if sociio:
         socketio.run(app, debug=True)
     else:
-        if DATABASE_NAME not in os.listdir():
-            db.create_all()
         app.debug = True
         app.run(host="0.0.0.0", port='8888', debug=True)

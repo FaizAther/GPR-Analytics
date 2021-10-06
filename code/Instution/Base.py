@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import List
+    from typing import List, Callable, Optional
 
 '''
     Base Class
@@ -15,6 +15,7 @@ class Base(ABC):
 
     ADD_THING_TO = lambda s, to: list.append(to, s)
 
+    @staticmethod
     def dict_find(s, to):
         sid = s
         if (type(s) == str):
@@ -23,14 +24,17 @@ class Base(ABC):
             sid = s.get_id()
         return to.get(sid)
 
+    @staticmethod
     def dict_insert(s, to) -> None:
         if (Base.dict_find(s, to) == None):
             to[s.get_id()] = s
 
+    @staticmethod
     def __DO_SOMETHINGS__(f, elems) -> None:
         for e in elems:
             Base.__DO_SOMETHING__(f, e)
 
+    @staticmethod
     def ADD_THINGS_TO(somethings: List[object], to: List[object]) -> None:
         Base.__DO_SOMETHINGS__(lambda x: to.append(x), somethings)
 
@@ -41,6 +45,7 @@ class Base(ABC):
     SEP_OP  = lambda e1, e2: e1 + Base.SEP(e2)
     SEP     = lambda e: "\n----\n" + e.__str__() + "\n----\n"
 
+    @staticmethod
     def __LIST_STR__(values: List, name: str) -> str:
         return name + Base.FOLDL(Base.SEP_OP, "", values)
 
@@ -76,6 +81,10 @@ class Base(ABC):
     def set_html(self, html: str) -> None:
         if html != None:
             self._html = html
+
+    @abstractmethod
+    def insert(self) -> str:
+        return None
 
     @abstractmethod
     def generate_html(self) -> str:
