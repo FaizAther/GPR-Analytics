@@ -62,16 +62,19 @@ class LoginForm(FlaskForm):
 def login():
 
     form = LoginForm()
-
+    user = True
+    valid_pass = True
     if form.validate_on_submit():
         session.pop('username', None)
+        # TODO: Allow alphanumeric usernames
         user = uni0.find_user(int(form.username.data))
-        valid_pass = user.validate_password(form.password.data)
-        print(valid_pass)
-        if valid_pass:
+        if user:
+            valid_pass = user.validate_password(form.password.data)
+        #print(valid_pass)
+        if user and valid_pass:
             session['username'] = user.get_id()
             return redirect(url_for('home', username=user.get_id()))
-    return render_template("login.html", form=form)
+    return render_template("login.html", form=form, valid_login=(valid_pass and user != None))
 
 @app.route('/logout')
 def logout():
