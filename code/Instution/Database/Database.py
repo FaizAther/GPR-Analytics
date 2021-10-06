@@ -27,7 +27,7 @@ class Database:
 
 class SqliteDB(Database):
     def __init__(self):
-        self.cursor = None
+        super.__init__()
  
     def connection(self) -> None:
         """Creates a connection to Sqlite3 DB"""
