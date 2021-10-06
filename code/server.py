@@ -12,7 +12,9 @@ from flask_socketio import (
 from engineio.payload import Payload
 import flask
 from flask import session
+
 from Forms.LoginForm import LoginForm
+from Forms.SelectionForm import SelectionForm
 
 from Instution.Run import *
 
@@ -65,16 +67,17 @@ def engagements():
         content="Not logged in"
     return render_template("home.html", content=content)
 
-@app.route('/university/<path>')
-def classes(path):
-    content = "Not found"
-    if path == "UniQLD":
-        content = uni0
-    elif path.split("=")[0] == "UniQLD-FAC":
-        print(path.split("=")[1])
-        content = uni0.find_faculty(int(path.split("=")[1])).__str__()
-    print(path.split("=")[0])
-    return render_template("hello.html", content=content)
+@app.route('/university/', methods=['GET', 'POST'])
+def classes():
+    content = "Selection"
+    uni_form = SelectionForm()
+    #print(my_sudo.get_universities())
+    uni_form.selection.choices = [(uni.get_id(), uni.get_name()) for uni in my_sudo.get_universities()]
+    if request.method == 'POST':
+        content=my_sudo.find_university(int(uni_form.selection.data))
+        #content = uni0.find_faculty(int(path.split("=")[1])).__str__()
+
+    return render_template("university.html", content=content, form=uni_form)
 
 @app.route('/public/<file>')
 def public(file):

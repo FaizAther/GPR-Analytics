@@ -1,27 +1,34 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, Dict, List
 
 from Instution.Users.User import User
 from Instution.Users.UserType import UserType
 from Instution.Users.Admin import Admin
 
 if TYPE_CHECKING:
-    pass
+    from Instution.Universities.University import University
 
 class Sudo(User):
 
     def __init__(self, id, type=UserType.SUDO):
         super().__init__(id, type)
-        self._admins: List[Admin] = []
+        self._admins: Dict[Admin] = {}
 
-    def get_admins(self) -> List[Admin]:
+    def get_admins(self) -> Dict[Admin]:
         return self._admins
 
     def add_admin(self, name=None, description=None):
         admin = Admin(len(self._admins), name=name, description=description)
-        self.get_admins().append(admin)
+        self.dict_insert(admin, self.get_admins())
         return admin
+
+    def find_university(self, id: int) -> University:
+        admin = self.dict_find(id, self.get_admins())
+        return admin.get_university() if admin != None else None
+
+    def get_universities(self):
+        return [admin.get_university() for admin in self.get_admins().values()]
 
     def add_engagement(self, engagement) -> None:
         return super().add_engagement(engagement)

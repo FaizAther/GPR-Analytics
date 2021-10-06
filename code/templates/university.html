@@ -1,0 +1,12 @@
+{% extends "basic.html" %}
+{% block my_title %}Hello{% endblock %}
+{% block my_h1 %}- Hello{% endblock %}
+{% block my_body %}
+<p>{{content}}</p>
+<div>
+    <form method="POST">
+        {{ form.selection }}
+        <input type="submit">
+    </form>
+</div>
+{% endblock %}

@@ -16,8 +16,8 @@ if TYPE_CHECKING:
 '''
 class Faculty(Base):
 
-    def __init__(self, id: int, name=None):
-        super().__init__(id, name)
+    def __init__(self, id: int, name=None, description=None):
+        super().__init__(id, name, description=description)
 
         self._count       :int              = 0
 

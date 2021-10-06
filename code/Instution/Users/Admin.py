@@ -16,7 +16,7 @@ class Admin(User):
         super().__init__(id, type)
         self._university = University(id, admin=self, name=name, description=description)
 
-    def get_iniversity(self) -> University:
+    def get_university(self) -> University:
         return self._university
 
     def add_engagement(self, engagement) -> None:
