@@ -6,115 +6,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartEd - Home</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+    <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+      
 </head>
 <body>
     <!-- HEADER -->
     <header class="header">
         <nav class="nav">
             <div class="col-md-6 text-center mb-5">
-                <a href="#welcome">
+                <a href="../home_student_page/index.html">
                     <h2 class="nav_logo"><img width="75%" height="75%" src="img/smarted_w_text.png"/></h2>
                 </a>
             </div>
             <div class="dropdown">
-                <div class="name_btn">student name </div>
+                <div class="name_btn"><i class="fa fa-user fa-lg"></i> Joe Biden </div>
+                
                 <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
+                    <a href="../course_student_page/index.html">My Courses</a>
+                    <a href="#">Notifications</a>
+                    <a href="#">Announcements</a>
+                    <a href="#">Tools</a>
+                    <a href="#">Settings</a>
                 </div>
             </div>
             <div class="nav_menu">
                 <ul class="nav_list">
-                    <li class="nav_item"><a href="#welcome" class="nav_link">Welcome</a></li>
-                    <li class="nav_item"><a href="#courses" class="nav_link">Courses</a></li>
+                    <li class="nav_item"><a href="../home_student_page/index.html" class="nav_link">Welcome</a></li>
+                    <li class="nav_item"><a href="../course_student_page/index.html" class="nav_link">Courses</a></li>
                     <li class="nav_item"><a href="#help" class="nav_link">Help</a></li>
                 </ul>
             </div>
             
         </nav>
     </header>
+
+
+
     <main class="main">
         <!-- HOME PAGE -->
         <section class="home" id=home>
-            <div class="main">Main</div>
-            <div class="sidebar">Sidebar</div>
-            <div class="content1">Content1</div>
-            <div class="content2">Content2</div>
-            <div class="content3">Content3</div>
-            <div class="footer">Footer</div>
-
-
-            <!-- <div class="grid-item">
-                <h5 class="home_column">News</h2>
-                <div class="tech-slideshow">
-                    <div class="mover-1"></div>
-                    <div class="mover-2"></div>
-                </div>
-                <div class="news">
-                    <p class=news-text-heading>New app to motivate aphasia recovery:</p>
-                    <p class="news-text">
-                         A smartphone app to track and improve communication recovery for stroke survivors with aphasia is under development by University of Queensland researchers. 5 October 2021
-                    </p>
-                    <p class=news-text-heading>Partnership ignites new medical R&D Lab:</p>
-                    <p class="news-text">
-                        A specialised medical research facility that will transform ground-breaking research into new medical equipment and technology is set to be established in Queensland, at the Herston Health Precinct.
-                        5 October 2021</p>
+            <div class="course_search">
+                <div class="content2">
+                    <h5 class="course_column2">Course Search</h2>
+                    <!-- The form -->
+                    <form class="example" action="action_page.php">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
                 </div>
             </div>
-            <div class="grid-item">
-                <div class="notice">
-                    <h5 class="home_column">Notice</h5>
-                    <p class="notice-heading">DECO3801 Project due soon!</p>
-                    <p class="notice-content">Make sure to keep up to date with the timeline 
-                        to ensure a finished project by the due date.</p>
-                    <p class="notice-heading">COMP4500 Quiz 3 ending soon!</p>
-                    <p class="notice-content">You have not completed Quiz 3! Make sure to complete it by 25 Sept.</p>
-                    <p class="notice-heading">COMP4500 Lecture catch-up!</p>
-                    <p class="notice-content">You did not watch lecture 7 and lecture 8, please watch the lectures to ensure you stay up to date!</p>
-                    <p class="notice-heading">CSSE2310 Assignment 2 Help Session.</p>
-                    <p class="notice-content">There will be an assignment help session hosted by the tutors next Monday. Make sure to attend if you need help!</p>
-                    <p class="notice-heading">COMP3506 Exam Help Session.</p>
-                    <p class="notice-content">There will be an exam help session hosted by the tutors next Friday. Make sure to attend if you need help!</p>
-                    <p class="notice-heading">You have no more notice!</p>
-                </div>
+            <div class="my_courses">
+                <div class="content1">
+                    <h5 class="course_column">My Courses</h2>
+                    <div class="course">
+                        <div class="sem_header"></p>Semester 2, 2021</div>
+                        <div class="courses">
+                            <a href="">
+                                <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                        </div>
+                        <div class="sem_header"></p>Semester 1, 2021</div>
+                        <div class="courses">
+                            <a href="">
+                                <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                        </div>
+                        <div class="sem_header"></p>Semester 2, 2020</div>
+                        <div class="courses">
+                            <a href="">
+                                <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                        </div>
+                        <div class="sem_header"></p>Semester 1, 2020</div>
+                        <div class="courses">
+                            <a href="">
+                                <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="">
+                                <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>   
             </div>
-            <div class="grid-item">
-                <div class="announcements">
-                    <h5 class="home_column">Announcements</h5>
-                    <p class="announcement-heading">DECO3801:</p>
-                    <p class="announcement-content">Week 10 Studio
-                        Posted on: Tuesday, 5 October 2021 8:48:50 AM AEST
-                        Hi Teams,
-                        This Thursday we have a guest lecture starting promptly at 5pm (Brisbane) 
-                        *NOTE the unusual time*. The guest speaker is Prof Caroline Jay, Head of Research ...
-                    </p>
-                    <p class="announcement-heading">COMP4500:</p>
-                    <p class="announcement-content">Week 10
-                        Posted on: Monday, 4 October 2021 4:39:04 PM AEST
-                        Hi everyone,
-                        Welcome back after the break! 
-                        The tutorial this week is on amortised analysis, that we covered before the break in week 9. In lectures we'll be starting to talk about complexity classes P and NP, and why there are interesting and relevant to programmers. 
-                        We also have Quiz 5 due on Friday ...
-                    </p>
-                    <p class="announcement-heading">COMP3702:</p>
-                    <p class="announcement-content">Tutorial 9 released
-                        Posted on: Monday, 4 October 2021 9:40:26 PM AEST
-                        Good evening COMP3702 students,
-                        I have uploaded this week's tutorial (Tutorial 9) on Multi-Armed Bandits and Reinforcement Learning to Blackboard.
-                        The last part of the tutorial ...
-                    </p>
-                    
+            <div class="course_catalogue">
+                <div class="content3">
+                    <h5 class="course_column3">Course Catalogue</h2>
+                    <ul>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> BEL Faculty</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Chem Eng</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Dental School</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> EAIT</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Faculty of Arts</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Faculty of Health Sciences</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Faculty of Medicine</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Faculty of Science</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i>  Graduate School</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> HABS</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> HAPI</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> HASS</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> HMNS</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> ITEE</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> MBS</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i>  MechMine</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> NMSW</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> SBS Faculty</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> School of Agriculture and Food Sciences</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> School of Architecture</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i>  School of Biological Sciences</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> School of Biomedical Sciences</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> School of Civil Engineering</a></li>
+                        
 
+                    </ul>
                 </div>
-            
+                
             </div>
-            <div class="grid-big-item">
-                <div class="extra">
-                    <p > test</p>
-                </div>
-            </div>   
-            Add more columns here if needed -->
+
+
+            <!-- Add more columns here if needed --> 
 
             
         </section>
