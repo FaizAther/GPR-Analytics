@@ -13,8 +13,8 @@ class BuilderHTML():
     # Users
 
     @dispatch(Student)
-    def generate(concrete: Student):
-        pass
+    def generate(concrete: Student) -> str:
+        return "<div>" + concrete.get_name() +"<\div>"
 
     @dispatch(Lecturer)
     def generate(concrete: Lecturer):
