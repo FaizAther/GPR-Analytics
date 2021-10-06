@@ -16,12 +16,19 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="../static/bootstrap/style.css">
     <!-- google Material icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    
     <!-- custom css -->
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='chatroom.css')}}">
+
+    <link rel="stylesheet" href="../static/chatroom.css"/>
+    <link rel="stylesheet" href="../static/bootstrap/style.css">
     
 
     <script type="text/javascript"> 
@@ -36,16 +43,15 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Chat [{{room_id}}]</title>
+    <title>Video Chat - {{room_id}} - SmartEd</title>
 </head>
 <body>
-    
-    <div class="heading mb-4">
-        <h1 class="display-4">Video Chat</h1>
+    <div class="easing_gradient_slow heading mb-4">
+        <h1 class="display-4"><font face="Raleway" color="black">Video Chat</font></h1>
         <div class="room-info">
-            <h3>Room: <span class="heading-mark">{{room_id}}</span></h3>
-            <h5>You have joined as <span class="heading-mark">{{display_name}}</span></h5>
-            <div>Ask your friends to join using the room id: <span class="heading-mark">{{room_id}}</span></div>
+            <h3><font face="Raleway" color="black">Room: </font><span class="heading-mark">{{room_id}}</span></h3>
+            <h5><font face="Raleway" color="black">You have joined as </font><span class="heading-mark">{{display_name}}</span></h5>
+            <div><font face="Raleway" color="black">Ask your friends to join using the room id: </font><span class="heading-mark">{{room_id}}</span></div>
             <div id="room_link"></div>
         </div>
     </div>
@@ -53,7 +59,8 @@
     <div class="container-fluid px-0 mx-0">
         <div id="video_grid" class="video-grid"></div>
 
-        <div id="control_box" class="row control-box shadow">
+</body>
+        <div id="control_box" class="row control-box shadow" style="bottom: 0px; position:fixed"> <!--Stick control box to bottom of screen-->
             <div class="col-7 col-md-8 col-lg-9 d-flex justify-content-around align-items-center button-box">
                 
                 <button id="bttn_mute" class="btn btn-lg btn-outline-secondary rounded-circle">
@@ -79,5 +86,5 @@
             </div>
         </div>
     </div>    
-</body>
+
 </html>

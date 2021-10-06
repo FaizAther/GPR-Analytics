@@ -15,7 +15,14 @@
 
     <!-- google Material icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../static/bootstrap/style.css">
+    
+    <!-- custom css -->
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="../../../static/chatroom.css"/>
 
     <script src="{{url_for('static', filename='chatroom_checkpoint.js')}}"></script>
     <!-- custom css -->
@@ -27,24 +34,27 @@
 </head>
 <body>
 
-    <div class="heading mb-4">
-        <h1 class="display-4">Video Chat</h1>        
-        <h4>You are about to join room: <span class="heading-mark">{{room_id}}</span></h4>
+    <div class="easing_gradient heading mb-4">
+        <img width="18%" height="18%" src="../../../static/smarted_w_text.png"></img>   
+        <h5><font face="Raleway" color="black">Joining room: </font><span class="heading-mark">{{room_id}}</span></h5>
     </div>
 
     <div class="container text-center mt-5">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-6 mb-5">
+                <font face="Raleway">
                 <h4>What should others see you as?</h4>
                 <p>
                     Enter a Name that your friends will be able to recognize you with <br>
                     This name will be displayed to others!
                 </p>
+            </font>
+                <!-- Maybe we could change this to the students name?-->
                 <form method="POST" onsubmit="return validate()" class="form shadow" style="max-width:400px; margin-left: auto; margin-right: auto;">
                     <div class="input-group mb-3">
                         <input type="text" name="display_name" id="display_name" class="form-control" placeholder="Display Name" autofocus required>
                         <div class="input-group-append">
-                            <input type="submit" value="Join" class="btn btn-primary">                            
+                            <button type="submit" class="form-control btn-primary rounded submit px-3"><font face="Raleway">Join</font></button>                  
                         </div>
                     </div>
                     <input type="hidden" value="0" name="mute_audio" id="mute_audio_inp">

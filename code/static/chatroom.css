@@ -66,3 +66,38 @@
     }
     
 }
+
+.easing_gradient {
+    background: linear-gradient(-45deg, #ffa69e, #861657, #5f0a87, #a4508b);
+    background-size: 400% 400%;
+    animation: gradient 45s ease infinite;
+}
+
+.easing_gradient_slow {
+    background: linear-gradient(-45deg, #ffa69e, #861657, #5f0a87, #a4508b);
+    background-size: 400% 400%;
+    animation: gradient 230s ease infinite;
+}
+
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+} 
+
+.btn-primary, .btn-primary:visited, .btn-primary:active  {
+    background-color: #2b87ff !important;
+    transition: color 1.5s;
+}
+
+.btn-primary:hover {
+    background-color: #5f0a87;
+    transition: color 1.5s;
+}

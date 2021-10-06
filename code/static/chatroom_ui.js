@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", (event)=>{
         window.location.replace("/");
     });
 
-    document.getElementById("room_link").innerHTML=`or the link: <span class="heading-mark">${window.location.href}</span>`;
+    document.getElementById("room_link").innerHTML=`<font color="black" face="Raleway">or use the link: </font><span class="heading-mark">${window.location.href}</span>`;
 
 });
 
