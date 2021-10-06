@@ -150,42 +150,19 @@ display: block;
     row-gap: 1rem;
     background-size: cover;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr ;
     grid-template-rows: 1fr 1fr;
     grid-template-areas: 
-    "left right right right" 
-    "left right right right" 
+    "left right" 
+    "left right" 
 }
-.content1 {
-    left:50px;
-    right: 50px;
-    height: 100vh;
-    background: rgb(54, 54, 54);
-    font-size: 30px;
-    text-align: center;
-    grid-area: content1;
-    overflow-y: scroll;
+.left{
+    background-color: #a7ffeb;
+    -ms-grid-column-span: 4;
     grid-area: left;
 }
-.help_column1{
-    text-decoration: none;
-    font-family: 'Roboto',sans-serif;
-    padding-top: 15px;
-    padding-bottom: 5px;
-    font-size: 20px;
-    color: white;
-    text-align: left;
-    margin: 0px 20px 0px 20px;
-}
-.settings-btn{
-    color: white
-}
-
-
-
 .right{
     background-color: #4f9652;
     -ms-grid-column-span: 4;
     grid-area: right;
 }
-
