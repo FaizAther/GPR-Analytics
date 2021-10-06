@@ -1,14 +1,16 @@
+from abc import abstractmethod
+from typing import TYPE_CHECKING
+
 import sqlite3
 
-
-from abc import abstractmethod
-from typing import Dict, Tuple, Any
+if TYPE_CHECKING:
+    from typing import Dict, Any
 
 class Database:
 
     def __init__(self):
         self.client = None
-        self.bucket = "Dowbits"
+        self.bucket = "gpr"
         self.connection()
 
     @abstractmethod

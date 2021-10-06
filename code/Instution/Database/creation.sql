@@ -1,58 +1,58 @@
 -- Comments
 
 CREATE TABLE User (
-    id numeric PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name text NOT NULL,
     type numeric NOT NULL,
     password text NOT NULL
 );
 
 CREATE TABLE Resource (
-    id numeric PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     location text
 );
 
 CREATE TABLE University (
-    id numeric PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name text NOT NULL,
-    admin numeric NOT NULL,
+    admin INTEGER NOT NULL,
     foreign key (admin) references User(id)
 );
 
 CREATE TABLE Faculty (
-    id numeric PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name text NOT NULL,
-    university numeric NOT NULL,
-    dean numeric NOT NULL,
+    university INTEGER NOT NULL,
+    dean INTEGER NOT NULL,
     foreign key (university) references University(id),
     foreign key (dean) references User(id)
 );
 
 CREATE TABLE Course (
-    id numeric PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name text NOT NULL,
-    coordinator numeric NOT NULL, 
+    coordinator INTEGER NOT NULL, 
     foreign key (coordinator) references User(id)
 );
 
 CREATE TABLE Event (
-    id numeric PRIMARY KEY,
-    course_id numeric NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    course_id INTEGER NOT NULL,
     name text NOT NULL,
-    manager numeric NOT NULL,
-    resource_id numeric,
-    type numeric NOT NULL,
+    manager INTEGER NOT NULL,
+    resource_id INTEGER,
+    type INTEGER NOT NULL,
     foreign key (resource_id) references Resource(id),
     foreign key (manager) references User(id),
     foreign key (course_id) references Course(id)
 );
 
 CREATE TABLE Attendance (
-    id numeric PRIMARY KEY,
-    event_id numeric,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_id INTEGER,
     name text NOT NULL,
-    marker_id numeric NOT NULL,
-    student_id numeric NOT NULL,
+    marker_id INTEGER NOT NULL,
+    student_id INTEGER NOT NULL,
     startdate date NOT NULL,
     foreign key (event_id) references Event(id),
     foreign key (marker_id) references User(id),
@@ -60,10 +60,10 @@ CREATE TABLE Attendance (
 );
 
 CREATE TABLE Mark (
-    attendance_id numeric,
-    total numeric, 
-    received numeric,
-    resource_id numeric,
+    attendance_id INTEGER,
+    total INTEGER, 
+    received INTEGER,
+    resource_id INTEGER,
     duedate date,
     foreign key (attendance_id) references Attendance(id),
     foreign key (resource_id) references Resource(id),
@@ -71,25 +71,25 @@ CREATE TABLE Mark (
 );
 
 CREATE TABLE Invite (
-    event_id numeric NOT NULL,
-    user_id numeric NOT NULL,
+    event_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
     foreign key (event_id) references Event(id),
     foreign key (user_id) references User(id),
     primary key (event_id, user_id)
 );
 
 CREATE TABLE Member (
-    id numeric PRIMARY KEY,
-    user_id numeric,
-    university_id numeric,
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    university_id INTEGER,
     foreign key (user_id) references User(id),
     foreign key (university_id) references University(id)
 );
 
 CREATE TABLE Enrollment (
-    id numeric PRIMARY KEY,
-    user_id numeric,
-    course_id numeric,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    course_id INTEGER,
     foreign key (user_id) references User(id),
     foreign key (course_id) references Course(id)
 );
