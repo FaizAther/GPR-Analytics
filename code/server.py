@@ -34,6 +34,9 @@ _name_of_sid = {} # stores display name of users
 def login():
     if 'username' in session:
         return redirect(url_for('index'))
+    elif 'admin' in session:
+        return redirect(url_for('admin'))
+
     form = LoginForm()
     form.selection.choices = my_sudo.get_selection()
     university = None
@@ -49,6 +52,8 @@ def login():
             session['username'] = user.get_id()
             session['university'] = university.get_id()
             if user.get_type() == UserType.ADMIN:
+                session.pop('username', None)
+                session['admin'] = user.get_id()
                 return redirect(url_for('admin'))
             return redirect(url_for('home'))
     return render_template("login.html", form=form, validate=validate)
@@ -56,9 +61,10 @@ def login():
 @app.route('/logout/')
 def logout():
     # remove the username from the session if it's there
-    if 'username' not in session:
+    if 'username' not in session and 'admin' not in session:
         return redirect(url_for("login"))
     session.pop('username', None)
+    session.pop('admin', None)
     session.pop('university', None)
     return redirect(url_for('index'))
 
@@ -66,6 +72,9 @@ def logout():
 def home():
     if 'username' not in session:
         return redirect(url_for("login"))
+    elif 'admin' in session:
+        return redirect(url_for('admin'))
+
     content = my_sudo.find_user(session['university'], session['username'])
     return render_template("home.html", content=content)
 
@@ -74,6 +83,8 @@ def engagements():
     if 'username' in session:
         user = my_sudo.find_user(session['university'], session['username'])
         content = Base.__LIST_STR__(user.get_engagements(), "Engagements=")
+    elif 'admin' in session:
+        return redirect(url_for('admin'))
     else:
         return redirect(url_for("login"))
     return render_template("home.html", content=content)
@@ -98,8 +109,10 @@ def index():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    if 'username' not in session:
+    if 'admin' not in session and 'username' not in session:
         return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('home'))
     form = AddForm()
     admin = my_sudo.find_admin(session['university'])
     form.selection.choices = admin.get_functions()

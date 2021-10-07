@@ -17,14 +17,17 @@ class Base(ABC):
 
     @staticmethod
     def dict_find(s, to):
-        sid = None
+        sid = s
         if (type(s) == str):
             try:
                 sid = int(s)
             except:
                 sid = None
         if sid == None and type(s) != int:
-            sid = s.get_id()
+            try:
+                sid = s.get_id()
+            except:
+                sid = None
         return to.get(sid) if sid != None else None
 
     @staticmethod
