@@ -48,7 +48,7 @@ class University(Base):
         return Base.dict_find(id, self.get_faculties())
 
     def find_user(self, id) -> User:
-        return Base.dict_find(id, self.get_users())
+        return self.get_admin() if id == "admin" else Base.dict_find(id, self.get_users())
 
     def make_faculty(self, name: str, description=None) -> Faculty:
         faculty = Faculty(len(self.get_faculties().values()), name=name, description=description)

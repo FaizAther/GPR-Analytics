@@ -18,9 +18,9 @@ class Base(ABC):
     @staticmethod
     def dict_find(s, to):
         sid = s
-        if (type(s) == str):
+        if (type(sid) == str):
             sid = int(s)
-        if type(s) != int:
+        if type(sid) != int:
             sid = s.get_id()
         return to.get(sid)
 
