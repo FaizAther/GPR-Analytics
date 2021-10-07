@@ -15,6 +15,7 @@ from flask import session
 
 from Forms.LoginForm import LoginForm
 from Forms.SelectionForm import SelectionForm
+from Forms.AddForm import AddForm
 
 from Instution.Run import *
 
@@ -102,10 +103,15 @@ def favicon():
 def index():
     return render_template("index.html")
 
-@app.route('/admin')
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
+    form = AddForm()
     admin = my_sudo.find_admin(session['university'])
-    return render_template("admin.html", content=admin)
+    form.selection.choices = admin.get_functions()
+    if request.method == "POST":
+        print(form.name.data)
+        admin.commit(int(form.selection.data), form.name.data)
+    return render_template("admin.html", content=admin, form=form)
 
 
 def hello(name):

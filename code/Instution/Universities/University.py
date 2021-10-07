@@ -30,7 +30,7 @@ class University(Base):
     def get_users(self) -> Dict[User]:
         return self._users
 
-    def make_user(self, name: str, description=None) -> User:
+    def make_user(self, name: str=None, description=None) -> User:
         user = User(len(self.get_users().values()), name=name, description=description)
         self.add_user(user)
         return user
@@ -50,8 +50,9 @@ class University(Base):
     def find_user(self, id) -> User:
         return self.get_admin() if id == "admin" else Base.dict_find(id, self.get_users())
 
-    def make_faculty(self, name: str, description=None) -> Faculty:
+    def make_faculty(self, name: str=None, description=None) -> Faculty:
         faculty = Faculty(len(self.get_faculties().values()), name=name, description=description)
+        print(self)
         self.add_faculty(faculty)
         return faculty
 
