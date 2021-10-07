@@ -32,6 +32,8 @@ _name_of_sid = {} # stores display name of users
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
+    if 'username' in session:
+        return redirect(url_for('index'))
     form = LoginForm()
     form.selection.choices = my_sudo.get_selection()
     university = None
@@ -89,15 +91,6 @@ def university():
 
     return render_template("university.html", content=content, form=uni_form)
 
-@app.route('/public/<file>')
-def public(file):
-    return send_from_directory(os.path.join(app.root_path, 'public'),
-                                file, mimetype='')
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/')
 def index():
@@ -119,6 +112,15 @@ def admin():
 def hello(name):
     return render_template("hello.html", content=f"Hello {name}")
 
+@app.route('/public/<file>')
+def public(file):
+    return send_from_directory(os.path.join(app.root_path, 'public'),
+                                file, mimetype='')
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 # Video chat
 
