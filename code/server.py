@@ -30,7 +30,7 @@ _users_in_room = {} # stores room wise user list
 _room_of_sid = {} # stores room joined by an used
 _name_of_sid = {} # stores display name of users
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     form.selection.choices = my_sudo.get_selection()
@@ -51,7 +51,7 @@ def login():
             return redirect(url_for('home'))
     return render_template("login.html", form=form, validate=validate)
 
-@app.route('/logout')
+@app.route('/logout/')
 def logout():
     # remove the username from the session if it's there
     session.pop('username', None)

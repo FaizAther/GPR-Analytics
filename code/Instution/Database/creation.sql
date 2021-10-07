@@ -2,6 +2,7 @@
 
 CREATE TABLE User (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    position INTEGER NOT NULL,
     university_id INTEGER,
     name text NOT NULL,
     type numeric NOT NULL,
@@ -23,6 +24,7 @@ CREATE TABLE University (
 
 CREATE TABLE Faculty (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    position INTEGER NOT NULL,
     name text NOT NULL,
     university INTEGER NOT NULL,
     dean INTEGER NOT NULL,
@@ -32,6 +34,7 @@ CREATE TABLE Faculty (
 
 CREATE TABLE Course (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    position INTEGER NOT NULL,
     faculty_id INTEGER,
     name text NOT NULL,
     coordinator INTEGER NOT NULL, 
@@ -41,6 +44,7 @@ CREATE TABLE Course (
 
 CREATE TABLE Event (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    position INTEGER NOT NULL,
     course_id INTEGER NOT NULL,
     name text NOT NULL,
     manager INTEGER NOT NULL,
@@ -53,6 +57,7 @@ CREATE TABLE Event (
 
 CREATE TABLE Attendance (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    position INTEGER NOT NULL,
     event_id INTEGER,
     name text NOT NULL,
     marker_id INTEGER NOT NULL,
@@ -65,6 +70,7 @@ CREATE TABLE Attendance (
 
 CREATE TABLE Mark (
     attendance_id INTEGER,
+    position INTEGER NOT NULL,
     total INTEGER, 
     received INTEGER,
     resource_id INTEGER,
