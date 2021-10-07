@@ -37,10 +37,10 @@ def login():
     university = None
     validate = True
     if request.method == "POST":
-        university = my_sudo.find_university(int(form.selection.data))
+        university = my_sudo.find_university(form.selection.data)
     if form.validate_on_submit() and university != None:
         session.pop('username', None)
-        user = university.get_admin() if form.username.data == "admin" else university.find_user(int(form.username.data))
+        user = university.find_user(form.username.data)
         validate = user != None and user.validate_password(form.password.data)
         print(validate)
         if validate:
@@ -83,7 +83,7 @@ def university():
     uni_form.selection.choices = my_sudo.get_selection()
     print(my_sudo.get_selection())
     if request.method == 'POST':
-        content=my_sudo.find_university(int(uni_form.selection.data))
+        content=my_sudo.find_university(uni_form.selection.data)
         #content = uni0.find_faculty(int(path.split("=")[1])).__str__()
 
     return render_template("university.html", content=content, form=uni_form)
