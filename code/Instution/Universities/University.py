@@ -4,6 +4,10 @@ from typing import TYPE_CHECKING
 
 from Instution.Base import Base
 from Instution.Universities.Faculty import Faculty
+from Instution.Users.Lecturer import Lecturer
+from Instution.Users.Student import Student
+from Instution.Users.Tutor import Tutor
+from Instution.Users.UserType import UserType
 
 if TYPE_CHECKING:
     from typing import List, Dict
@@ -30,8 +34,20 @@ class University(Base):
     def get_users(self) -> Dict[User]:
         return self._users
 
-    def make_user(self, name: str, description=None) -> User:
-        user = User(len(self.get_users().values()), name=name, description=description)
+    def make_user(self, type: UserType, name: str=None, description=None) -> User:
+        position = len(self.get_users().values())
+
+        if type == UserType.LECTURER:
+            user = Lecturer(position)
+        elif type == UserType.TUTOR:
+            user = Tutor(position)
+        elif type == UserType.STUDENT or type == UserType.UNDERGRAD:
+            user = Student(position)
+        elif type == UserType.POSTGRAD:
+            user = Student(position, type=type)
+        elif type == UserType.PHD:
+            user = Student(position, type=type)
+    
         self.add_user(user)
         return user
 
@@ -50,8 +66,9 @@ class University(Base):
     def find_user(self, id) -> User:
         return self.get_admin() if id == "admin" else Base.dict_find(id, self.get_users())
 
-    def make_faculty(self, name: str, description=None) -> Faculty:
+    def make_faculty(self, name: str=None, description=None) -> Faculty:
         faculty = Faculty(len(self.get_faculties().values()), name=name, description=description)
+        print(self)
         self.add_faculty(faculty)
         return faculty
 

@@ -18,11 +18,17 @@ class Base(ABC):
     @staticmethod
     def dict_find(s, to):
         sid = s
-        if (type(sid) == str):
-            sid = int(s)
-        if type(sid) != int:
-            sid = s.get_id()
-        return to.get(sid)
+        if (type(s) == str):
+            try:
+                sid = int(s)
+            except:
+                sid = None
+        if sid == None and type(s) != int:
+            try:
+                sid = s.get_id()
+            except:
+                sid = None
+        return to.get(sid) if sid != None else None
 
     @staticmethod
     def dict_insert(s, to) -> None:

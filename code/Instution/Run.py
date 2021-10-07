@@ -27,19 +27,17 @@ print(course)
 print(my_faculty)
 
 #print(uni0)
-u0 = Student(100)
+u0 = uni0.make_user(UserType.UNDERGRAD)
 #print(u0)
 
-u1 = Student(101, UserType.POSTGRAD)
-u2 = Student(102, UserType.PHD)
+u1 = uni0.make_user(UserType.POSTGRAD)
+u2 = uni0.make_user(UserType.PHD)
 
-u3 = Student(104)
+u3 = uni0.make_user(UserType.UNDERGRAD)
 
 
-t0 = Tutor(300)
-l0 = Lecturer(400)
-
-uni0.add_users([u0,u1,u2,u3,t0,l0])
+t0 = uni0.make_user(UserType.TUTOR)
+l0 = uni0.make_user(UserType.LECTURER)
 
 f0 = uni0.make_faculty("COMP", description="The most fun")
 f0.make_course(3301)
@@ -70,3 +68,5 @@ e0.add_users([l0,t0,u0,u1,u2,u3])
 #print(t0.get_capacity())
 
 #print(u0)
+
+print(uni0.get_users())

@@ -10,11 +10,11 @@ from flask_socketio import (
     SocketIO, emit, join_room, leave_room
 )
 from engineio.payload import Payload
-import flask
 from flask import session
 
 from Forms.LoginForm import LoginForm
 from Forms.SelectionForm import SelectionForm
+from Forms.AddForm import AddForm
 
 from Instution.Run import *
 
@@ -32,6 +32,11 @@ _name_of_sid = {} # stores display name of users
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
+    if 'username' in session:
+        return redirect(url_for('index'))
+    elif 'admin' in session:
+        return redirect(url_for('admin'))
+
     form = LoginForm()
     form.selection.choices = my_sudo.get_selection()
     university = None
@@ -47,6 +52,8 @@ def login():
             session['username'] = user.get_id()
             session['university'] = university.get_id()
             if user.get_type() == UserType.ADMIN:
+                session.pop('username', None)
+                session['admin'] = user.get_id()
                 return redirect(url_for('admin'))
             return redirect(url_for('home'))
     return render_template("login.html", form=form, validate=validate)
@@ -54,16 +61,21 @@ def login():
 @app.route('/logout/')
 def logout():
     # remove the username from the session if it's there
+    if 'username' not in session and 'admin' not in session:
+        return redirect(url_for("login"))
     session.pop('username', None)
+    session.pop('admin', None)
     session.pop('university', None)
     return redirect(url_for('index'))
 
 @app.route('/home/')
 def home():
-    if 'username' in session:
-        content = my_sudo.find_user(session['university'], session['username'])
-    else:
-        content="Not logged in"
+    if 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' in session:
+        return redirect(url_for('admin'))
+
+    content = my_sudo.find_user(session['university'], session['username'])
     return render_template("home.html", content=content)
 
 @app.route('/engagements/')
@@ -71,8 +83,10 @@ def engagements():
     if 'username' in session:
         user = my_sudo.find_user(session['university'], session['username'])
         content = Base.__LIST_STR__(user.get_engagements(), "Engagements=")
+    elif 'admin' in session:
+        return redirect(url_for('admin'))
     else:
-        content="Not logged in"
+        return redirect(url_for("login"))
     return render_template("home.html", content=content)
 
 @app.route('/university/', methods=['GET', 'POST'])
@@ -88,6 +102,29 @@ def university():
 
     return render_template("university.html", content=content, form=uni_form)
 
+
+@app.route('/')
+def index():
+    return render_template("index.html")
+
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('home'))
+    form = AddForm()
+    admin = my_sudo.find_admin(session['university'])
+    form.selection.choices = admin.get_functions()
+    if request.method == "POST":
+        print(form.name.data)
+        admin.commit(int(form.selection.data), form.name.data)
+    return render_template("admin.html", content=admin, form=form)
+
+
+def hello(name):
+    return render_template("hello.html", content=f"Hello {name}")
+
 @app.route('/public/<file>')
 def public(file):
     return send_from_directory(os.path.join(app.root_path, 'public'),
@@ -97,20 +134,6 @@ def public(file):
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
-@app.route('/')
-def index():
-    return render_template("index.html")
-
-@app.route('/admin')
-def admin():
-    admin = my_sudo.find_admin(session['university'])
-    return render_template("admin.html", content=admin)
-
-
-def hello(name):
-    return render_template("hello.html", content=f"Hello {name}")
-
 
 # Video chat
 

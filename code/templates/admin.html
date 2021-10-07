@@ -1,4 +1,14 @@
 {% extends "basic.html" %}
 {% block my_title %}Logged in{% endblock %}
 {% block my_h1 %}- Admin{% endblock %}
-{% block my_body %}<p>{{content}}</p>{% endblock %}
+{% block my_body %}
+<p>{{content}}</p>
+<div>
+    <form method="POST">
+        {{ form.csrf_token }}
+        {{ form.name }}
+        {{ form.selection }}
+        <button>Action</button>
+    </form>
+</div>
+{% endblock %}
