@@ -9,8 +9,23 @@ from Instution.Users.UserType import UserType
 from Instution.Events.EventType import EventType
 from Instution.Events.Event import Event
 from Instution.Events.Mark import Mark
+from Instution.Users.Sudo import Sudo
 
-uni0 = University(0, name="UniQLD", description="Purple")
+print("just test")
+my_sudo = Sudo(5, 5)
+print(my_sudo)
+my_admin = my_sudo.add_admin(name="UQ", description="Purple")
+print(my_admin)
+my_admin2 = my_sudo.add_admin(name="UNSW", description="Yellow")
+print(my_admin2)
+uni0 = my_admin.get_university()
+print(uni0)
+my_faculty = uni0.make_faculty("COMP")
+print(my_faculty)
+course = my_faculty.make_course_annon()
+print(course)
+print(my_faculty)
+
 #print(uni0)
 u0 = Student(100)
 #print(u0)
@@ -26,8 +41,7 @@ l0 = Lecturer(400)
 
 uni0.add_users([u0,u1,u2,u3,t0,l0])
 
-f0 = Faculty(0, name="COMP")
-uni0.add_faculty(f0)
+f0 = uni0.make_faculty("COMP", description="The most fun")
 f0.make_course(3301)
 f0.add_user(u0, 3301)
 f0.add_user(l0, 3301)

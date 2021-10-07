@@ -218,6 +218,19 @@ display: block;
     color: white;
     box-shadow: 3px 0px #888888;
 }
+.home_column-btn{
+    text-decoration: none;
+    font-family: 'Roboto',sans-serif;
+    margin-top: 0px;
+    font-size: 20px;
+    color: white;
+}
+.home_column-btn:hover{
+    color: rgb(28, 168, 28);
+}
+
+
+
 .tech-slideshow {
     height: 200px;
     left:0px;

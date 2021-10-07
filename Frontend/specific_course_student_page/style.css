@@ -197,7 +197,19 @@ display: block;
     border: 1px solid rgba(196, 196, 196, 0.8);
 }
 
-/* CONTENT AREA */
+/* ====== CONTENT AREA ====== */
+/* handle anchors */
+.anchor {
+    display:block;
+    padding-top:100px;
+    margin-top:-100px;
+ }
+ .anchor2 {
+    display:block;
+    padding-top:100px;
+    margin-top:-100px;
+ }
+
 .content2{
     grid-area: content2;
 }

@@ -23,6 +23,9 @@ class Student(User):
     def update(self, course: Course):
         super().update(course)
         #print(course)
+    
+    def insert(self) -> str:
+        return super().insert()
 
     def __whitetest__(self, results) -> bool:
         return super().__whitetest__(results=results)

@@ -12,32 +12,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="../static/bootstrap/style.css">
     <!-- custom css -->
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="../static/chatroom.css"/>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Chat</title>
+    <title>Video Chat - SmartEd</title>
 </head>
 <body>
 
-    <div class="heading mb-4">
-        <h1 class="display-4">Video Chat</h1>
+    <div class="easing_gradient heading mb-4">
+        <img width="18%" height="18%" src="../static/smarted_w_text.png"></img>
     </div>
+
     <div class="container text-center mt-5">
+        <font face="Raleway">
         <h4>Welcome to video chat!</h4>
         <p>
             Enter a custom room name, and click join! <br> 
-            Share the room name with your friends, so that they can join too!
+            Once you're in, you can share the room ID so that others can join!
         </p>
-
+    </font>
         <form id="room_form" method="POST" class="form shadow" style="max-width:400px; margin-left: auto; margin-right: auto;">
             <div class="input-group mb-3">
                 <input type="text" name="room_id" id="room_id" class="form-control" placeholder="Custom Room Name" autofocus required>
                 <div class="invalid-feedback">Please fill out this field.</div>
                 <div class="input-group-append">
-                    <input type="submit" value="Join" class="btn btn-primary">
+                    <button type="submit" class="form-control btn-primary rounded submit px-3"><font face="Raleway">Join</font></button>
                 </div>
                 
             </div>

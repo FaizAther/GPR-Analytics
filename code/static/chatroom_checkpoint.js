@@ -42,6 +42,7 @@ var mediaConstraints = {
 
 function validate()
 {
+	return true; // remove
     if(!camera_allowed)
     {alert("Please allow camera and mic permissions!");}
     return camera_allowed;

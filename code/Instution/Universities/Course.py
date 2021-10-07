@@ -75,6 +75,9 @@ class Course(Base):
     def get_admin(self) -> Lecturer:
         return self._admin
 
+    def insert(self) -> str:
+        return super().insert()
+
     def __repr__(self) -> str:
         return super().__repr__() + \
             f", admin={self.get_admin().__str__()}"

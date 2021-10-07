@@ -16,8 +16,8 @@ if TYPE_CHECKING:
 '''
 class Faculty(Base):
 
-    def __init__(self, id: int, name=None):
-        super().__init__(id, name)
+    def __init__(self, id: int, name=None, description=None):
+        super().__init__(id, name, description=description)
 
         self._count       :int              = 0
 
@@ -38,9 +38,21 @@ class Faculty(Base):
             users
         )
 
-    def make_course(self, id:int) -> None:
-        self.add_course(Course(id, name=f"{self.get_name()}-{id}"))
+    def make_course_annon(self) -> Course:
+        course_id = self._count
+        add_course = None
+        for offset in range(0,20):
+            course = self.get_courses().get(course_id + offset)
+            if course == None:
+                add_course = self.make_course(course_id + offset)
+                break
+        return add_course
+
+    def make_course(self, id:int) -> Course:
+        course = Course(id, name=f"{self.get_name()}-{id}")
+        self.add_course(course)
         self._count += 1
+        return course
 
     def get_locations(self) -> List[Location]:
         return self._locations
@@ -65,6 +77,10 @@ class Faculty(Base):
             lambda c: self.add_course(c),
             self.get_courses()
         )
+
+    def insert(self) -> str:
+        return super().insert()
+
 
     def __repr__(self) -> str:
         courses_str = Base.__LIST_STR__(
