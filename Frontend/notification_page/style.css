@@ -200,8 +200,10 @@ display: block;
     text-align: left;
 }
 .recording_img {
-    margin: 0px 0px 50px 2px;
+    margin: 10px 0px 50px 10px;
+    width: 250px;
 }
 .comp4500quiz_img {
-    margin: 0px 0px 50px 2px;
+    margin: 10px 0px 50px 20px;
+    width: 300px;
 }
