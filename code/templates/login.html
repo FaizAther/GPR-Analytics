@@ -2,12 +2,18 @@
 {% block my_title %}Login{% endblock %}
 {% block my_h1 %}- Enter login details{% endblock %}
 {% block my_body %}
-<p>
+<div>
     <form method="POST">
         {{ form.csrf_token }}
         {{ form.username }}
         {{ form.password }}
+        {{ form.selection }}
         <button>Login</button>
     </form>
-</p>
+</div>
+{% if not validate %}
+<div>
+    Wrong Password
+</div>
+{% endif %}
 {% endblock %}

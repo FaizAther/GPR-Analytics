@@ -33,27 +33,35 @@ _name_of_sid = {} # stores display name of users
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-
-    if form.validate_on_submit():
+    form.selection.choices = my_sudo.get_selection()
+    university = None
+    validate = True
+    if request.method == "POST":
+        university = my_sudo.find_university(int(form.selection.data))
+    if form.validate_on_submit() and university != None:
         session.pop('username', None)
-        user = uni0.find_user(int(form.username.data))
-        valid_pass = user.validate_password(form.password.data)
-        print(valid_pass)
-        if valid_pass:
+        user = university.get_admin() if form.username.data == "admin" else university.find_user(int(form.username.data))
+        validate = user != None and user.validate_password(form.password.data)
+        print(validate)
+        if validate:
             session['username'] = user.get_id()
+            session['university'] = university.get_id()
+            if user.get_type() == UserType.ADMIN:
+                return redirect(url_for('admin'))
             return redirect(url_for('home'))
-    return render_template("login.html", form=form)
+    return render_template("login.html", form=form, validate=validate)
 
 @app.route('/logout')
 def logout():
     # remove the username from the session if it's there
     session.pop('username', None)
+    session.pop('university', None)
     return redirect(url_for('index'))
 
 @app.route('/home/')
 def home():
     if 'username' in session:
-        content=uni0.find_user(int(session['username']))
+        content = my_sudo.find_user(session['university'], session['username'])
     else:
         content="Not logged in"
     return render_template("home.html", content=content)
@@ -61,18 +69,19 @@ def home():
 @app.route('/engagements/')
 def engagements():
     if 'username' in session:
-        user=uni0.find_user(int(session['username']))
+        user = my_sudo.find_user(session['university'], session['username'])
         content = Base.__LIST_STR__(user.get_engagements(), "Engagements=")
     else:
         content="Not logged in"
     return render_template("home.html", content=content)
 
 @app.route('/university/', methods=['GET', 'POST'])
-def classes():
+def university():
     content = "Selection"
     uni_form = SelectionForm()
     #print(my_sudo.get_universities())
-    uni_form.selection.choices = [(uni.get_id(), uni.get_name()) for uni in my_sudo.get_universities()]
+    uni_form.selection.choices = my_sudo.get_selection()
+    print(my_sudo.get_selection())
     if request.method == 'POST':
         content=my_sudo.find_university(int(uni_form.selection.data))
         #content = uni0.find_faculty(int(path.split("=")[1])).__str__()
@@ -95,7 +104,8 @@ def index():
 
 @app.route('/admin')
 def admin():
-    return redirect(url_for("hello_world", name="admin"))
+    admin = my_sudo.find_admin(session['university'])
+    return render_template("admin.html", content=admin)
 
 
 def hello(name):

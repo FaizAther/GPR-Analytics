@@ -1,4 +1,5 @@
 from __future__ import annotations
+from threading import get_ident
 
 from typing import TYPE_CHECKING, Dict, List
 
@@ -14,18 +15,30 @@ class Sudo(User):
     def __init__(self, id, type=UserType.SUDO):
         super().__init__(id, type)
         self._admins: Dict[Admin] = {}
+        self._selection = []
 
     def get_admins(self) -> Dict[Admin]:
         return self._admins
 
+    def find_admin(self, id) -> Admin:
+        return self.dict_find(id, self.get_admins())
+
     def add_admin(self, name=None, description=None):
         admin = Admin(len(self._admins), name=name, description=description)
         self.dict_insert(admin, self.get_admins())
+        university = admin.get_university()
+        self._selection += [(university.get_id(), university.get_name())]
         return admin
+
+    def get_selection(self):
+        return self._selection
 
     def find_university(self, id: int) -> University:
         admin = self.dict_find(id, self.get_admins())
         return admin.get_university() if admin != None else None
+
+    def find_user(self, university_id: int, user_id: int) -> User:
+        return self.find_university(university_id).find_user(user_id)
 
     def get_universities(self):
         return [admin.get_university() for admin in self.get_admins().values()]

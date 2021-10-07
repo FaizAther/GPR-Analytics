@@ -27,13 +27,18 @@ class University(Base):
     def get_admin(self) -> User:
         return self._admin
 
-    def get_users(self) -> List[User]:
+    def get_users(self) -> Dict[User]:
         return self._users
+
+    def make_user(self, name: str, description=None) -> User:
+        user = User(len(self.get_users().values()), name=name, description=description)
+        self.add_user(user)
+        return user
 
     def add_user(self, user: User) -> None:
         Base.dict_insert(user, self.get_users())
 
-    def add_users(self, users: List[User]) -> None:
+    def add_users(self, users: Dict[User]) -> None:
         Base.__DO_SOMETHINGS__(lambda u: self.add_user(u), users)
 
     def get_faculties(self) -> Dict[int, Faculty]:
@@ -53,7 +58,7 @@ class University(Base):
     def add_faculty(self, faculty: Faculty) -> None:
         Base.dict_insert(faculty, self.get_faculties())
 
-    def add_faculties(self, faculties: List[Faculty]) -> None:
+    def add_faculties(self, faculties: Dict[Faculty]) -> None:
         Base.__DO_SOMETHINGS__(lambda f: self.add_faculty(f), faculties)
 
 
