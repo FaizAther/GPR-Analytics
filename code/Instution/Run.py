@@ -1,3 +1,4 @@
+from Instution.PrettifyMe.BuilderHTML import BuilderHTML
 from Instution.Base import Base
 from Instution.Universities.University import University
 from Instution.Universities.Faculty import Faculty
@@ -70,3 +71,5 @@ e0.add_users([l0,t0,u0,u1,u2,u3])
 #print(u0)
 
 print(uni0.get_users())
+
+print(uni0.generate_html())

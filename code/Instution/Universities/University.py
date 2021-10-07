@@ -25,8 +25,7 @@ class University(Base):
         self._users     :Dict[int, User]    = {}
 
     def generate_html(self) -> str:
-        ## TODO
-        return ""
+        return super().generate_html()
 
     def get_admin(self) -> User:
         return self._admin
@@ -59,6 +58,9 @@ class University(Base):
 
     def get_faculties(self) -> Dict[int, Faculty]:
         return self._faculties
+
+    def get_faculties_list(self) -> List[Faculty]:
+        return self.get_faculties().values()
 
     def find_faculty(self, id) -> Faculty:
         return Base.dict_find(id, self.get_faculties())

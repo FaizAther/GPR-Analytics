@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import List, Callable, Optional
+    from typing import List
 
 '''
     Base Class

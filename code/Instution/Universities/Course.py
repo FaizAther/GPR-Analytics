@@ -70,7 +70,7 @@ class Course(Base):
         Base.__DO_SOMETHINGS__(lambda u: u.update(event), self.get_users())
 
     def generate_html(self) -> str:
-        return ""
+        super().generate_html()
 
     def get_admin(self) -> Lecturer:
         return self._admin

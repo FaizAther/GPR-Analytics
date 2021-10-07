@@ -2,7 +2,9 @@
 {% block my_title %}Search{% endblock %}
 {% block my_h1 %}- Universities{% endblock %}
 {% block my_body %}
-<p>{{content}}</p>
+{% autoescape false %}
+    <div>{{ content }}</div>
+{% endautoescape %}
 <div>
     <form method="POST">
         {{ form.selection }}

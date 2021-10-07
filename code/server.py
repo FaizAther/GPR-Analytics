@@ -97,7 +97,8 @@ def university():
     uni_form.selection.choices = my_sudo.get_selection()
     print(my_sudo.get_selection())
     if request.method == 'POST':
-        content=my_sudo.find_university(uni_form.selection.data)
+        content = BuilderHTML.generate(my_sudo.find_university(uni_form.selection.data))
+        print(content)
         #content = uni0.find_faculty(int(path.split("=")[1])).__str__()
 
     return render_template("university.html", content=content, form=uni_form)
