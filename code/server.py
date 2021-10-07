@@ -10,7 +10,6 @@ from flask_socketio import (
     SocketIO, emit, join_room, leave_room
 )
 from engineio.payload import Payload
-import flask
 from flask import session
 
 from Forms.LoginForm import LoginForm
@@ -55,16 +54,17 @@ def login():
 @app.route('/logout/')
 def logout():
     # remove the username from the session if it's there
+    if 'username' not in session:
+        return redirect(url_for("login"))
     session.pop('username', None)
     session.pop('university', None)
     return redirect(url_for('index'))
 
 @app.route('/home/')
 def home():
-    if 'username' in session:
-        content = my_sudo.find_user(session['university'], session['username'])
-    else:
-        content="Not logged in"
+    if 'username' not in session:
+        return redirect(url_for("login"))
+    content = my_sudo.find_user(session['university'], session['username'])
     return render_template("home.html", content=content)
 
 @app.route('/engagements/')
@@ -73,7 +73,7 @@ def engagements():
         user = my_sudo.find_user(session['university'], session['username'])
         content = Base.__LIST_STR__(user.get_engagements(), "Engagements=")
     else:
-        content="Not logged in"
+        return redirect(url_for("login"))
     return render_template("home.html", content=content)
 
 @app.route('/university/', methods=['GET', 'POST'])
@@ -105,6 +105,8 @@ def index():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
+    if 'username' not in session:
+        return redirect(url_for("login"))
     form = AddForm()
     admin = my_sudo.find_admin(session['university'])
     form.selection.choices = admin.get_functions()
