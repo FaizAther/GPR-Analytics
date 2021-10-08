@@ -10,6 +10,7 @@
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
+    {% block my_header %}{% endblock %}
     <title>{% block my_title %}{% endblock %} - GPR</title>
   </head>
   <body>
