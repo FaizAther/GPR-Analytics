@@ -70,7 +70,7 @@ def logout():
 
 @app.route('/home/')
 def home():
-    if 'username' not in session:
+    if 'username' not in session and 'admin' not in session:
         return redirect(url_for("login"))
     elif 'admin' in session:
         return redirect(url_for('admin'))
