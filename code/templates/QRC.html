@@ -14,7 +14,7 @@
       <script src="../static/qrcode.min.js"></script>
       <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
       <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
+      <link rel="icon" href="../../Frontend/img/logo.png">
       <script>
          function show_QRC() {
             var QR_CODE = new QRCode("qrcode", {
@@ -24,6 +24,7 @@
             QR_CODE.makeCode("https://smart-ed.org/register_attendance.html"); // Pass course parameter here.
       }
       </script>
+
    </head>
    <body onload="javascript:show_QRC()">
       <section class="ftco-section">
