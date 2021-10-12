@@ -208,51 +208,63 @@ display: block;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas: 
-    "grade rank satisfaction report report" 
+    "stats stats stats report report" 
     "you you you insights insights" 
     "you you you insights insights";
 }
-/* GRADE */
-.grade {
-    position: relative;
-    left: 0px;
-    width: 180px;
+.stats {
+    grid-area: stats;
     margin: 15px;
-    grid-area: grade;
     background: linear-gradient(-45deg, #861657, #5f0a87, #a4508b);
 	background-size: 400% 400%;
 	animation: gradient 25s ease infinite;
-    border: 1px solid rgba(196, 196, 196, 0.8);
-    box-shadow: 3px 2px #888888;
 }
-.current_grade h5 {
-    margin: -5px 0px 0px 65px;
-    font-family: 'Roboto',sans-serif;
-    font-size: 90px;
-    color: white;
-}
-.current_grade p {
-    padding: 10px 20px 0px 57px;
+.stats h5{
     font-family: 'Roboto',sans-serif;
     font-size: 20px;
-    color: rgb(14, 224, 14);
+    margin: 5px 0px 0px 10px;
+    color: white;
 }
+
+.statistics {
+    margin: 10px;
+    height: 200px;
+    background-color: white;
+    overflow-y: scroll;
+}
+
+/* STATISTICS */
+.resources {
+    overflow-y: scroll;
+}
+.content_entry {
+    padding:10px;
+    background-color: rgb(252, 249, 249);
+}   
+.content_entry:hover {
+    background-color: #5f0a872d;
+    border: 1px solid rgba(196, 196, 196, 0.8);
+    box-shadow: 0px 1.5px #888888;
+}
+.content_entry a{
+    margin:20px;
+    color: black;
+    font-size: 20px;
+}
+.resources_line {
+    margin:0;
+    border: 1px solid rgba(196, 196, 196, 0.8);
+}
+#exclamation {
+    color: red;
+    margin-right: 10px;
+}
+
 .overview_title_font {
     font-family: 'Roboto',sans-serif;
     font-size: 20px;
     color: white;
     margin: 15px 0px 15px 25px;
-}
-/* SATISFACTION */
-.satisfaction {
-    width: 180px;
-    background: linear-gradient(-45deg, #861657, #5f0a87, #a4508b);
-	background-size: 400% 400%;
-	animation: gradient 25s ease infinite;
-    margin:15px;
-    grid-area: satisfaction;
-    border: 1px solid rgba(196, 196, 196, 0.8);
-    box-shadow: 3px 2px #888888;
 }
 .overview_title_font2 {
     font-family: 'Roboto',sans-serif;
@@ -260,48 +272,6 @@ display: block;
     color: white;
     margin: 15px 0px 15px 20px;
 }
-.current_satisfaction h5 {
-    margin: 25px 0px 0px 50px;
-    font-family: 'Roboto',sans-serif;
-    font-size: 75px;
-    color: white;
-}
-.current_satisfaction p {
-    margin: 10px 0px 10px 75px;
-    font-family: 'Roboto',sans-serif;
-    font-size: 40px;
-    color:white;
-}
-/* RANK */
-.rank {
-    width: 180px;
-    background: linear-gradient(-45deg, #861657, #5f0a87, #a4508b);
-	background-size: 400% 400%;
-	animation: gradient 25s ease infinite;
-    margin:15px;
-    grid-area: rank;
-    border: 1px solid rgba(196, 196, 196, 0.8);
-    box-shadow: 3px 2px #888888;
-}
-.overview_title_font3 {
-    font-family: 'Roboto',sans-serif;
-    font-size: 20px;
-    color: white;
-    margin: 13px 0px 15px 60px;
-}
-.current_rank h5 {
-    margin: 20px 0px 0px 50px;
-    font-family: 'Roboto',sans-serif;
-    font-size: 75px;
-    color: white;
-}
-.current_rank p {
-    margin: 20px 0px 10px 60px;
-    font-family: 'Roboto',sans-serif;
-    font-size: 20px;
-    color: rgb(14, 224, 14);
-}
-
 /* KEY INSIGHT REPORT */
 .report {
     width: 350px;
@@ -312,8 +282,8 @@ display: block;
     grid-area: report;
 }
 .key_report {
-    margin: 10px;
-    height: 150px;
+    margin: 10px 10px 10px 10px;
+    height: 185px;
     background-color: white;
     overflow-y: scroll;
 }
@@ -334,7 +304,7 @@ display: block;
 }
 .for_you {
     margin: 10px;
-    height: 380px;
+    height: 360px;
     background-color: white;
     overflow-y: scroll;
 }
@@ -350,7 +320,7 @@ display: block;
 }
 .actionable_insights {
     margin: 10px;
-    height: 395px;
+    height: 370px;
     background-color: white;
     overflow-y: scroll;
 }
