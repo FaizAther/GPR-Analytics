@@ -23,6 +23,7 @@ Payload.max_decode_packets = 200
 app = Flask(__name__)
 app.secret_key = "gpr"
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 # DISABLES CACHING TO MAKE DEV EASIER. REMOVE B4 RELEASE
 socketio = SocketIO(app)
 
 # Video chat
@@ -66,7 +67,7 @@ def logout():
     session.pop('username', None)
     session.pop('admin', None)
     session.pop('university', None)
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 @app.route('/home/')
 def home():
@@ -74,9 +75,9 @@ def home():
         return redirect(url_for("login"))
     elif 'admin' in session:
         return redirect(url_for('admin'))
-
+    username = ""
     content = my_sudo.find_user(session['university'], session['username'])
-    return render_template("home.html", content=content)
+    return render_template("home.html", content=content, username=session['username'])
 
 @app.route('/engagements/')
 def engagements():
@@ -87,7 +88,8 @@ def engagements():
         return redirect(url_for('admin'))
     else:
         return redirect(url_for("login"))
-    return render_template("home.html", content=content)
+    username = ""
+    return render_template("home.html", content=content, username=session['username'])
 
 @app.route('/university/', methods=['GET', 'POST'])
 def university():
@@ -96,6 +98,7 @@ def university():
     #print(my_sudo.get_universities())
     uni_form.selection.choices = my_sudo.get_selection()
     print(my_sudo.get_selection())
+    username = ""
     if request.method == 'POST':
         content = BuilderHTML.generate(my_sudo.find_university(uni_form.selection.data))
         print(content)
@@ -115,12 +118,14 @@ def admin():
     elif 'admin' not in session:
         return redirect(url_for('home'))
     form = AddForm()
+    username = ""
     admin = my_sudo.find_admin(session['university'])
     form.selection.choices = admin.get_functions()
+    form.type_selection.choices = list(map((lambda ut: (ut.value, ut.name)), list(UserType)))
     if request.method == "POST":
         print(form.name.data)
-        admin.commit(int(form.selection.data), form.name.data)
-    return render_template("admin.html", content=admin, form=form)
+        admin.commit(int(form.selection.data), form.name.data, type_select=form.type_selection.data)
+    return render_template("admin.html", content=admin, form=form, username="Admin")
 
 
 def hello(name):

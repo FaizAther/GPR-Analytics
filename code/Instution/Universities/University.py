@@ -36,22 +36,25 @@ class University(Base):
     def make_user(self, type: UserType, name: str=None, description=None) -> User:
         position = len(self.get_users().values())
 
+        user = None
         if type == UserType.LECTURER:
             user = Lecturer(position)
         elif type == UserType.TUTOR:
             user = Tutor(position)
         elif type == UserType.STUDENT or type == UserType.UNDERGRAD:
-            user = Student(position)
+            user = Student(position, name=name)
         elif type == UserType.POSTGRAD:
             user = Student(position, type=type)
         elif type == UserType.PHD:
             user = Student(position, type=type)
     
+        print("type: " + type.__str__() + "adding: " + user.__str__())
         self.add_user(user)
         return user
 
     def add_user(self, user: User) -> None:
-        Base.dict_insert(user, self.get_users())
+        if user != None:
+            Base.dict_insert(user, self.get_users())
 
     def add_users(self, users: Dict[User]) -> None:
         Base.__DO_SOMETHINGS__(lambda u: self.add_user(u), users)
