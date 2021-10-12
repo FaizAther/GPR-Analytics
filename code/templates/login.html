@@ -1,5 +1,4 @@
-{% extends "basic.html" %}
-{% block my_header %}
+
 <!-- Add to header -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,21 +15,13 @@
       });
     }
  </script>
-{% endblock %}
-{% block my_title %}
-Login
-{% endblock %}
-{% block my_h1 %}
-<!-- Add to h1 -->
-{% endblock %}
-{% block my_body %}
-<!-- Add to body -->
-<div>
+
+
 <section class="ftco-section">
 <div class="container">
 <div class="row justify-content-center">
     <div class="col-md-6 text-center mb-5">
-        <h2 class="heading-section"><img width="75%" height="75%" src="{{ url_for('static', filename='smarted_w_text.png') }}""/></h2>
+        <h2 class="heading-section"><img width="75%" height="85%" src="{{ url_for('static', filename='smarted_w_text.png') }}""/></h2>
     </div>
 </div>
 <div class="row justify-content-center l-form">
@@ -47,6 +38,7 @@ Login
             <input name="password" type="password" class="form-control rounded-left" placeholder="Password" required>
         </div>
         {{ form.selection }}
+        <div class="mb-3"></div>
         {% if not validate: %}
             <script>
                 bad_login()
@@ -73,8 +65,5 @@ Login
 </div>
 </div>
 </section>
-</div>
-{% endblock %}
-{% block my_footer %}
-<!-- Add to footer -->
- {% endblock %}
+
+
