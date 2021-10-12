@@ -121,9 +121,10 @@ def admin():
     username = ""
     admin = my_sudo.find_admin(session['university'])
     form.selection.choices = admin.get_functions()
+    form.type_selection.choices = list(map((lambda ut: (ut.value, ut.name)), list(UserType)))
     if request.method == "POST":
         print(form.name.data)
-        admin.commit(int(form.selection.data), form.name.data)
+        admin.commit(int(form.selection.data), form.name.data, type_select=form.type_selection.data)
     return render_template("admin.html", content=admin, form=form, username="Admin")
 
 

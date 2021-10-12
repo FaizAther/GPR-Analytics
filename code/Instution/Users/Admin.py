@@ -22,12 +22,11 @@ class Admin(User):
     def get_functions(self):
         return [(0, "Faculty"), (1, "User")]
     
-    def commit(self, action: int, name=None):
+    def commit(self, action: int, name=None, type_select=UserType.DEFAULT):
         if action == 0:
-            print("here")
             self._university.make_faculty(name=name)
         elif action == 1:
-            self._university.make_user(name=name)
+            self._university.make_user(list(UserType)[int(type_select)], name=name)
 
     def add_engagement(self, engagement) -> None:
         return super().add_engagement(engagement)

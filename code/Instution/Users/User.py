@@ -20,8 +20,8 @@ class User(Base):
         import hashlib
         return hashlib.sha256(value.encode('utf-8')).hexdigest()
 
-    def __init__(self, id: int, type: UserType):
-        super().__init__(id)
+    def __init__(self, id: int, type: UserType, name=None):
+        super().__init__(id, name=name)
         self._engagements   :List       = []
         self._password      :str        = ""
         self._type          :UserType   = type

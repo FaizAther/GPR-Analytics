@@ -11,8 +11,8 @@ if TYPE_CHECKING:
 
 class Student(User):
 
-    def __init__(self, id: int, type: UserType=UserType.UNDERGRAD):
-        super().__init__(id, type)
+    def __init__(self, id: int, type: UserType=UserType.UNDERGRAD, name=None):
+        super().__init__(id, type, name=name)
 
     def add_engagement(self, engagement) -> None:
         super().add_engagement(engagement)
