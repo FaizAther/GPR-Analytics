@@ -1,0 +1,135 @@
+{% extends "basic.html" %}
+{% block my_header %}
+<head>
+    <title>Courses - SmartEd</title>
+    <link rel="stylesheet" href="../static/pages_css/course_staff.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+    <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel="icon" href="../static/pages_img/logo.png">
+</head>
+{% endblock %}
+{% block my_body %}
+<body>
+    <main class="main">
+        <!-- HOME PAGE -->
+        <section class="home" id=home>
+            <div class="course_search">
+                <div class="content2">
+                    <h5 class="course_column2">Course Search</h2>
+                    <!-- The form -->
+                    <form class="example" action="action_page.php">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="my_courses">
+                <div class="content1">
+                    <h5 class="course_column">My Courses</h2>
+                    <div class="course">
+                        <div class="sem_header"></p>Semester 2, 2021</div>
+                        <div class="courses">
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                        </div>
+                        <div class="sem_header"></p>Semester 1, 2021</div>
+                        <div class="courses">
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                        </div>
+                        <div class="sem_header"></p>Semester 2, 2020</div>
+                        <div class="courses">
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                        </div>
+                        <div class="sem_header"></p>Semester 1, 2020</div>
+                        <div class="courses">
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                            <a href="specific_course_staff.html">
+                                <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+            <div class="course_catalogue">
+                <div class="content3">
+                    <h5 class="course_column3">Course Catalogue</h2>
+                    <ul>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> BEL Faculty</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Chem Eng</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Dental School</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> EAIT</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Faculty of Arts</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Faculty of Health Sciences</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Faculty of Medicine</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> Faculty of Science</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i>  Graduate School</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> HABS</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> HAPI</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> HASS</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> HMNS</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> ITEE</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> MBS</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i>  MechMine</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> NMSW</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> SBS Faculty</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> School of Agriculture and Food Sciences</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> School of Architecture</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i>  School of Biological Sciences</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> School of Biomedical Sciences</a></li>
+                        <li class="catalogue"><a href="" class="buttons"><i class="fa fa-folder-open"></i> School of Civil Engineering</a></li>
+                        
+
+                    </ul>
+                </div>
+                
+            </div>
+
+
+            <!-- Add more columns here if needed --> 
+
+            
+        </section>
+        
+    </main>
+</body>
+{% endblock %}

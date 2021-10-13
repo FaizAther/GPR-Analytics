@@ -75,7 +75,7 @@ class Faculty(Base):
     def add_courses(self, courses:List[Course]) -> None:
         Base.__DO_SOMETHINGS__(
             lambda c: self.add_course(c),
-            self.get_courses()
+            courses
         )
 
     def insert(self) -> str:

@@ -20,9 +20,12 @@ class University(Base):
 
     def __init__(self, id: int, admin=None, name=None, description=None):
         super().__init__(id, name, description)
-        self._admin     :User               = admin
+        self._admin     :Lecturer           = admin
         self._faculties :Dict[int, Faculty] = {}
         self._users     :Dict[int, User]    = {}
+
+        if admin == None:
+            self._admin = self.make_user(UserType.ADMIN)
 
     def generate_html(self) -> str:
         return super().generate_html()
