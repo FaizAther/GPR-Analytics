@@ -1,12 +1,14 @@
-
+{% extends "basic.html" %}
+{% block my_header %}
 <head>
-    <title>SmartEd - Home</title>
-    <link rel="stylesheet" href="../../../static/pages_css/settings_student.css">
+    <title>Settings - SmartEd</title>
+    <link rel="stylesheet" href="../static/pages_css/settings_student.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-    <link rel="icon" href="../../../static/pages_img/logo.png">
+    <link rel="icon" href="../static/pages_img/logo.png">
 </head>
-<body>
+{% endblock %}
+{% block my_body %}
 <body>
 
 
@@ -104,7 +106,7 @@
                 </div>
                 <div class="noti-dash" id="noti-dash">
                     <h5>Notifications Dashboard</h5>
-                    <p><a href="../student/notification_student.html">Access notifications here.</a> </p>
+                    <p><a href="notification_student.html">Access notifications here.</a> </p>
                 </div>
                 <div class="privacy" >
                     <h5 id="privacy">Privacy and Terms of Use</h5>
@@ -124,4 +126,4 @@
     
     
 </body>
-</html>
+{% endblock %}
