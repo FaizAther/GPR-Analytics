@@ -35,11 +35,14 @@
                   <li class="nav-item">
                       <a class="nav-link" aria-current="page" href="{{ url_for('index') }}"><font color="white">Home</font></a>
                   </li>
-                  <!-- Engagements Item -->
+
+                  <!-- Engagements Item - non-admin only -->
+                  {% if username != "Admin" %} 
                   <li class="nav-item">
                       <a class="nav-link" href="{{ url_for('engagements') }}"><font color="white">Engagements</font></a>
                   </li>
-                  <!-- Admin Item -->
+                  {% endif %}
+                  <!-- Admin Item admin-only -->
                   {% if username == "Admin" %} 
                     <li class="nav-item">
                       <a class="nav-link" href="{{ url_for('admin') }}"><font color="white">Admin</font></a>
