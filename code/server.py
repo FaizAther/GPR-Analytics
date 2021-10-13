@@ -85,7 +85,7 @@ def engagements():
         user = my_sudo.find_user(session['university'], session['username'])
         content = Base.__LIST_STR__(user.get_engagements(), "Engagements=")
     elif 'admin' in session:
-        return redirect(url_for('admin'))
+        return redirect(url_for('admin', username="Admin"))
     else:
         return redirect(url_for("login"))
     username = ""
@@ -93,23 +93,38 @@ def engagements():
 
 @app.route('/university/', methods=['GET', 'POST'])
 def university():
+    uname = ""
+    if 'username' in session:
+        uname = session['username']
+    elif 'admin' in session:
+        uname = "Admin"
+    else:
+        uname = None
+
     content = "Selection"
     uni_form = SelectionForm()
     #print(my_sudo.get_universities())
     uni_form.selection.choices = my_sudo.get_selection()
     print(my_sudo.get_selection())
-    username = ""
+    
     if request.method == 'POST':
         content = BuilderHTML.generate(my_sudo.find_university(uni_form.selection.data))
         print(content)
         #content = uni0.find_faculty(int(path.split("=")[1])).__str__()
 
-    return render_template("university.html", content=content, form=uni_form)
+    return render_template("university.html", content=content, form=uni_form, username=uname)
 
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    uname = ""
+    if 'username' in session:
+        uname = session['username']
+    elif 'admin' in session:
+        uname = "Admin"
+    else:
+        uname = None
+    return render_template("index.html", username=uname)
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():

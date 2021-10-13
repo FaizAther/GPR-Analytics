@@ -68,13 +68,20 @@
                         <font color="white" face="Raleway:wght@300">
                           {% if username == "Admin" %}
                             Admin
+                          {% elif username == None %}
+                            Not Logged In
                           {% else %}
                             {{ username }} 
                           {% endif %}
                         </font>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        {% if username != None %} 
                           <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                        {% else %}
+                          <li><a class="dropdown-item" href="{{ url_for('login') }}">Login</a></li>
+                          {% endif %}
+                        
                          <!-- <li><a class="dropdown-item" href="/register">Register</a></li> -->
                       </ul>
                   </li>
