@@ -9,6 +9,9 @@
 </head>
 {% endblock %}
 {% block my_body %}
+{% for engagement in content %}
+    {{ engagement }}
+{% endfor %}
 <body>
     <main class="main">
         <!-- HOME PAGE -->

@@ -20,13 +20,15 @@ class Admin(User):
         return self._university
 
     def get_functions(self):
-        return [(0, "Faculty"), (1, "User")]
+        return [(0, "Faculty"), (1, "User"), (3, "Course")]
     
     def commit(self, action: int, name=None, type_select=UserType.DEFAULT):
         if action == 0:
             self._university.make_faculty(name=name)
         elif action == 1:
             self._university.make_user(list(UserType)[int(type_select)], name=name)
+        elif action == 2:
+            pass
 
     def add_engagement(self, engagement) -> None:
         return super().add_engagement(engagement)

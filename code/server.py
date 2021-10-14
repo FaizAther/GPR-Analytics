@@ -132,14 +132,16 @@ def admin():
         return redirect(url_for("login"))
     elif 'admin' not in session:
         return redirect(url_for('home'))
-    form = AddForm()
+    form = SelectionForm()
+    form_1 = None
     username = ""
     admin = my_sudo.find_admin(session['university'])
     form.selection.choices = admin.get_functions()
-    form.type_selection.choices = list(map((lambda ut: (ut.value, ut.name)), list(UserType)))
-    if request.method == "POST":
+    #form.type_selection.choices = list(map((lambda ut: (ut.value, ut.name)), list(UserType)))
+    if request.method == "POST" and form_1 == None:
         print(form.name.data)
-        admin.commit(int(form.selection.data), form.name.data, type_select=form.type_selection.data)
+    elif request.method == "POST" and form_1 != None:
+        admin.commit(int(form.selection.data), form.name.data, type_select=form_1.type_selection.data)
     return render_template("admin.html", content=admin, form=form, username="Admin")
 
 
@@ -166,7 +168,15 @@ def QRC():
 # Needs to be passed username (for display) and list of courses they're enrolled in (to fetch announcements for)
 @app.route('/announcement_student/')
 def announcement_student():
-    return render_template("announcement_student.html")
+    # check user logged in
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    # find user from session
+    user = my_sudo.find_user(session['university'], session['username'])
+
+    # user object has list of engagements: user.get_engagements()
+    return render_template("announcement_student.html", content=user.get_engagements())
 
 # Needs to be passed username (for display) and list of courses they're enrolled in and student grades/data/stats etc
 @app.route('/course_overview_student/')
