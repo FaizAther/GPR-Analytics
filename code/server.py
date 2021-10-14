@@ -11,6 +11,7 @@ from flask_socketio import (
 )
 from engineio.payload import Payload
 from flask import session
+from werkzeug.utils import HTMLBuilder
 
 from Forms.LoginForm import LoginForm
 from Forms.SelectionForm import SelectionForm
@@ -176,7 +177,7 @@ def announcement_student():
     user = my_sudo.find_user(session['university'], session['username'])
 
     # user object has list of engagements: user.get_engagements()
-    return render_template("announcement_student.html", content=user.get_engagements())
+    return render_template("announcement_student.html", content=user.get_engagements(), builder=BuilderHTML)
 
 # Needs to be passed username (for display) and list of courses they're enrolled in and student grades/data/stats etc
 @app.route('/course_overview_student/')

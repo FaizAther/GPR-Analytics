@@ -10,7 +10,10 @@
 {% endblock %}
 {% block my_body %}
 {% for engagement in content %}
-    {{ engagement }}
+{% autoescape false %}
+    <div>{{ content }}</div>
+    {{ builder.generate(engagement) }}
+{% endautoescape %}
 {% endfor %}
 <body>
     <main class="main">
