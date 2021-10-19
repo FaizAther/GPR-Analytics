@@ -8,24 +8,16 @@ import populate
 # establish the connection to azure sql database
 db = "university_db"
 
-# MONEY RAN OUT SO CAN'T USE AZURE SQL DATABASE
-# cnx = mysql.connector.connect(
-#     host="university-db-deco3801.mysql.database.azure.com",
-#     user="gpr_deco3801@university-db-deco3801",
-#     passwd="Abc1234567890",
-#     database=db
-# )
-
-# desktop mySQL
 cnx = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="abcd1234",
+    host="university-db-deco3801.mysql.database.azure.com",
+    user="deco3801_login@university-db-deco3801",
+    passwd="Abcd1234",
     database=db
 )
+# mycursor.execute("CREATE DATABASE university_db")
+
 
 mycursor = cnx.cursor()
-
 
 def show_databases():
     '''
@@ -34,6 +26,7 @@ def show_databases():
     mycursor.execute("SHOW DATABASES")
     for database in mycursor:
         print(database)
+
 
 def show_tables():
     '''
