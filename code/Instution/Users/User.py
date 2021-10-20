@@ -36,6 +36,9 @@ class User(Base):
     def update(self, subject):
         print(f"uuid={self.get_id()} reacted to\nengagement=\t{subject.__str__()}")
 
+    def is_type(self, target:UserType):
+        return self.get_type() == target
+
     def get_type(self) -> UserType:
         return self._type
 
