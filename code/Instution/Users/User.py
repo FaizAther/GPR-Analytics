@@ -37,6 +37,9 @@ class User(Base):
         print(f"uuid={self.get_id()} reacted to\nengagement=\t{subject.__str__()}")
 
     def is_type(self, target:UserType):
+        students = [UserType.UNDERGRAD, UserType.POSTGRAD, UserType.PHD, UserType.EXCHANGE]
+        if (target == UserType.STUDENT):
+            return self.get_type() in students
         return self.get_type() == target
 
     def get_type(self) -> UserType:
