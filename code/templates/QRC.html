@@ -21,7 +21,7 @@
               width: 220,
               height: 220
             });
-            QR_CODE.makeCode("https://smart-ed.org/register_attendance.html"); // Pass course parameter here.
+            QR_CODE.makeCode("https://smart-ed.org/register_attendance?course={{specified_course}}"); // Pass course parameter here.
       }
       </script>
    </head>
@@ -37,8 +37,8 @@
                <div class="col-md-7 col-lg-5">
                   <div class="login-wrap p-4 p-md-5">
                      <h4 class="text-center mb-3">
-                     <font face="Raleway">Sign on for COURSE_NAME</font></h4>
-                     <div class="text-center mb-4"><font color="black" size="3%" face="Raleway">You are about to sign on for: TUTORIAL_7</font></div>
+                     <font face="Raleway">Sign on for {{specified_course.replace("-","")}}</font></h4>
+                     <div class="mb-2"></div>
                      <center><div id="qrcode"></div></center>
                   </div>
                </div>

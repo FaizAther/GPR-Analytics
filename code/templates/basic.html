@@ -43,15 +43,53 @@
 
                   <!-- Engagements Item - non-admin only -->
                   {% if username != "Admin" %} 
-                  <li class="nav-item">
+                  <!--<li class="nav-item">
                       <a class="nav-link" href="{{ url_for('engagements') }}"><font color="white">Engagements</font></a>
-                  </li>
+                  </li>-->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <font color="white" face="Raleway:wght@300">
+                        Engagements
+                      </font>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      {% for course in courses %}
+                      {% set c = course.get_name() %}
+                      <li><a class="dropdown-item" href="{{ url_for('specific_course_student') }}?course={{c}}">{{ c.replace("-", "") }}</a></li>
+
+                      <!--<li><a class="dropdown-item" href="{{ url_for('university') }}">another here</a></li>-->
+                       <!-- <li><a class="dropdown-item" href="/register">Register</a></li> -->
+                       {% endfor %}
+                    </ul>
+                </li>
                   {% endif %}
                   <!-- Admin Item admin-only -->
                   {% if username == "Admin" %} 
                     <li class="nav-item">
                       <a class="nav-link" href="{{ url_for('admin') }}"><font color="white">Admin</font></a>
                     </li>
+                  {% endif %}
+                  <!-- Courses which the admin manages -->
+                  {% if username == "Admin" %} 
+                  <!--<li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('engagements') }}"><font color="white">Engagements</font></a>
+                  </li>-->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <font color="white" face="Raleway:wght@300">
+                        My Courses
+                      </font>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      {% for i in range(0, courses|length, 2) %}
+                      {% set c = courses[i].get_name() %}
+                      <li><a class="dropdown-item" href="{{ url_for('specific_course_student') }}?course={{c}}">{{ c.replace("-", "") }}</a></li>
+
+                      <!--<li><a class="dropdown-item" href="{{ url_for('university') }}">another here</a></li>-->
+                       <!-- <li><a class="dropdown-item" href="/register">Register</a></li> -->
+                       {% endfor %}
+                    </ul>
+                </li>
                   {% endif %}
                   <!-- Universities dropdown Item admin-only -->
                   {% if username == "Admin" %} 
@@ -90,11 +128,11 @@
                           {% if username == "Admin" %}
                           <!-- ADMIN OPTIONS -->
                             <li><a class="dropdown-item" href="{{ url_for('notification_staff') }}">Notifications</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('notification_staff') }}">Settings</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('settings_staff') }}">Settings</a></li>
                           {% else %}
                           <!-- STUDENT OPTIONS -->
                             <li><a class="dropdown-item" href="{{ url_for('notification_student') }}">Notifications</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('notification_student') }}">Settings</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('settings_student') }}">Settings</a></li>
                           {% endif %}                          
                           <!-- COMMON OPTIONS-->
                           <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>

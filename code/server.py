@@ -77,9 +77,12 @@ def home():
     elif 'admin' in session:
         return redirect(url_for('admin'))
     username = ""
+    #TODO get course of user to gen navbar
     content = my_sudo.find_user(session['university'], session['username'])
+    # if user is an admin, render_template should have username='Admin'
     return render_template("home.html", content=content, username=session['username'])
 
+#deprecated
 @app.route('/engagements/')
 def engagements():
     if 'username' in session:
@@ -162,7 +165,8 @@ def favicon():
 
 @app.route('/QRC/')
 def QRC():
-    return render_template("QRC.html")
+    target_course = request.args.get("course") # passed as URL argument
+    return render_template("QRC.html", specified_course=target_course)
 
 # Student pages
 
@@ -177,43 +181,90 @@ def announcement_student():
     user = my_sudo.find_user(session['university'], session['username'])
 
     # user object has list of engagements: user.get_engagements()
-    return render_template("announcement_student.html", content=user.get_engagements(), builder=BuilderHTML)
+    return render_template("announcement_student.html", username=user.get_name(), courses=user.get_enrollments())
 
 # Needs to be passed username (for display) and list of courses they're enrolled in and student grades/data/stats etc
 @app.route('/course_overview_student/')
 def course_overview_student():
-    return render_template("course_overview_student.html")
+    # check user logged in
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    # find user from session
+    user = my_sudo.find_user(session['university'], session['username'])
+    return render_template("course_overview_student.html", username=user.get_name(), courses=user.get_enrollments())
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
 @app.route('/courses_student/')
 def courses_student():
-    return render_template("course_student.html")
+    # check user logged in
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    # find user from session
+    user = my_sudo.find_user(session['university'], session['username'])
+    return render_template("course_student.html", username=user.get_name(), courses=user.get_enrollments())
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
 @app.route('/help_student/')
 def help_student():
-    return render_template("help_student.html")
+    # check user logged in
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    # find user from session
+    user = my_sudo.find_user(session['university'], session['username'])
+    return render_template("help_student.html", username=user.get_name(), courses=user.get_enrollments())
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
 @app.route('/home_student/')
 def home_student():
-    return render_template("home_student.html")
+    # check user logged in
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    # find user from session
+    user = my_sudo.find_user(session['university'], session['username'])
+    return render_template("home_student.html", username=user.get_name(), courses=user.get_enrollments())
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
 @app.route('/notification_student/')
 def notification_student():
-    return render_template("notification_student.html")
+    # check user logged in
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    # find user from session
+    user = my_sudo.find_user(session['university'], session['username'])
+    return render_template("notification_student.html", username=user.get_name(), courses=user.get_enrollments())
 
 # Needs to be passed username (for display) and list of courses they're enrolled in & Needs 
 # ALL user information we have (e.g. name, DOB, phone, whatever we have)
 @app.route('/settings_student/')
 def settings_student():
-    return render_template("settings_student.html")
+    # check user logged in
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    # find user from session
+    user = my_sudo.find_user(session['university'], session['username'])
+    return render_template("settings_student.html", username=user.get_name(), courses=user.get_enrollments())
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
-@app.route('/specific_course_student/')
+@app.route('/specific_course_student')
 def specific_course_student():
-    return render_template("specific_course_student.html")
+    # check user logged in
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    # find user from session
+    user = my_sudo.find_user(session['university'], session['username'])
+
+    target_course = request.args.get('course')
+    if target_course == None:
+        return redirect(url_for('index'))
+
+    return render_template("specific_course_student.html", specified_course=target_course, username=user.get_name(), courses=user.get_enrollments())
 
 ###### Staff pages ----- FOR ALL OF THE FOLLOWING, MAKE ONLY ACCESSIBLE IF USER IS ADMIN
 
@@ -221,45 +272,75 @@ def specific_course_student():
 # Needs to be passed username (for display) and staff announcements(?)
 @app.route('/announcement_staff/')
 def announcement_staff():
-    return render_template("announcement_staff.html")
+    if 'admin' not in session:
+        return redirect(url_for('login'))
+
+    return render_template("announcement_staff.html", username='Admin')
 
 # Needs to be passed username (for display) and courses which the staff member manages
 @app.route('/course_overview_staff/')
 def course_overview_staff():
-    return render_template("course_overview_staff.html")
+    if 'admin' not in session:
+        return redirect(url_for('login'))
+
+    return render_template("course_overview_staff.html", username='Admin')
 
 # Needs to be passed username (for display) and info for the specified course (or all courses they teach and filtering can be done in the html page)
 @app.route('/course_page_staff/')
 def course_page_staff():
-    return render_template("course_page_staff.html")
+    if 'admin' not in session:
+        return redirect(url_for('login'))
+
+    return render_template("course_page_staff.html", username='Admin')
 
 # Needs to be passed username (for display) and courses which the staff member manages
 @app.route('/help_staff/')
 def help_staff():
-    return render_template("help_staff.html")
+    if 'admin' not in session:
+        return redirect(url_for('login'))
+
+    return render_template("help_staff.html", username='Admin')
 
 # Needs to be passed username (for display) and courses which the staff member manages
 @app.route('/home_staff/')
 def home_staff():
-    return render_template("home_staff.html")
+    if 'admin' not in session:
+        return redirect(url_for('login'))
+
+    return render_template("home_staff.html", username='Admin')
 
 # Needs to be passed username (for display) and courses which the staff member manages AND staff announcements/etc
 @app.route('/notification_staff/')
 def notification_staff():
-    return render_template("notification_staff.html")
+    if 'admin' not in session:
+        return redirect(url_for('login'))
+
+    return render_template("notification_staff.html", username='Admin')
 
 # Needs to be passed username (for display) and courses which the staff member manages & their contact details (name/dob/phone, etc)
 @app.route('/settings_staff/')
 def settings_staff():
-    return render_template("settings_staff.html")
+    if 'admin' not in session:
+        return redirect(url_for('login'))
+
+    return render_template("settings_staff.html", username='Admin')
 
 
 @app.route('/specific_course_staff/')
 def specific_course_staff():
-    return render_template("specific_course_staff.html")
+    if 'admin' not in session:
+        return redirect(url_for('login'))
+
+    return render_template("specific_course_staff.html", username='Admin')
 
 
 
+@app.route('/register_attendance')
+def register_attendance():
+
+    # ensure user logged in, if not, make them login, but bring them back here.
+
+    return render_template("register_attendance.html")
 
 
 
