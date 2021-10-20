@@ -49,7 +49,7 @@ class Course(Base):
 
     def add_user(self, user: User) -> None:
         Base.ADD_THING_TO(user, self.get_users())
-        Base.ADD_THING_TO(self, user.get_engagements())
+        user.add_engagement(self)
         if user.get_type() == UserType.LECTURER:
             self.handle_lecturer(user)
 

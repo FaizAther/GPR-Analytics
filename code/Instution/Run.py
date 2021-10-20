@@ -43,6 +43,7 @@ l0 = uni0.make_user(UserType.LECTURER)
 f0 = uni0.make_faculty("COMP", description="The most fun")
 f0.make_course(3301)
 f0.add_user(u0, 3301)
+print("FUCKKK", u0.get_enrollments())
 f0.add_user(l0, 3301)
 
 f0.make_course(4403)
