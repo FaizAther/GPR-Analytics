@@ -426,6 +426,9 @@ display: block;
     margin: 10px 0px 0px 50px;
     padding:0px 150px 0px 0px;
 }
+.staff:hover {
+    background-color: rgb(223, 222, 222);
+}
 .staff p{
     margin: 0px 0px 5px 0px;
 }
@@ -442,10 +445,8 @@ display: block;
     "left right1"
     "left right2";
 }
-
 .library_left {
     height: 30rem;
-    width: 25rem;
     margin: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(196, 196, 196, 0.8);
@@ -457,7 +458,6 @@ display: block;
 }
 .library_top_right {
     height: 10rem;
-    width: 25rem;
     margin: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(196, 196, 196, 0.8);
@@ -474,7 +474,6 @@ display: block;
 }
 .library_bot_right {
     height: 15rem;
-    width: 25rem;
     margin: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(196, 196, 196, 0.8);
@@ -494,8 +493,7 @@ display: block;
     font-family: 'Roboto',sans-serif;
     position: relative;
     top: -50px;
-    left:-60px;
-    width: 25rem;
+    left: -20px;
     padding-top: 15px;
     padding-bottom: 5px;
     font-size: 20px;
@@ -504,7 +502,6 @@ display: block;
 	animation: gradient 25s ease infinite;
     color: white;
     box-shadow: 3px 0px #888888;
-    overflow-y: scroll;
 }
 .elements{
     position: relative;
@@ -700,6 +697,20 @@ display: block;
     background-color: white;
     overflow-y: scroll;
 }
+.content_entry_stats {
+    padding: 20px;
+    background-color: rgb(252, 249, 249);
+}   
+.content_entry_stats:hover {
+    background-color: #5f0a872d;
+    border: 1px solid rgba(196, 196, 196, 0.8);
+    box-shadow: 0px 1.5px #888888;
+}
+.content_entry_stats a{
+    margin:20px;
+    color: black;
+    font-size: 20px;
+}
 
 /* ACTIONABLE INSIGHTS */
 .insights {
@@ -710,6 +721,20 @@ display: block;
 	animation: gradient 25s ease infinite;
     margin:15px;
     grid-area: insights;
+}
+.report_entry {
+    padding: 20px;
+    background-color: rgb(252, 249, 249);
+}   
+.report_entry:hover {
+    background-color: #5f0a872d;
+    border: 1px solid rgba(196, 196, 196, 0.8);
+    box-shadow: 0px 1.5px #888888;
+}
+.report_entry a{
+    margin:20px;
+    color: black;
+    font-size: 20px;
 }
 .insights h4{
     font-family: 'Roboto',sans-serif;
