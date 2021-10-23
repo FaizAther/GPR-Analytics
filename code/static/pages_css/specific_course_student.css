@@ -544,7 +544,7 @@ display: block;
 
 
 .stats{
-    margin: 5px;
+    margin: 10px 10px 10px 40px;
     height: 750px;
     grid-area: content2;
     display: grid;
