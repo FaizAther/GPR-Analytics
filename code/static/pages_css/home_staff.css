@@ -271,14 +271,16 @@ display: block;
 .content4 {
     left:50px;
     right: 50px;
-    height: 50rem;
-    margin: 20px;
+    height: 30rem;
+    margin: 20px 20px 50px 20px;
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(196, 196, 196, 0.8);
     font-size: 30px;
     text-align: center;
     box-shadow: 3px 2px #888888;
     grid-area: content4;
+    overflow-y: scroll;
+    overflow-x: scroll;
 }
 .news-heading{
     margin: 20px;
@@ -289,7 +291,7 @@ display: block;
     font-weight: bold;
 }
 .news-text{
-    margin: -10px 10px 10px 10px;
+    margin: -10px 10px 100px 10px;
     display: inline-block;
     font-size: 15px;
     line-height: 23px;
