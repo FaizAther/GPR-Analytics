@@ -35,7 +35,7 @@ _name_of_sid = {} # stores display name of users
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if 'username' in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
     elif 'admin' in session:
         return redirect(url_for('admin'))
 
@@ -70,20 +70,8 @@ def logout():
     session.pop('university', None)
     return redirect(url_for('login'))
 
-@app.route('/home/')
-def home():
-    if 'username' not in session and 'admin' not in session:
-        return redirect(url_for("login"))
-    elif 'admin' in session:
-        return redirect(url_for('admin'))
-    username = ""
-    #TODO get course of user to gen navbar
-    content = my_sudo.find_user(session['university'], session['username'])
-    # if user is an admin, render_template should have username='Admin'
-    return render_template("home.html", content=content, username=session['username'])
-
 #deprecated
-@app.route('/engagements/')
+"""@app.route('/engagements/')
 def engagements():
     if 'username' in session:
         user = my_sudo.find_user(session['university'], session['username'])
@@ -94,7 +82,9 @@ def engagements():
         return redirect(url_for("login"))
     username = ""
     return render_template("home.html", content=content, username=session['username'])
+"""
 
+"""
 @app.route('/university/', methods=['GET', 'POST'])
 def university():
     uname = ""
@@ -117,18 +107,24 @@ def university():
         #content = uni0.find_faculty(int(path.split("=")[1])).__str__()
 
     return render_template("university.html", content=content, form=uni_form, username=uname)
+"""
+
+def is_logged_in():
+    return 'username' in session or 'admin' in session
+
+def is_admin():
+    return 'admin' in session
 
 
+
+
+
+# deprecated
 @app.route('/')
 def index():
-    uname = ""
-    if 'username' in session:
-        uname = session['username']
-    elif 'admin' in session:
-        uname = "Admin"
-    else:
-        uname = None
-    return render_template("index.html", username=uname)
+    if not is_logged_in:
+        return redirect(url_for("login"))
+    return redirect(url_for("home"))
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
@@ -146,11 +142,8 @@ def admin():
         print(form.name.data)
     elif request.method == "POST" and form_1 != None:
         admin.commit(int(form.selection.data), form.name.data, type_select=form_1.type_selection.data)
-    return render_template("admin.html", content=admin, form=form, username="Admin")
+    return render_template("admin.html", content=admin, form=form, user=admin)
 
-
-def hello(name):
-    return render_template("hello.html", content=f"Hello {name}")
 
 @app.route('/public/<file>')
 def public(file):
@@ -162,7 +155,6 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-
 @app.route('/QRC/')
 def QRC():
     target_course = request.args.get("course") # passed as URL argument
@@ -170,178 +162,103 @@ def QRC():
 
 # Student pages
 
-# Needs to be passed username (for display) and list of courses they're enrolled in (to fetch announcements for)
-@app.route('/announcement_student/')
-def announcement_student():
-    # check user logged in
-    if 'username' not in session:
-        return redirect(url_for('index'))
-
-    # find user from session
-    user = my_sudo.find_user(session['university'], session['username'])
-
-    # user object has list of engagements: user.get_engagements()
-    return render_template("announcement_student.html", username=user.get_name(), courses=user.get_enrollments())
-
-# Needs to be passed username (for display) and list of courses they're enrolled in and student grades/data/stats etc
-@app.route('/course_overview_student/')
-def course_overview_student():
-    # check user logged in
-    if 'username' not in session:
-        return redirect(url_for('index'))
-
-    # find user from session
-    user = my_sudo.find_user(session['university'], session['username'])
-    return render_template("course_overview_student.html", username=user.get_name(), courses=user.get_enrollments())
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
-@app.route('/courses_student/')
-def courses_student():
+@app.route('/home/')
+def home():
     # check user logged in
     if 'username' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
 
     # find user from session
-    user = my_sudo.find_user(session['university'], session['username'])
-    return render_template("course_student.html", username=user.get_name(), courses=user.get_enrollments())
+    _user = my_sudo.find_user(session['university'], session['username'])
+    return render_template("home.html", user=_user)
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
-@app.route('/help_student/')
-def help_student():
+@app.route('/course')
+def course():
     # check user logged in
     if 'username' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
 
     # find user from session
-    user = my_sudo.find_user(session['university'], session['username'])
-    return render_template("help_student.html", username=user.get_name(), courses=user.get_enrollments())
-
-# Needs to be passed username (for display) and list of courses they're enrolled in
-@app.route('/home_student/')
-def home_student():
-    # check user logged in
-    if 'username' not in session:
-        return redirect(url_for('index'))
-
-    # find user from session
-    user = my_sudo.find_user(session['university'], session['username'])
-    return render_template("home_student.html", username=user.get_name(), courses=user.get_enrollments())
-
-# Needs to be passed username (for display) and list of courses they're enrolled in
-@app.route('/notification_student/')
-def notification_student():
-    # check user logged in
-    if 'username' not in session:
-        return redirect(url_for('index'))
-
-    # find user from session
-    user = my_sudo.find_user(session['university'], session['username'])
-    return render_template("notification_student.html", username=user.get_name(), courses=user.get_enrollments())
-
-# Needs to be passed username (for display) and list of courses they're enrolled in & Needs 
-# ALL user information we have (e.g. name, DOB, phone, whatever we have)
-@app.route('/settings_student/')
-def settings_student():
-    # check user logged in
-    if 'username' not in session:
-        return redirect(url_for('index'))
-
-    # find user from session
-    user = my_sudo.find_user(session['university'], session['username'])
-    return render_template("settings_student.html", username=user.get_name(), courses=user.get_enrollments())
-
-# Needs to be passed username (for display) and list of courses they're enrolled in
-@app.route('/specific_course_student')
-def specific_course_student():
-    # check user logged in
-    if 'username' not in session:
-        return redirect(url_for('index'))
-
-    # find user from session
-    user = my_sudo.find_user(session['university'], session['username'])
+    _user = my_sudo.find_user(session['university'], session['username'])
 
     target_course = request.args.get('course')
     if target_course == None:
-        return redirect(url_for('index'))
-
-    return render_template("specific_course_student.html", specified_course=target_course, username=user.get_name(), courses=user.get_enrollments())
-
-###### Staff pages ----- FOR ALL OF THE FOLLOWING, MAKE ONLY ACCESSIBLE IF USER IS ADMIN
-
-
-# Needs to be passed username (for display) and staff announcements(?)
-@app.route('/announcement_staff/')
-def announcement_staff():
-    if 'admin' not in session:
         return redirect(url_for('login'))
 
-    return render_template("announcement_staff.html", username='Admin')
-
-# Needs to be passed username (for display) and courses which the staff member manages
-@app.route('/course_overview_staff/')
-def course_overview_staff():
-    if 'admin' not in session:
-        return redirect(url_for('login'))
-
-    return render_template("course_overview_staff.html", username='Admin')
-
-# Needs to be passed username (for display) and info for the specified course (or all courses they teach and filtering can be done in the html page)
-@app.route('/course_page_staff/')
-def course_page_staff():
-    if 'admin' not in session:
-        return redirect(url_for('login'))
-
-    return render_template("course_page_staff.html", username='Admin')
-
-# Needs to be passed username (for display) and courses which the staff member manages
-@app.route('/help_staff/')
-def help_staff():
-    if 'admin' not in session:
-        return redirect(url_for('login'))
-
-    return render_template("help_staff.html", username='Admin')
-
-# Needs to be passed username (for display) and courses which the staff member manages
-@app.route('/home_staff/')
-def home_staff():
-    if 'admin' not in session:
-        return redirect(url_for('login'))
-
-    return render_template("home_staff.html", username='Admin')
-
-# Needs to be passed username (for display) and courses which the staff member manages AND staff announcements/etc
-@app.route('/notification_staff/')
-def notification_staff():
-    if 'admin' not in session:
-        return redirect(url_for('login'))
-
-    return render_template("notification_staff.html", username='Admin')
-
-# Needs to be passed username (for display) and courses which the staff member manages & their contact details (name/dob/phone, etc)
-@app.route('/settings_staff/')
-def settings_staff():
-    if 'admin' not in session:
-        return redirect(url_for('login'))
-
-    return render_template("settings_staff.html", username='Admin')
-
-
-@app.route('/specific_course_staff/')
-def specific_course_staff():
-    if 'admin' not in session:
-        return redirect(url_for('login'))
-
-    return render_template("specific_course_staff.html", username='Admin')
-
-
+    return render_template("course.html", specified_course=target_course, user=_user)
 
 @app.route('/register_attendance')
 def register_attendance():
 
     # ensure user logged in, if not, make them login, but bring them back here.
 
+    # find user from session
+    _user = my_sudo.find_user(session['university'], session['username'])
     return render_template("register_attendance.html")
 
+
+@app.route('/university')
+def university():
+    if not is_admin():
+        return redirect(url_for('forbidden'))
+    _user = my_sudo.find_user(session['university'], session['username'])
+    return render_template("university.html", user=_user)
+
+
+
+
+# assign students to courses, assign staff to course, create courses, del courses
+@app.route('/course_mgmt')
+def course_mgmt():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('forbidden'))
+
+    _user = my_sudo.find_admin(session['university'])
+    print("///////////////////////////")
+    u = _user.get_university()
+
+    print("///////////////////////////")
+    return render_template("course_mgmt.html", user=_user)
+
+# Create staff, remove staff, list staff
+@app.route('/staff_mgmt')
+def staff_mgmt():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('forbidden'))
+
+    _user = my_sudo.find_admin(session['university'])
+    
+    return render_template("staff_mgmt.html", user=_user)
+
+# user management, drop students, add students, promote students, demote students
+@app.route('/user_mgmt')
+def user_mgmt():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('forbidden'))
+    _user = my_sudo.find_admin(session['university'])
+
+    return render_template("user_mgmt.html", user=_user)
+
+
+
+
+
+
+
+
+
+@app.route('/forbidden')
+def forbidden():
+    return render_template("403.html")
 
 
 # Video chat

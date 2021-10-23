@@ -1,0 +1,89 @@
+{% extends "basic.html" %}
+{% block my_title %}Logged in{% endblock %}
+{% block my_h1 %}
+
+{% endblock %}
+{% block my_body %}
+<script>
+    function showControls(show) {
+        if (show) {
+            document.getElementById("fromControls").style.visibility = "visible";
+        } else {
+            document.getElementById("fromControls").style.visibility = "hidden";
+        }
+    }
+    function areYouSure() {
+        if (confirm("You're about to delete this staff member")) {
+            // yes, delete
+        } else {
+            // actually, nvm
+        }
+    }
+</script>
+<div class="row justify-content-center l-form">
+    <div class="col-md-7 col-lg-5">
+    <div class="login-wrap p-4 p-md-5">
+
+    <form method="POST">
+        <div class="input-group">
+            <button type="button" class="btn btn-outline-primary">Create new User</button>
+            <label style="margin-left: 20px; margin-top:8px;">Or</label>
+          </div>
+        <div class="input-group" style="padding-top:10px">
+            <input type="search" class="form-control rounded" placeholder="Search Existing Users" aria-label="Search Existing Users"
+            aria-describedby="search-addon" />
+            <button type="button" class="btn btn-outline-primary">search</button>
+          </div>
+    </form>
+</div>
+
+<div id="fromControls" style="visibility: visible;border-radius: 5px; background-color:#efefef" class="row justify-content-left l-form">
+    <div style="padding:20px">
+
+    <form method="POST">
+        <label for="exampleInputEmail1">Username</label>
+        <div class="form-group" style="margin-bottom: 10px">
+            <input type="email" class="form-control" id="courseName" aria-describedby="courseName" placeholder="Course Name">
+        </div>
+            
+        <label for="exampleInputEmail1">Lecturer</label>
+        <div class="input-group" style="margin-bottom: 10px">
+            <input type="search" class="form-control rounded" placeholder="Search Staff" aria-label="Search Staff"
+            aria-describedby="search-addon" />
+            <button type="button" class="btn btn-outline-primary">search</button>
+        </div>
+        
+        <label for="exampleInputEmail1">Engagements</label>
+        <div class="input-group">
+        <div class="border border-secondary overflow-auto" style="margin-bottom: 10px;height:200px; width:100%">
+            <ul class="list-group">
+                {% for i in range(0,4) %}
+                    <li style="font-size: 13px;" class="list-group-item">course {{i}}<button style="font-size: 13px; float: right" type="button" class="btn">Remove</button> </li>
+                {% endfor %}
+                <!-- Add Student to course -->
+                <li class="list-group-item">
+                    <input type="search" class="rounded" placeholder="Search Students" aria-label="Search Students"
+                    aria-describedby="search-addon" />
+                    <button style="font-size: 13px;float: right" type="button" class="btn">Add</button>
+                </li>
+            </ul>
+        </div>
+
+        <label for="exampleInputEmail1">User Enabled <input class="form-check-input" type="checkbox" checked="true" id="flexCheckDefault"></label>
+        <label style="padding-left: 10px;" for="exampleInputEmail1">Is Staff <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></label>
+
+        <div class="input-group" style="margin-top: 10px">
+            <button style="float:right" onclick="areYouSure()" type="button" class="float-right btn btn-outline-primary">Delete User</button>
+        </div>
+
+        <div class="input-group" style="margin-top: 10px">
+            <button style="float:right" type="button" class="float-right btn btn-outline-primary">Save</button>
+        </div>
+
+    </div>
+
+
+    </form>
+</div>
+
+{% endblock %}

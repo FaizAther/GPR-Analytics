@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,77 +21,100 @@
   <header class="header easing_gradient">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+    {% set types = user.get_user_types() %}
+    <script>console.log("{{user.get_type()}}")</script>
+
+    {% if user.get_type() in [types.STUDENT, types.TUTOR, types.UNDERGRAD, types.POSTGRAD] %} 
+      {% set courses = user.get_enrollments() %}
+    {% endif %}
+
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
-          
               <img width="14%" height="14%" class="img-fluid" src="../static/smarted_w_text_fullsize.png" />
           
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
+
+
           <div class="collapse navbar-collapse" style="margin-left: 10px;" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <!-- Home Item -->
-                  <li class="nav-item">
-                    {% if username == "Admin" %}
-                      <a class="nav-link" aria-current="page" href="{{ url_for('home_staff') }}"><font color="white">Home</font></a>
-                    {% else %}
-                      <a class="nav-link" aria-current="page" href="{{ url_for('home_student') }}"><font color="white">Home</font></a>
-                    {% endif %}
-                  </li>
 
-                  <!-- Engagements Item - non-admin only -->
-                  {% if username != "Admin" %} 
+                <!-- COMMON nav bar items-->
+                <!-- Home Item -->
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="{{ url_for('home') }}"><font color="white">Home</font></a>
+                </li>
+
+                <!-- ADMIN nav bar items -->
+
+
+                <!-- LECTURER/STAFF nav bar items -->
+
+
+                <!-- STUDENT nav bar items -->
+
+
+
+
+
+
+                  <!-- Engagements Item -->
+                  {% if user.get_type() in [types.STUDENT, types.TUTOR, types.UNDEGRAD, types.POSTGRAD] %} 
                   <!--<li class="nav-item">
-                      <a class="nav-link" href="{{ url_for('engagements') }}"><font color="white">Engagements</font></a>
                   </li>-->
                   <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <font color="white" face="Raleway:wght@300">
-                        Engagements
-                      </font>
-                    </a>
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font color="white" face="Raleway:wght@300">Courses</font></a>
+
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                       {% for course in courses %}
                       {% set c = course.get_name() %}
-                      <li><a class="dropdown-item" href="{{ url_for('specific_course_student') }}?course={{c}}">{{ c.replace("-", "") }}</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('course') }}?course={{c}}">{{ c.replace("-", "") }}</a></li>
 
-                      <!--<li><a class="dropdown-item" href="{{ url_for('university') }}">another here</a></li>-->
+
                        <!-- <li><a class="dropdown-item" href="/register">Register</a></li> -->
                        {% endfor %}
                     </ul>
                 </li>
                   {% endif %}
+
+
+
+
+
+
                   <!-- Admin Item admin-only -->
-                  {% if username == "Admin" %} 
+                  {% if user.get_type() == types.ADMIN %}
                     <li class="nav-item">
                       <a class="nav-link" href="{{ url_for('admin') }}"><font color="white">Admin</font></a>
                     </li>
-                  {% endif %}
-                  <!-- Courses which the admin manages -->
-                  {% if username == "Admin" %} 
-                  <!--<li class="nav-item">
-                      <a class="nav-link" href="{{ url_for('engagements') }}"><font color="white">Engagements</font></a>
-                  </li>-->
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <font color="white" face="Raleway:wght@300">
-                        My Courses
-                      </font>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                      {% for i in range(0, courses|length, 2) %}
-                      {% set c = courses[i].get_name() %}
-                      <li><a class="dropdown-item" href="{{ url_for('specific_course_student') }}?course={{c}}">{{ c.replace("-", "") }}</a></li>
 
-                      <!--<li><a class="dropdown-item" href="{{ url_for('university') }}">another here</a></li>-->
-                       <!-- <li><a class="dropdown-item" href="/register">Register</a></li> -->
-                       {% endfor %}
-                    </ul>
-                </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <font color="white" face="Raleway:wght@300">
+                          Management
+                        </font>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ url_for('course_mgmt') }}">Courses</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('staff_mgmt') }}">Staff</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('user_mgmt') }}">Users</a></li>
+                         <!-- <li><a class="dropdown-item" href="/register">Register</a></li> -->
+                      </ul>
+                  </li>
                   {% endif %}
-                  <!-- Universities dropdown Item admin-only -->
-                  {% if username == "Admin" %} 
+
+
+
+
+
+
+
+
+
+                  
+                  <!-- Universities dropdown Item sudo-only -->
+                  {% if user.get_type() == types.SUDO %} 
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <font color="white" face="Raleway:wght@300">
@@ -110,37 +132,27 @@
 
 
 
+
+
+              <!-- Far left user drop down. Available for all, logout option if logged in, login otherwise -->
               <ul class="navbar-nav ms-auto">
                   <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <font color="white" face="Raleway:wght@300">
-                          {% if username == "Admin" %}
-                            Admin
-                          {% elif username == None %}
-                            Not Logged In
+                          {% if user == None %}
+
                           {% else %}
-                            {{ username }} 
+                            {{ user.get_name() }}
                           {% endif %}
+                          
                         </font>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        {% if username != None %}
-                          {% if username == "Admin" %}
-                          <!-- ADMIN OPTIONS -->
-                            <li><a class="dropdown-item" href="{{ url_for('notification_staff') }}">Notifications</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('settings_staff') }}">Settings</a></li>
-                          {% else %}
-                          <!-- STUDENT OPTIONS -->
-                            <li><a class="dropdown-item" href="{{ url_for('notification_student') }}">Notifications</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('settings_student') }}">Settings</a></li>
-                          {% endif %}                          
-                          <!-- COMMON OPTIONS-->
+                        {% if user != None %}
                           <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
                         {% else %}
-                            <li><a class="dropdown-item" href="{{ url_for('login') }}">Login</a></li>
-                        
-                            {% endif %}
-                        
+                          <li><a class="dropdown-item" href="{{ url_for('login') }}">Login</a></li>
+                        {% endif %}
                       </ul>
                   </li>
               </ul>
