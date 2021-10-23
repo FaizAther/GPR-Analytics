@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from Instution.Base import Base
+
 from Instution.Users.UserType import UserType
 from Instution.Events.EventType import EventType
 from Instution.Events.Event import Event
@@ -14,6 +15,7 @@ if TYPE_CHECKING:
     from Instution.Users.Student import Student
     from Instution.Users.Tutor import Tutor
     from Instution.Users.Lecturer import Lecturer
+    from Instution.Items.Announcement import Announcement
 
 '''
     Course class
@@ -25,6 +27,17 @@ class Course(Base):
         self._admin     :User        = admin
         self._users     :List[User]  = []
         self._events    :List[Event] = []
+        self._announcements: List[Announcement] = []
+
+    def get_announcements(self):
+        return self._announcements
+
+    def add_announcements(self, announcements: List[Announcement]) -> None:
+        for a in announcements:
+            self.add_announcement(a)
+
+    def add_announcement(self, announcement: Announcement) -> None:
+        self._announcements.append(announcement)
 
     def update(self, user):
         if user != self.get_admin():
