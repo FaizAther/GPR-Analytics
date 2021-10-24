@@ -11,8 +11,12 @@ body {
     margin: 3rem 0 0 0;
     font-family: "Poppins", sans-serif;
     font-size: 0.938rem;
-    color: #412d4d;
-    
+    color: black;
+    background-color: white;
+}
+.dark-mode {
+    background-color: black;
+    color: white;
 }
 
 h1, h2, p {
@@ -186,11 +190,19 @@ display: block;
     
 }
 .settings-btn{
-    color: white;
     font-size: 15px;
     margin: 20px;
+    color: white;
+}
+.settings-btn2{
+    font-size: 15px;
+    margin: 20px;
+    color: white;
 }
 .settings-btn:hover{
+    color: #60a860;
+}
+.settings-btn2:hover{
     color: #60a860;
 }
 .line {
@@ -221,12 +233,15 @@ display: block;
     font-size: small;
 }
 .content_container {
+    background: linear-gradient(-45deg, #861657, #5f0a87, #a4508b);
+	background-size: 400% 400%;
+	animation: gradient 25s ease infinite;
     height: 520px;
     margin: 20px 50px 20px 50px;
     overflow-y: scroll;
-    background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(196, 196, 196, 0.8);
     box-shadow: 3px 2px #888888;
+    color: white;
 }
 .content_container #ecp_container{
     margin: 20px 50px 20px 50px;
@@ -243,37 +258,30 @@ display: block;
 }
 .col1{
     padding:10px;
-    background-color: rgb(235, 230, 230);
     grid-area: col1;
 }
 .col2{
     padding:10px;
-    background-color: rgb(235, 230, 230);
     grid-area: col2;
 }
 .col3{
     padding:10px;
-    background-color: rgb(235, 230, 230);
     grid-area: col3;
 }
 .col4{
     padding:10px;
-    background-color: rgb(235, 230, 230);
     grid-area: col4;
 }
 .col5{
     padding:10px;
-    background-color: rgb(235, 230, 230);
     grid-area: col5;
 }
 .col6{
     padding:10px;
-    background-color: rgb(235, 230, 230);
     grid-area: col6;
 }
 .col7{
     padding:10px;
-    background-color: rgb(235, 230, 230);
     grid-area: col7;
 }
 .a1{
@@ -363,16 +371,15 @@ display: block;
 }
 .content_entry {
     padding:10px;
-    background-color: rgb(252, 249, 249);
+    color: white;
 }   
 .content_entry:hover {
-    background-color: rgb(190, 190, 190);
     border: 1px solid rgba(196, 196, 196, 0.8);
     box-shadow: 0px 1.5px #888888;
+    background-color: #a4508b ;
 }
 .content_entry a{
     margin:20px;
-    color: black;
     font-size: 20px;
 }
 .resources_line {
@@ -405,7 +412,11 @@ display: block;
     justify-content: space-between;
 }
 .tabs{
-    margin: 10px 20px 10px 20px;
+    padding: 20px;
+    background: linear-gradient(-45deg, #861657, #5f0a87, #a4508b);
+	background-size: 400% 400%;
+	animation: gradient 25s ease infinite;
+    color: white;
 }
 .tab_last_activity {
     position: relative;
@@ -427,7 +438,7 @@ display: block;
     padding:0px 150px 0px 0px;
 }
 .staff:hover {
-    background-color: rgb(223, 222, 222);
+    background-color: #a4508b ;
 }
 .staff p{
     margin: 0px 0px 5px 0px;
@@ -437,71 +448,13 @@ display: block;
 }
 
 /* LIBRARY */
-.library .content_container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: 
-    "left right1"
-    "left right2";
-}
 .library_left {
-    height: 30rem;
-    margin: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(196, 196, 196, 0.8);
-    font-size: 30px;
-    text-align: center;
-    box-shadow: 3px 2px #888888;
-    overflow-y: scroll;
-    grid-area: left;
-}
-.library_top_right {
-    height: 10rem;
-    margin: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(196, 196, 196, 0.8);
-    font-size: 30px;
-    text-align: center;
-    box-shadow: 3px 2px #888888;
-    overflow-y: scroll;
-    grid-area: right1;
-}
-.library_top_right p{
-    position: relative;
-    top: -50px;
-    left: 20px;
-}
-.library_bot_right {
-    height: 15rem;
-    margin: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(196, 196, 196, 0.8);
-    font-size: 30px;
-    text-align: center;
-    box-shadow: 3px 2px #888888;
-    overflow-y: scroll;
-    grid-area: right2;
-}
-.library_bot_right p{
-    position: relative;
-    top: -40px;
-    left: 20px;
-}
-.library_column1{
-    text-decoration: none;
-    font-family: 'Roboto',sans-serif;
-    position: relative;
-    top: -50px;
-    left: -20px;
-    padding-top: 15px;
-    padding-bottom: 5px;
-    font-size: 20px;
+    padding-top: 20px;
     background: linear-gradient(-45deg, #861657, #5f0a87, #a4508b);
 	background-size: 400% 400%;
 	animation: gradient 25s ease infinite;
-    color: white;
-    box-shadow: 3px 0px #888888;
+    overflow-y: scroll;
+    grid-area: left;
 }
 .elements{
     position: relative;
@@ -514,6 +467,7 @@ display: block;
     font-size: 20px;
     font-weight: bold;
     text-align: left;
+    color: white;
 }
 .library_links_title:hover{
     color: rgb(13, 172, 13);   
@@ -521,6 +475,7 @@ display: block;
 .library_links_content{
     font-size: 15px;
     text-align: left;
+    color: white;
 }
 .line {
     margin:10px 30px 30px 30px;
@@ -529,7 +484,6 @@ display: block;
 .library_button {
     background-color: #5f0a87;
     border: none;
-    color: white;
     padding: 5px 32px;
     text-align: center;
     text-decoration: none;
@@ -673,7 +627,6 @@ display: block;
 .key_report {
     margin: 10px;
     height: 220px;
-    background-color: white;
     overflow-y: scroll;
 }
 
@@ -688,28 +641,27 @@ display: block;
 .you h4{
     font-family: 'Roboto',sans-serif;
     font-size: 40px;
-    color: white;
     margin:10px;
+    color: white;
 }
 .for_you {
     margin: 10px;
     height: 330px;
-    background-color: white;
     overflow-y: scroll;
 }
 .content_entry_stats {
     padding: 20px;
-    background-color: rgb(252, 249, 249);
+    color: white;
 }   
 .content_entry_stats:hover {
-    background-color: #5f0a872d;
     border: 1px solid rgba(196, 196, 196, 0.8);
     box-shadow: 0px 1.5px #888888;
+    background-color: #a4508b ;
 }
 .content_entry_stats a{
     margin:20px;
-    color: black;
     font-size: 20px;
+    color: white;
 }
 
 /* ACTIONABLE INSIGHTS */
@@ -724,27 +676,128 @@ display: block;
 }
 .report_entry {
     padding: 20px;
-    background-color: rgb(252, 249, 249);
 }   
 .report_entry:hover {
-    background-color: #5f0a872d;
     border: 1px solid rgba(196, 196, 196, 0.8);
     box-shadow: 0px 1.5px #888888;
+    background-color: #a4508b ;
 }
 .report_entry a{
     margin:20px;
-    color: black;
     font-size: 20px;
 }
 .insights h4{
     font-family: 'Roboto',sans-serif;
     font-size: 20px;
-    color: white;
     margin:10px;
+    color: white;
 }
 .actionable_insights {
     margin: 10px;
     height: 350px;
-    background-color: white;
     overflow-y: scroll;
+}
+
+/* SETTINGS */
+.change-text h5 {
+    margin: 10px 0px 0px 50px;
+}
+
+/* The container */
+.container {
+    margin-top: 10px;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+  /* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+.checkboxes {
+    margin: 20px 0px 0px 50px;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #a4508b ;
+}
+  
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+background-color: #2196F3;
+}
+  
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+content: "";
+position: absolute;
+display: none;
+}
+  
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+left: 9px;
+top: 5px;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 3px 3px 0;
+-webkit-transform: rotate(45deg);
+-ms-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+#dark-mode-button {
+    margin: 0px 0px 0px 50px;
+}
+
+.button {
+    background-color: #913089; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+.button:hover {
+    background-color: rgb(168, 109, 173);
+}
+.save_btn_text {
+    color: green;
+}
+.privacy {
+    padding-bottom: 50px;
 }

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <link rel="icon" href="../static/pages_img/logo.png">
+    <script src="../static/course.js"></script>
 </head>
 {% endblock %}
 {% block my_body %}
@@ -28,6 +29,7 @@
                     <li><a href="#overview_anchor" class="settings-btn">Course Overview</a></li>
                     <li><a href="{{ url_for('QRC')}}?course={{specified_course}}" class="settings-btn">QR Code Sign on</a></li>
                     <li><a href="{{ url_for('video_index')}}" class="settings-btn">Video Room</a></li>
+                    <li><a href="#settings_anchor" class="settings-btn">Settings</a></li>
                 </ul>
             </div>
             <div class="content2">
@@ -354,10 +356,9 @@
                 </div>
                 <a id="anchorpoint_library" class="anchor"></a>
                 <div class="library">
-                    <h5>Library Links</h5>
                     <div class=content_container id="course-id">
                         <div class="library_left">
-                            <h5 class="library_column1">Library Links</h5>
+                            <h5 class="library_column1"></h5>
                             <div class="elements">
                                 <p><a href="https://www.library.uq.edu.au" class="library_links_title">Library website</a></p>
                                 <p class="library_links_content">Search for information for assignments, past exam papers, referencing and more.</p>
@@ -373,32 +374,23 @@
                                 <p class="library_links_content">
                                     Quickly build your digital and assignment skills with our online modules. The modules are designed to help you complete your courses and enhance your employability. Modules include:
                                 </p>
-                                <p>
+                                <p class="library_links_content">
                                     Information essentials - Learn search strategies and techniques for evaluating information
                                 <p>
-                                <p>
+                                <p class="library_links_content">
                                     Types of assignment - Tips for creating videos and audio, presentations and posters
                                 </p>
-                                <p>
+                                <p class="library_links_content">
                                     Write, cite and submit - Covers planning assignments, plagiarism, referencing and referencing styles
                                 </p>
-                                <p> 
+                                <p class="library_links_content"> 
                                     UQ systems - Learn about the online systems you need to use at UQ
                                 </p>
-                                <p>
+                                <p class="library_links_content">
                                     Communicate and collaborate online – Strategies and tools for effective communication and group assignments
                                 </p>
                                 <hr class="line">
                             </div>
-                        </div>
-                        <div class="library_top_right">
-                            <h5 class="library_column1">Course Resource Lists</h5>
-                            <p>There is no content to display.</p>
-                        </div>
-                        <div class="library_bot_right">
-                            <h5 class="library_column1">Subject Guides</h5>
-                            <p>Subject specific research assistance for this course.</p>
-                            <div><a href="https://lgapi-au.libapps.com/widget_c.php?site_id=731&widget_type=9&output_format=3&widget_title=&widget_height=&widget_width=&widget_embed_type=1&guide_id=210320&page_id=0&enable_navigation=1&config_id=1633599258144&lti_id=10998" class="library_button">Launch Subject Guides</a></div>
                         </div>
                     </div>
                 </div>
@@ -430,7 +422,7 @@
                     </div>
                     
                     <div class="you">
-                        <h4 class="overview_title_others">For You</h4>
+                        <h4>For You</h4>
                         <div class="for_you">
                             <div class=content_container_statistics id="course-id">
                                 <div class="content_entry_stats">
@@ -476,23 +468,23 @@
                         <h4 class="overview_title_others">Key Insight Report</h4>
                         <div class="key_report">
                             <div class="report_entry">
-                                <a href="#" class="settings-btn"> Quiz 3 Result improved!</a>
+                                <a href="#" class="settings-btn2"> Quiz 3 Result improved!</a>
                             </div>
                             <hr class="resources_line">
                             <div class="report_entry">
-                                <a href="#" class="settings-btn"> Lecture attendance is consistent!</a>
+                                <a href="#" class="settings-btn2"> Lecture attendance is consistent!</a>
                             </div>
                             <hr class="resources_line">
                             <div class="report_entry">
-                                <a href="#" class="settings-btn"> Tutorial attendance needs improvement.</a>
+                                <a href="#" class="settings-btn2"> Tutorial attendance needs improvement.</a>
                             </div>
                             <hr class="resources_line">
                             <div class="report_entry">
-                                <a href="#" class="settings-btn"> Assignement 1 result is above average!</a>
+                                <a href="#" class="settings-btn2"> Assignement 1 result is above average!</a>
                             </div>
                             <hr class="resources_line">
                             <div class="report_entry">
-                                <a href="#" class="settings-btn"> </a>
+                                <a href="#" class="settings-btn2"> </a>
                             </div>
                             <hr class="resources_line">
 
@@ -502,27 +494,100 @@
                         <h4 class="overview_title_others">Actionable Insights</h4>
                         <div class="actionable_insights">
                             <div class="report_entry">
-                                <a href="#" class="settings-btn"> Go through Week 6 content for Quiz 4!</a>
+                                <a href="#" class="settings-btn2"> Go through Week 6 content for Quiz 4!</a>
                             </div>
                             <hr class="resources_line">
                             <div class="report_entry">
-                                <a href="#" class="settings-btn"> Make sure to attend tutorials to not fall behind.</a>
+                                <a href="#" class="settings-btn2"> Make sure to attend tutorials to not fall behind.</a>
                             </div>
                             <hr class="resources_line">
                             <div class="report_entry">
-                                <a href="#" class="settings-btn"> Check out the library for extra readings on Assignment 2.</a>
+                                <a href="#" class="settings-btn2"> Check out the library for extra readings on Assignment 2.</a>
                             </div>
                             <hr class="resources_line">
                             <div class="report_entry">
-                                <a href="#" class="settings-btn"> Your understanding with Week 4 content is below average, check out the learning resources for more help.</a>
-                            </div>
-                            <hr class="resources_line">
-                            <div class="report_entry">
-                                <a href="#" class="settings-btn"> </a>
+                                <a href="#" class="settings-btn2"> Your understanding with Week 4 content is below average, check out the learning resources for more help.</a>
                             </div>
                             <hr class="resources_line">
                         </div>
                     </div>
+                </div>
+
+                <a id="settings_anchor" class="anchor"></a>
+                <a id="anchorpoint2" class="anchor"></a>
+                <div class="change-text" id="change-text-size">
+                    <h5>Change Text Size</h5>
+                    <p>
+                        To change text size, use the browser's controls.
+                        For all browsers, you can use the following key combinations:</p>
+                    <p>
+                        For Windows: </p>
+                        <p>
+                        Zoom In: Press CTRL "+"
+                        Zoom Out: Press CTRL "-"
+                        Reset or Original Size: Press CTRL "0" (except for Internet Explorer)</p>
+                        <p>
+                        For Macs:
+                        </p>
+                        <p>
+                        Zoom In: Press COMMAND "+"
+                        Zoom Out: Press COMMAND "-"
+                        Reset or Original Size: Press COMMAND "0"
+                    </p>
+                    <p>
+                        Internet Explorer: 
+
+                        From the menu bar, select View > Zoom > Zoom In or Zoom Out -OR- select a percentage.
+                    </p>
+                    <p>
+                        FireFox:
+
+                        From the menu bar, select View > Zoom Text Only and select Zoom In or Zoom Out from the same menu. Only the text size changes while other elements on the page remain the same. If you want to change all page elements, clear the Zoom Text Only selection and then select View > Zoom In or Zoom Out. Select Reset to return the view to the original size.
+                    </p>
+                    <p>
+                        Safari:
+
+                        From the menu bar, select View > Zoom Text Only and select Zoom In or Zoom Out from the same menu. Only the text size changes while other elements on the page remain the same. If you want to change all page elements, clear the Zoom Text Only selection and select View > Zoom In or Zoom Out. Select Actual Size to return the view to the original size.
+                    </p>
+                    <p>
+                        Google Chrome:
+                        
+                        From the menu bar, select View > Zoom In or Zoom Out. Select Actual Size to return the view to the original size.
+                    </p>
+                </div>
+                <div class="dark-mode-setting">
+                    <h5>Dark Mode Setting</h5>
+                    <button class="button" id="dark-mode-button"><a role="button" onclick="darkmode()">Toggle Me</a></button>
+                </div>
+                <div class="edit-noti" id="edit-noti">
+                    <h5>Edit Notification Setting</h5>
+                    <div class="checkboxes">
+                        <span> Enable/Disable Notifications for selected courses</span>
+                        <label class="container">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                        </label>
+                        <label class="container">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        </label>
+                        <label class="container">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        </label>
+                        <label class="container">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        </label>
+                        <button class="button" onClick='document.getElementById("text").style.display="initial";' target="_blank">Save</button>
+                        <span style="display:none;" id="text" class="save_btn_text">Your preferences have been saved.</span>
+                    </div>
+                </div>
+                <div class="privacy" >
+                    <h5 id="privacy">Privacy and Terms of Use</h5>
+                    <p>Blackboard will collect, use, and store your personal information that is necessary to use this application and the related functionalities. Blackboard handles this information on behalf of your institution.
+                        The application uses cookies that are required to provide the necessary functionalities to you. To learn more about the use of cookies and how Blackboard uses personal information on behalf of your institution, please read Blackboards Privacy Statement.
+                        When you select "Accept & Continue" you are agreeing to Blackboards Terms of Use.</p>
                 </div>
 
             </div>
