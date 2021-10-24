@@ -13,10 +13,7 @@ body {
     font-size: 0.938rem;
     color: black;
     background-color: white;
-}
-.dark-mode {
-    background-color: black;
-    color: white;
+    --link-color: white;
 }
 
 h1, h2, p {
@@ -775,7 +772,7 @@ border-width: 0 3px 3px 0;
 -ms-transform: rotate(45deg);
 transform: rotate(45deg);
 }
-#dark-mode-button {
+.theme-switch {
     margin: 0px 0px 0px 50px;
 }
 
@@ -801,3 +798,7 @@ transform: rotate(45deg);
 .privacy {
     padding-bottom: 50px;
 }
+
+
+
+/* RESPONSIVE DISPLAY */

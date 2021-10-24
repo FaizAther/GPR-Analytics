@@ -3,14 +3,17 @@
 <head>
     <title>Home - SmartEd</title>
     <link rel="stylesheet" href="../static/pages_css/home_student.css">
+    <link href="../static/default.css" rel="stylesheet" />
+    <link href="../static/dark.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <link rel="icon" href="../static/pages_img/logo.png">
+    <script src="../static/course.js"></script>
 </head>
 {% endblock %}
 {% block my_body %}
 <body>
-
+    
     <main class="main">
         <!-- HOME PAGE -->
         <section class="home" id=home>
@@ -91,14 +94,12 @@
                     <a href="" class="buttons2">
                         <p class="notice-heading">COMP4500 Quiz 3 ending soon!</p>
                         <p class="notice-content">You have not completed Quiz 3! Make sure to complete it by 27 August.</p>
-                        <img class="comp4500quiz_img" width="100%" height="100%" src="../static/pages_img/comp4500_quiz.png"/>
-                    </a>
+                     </a>
                     <hr class="line">
                     <a href="" class="buttons2">
                         <p class="notice-heading">COMP4500 Lecture catch-up!</p>
                         <p class="notice-content">You did not watch lecture 7 and lecture 8, please watch the lectures to ensure you stay up to date!</p>
-                        <img class="recording_img" width="75%" height="75%" src="../static/pages_img/lecture_recording.png"/>
-                    </a>
+                     </a>
                     <hr class="line">
                     <a href="" class="buttons2">
                         <p class="notice-heading">COMP4702 Assignment 2 Help Session.</p>
@@ -245,8 +246,11 @@
                         </a>
                     </div>
                 </div>
+                
             </div>
-            
+            <div class="theme-switch">
+                <input type="checkbox"></input>
+              </div>
             
             <!-- Add more columns here if needed -->
 

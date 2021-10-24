@@ -1,0 +1,5 @@
+[data-theme="dark"] {
+    --foreground-color: #EEE;
+    --background-color: #111;
+    --link-color: white;
+}

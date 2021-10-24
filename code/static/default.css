@@ -1,0 +1,38 @@
+:root {
+  --foreground-color: #000;
+  --background-color: #FFF;
+}
+
+body {
+  background: var(--background-color);
+  color: var(--foreground-color);
+}
+
+a, a:visited {
+  color: var(--link-color);
+}
+
+h1,
+nav {
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0.5em;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+header {
+  position: relative;
+}
+
+header input[type="checkbox"] {
+  position: absolute;
+  right: 1em;
+}
