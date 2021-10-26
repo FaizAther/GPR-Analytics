@@ -83,7 +83,7 @@ CREATE TABLE Attendance (
     name text NOT NULL,
     marker_id INTEGER NOT NULL,
     student_id INTEGER NOT NULL,
-    startdate date NOT NULL,
+    -- startdate date NOT NULL,
     description text,
     foreign key (event_id) references Event(id),
     foreign key (marker_id) references User(id),
