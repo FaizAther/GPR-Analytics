@@ -18,18 +18,13 @@
         <!-- HOME PAGE -->
         <section class="home" id=home>
             <div class="content1">
-                <h5 class="course-id">{{ specified_course.replace("-","") }}</h5>
+                <h4 class="course-id"><font style="padding-top:2px;" size="5px">{{ specified_course.replace("-","") }}</font></h4>
                 <ul class="settings-menu">
                                 <li><a href="#anchorpoint_announcement" class="settings-btn">Announcements</a></li>
-                    <li><a href="#anchorpoint_ecp" class="settings-btn">Course Profile (ECP)</a></li>
                     <li><a href="#anchorpoint_course_staff" class="settings-btn">Course Staff</a></li>
                     <li><a href="#anchorpoint_resources" class="settings-btn">Learning Resources</a></li>
                     <li><a href="#anchorpoint_assessments" class="settings-btn">Assessments</a></li>
                     <li><a href="#anchorpoint_grades" class="settings-btn">My Grades</a></li>
-                    <li><a href="#anchorpoint_library" class="settings-btn">Library Links</a></li>
-                    
-                    <hr class="line">
-                    <h5 class="course-id">SmartEd</h5>
                     <li><a href="#overview_anchor" class="settings-btn">Course Overview</a></li>
                     <li><a href="{{ url_for('QRC')}}?course={{specified_course}}" class="settings-btn">QR Code Sign on</a></li>
                     <li><a href="{{ url_for('video_index')}}" class="settings-btn">Video Room</a></li>
@@ -37,7 +32,7 @@
                 </ul>
             </div>
             <div class="content2">
-                <a id="anchorpoint_announcement" class="anchor"></a>
+                <a id="anchorpoint_announcement" style="display:block; margin-top:-50px;"></a>
                 <div class="announcements">
                     <h5>Announcements</h5>
                     <div class=content_container id="course-id">
@@ -222,12 +217,12 @@
                 </div>
                 <a id="anchorpoint_assessments" class="anchor"></a>
                 <div class="assessments">
-                    <h5>Assessments</h5>
+                    <h5>Assessment</h5>
                     <div class=content_container id="course-id">
                         <div class="content_entry">
                             <a href="#" class="settings-btn"><i class="fa fa-link"></i> How to submit a SmartEd assessment</a>
                             <p class="resources_content">
-                                You must submit all assessments via SmartEd, video items must be submitted to SmartEd using Kaltura. Please see this link on how to submit your non-video assessment tasks on SmartEd.
+                                You must submit all assessment via SmartEd, video items must be submitted to SmartEd using Kaltura. Please see this link on how to submit your non-video assessment tasks on SmartEd.
                             </p>
                         </div>
                         <hr class="resources_line">
@@ -358,46 +353,7 @@
 
                     </div>
                 </div>
-                <a id="anchorpoint_library" class="anchor"></a>
-                <div class="library">
-                    <div class=content_container id="course-id">
-                        <div class="library_left">
-                            <h5 class="library_column1"></h5>
-                            <div class="elements">
-                                <p><a href="https://www.library.uq.edu.au" class="library_links_title">Library website</a></p>
-                                <p class="library_links_content">Search for information for assignments, past exam papers, referencing and more.</p>
-                                <hr class="line">
-                            </div>
-                            <div class="elements">
-                                <p><a href="../home_student_page/index.html" class="library_links_title">My Library</a></p>
-                                <p class="library_links_content">View your loans, holds and room bookings.  Get personalised links to Library resources and Library help.</p>
-                                <hr class="line">
-                            </div>
-                            <div class="elements">
-                                <p><a href="https://web.library.uq.edu.au/research-tools-techniques/digital-essentials" class="library_links_title">Digital Essentials</a></p>
-                                <p class="library_links_content">
-                                    Quickly build your digital and assignment skills with our online modules. The modules are designed to help you complete your courses and enhance your employability. Modules include:
-                                </p>
-                                <p class="library_links_content">
-                                    Information essentials - Learn search strategies and techniques for evaluating information
-                                <p>
-                                <p class="library_links_content">
-                                    Types of assignment - Tips for creating videos and audio, presentations and posters
-                                </p>
-                                <p class="library_links_content">
-                                    Write, cite and submit - Covers planning assignments, plagiarism, referencing and referencing styles
-                                </p>
-                                <p class="library_links_content"> 
-                                    UQ systems - Learn about the online systems you need to use at UQ
-                                </p>
-                                <p class="library_links_content">
-                                    Communicate and collaborate online – Strategies and tools for effective communication and group assignments
-                                </p>
-                                <hr class="line">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <a id="overview_anchor" class="anchor"></a>
                 <div class="stats">

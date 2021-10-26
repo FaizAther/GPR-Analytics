@@ -69,7 +69,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                       {% for course in courses %}
                       {% set c = course.get_name() %}
-                      <li><a class="dropdown-item" href="{{ url_for('course') }}?course={{c}}">{{ c.replace("-", "") }}</a></li>
+                      <li><font color="black"><a class="dropdown-item text-dark" href="{{ url_for('course') }}?course={{c}}">{{ c.replace("-", "") }}</a></font></li>
 
 
                        <!-- <li><a class="dropdown-item" href="/register">Register</a></li> -->
@@ -163,7 +163,7 @@
 </header></font>
   <body>
     
-    <div style="padding-top:7rem">{% block my_body %}{% endblock %}</div>
+    <div style="padding-top:0rem">{% block my_body %}{% endblock %}</div>
 
     <div>{% block my_footer %}{% endblock %}</div>
      </body>
