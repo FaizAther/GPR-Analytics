@@ -30,10 +30,10 @@ CREATE TABLE Faculty (
     position INTEGER NOT NULL,
     university_id INTEGER NOT NULL,
     name text NOT NULL,
-    dean INTEGER NOT NULL,
+    dean_id INTEGER NOT NULL,
     description text,
     foreign key (university_id) references University(id),
-    foreign key (dean) references User(id)
+    foreign key (dean_id) references User(id)
 );
 
 CREATE TABLE Course (
@@ -41,9 +41,9 @@ CREATE TABLE Course (
     position INTEGER NOT NULL,
     faculty_id INTEGER,
     name text NOT NULL,
-    coordinator INTEGER NOT NULL, 
+    coordinator_id INTEGER NOT NULL, 
     description text,
-    foreign key (coordinator) references User(id),
+    foreign key (coordinator_id) references User(id),
     foreign key (faculty_id) references Faculty(id)
 );
 
@@ -51,22 +51,28 @@ CREATE TABLE Announcement (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     course_id INTEGER NOT NULL,
     position INTEGER NOT NULL,
-    created DATE NOT NULL,
+    created_date DATE NOT NULL,
     description text NOT NULL,
     foreign key (course_id) references Course(id)
 );
 
 CREATE TABLE Event (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    position INTEGER NOT NULL,
     course_id INTEGER NOT NULL,
+    position INTEGER NOT NULL,
+    created_date date NOT NULL,
+    description text,
     name text NOT NULL,
-    manager INTEGER NOT NULL,
+    manager_id INTEGER NOT NULL,
     resource_id INTEGER,
     type INTEGER NOT NULL,
-    description text,
+    start_date date NOT NULL,
+    end_date date NOT NULL,
+    reacurring bool NOT NULL,
+    day_of_week INTEGER,
+    time_of_day INTEGER,
     foreign key (resource_id) references Resource(id),
-    foreign key (manager) references User(id),
+    foreign key (manager_id) references User(id),
     foreign key (course_id) references Course(id)
 );
 

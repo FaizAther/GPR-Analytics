@@ -17,34 +17,34 @@ INSERT INTO User (position, university_id, name, type, password) VALUES (0, 0, "
 
 -- Add Faculty
 
-INSERT INTO Faculty (position, university_id, name, dean) VALUES (0, 1, "COMP", 1);
-INSERT INTO Faculty (position, university_id, name, dean) VALUES (1, 1, "MATH", 2);
-INSERT INTO Faculty (position, university_id, name, dean) VALUES (2, 1, "PHYS", 1);
-INSERT INTO Faculty (position, university_id, name, dean) VALUES (3, 1, "STAT", 1);
+INSERT INTO Faculty (position, university_id, name, dean_id) VALUES (0, 1, "COMP", 1);
+INSERT INTO Faculty (position, university_id, name, dean_id) VALUES (1, 1, "MATH", 2);
+INSERT INTO Faculty (position, university_id, name, dean_id) VALUES (2, 1, "PHYS", 1);
+INSERT INTO Faculty (position, university_id, name, dean_id) VALUES (3, 1, "STAT", 1);
 
 
 -- Add Courses
 
 
 -- COMP
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (0, 1, "COMP-3301", 0);
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (1, 1, "COMP-4403", 1);
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (2, 1, "COMP-3301", 2);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (0, 1, "COMP-3301", 2);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1, 1, "COMP-4403", 3);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2, 1, "COMP-3301", 4);
 
 -- MATH
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (0, 2, "MATH-1081", 3);
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (1, 2, "MATH-1131", 4);
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (2, 2, "MATH-1231", 5);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (0, 2, "MATH-1081", 5);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1, 2, "MATH-1131", 6);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2, 2, "MATH-1231", 7);
 
 -- PHYS
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (0, 3, "PHYS-1111", 6);
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (1, 3, "PHYS-2222", 7);
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (2, 3, "PHYS-3333", 8);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (0, 3, "PHYS-1111", 8);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1, 3, "PHYS-2222", 9);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2, 3, "PHYS-3333", 10);
 
 -- STAT
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (0, 4, "STAT-1100", 9);
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (1, 4, "STAT-2200", 10);
-INSERT INTO Course (position, faculty_id, name, coordinator) VALUES (2, 4, "STAT-3300", 11);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (0, 4, "STAT-1100", 11);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1, 4, "STAT-2200", 12);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2, 4, "STAT-3300", 13);
 
 -- Add Lecturer
 
@@ -119,22 +119,33 @@ INSERT INTO Enrollment (user_id, course_id) VALUES (19, 11);
 
 -- Add Announcements
 
-INSERT INTO Announcement (course_id, position, created, description) VALUES (1, 0, "2021-10-26 16:28:17.303301", "Welcome to week 1!");
-INSERT INTO Announcement (course_id, position, created, description) VALUES (2, 0, "2021-10-26 16:28:17.303333", "Welcome to week 1!");
-INSERT INTO Announcement (course_id, position, created, description) VALUES (3, 0, "2021-10-26 16:28:17.303338", "Welcome to week 1!");
-INSERT INTO Announcement (course_id, position, created, description) VALUES (4, 0, "2021-10-26 16:28:17.303341", "Welcome to week 1!");
-INSERT INTO Announcement (course_id, position, created, description) VALUES (5, 0, "2021-10-26 16:28:17.303345", "Welcome to week 1!");
-INSERT INTO Announcement (course_id, position, created, description) VALUES (6, 0, "2021-10-26 16:28:17.303348", "Welcome to week 1!");
-INSERT INTO Announcement (course_id, position, created, description) VALUES (7, 0, "2021-10-26 16:28:17.303351", "Welcome to week 1!");
-INSERT INTO Announcement (course_id, position, created, description) VALUES (8, 0, "2021-10-26 16:28:17.303354", "Welcome to week 1!");
-INSERT INTO Announcement (course_id, position, created, description) VALUES (9, 0, "2021-10-26 16:28:17.303358", "Welcome to week 1!");
-INSERT INTO Announcement (course_id, position, created, description) VALUES (10, 0, "2021-10-26 16:28:17.303365", "Welcome to week 1!");
-INSERT INTO Announcement (course_id, position, created, description) VALUES (11, 0, "2021-10-26 16:28:17.303368", "Welcome to week 1!");
-INSERT INTO Announcement (course_id, position, created, description) VALUES (12, 0, "2021-10-26 16:28:17.303371", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (1, 0, "2021-10-26 16:28:17.303301", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (2, 0, "2021-10-26 16:28:17.303333", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (3, 0, "2021-10-26 16:28:17.303338", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (4, 0, "2021-10-26 16:28:17.303341", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (5, 0, "2021-10-26 16:28:17.303345", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (6, 0, "2021-10-26 16:28:17.303348", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (7, 0, "2021-10-26 16:28:17.303351", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (8, 0, "2021-10-26 16:28:17.303354", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (9, 0, "2021-10-26 16:28:17.303358", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (10, 0, "2021-10-26 16:28:17.303365", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (11, 0, "2021-10-26 16:28:17.303368", "Welcome to week 1!");
+INSERT INTO Announcement (course_id, position, created_date, description) VALUES (12, 0, "2021-10-26 16:28:17.303371", "Welcome to week 1!");
 
 
 -- Add Events
 
+-- Add 3 Lectures b/w 9 to 16 hundred hours 1 hour each randomly
+
+-- Add 1 Consultation b/w 9 to 16 hundred hours 1 hour each randomly
+
+-- Add 3 Tutorials b/w 9 to 16 hundred hours 1 hour each randomly
+
+-- Add 3 Pracs b/w 9 to 16 hundred hours 1 hour each randomly
+
+-- Add 3 to 4 Markings 150 days semester divide accordingly for deadlines
+
+-- Add 1 Exam each +160 days deadline
 
 
 
