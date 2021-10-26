@@ -12,8 +12,8 @@ if TYPE_CHECKING:
 
 class Sudo(User):
 
-    def __init__(self, id, type=UserType.SUDO):
-        super().__init__(id, type)
+    def __init__(self):
+        super().__init__(0, type=UserType.SUDO)
         self._admins: Dict[Admin] = {}
         self._selection = []
 

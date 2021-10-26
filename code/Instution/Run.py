@@ -13,7 +13,7 @@ from Instution.Events.Mark import Mark
 from Instution.Users.Sudo import Sudo
 
 print("just test")
-my_sudo = Sudo(5, 5)
+my_sudo = Sudo()
 print(my_sudo)
 my_admin = my_sudo.add_admin(name="UQ", description="Purple")
 print(my_admin)
