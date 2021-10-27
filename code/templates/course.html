@@ -14,7 +14,21 @@
 {% block my_body %}
 <body>
 
+    <script>
+        function showModal() {
+            $('#newResource').modal('show')
+        }
 
+        function validate_time(caller) {
+            var caller_object = document.getElementById(caller);
+            var regex_check_pass = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(caller_object.value);
+
+            if (!regex_check_pass && caller_object.value != "") {
+                caller_object.value = "INVALID";
+            }
+        }
+
+    </script>
 
     <script> console.log("{{course}}")</script>
     <main class="main">
@@ -89,12 +103,77 @@
 
                     </div>
                 </div>
-                <a id="anchorpoint_resources" class="anchor"></a>
-                <div class="resources">
-                    <h5>Learning Resources</h5>
-                    <div class=content_container id="course-id">
-                        
 
+                <a id="anchorpoint_resources" class="anchor"></a>
+
+                <!--  event = my_course.make_event(event_query['position'],
+                    event_query['type'X], \
+                    event_query['name'X],
+                    event_query['start_date'X],
+                    event_query['end_date'X],
+                    (30 if event_query['marked'] else 0), style="float:right;margin-right:60px;"
+                    deadline=deadline) -->
+                    <h5>Learning Resources 
+                        <button type="button" style="float:right;margin-right:60px;" class="btn btn-dark" 
+                                data-toggle="modal" onclick="showModal()">Create new Resource
+                            </button>
+                    </h5>
+                    
+                    <div id="newResource" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                          <div style="padding:20px;" class="modal-content">
+                            <form method="POST">
+
+                                <h3>Create a new {{course.get_name().replace("-","")}} Resource</h3>
+
+   
+
+                                <label for="exampleInputEmail1">What kind of event are you creating?</label>
+
+                                <select id="course_selection" style="margin-top:15px;margin-bottom:15px" class="form-select" aria-label="Default select example">
+                                    <option style="background-color: #DFDFDF" id="event_type" selected>Event Type</option>
+                                    <option value="0">Lecture</option>
+                                    <option value="1">Tutorial</option>
+                                    <option value="2">Practical</option>
+                                    <option value="3">Assignment</option>
+                                    <option value="4">Project</option>
+                                    <option value="5">Examination</option>
+                                    <option value="6">Consultation</option>
+                                    <option value="7">Guest</option>
+                                    <option value="7">Default</option>
+                                </select>
+
+                                <label for="exampleInputEmail1">What would you like to name this event?</label>
+
+                                <input style="margin-bottom:10px;" name="new_announcement_desc" type="text" class="form-control" id="exampleInputEmail1" placeholder="Name">
+                                <div style="margin-bottom:10px;">
+                                    <label for="exampleInputEmail1">When is the date of this event?</label>
+                                </div>
+
+                                <input style="margin-bottom:10px;" name="new_announcement_desc" type="text" class="form-control" id="exampleInputEmail1" placeholder="Date of Event">
+                                
+
+                                <div style="margin-bottom:10px;">
+                                    <label for="exampleInputEmail1">When does this event start and end?</label>
+                                </div>
+                                <div style="margin-top:10px;margin-bottom:10px;" class="input-group">
+                                    <input id="start" onfocusout="validate_time('start')" style="margin-right: 40px;" type="text" class="form-control" placeholder="Start"/>
+                                    <span class="input-group-addon">to</span>
+                                    <input id="end" onfocusout="validate_time('end')" style="margin-left: 40px;" type="text" class="form-control" placeholder="End"/>
+                                </div>
+
+
+                                <button type="submit" style="margin-right:150px;" class="btn btn-dark">Create Resource</button>
+
+
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
+                      
+                <div class="resources">
+                    <div class=content_container id="course-id">
 
                         {% for event in course.get_events() %}
                         {% if event.get_weighting() == 0 %}
