@@ -42,9 +42,9 @@ INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2222, 3,
 INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (3333, 3, "PHYS-3333", 10);
 
 -- STAT
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (0, 4, "STAT-1100", 11);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1, 4, "STAT-2200", 12);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2, 4, "STAT-3300", 13);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1100, 4, "STAT-1100", 11);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2200, 4, "STAT-2200", 12);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (3300, 4, "STAT-3300", 13);
 
 -- Add Lecturer
 
