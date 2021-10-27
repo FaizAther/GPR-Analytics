@@ -16,6 +16,12 @@ class Student(User):
         super().__init__(id, type, name=name, description=description)
         self._enrollments = []
 
+    def find_enrollment(self, course):
+        for e in self.get_engagements():
+            if e.get_name() == course:
+                return e
+
+
     def get_enrollments(self):
         return self._enrollments
 

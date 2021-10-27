@@ -24,6 +24,9 @@ class Faculty(Base):
         self._courses   :Dict[int, Course]  = {}
         self._locations :List[Location]     = []
 
+    def find_course(self, course):
+        return Base.dict_find(course, self.get_courses())
+
     def add_user(self, user:User, course_id:int, course=None) -> None:
         if course == None:
             course = self.get_courses().get(course_id)
@@ -48,11 +51,11 @@ class Faculty(Base):
                 break
         return add_course
 
-    def make_course(self, id:int=None, name=None) -> Course:
+    def make_course(self, id:int=None, name=None, description=None) -> Course:
         identifier = f"{self.get_name()}-{id}" if name == None else name
         if id == None:
             id = int(name.split('-')[1])
-        course = Course(id, name=f"{identifier}")
+        course = Course(id, name=f"{identifier}", description=description)
         self.add_course(course)
         self._count += 1
         return course

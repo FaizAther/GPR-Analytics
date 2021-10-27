@@ -23,6 +23,7 @@ class University(Base):
         self._admin     :Lecturer           = admin
         self._faculties :Dict[int, Faculty] = {}
         self._users     :Dict[int, User]    = {}
+        self._count = 0
 
         if admin == None:
             self._admin = self.make_user(UserType.ADMIN)
@@ -71,7 +72,12 @@ class University(Base):
         return self.get_faculties().values()
 
     def find_faculty(self, id) -> Faculty:
-        return Base.dict_find(id, self.get_faculties())
+        fac = None
+        try:
+            fac = self.get_faculties()[id]
+        except:
+            fac = None
+        return fac
 
     def find_user(self, id) -> User:
         return self.get_admin() if id == "admin" else Base.dict_find(id, self.get_users())
@@ -83,7 +89,8 @@ class University(Base):
         return faculty
 
     def add_faculty(self, faculty: Faculty) -> None:
-        Base.dict_insert(faculty, self.get_faculties())
+        # Base.dict_insert(faculty, self.get_faculties())
+        self.get_faculties()[faculty.get_name()] = faculty
 
     def add_faculties(self, faculties: Dict[Faculty]) -> None:
         Base.__DO_SOMETHINGS__(lambda f: self.add_faculty(f), faculties)
