@@ -1,4 +1,5 @@
 import os
+import re
 
 from flask import (
     Flask, redirect, url_for,
@@ -17,6 +18,8 @@ from Forms.LoginForm import LoginForm
 from Forms.SelectionForm import SelectionForm
 from Forms.AddForm import AddForm
 from Forms.AnnouncementForm import AnnouncementForm
+from Forms.EventForm import EventForm
+
 
 from Instution.Run import *
 
@@ -50,7 +53,7 @@ def login():
         session.pop('username', None)
         user = university.find_user(form.username.data)
         validate = user != None and user.validate_password(form.password.data)
-        print(validate)
+        # print(validate)
         if validate:
             session['username'] = user.get_id()
             session['university'] = university.get_id()
@@ -130,7 +133,7 @@ def home():
 
     # find user from session
     _user = my_sudo.find_user(session['university'], session['username'])
-    print(_user, _user.get_type())
+    # print(_user, _user.get_type())
     return render_template("home.html", user=_user)
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
@@ -141,6 +144,12 @@ def course():
         return redirect(url_for('login'))
 
     form = AnnouncementForm()
+    form1 = EventForm()
+    eventTypes = []
+    for i in range(0, 9):
+        eventTypes.append((i, EventType(i)))
+    form1.resource_type.choices = eventTypes
+    # print(eventTypes)
 
     # find user from session
     _uni = my_sudo.find_university(session['university'])
@@ -154,16 +163,26 @@ def course():
     _course = _faculty.find_course(target_course)
     # _faculty.find
     # print(_course)
-    if request.method == "POST":
+    if request.method == "POST" and "form-announcement" in request.form and form.validate():
         # print("here")
         _course.make_announcement(description=form.new_announcement_desc.data)
         print(form.new_announcement_desc.data)
         # print("asdfasdfasdfasdfasdf")
+        print("for ZERO 000000")
+    elif request.method == "POST" and "form-resource" in request.form:
+        # print("form ONE 11")
+        # print(form1.resource_type.data, form1.resource_start_time, form1.resource_end_time, form1.resource_name)
+        # print(EventType(int(form1.resource_type.data)))
+        pos = len(_course.get_events())
+        event = _course.make_event(pos, int(form1.resource_type.data), \
+    form1.resource_name.data, form1.resource_start_time.data, form1.resource_end_time.data, (30 if False else 0), deadline=None)
+        # print(event)
 
+    # print(request.form)
     if target_course == None:
         return redirect(url_for('login'))
 
-    return render_template("course.html", specified_course=target_fac_cour, user=_user, course=_course, form=form)
+    return render_template("course.html", specified_course=target_fac_cour, user=_user, course=_course, form=form, form1=form1)
 
 @app.route('/register_attendance')
 def register_attendance():
