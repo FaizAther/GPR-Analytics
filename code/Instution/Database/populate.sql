@@ -10,7 +10,7 @@
 
 
 -- Add The Univeristy of Queensland
-INSERT INTO University (name, admin, description) VALUES ("The Univeristy of Queensland", 0, "Purple is the best!");
+INSERT INTO University (name, admin, description) VALUES ("The Univeristy of Queensland", 1, "Purple is the best!");
 
 -- Add Admin user
 INSERT INTO User (position, university_id, name, type, password) VALUES (0, 0, "John", 8, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
