@@ -48,8 +48,11 @@ class Faculty(Base):
                 break
         return add_course
 
-    def make_course(self, id:int) -> Course:
-        course = Course(id, name=f"{self.get_name()}-{id}")
+    def make_course(self, id:int=None, name=None) -> Course:
+        identifier = f"{self.get_name()}-{id}" if name == None else name
+        if id == None:
+            id = int(name.split('-')[1])
+        course = Course(id, name=f"{identifier}")
         self.add_course(course)
         self._count += 1
         return course
@@ -85,7 +88,7 @@ class Faculty(Base):
     def __repr__(self) -> str:
         courses_str = Base.__LIST_STR__(
             list(self.get_courses_list()), ", courses=")
-        return f"{super().__repr__()}" + \
+        return f"{super().__repr__()}, description={self.get_description()}" + \
             f"{courses_str}"
 
     def __whitetest__(self, result) -> bool:

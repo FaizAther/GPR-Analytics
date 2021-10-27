@@ -11,8 +11,8 @@ if TYPE_CHECKING:
 
 class Lecturer(User):
 
-    def __init__(self, id: int, type: UserType=UserType.LECTURER):
-        super().__init__(id, type)
+    def __init__(self, id: int, type: UserType=UserType.LECTURER, name=None, description=None):
+        super().__init__(id, type, name=name, description=description)
 
     def add_engagement(self, engagement) -> None:
         return super().add_engagement(engagement)

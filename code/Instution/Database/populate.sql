@@ -17,29 +17,29 @@ INSERT INTO User (position, university_id, name, type, password) VALUES (0, 0, "
 
 -- Add Faculty
 
-INSERT INTO Faculty (position, university_id, name, dean_id) VALUES (0, 1, "COMP", 1);
-INSERT INTO Faculty (position, university_id, name, dean_id) VALUES (1, 1, "MATH", 2);
-INSERT INTO Faculty (position, university_id, name, dean_id) VALUES (2, 1, "PHYS", 1);
-INSERT INTO Faculty (position, university_id, name, dean_id) VALUES (3, 1, "STAT", 1);
+INSERT INTO Faculty (position, university_id, name, dean_id, description) VALUES (0, 1, "COMP", 1, "The Faculty of Computer Science");
+INSERT INTO Faculty (position, university_id, name, dean_id, description) VALUES (1, 1, "MATH", 2, "The Faculty of Mathematics");
+INSERT INTO Faculty (position, university_id, name, dean_id, description) VALUES (2, 1, "PHYS", 1, "The Faculty of Physics");
+INSERT INTO Faculty (position, university_id, name, dean_id, description) VALUES (3, 1, "STAT", 1, "The Faulty of Statistics");
 
 
 -- Add Courses
 
 
 -- COMP
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (0, 1, "COMP-3301", 2);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1, 1, "COMP-4403", 3);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2, 1, "COMP-3301", 4);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (3301, 1, "COMP-3301", 2);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (4403, 1, "COMP-4403", 3);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (4506, 1, "COMP-4506", 4);
 
 -- MATH
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (0, 2, "MATH-1081", 5);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1, 2, "MATH-1131", 6);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2, 2, "MATH-1231", 7);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1081, 2, "MATH-1081", 5);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1131, 2, "MATH-1131", 6);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1231, 2, "MATH-1231", 7);
 
 -- PHYS
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (0, 3, "PHYS-1111", 8);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1, 3, "PHYS-2222", 9);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2, 3, "PHYS-3333", 10);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1111, 3, "PHYS-1111", 8);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2222, 3, "PHYS-2222", 9);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (3333, 3, "PHYS-3333", 10);
 
 -- STAT
 INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (0, 4, "STAT-1100", 11);
@@ -63,30 +63,30 @@ INSERT INTO User (position, university_id, name, type, password) VALUES (11, 1, 
 
 -- Add Students
 
-INSERT INTO User (position, university_id, name, type, password) VALUES (0, 1, "Solomen", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (1, 1, "Simon", 7, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (2, 1, "Joseph", 7, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (3, 1, "Lazarus", 7, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (4, 1, "Judas", 7, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (5, 1, "Yeshua", 7, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (6, 1, "Ananias", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (7, 1, "Jonathan", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (8, 1, "Aaron", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (9, 1, "Nathaniel", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (10, 1, "Ezra", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (11, 1, "Asher", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (12, 1, "Jacob", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (13, 1, "Caleb", 4, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (14, 1, "Noah", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (15, 1, "Zachary", 4, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (16, 1, "Jonah", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (17, 1, "Isaac", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (18, 1, "Eli", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (19, 1, "Benjamin", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (20, 1, "Rebecca", 7, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (21, 1, "Elizabeth", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (22, 1, "Mary", 4, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (23, 1, "Joshua", 7, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (12, 1, "Solomen", 4, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (13, 1, "Simon", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (14, 1, "Joseph", 7, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (15, 1, "Lazarus", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (16, 1, "Judas", 4, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (17, 1, "Yeshua", 7, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (18, 1, "Ananias", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (19, 1, "Jonathan", 4, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (20, 1, "Aaron", 4, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (21, 1, "Nathaniel", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (22, 1, "Ezra", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (23, 1, "Asher", 7, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (24, 1, "Jacob", 4, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (25, 1, "Caleb", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (26, 1, "Noah", 4, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (27, 1, "Zachary", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (28, 1, "Jonah", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (29, 1, "Isaac", 7, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (30, 1, "Eli", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (31, 1, "Benjamin", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (32, 1, "Rebecca", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (33, 1, "Elizabeth", 6, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (34, 1, "Mary", 4, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (35, 1, "Joshua", 5, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
 
 -- Add Tutor TODO
 

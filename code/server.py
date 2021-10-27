@@ -172,6 +172,7 @@ def home():
 
     # find user from session
     _user = my_sudo.find_user(session['university'], session['username'])
+    print(_user, _user.get_type())
     return render_template("home.html", user=_user)
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
