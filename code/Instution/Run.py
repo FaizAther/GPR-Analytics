@@ -68,6 +68,11 @@ for admin_query in admins_query:
                 # print(my_course)
                 my_course.add_user(my_uni.get_users()[user_querry['position']])
 
+            event_querries = sqldb.query_dict(f"Select * FROM Event WHERE course_id = {course_query['id']}")
+            for event_querry in event_querries:
+                print(event_querry)
+    
+
             # print(my_uni.get_users())
             # event_queries = sqldb.query_dict(f"Select * FROM Event WHERE course_id = {course_query['position']}")
             # for event_query in event_queries:
