@@ -359,7 +359,7 @@ if __name__ == "__main__":
     sociio = True    
 
     if sociio:
-        socketio.run(app, host="0.0.0.0", port='80', debug=True)
+        socketio.run(app, host="0.0.0.0", port='8888', debug=True)
     else:
         app.debug = True
-        app.run(host="0.0.0.0", port='80', debug=True)
+        app.run(host="0.0.0.0", port='8888', debug=True)
