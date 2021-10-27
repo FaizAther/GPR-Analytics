@@ -41,17 +41,19 @@ class University(Base):
 
         user = None
         if type == UserType.LECTURER:
-            user = Lecturer(position)
+            user = Lecturer(position, name=name, description=description)
         elif type == UserType.TUTOR:
-            user = Tutor(position)
+            user = Tutor(position, name=name, description=description)
         elif type == UserType.STUDENT or type == UserType.UNDERGRAD:
-            user = Student(position, name=name)
+            user = Student(position, name=name, description=description)
         elif type == UserType.POSTGRAD:
-            user = Student(position, type=type)
+            user = Student(position, type=type, name=name, description=description)
         elif type == UserType.PHD:
-            user = Student(position, type=type)
+            user = Student(position, type=type, name=name, description=description)
+        elif type == UserType.EXCHANGE:
+            user = Student(position, type=type, name=name, description=description)
     
-        print("type: " + type.__str__() + "adding: " + user.__str__())
+        # print("type: " + type.__str__() + " adding: " + user.__str__())
         self.add_user(user)
         return user
 
@@ -76,7 +78,7 @@ class University(Base):
 
     def make_faculty(self, name: str=None, description=None) -> Faculty:
         faculty = Faculty(len(self.get_faculties().values()), name=name, description=description)
-        print(self)
+        # print(self)
         self.add_faculty(faculty)
         return faculty
 

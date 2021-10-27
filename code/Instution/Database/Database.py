@@ -1,10 +1,12 @@
+from __future__ import annotations
+
 from abc import abstractmethod
 from typing import TYPE_CHECKING
 
 import sqlite3
 
 if TYPE_CHECKING:
-    from typing import Dict, Any
+    from typing import Tuple, List, Dict, Any
 
 class Database:
 
@@ -22,12 +24,12 @@ class Database:
        pass
 
     @abstractmethod
-    def query(self) -> Dict[str, Any]:
+    def query(self) -> List[Tuple[Any]]:
        pass
 
 class SqliteDB(Database):
     def __init__(self):
-        super.__init__()
+        super().__init__()
  
     def connection(self) -> None:
         """Creates a connection to Sqlite3 DB"""
@@ -56,6 +58,14 @@ class SqliteDB(Database):
         self.cursor.execute(query)
         results = self.cursor.fetchall()
         return results
+    
+    def query_dict(self, query):
+        response = []
+        result = self.query(query)
+        for res in result:
+            # print(dir(self.cursor))
+            response.append(dict(zip([c[0] for c in self.cursor.description], res)))
+        return response
 """
 
 class GprDataBase():

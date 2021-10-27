@@ -71,6 +71,7 @@ CREATE TABLE Event (
     reacurring bool NOT NULL,
     day_of_week INTEGER,
     time_of_day INTEGER,
+    marked bool NOT NULL,
     foreign key (resource_id) references Resource(id),
     foreign key (manager_id) references User(id),
     foreign key (course_id) references Course(id)
@@ -85,6 +86,7 @@ CREATE TABLE Attendance (
     student_id INTEGER NOT NULL,
     -- startdate date NOT NULL,
     description text,
+    marked bool NOT NULL,
     foreign key (event_id) references Event(id),
     foreign key (marker_id) references User(id),
     foreign key (student_id) references User(id)
@@ -93,7 +95,7 @@ CREATE TABLE Attendance (
 CREATE TABLE Mark (
     attendance_id INTEGER,
     position INTEGER NOT NULL,
-    total INTEGER, 
+    total INTEGER NOT NULL, 
     received INTEGER,
     resource_id INTEGER,
     duedate date,

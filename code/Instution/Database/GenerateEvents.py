@@ -37,43 +37,43 @@ def events(course_id):
 	position = 0
 	for event_num in range(1,4):
 
-		event_reacurring(course_id, position, manager_id, event_num, EventType.LECTURE)
+		event_reacurring(course_id, position, manager_id, event_num, EventType.LECTURE, False)
 		position+=1
 		# Attendance for each student
-		event_reacurring(course_id, position, manager_id, event_num, EventType.TUTORIAL)
+		event_reacurring(course_id, position, manager_id, event_num, EventType.TUTORIAL, False)
 		position+=1
 		# Attendance for each student
-		event_reacurring(course_id, position, manager_id, event_num, EventType.PRACTICAL)
+		event_reacurring(course_id, position, manager_id, event_num, EventType.PRACTICAL, False)
 		position+=1
 		# Attendance for each student
-		event_once(course_id, position, manager_id, event_num, EventType.ASSIGNMENT)
+		event_once(course_id, position, manager_id, event_num, EventType.ASSIGNMENT, True)
 		position+=1
 		# Attendance for each student
 
 		# Marking for each student
 
-	event_reacurring(course_id, position, manager_id, 1, EventType.CONSULTATION)
+	event_reacurring(course_id, position, manager_id, 1, EventType.CONSULTATION, False)
 	position+=1
 
-	event_once(course_id, position, manager_id, 1, EventType.EXAM)
+	event_once(course_id, position, manager_id, 1, EventType.EXAM, True)
 	position+=1
 	# Attendance for each student
 
-def event_once(course_id, position, manager_id, event_num, event_type):
-	event(course_id, position, manager_id, event_num, event_type, False, None, None)
+def event_once(course_id, position, manager_id, event_num, event_type, marked):
+	event(course_id, position, manager_id, event_num, event_type, False, None, None, marked)
 
-def event_reacurring(course_id, position, manager_id, event_num, event_type):
-	event(course_id, position, manager_id, event_num, event_type, True, randrange(0, 6), randrange(0, 10))
+def event_reacurring(course_id, position, manager_id, event_num, event_type, marked):
+	event(course_id, position, manager_id, event_num, event_type, True, randrange(0, 6), randrange(0, 10), marked)
 
-def event(course_id, position, manager_id, event_num, event_type, reacurring, day_of_week, time_of_day):
+def event(course_id, position, manager_id, event_num, event_type, reacurring, day_of_week, time_of_day, marked):
 	
 	print(\
 		f"INSERT INTO Event (course_id, position, created_date, name, " + \
-		f"manager_id, type, start_date, end_date, reacurring"+ \
+		f"manager_id, type, start_date, end_date, reacurring, marked"+ \
 		(f"" if not reacurring else f", day_of_week, time_of_day") + \
 		f") " + \
 		f"VALUES ({course_id}, {position}, \"{datetime.now()}\", \"{event_type.name} {event_num}\", " + \
-		f"{manager_id}, {event_type.value}, \"{datetime.now()}\", \"{datetime.now() + timedelta(days=6*30)}\", {reacurring}" + \
+		f"{manager_id}, {event_type.value}, \"{datetime.now()}\", \"{datetime.now() + timedelta(days=6*30)}\", {reacurring}, {marked}" + \
 		(f"" if not reacurring else f", {day_of_week}, {time_of_day}") + \
 		f");"\
 	)

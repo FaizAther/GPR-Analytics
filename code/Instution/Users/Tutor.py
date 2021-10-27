@@ -11,8 +11,8 @@ if TYPE_CHECKING:
 
 class Tutor(User):
 
-    def __init__(self, id: int, type: UserType=UserType.TUTOR, capacity:int=3):
-        super().__init__(id, type)
+    def __init__(self, id: int, type: UserType=UserType.TUTOR, capacity:int=3, name=None, description=None):
+        super().__init__(id, typename=name, description=description)
         self._capacity = capacity
 
     def capacity_available(self):
