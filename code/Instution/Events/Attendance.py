@@ -17,6 +17,7 @@ if TYPE_CHECKING:
 class Attendance(Base):
 
     def __init__(self, id, event, attendee, marker=None):
+        id = len(attendee.get_engagements())
         super().__init__(id)
 
         self._attandee  :User   = attendee

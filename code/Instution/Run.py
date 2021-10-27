@@ -72,7 +72,7 @@ for admin_query in admins_query:
             event_queries = sqldb.query_dict(f"Select * FROM Event WHERE course_id = {course_query['id']}")
             for event_query in event_queries:
                 event = my_course.make_event(event_query['position'], event_query['type'], \
-                    event_query['name'], event_query['start_date'], event_query['end_date'], (0 if event_query['marked'] else 30))
+                    event_query['name'], event_query['start_date'], event_query['end_date'], (30 if event_query['marked'] else 0))
                 # print(event_query)
                 # print(event.get_invitees())
             
@@ -82,6 +82,8 @@ for admin_query in admins_query:
         # print(my_fac)
 
 print(my_user.get_engagements())
+for engagement in my_user.get_engagements():
+    print(engagement)
 # Populate University
 
 # Populate Faculty

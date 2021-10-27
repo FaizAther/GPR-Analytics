@@ -100,7 +100,7 @@ class Event(Base):
         marker = self.find_marker()
         marker = self.get_manager() if marker == None else marker
         # print(user)
-        id = len(self.get_invitees())
+        id = 0
         if (self.get_weighting() <= 0):
             attendance = Attendance(id, self, user, marker=marker)
         else:
