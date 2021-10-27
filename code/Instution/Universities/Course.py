@@ -8,7 +8,7 @@ from Instution.Users.UserType import UserType
 from Instution.Events.EventType import EventType
 from Instution.Events.Event import Event
 from Instution.Items.Announcement import Announcement
-
+from datetime import datetime
 
 if TYPE_CHECKING:
     from typing import List
@@ -26,6 +26,7 @@ class Course(Base):
     def __init__(self, id: int, admin: User=None, name=None, description=None):
         super().__init__(id, name=name, description=description)
         self._admin     :User        = admin
+        self._tutors    :Tutor       = []
         self._users     :List[User]  = []
         self._events    :List[Event] = []
         self._announcements: List[Announcement] = []
@@ -50,6 +51,27 @@ class Course(Base):
         if user != self.get_admin():
             return
         event = self.add_event()
+        return event
+
+    # {'id': 115, 'course_id': 9, 'position': 2, 'created_date': '2021-10-27 00:45:53.651011',
+    # 'description': None, 'name': 'PRACTICAL 1', 'manager_id': 10, 'resource_id': None,
+    # 'type': 2, 'start_date': '2021-10-27 00:45:53.651016',
+    # 'end_date': '2022-04-25 00:45:53.651018', 'reacurring': 1, 'day_of_week': 0,
+    # 'time_of_day': 3, 'marked': 0}
+    def make_event(self, id, type, name, \
+            start_date, end_date, weighting, \
+            reacurring=False, description=None, creation=None, day_of_week=None, time_of_day=None):
+        start_date = datetime.fromisoformat(start_date)
+        end_date = datetime.fromisoformat(end_date)
+        event = Event(id, start_date, end_date, name=name, description=description, creation=creation, type=EventType(type))
+        dates = {}
+        if reacurring:
+            pass
+        else:
+            event.set_weighting(weighting)
+
+        event.add_users(self.get_users())
+        self.add_event(event)
         return event
 
     def get_events(self) -> List[Event]:

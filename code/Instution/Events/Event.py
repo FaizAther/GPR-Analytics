@@ -25,20 +25,30 @@ if TYPE_CHECKING:
 '''
 class Event(Base):
 
-    def __init__(self, id, name=None, type=EventType.DEFAULT):
-        super().__init__(id, name=name)
+    def __init__(self, id, start_date, end_date, name=None, description=None, creation=None, \
+        type=EventType.DEFAULT):
+        super().__init__(id, name=name, description=description)
 
         self._manager       :User               = None
         self._organizers    :List[User]         = []
         self._invitees      :List[Attendance]   = []
         self._guests        :List[User]         = []
 
-        self._start_end     :Dict               = {datetime.now : datetime.now}
+        self._start_end     :Dict               = {}
         self._weighting     :int                = 0
 
         self._locations     :List[Location]     = []
         self._type          :EventType          = type
         self._resources     :List               = []
+        self._creation                          = creation if creation != None else datetime.now
+        self._start_date = start_date if start_date != None else datetime.now
+        self._end_date = end_date if end_date != None else datetime.now
+
+    def get_start_end(self):
+        return self._start_end
+    
+    def set_start_end(self, start_end):
+        self._start_end = start_end
 
     def get_type(self):
         return self._type
@@ -83,12 +93,18 @@ class Event(Base):
                     and m.capacity_available() \
                 else z, None, self.get_organizers())
 
+    def get_manager(self):
+        return self._manager
+
     def handle_student(self, user: Student) -> None:
         marker = self.find_marker()
+        marker = self.get_manager() if marker == None else marker
+        # print(user)
+        id = len(self.get_invitees())
         if (self.get_weighting() <= 0):
-            attendance = Attendance(0, self, user, marker=marker)
+            attendance = Attendance(id, self, user, marker=marker)
         else:
-            attendance = Mark(0, self, user, self.get_weighting(), marker=marker)
+            attendance = Mark(id, self, user, self.get_weighting(), marker=marker)
 
         Base.ADD_THING_TO(attendance, self.get_invitees())
 

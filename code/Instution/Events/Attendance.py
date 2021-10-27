@@ -39,3 +39,15 @@ class Attendance(Base):
 
     def add_user(self, user: User) -> None:
         user.add_engagement(self)
+
+    def __repr__(self) -> str:
+        return super().__repr__()
+    
+    def __whitetest__(self, result=...) -> bool:
+        return super().__whitetest__(result=result)
+    
+    def generate_html(self) -> str:
+        return super().generate_html()
+    
+    def insert(self) -> str:
+        return super().insert()
