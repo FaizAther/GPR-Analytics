@@ -12,18 +12,8 @@
 </head>
 {% endblock %}
 {% block my_body %}
-<script>
-    function get_semester_year(time_str) {
-        if (time_str.includes("-")) {
-            
-        }
-    }
-</script>
-
-
 
 <body>
-    
     <main class="main">
         <!-- HOME PAGE -->
         <section class="home" id=home>
@@ -50,37 +40,20 @@
             <div class="content2">
                 <div class="notice">
                     <h5 class="home_column"> <a class="home_column-btn">Upcoming Deadlines</a></h5>
-                    <a href="" class="buttons2">
-                        <p class="notice-heading">DECO3801 Project due soon!</p>
-                        <p class="notice-content">Make sure to keep up to date with the timeline 
-                            to ensure a finished project by the due date.</p>
-                    </a>
-                    <hr class="line">
-                    <a href="" class="buttons2">
-                        <p class="notice-heading">COMP4500 Quiz 3 ending soon!</p>
-                        <p class="notice-content">You have not completed Quiz 3! Make sure to complete it by 27 August.</p>
-                     </a>
-                    <hr class="line">
-                    <a href="" class="buttons2">
-                        <p class="notice-heading">COMP4500 Lecture catch-up!</p>
-                        <p class="notice-content">You did not watch lecture 7 and lecture 8, please watch the lectures to ensure you stay up to date!</p>
-                     </a>
-                    <hr class="line">
-                    <a href="" class="buttons2">
-                        <p class="notice-heading">COMP4702 Assignment 2 Help Session.</p>
-                        <p class="notice-content">There will be an assignment help session hosted by the tutors next Monday. Make sure to attend if you need help!</p>
-                    <hr class="line">
-                    <a href="" class="buttons2">
-                        <p class="notice-heading">COMP3702 Exam Help Session.</p>
-                        <p class="notice-content">There will be an exam help session hosted by the tutors next Friday. Make sure to attend if you need help!</p>
-                    </a>
-                    <hr class="line">
-                    <a href="" class="buttons2">
-                        <p class="notice-heading">Personal Exam Timetable is out!.</p>
-                        <p class="notice-content">To access the personal exam timetable, check your email!</p>
-                    </a>
-                    <hr class="line">
-                    <p class="notice-heading">You have no more notices!</p>
+
+                    {% for course in user.get_enrollments() %}
+                    {% for engagement in user.get_specific_engagement(course) %}
+                    {% if engagement.is_marked() %}
+
+                    
+                    <center>
+                        <font size="3px"><p style="">{{engagement.get_name()}} for {{course.get_name()}} - {{engagement.get_deadline()}}</p></font>
+                    </center>
+                    
+                    <hr style="margin-top:10px;" class="line">
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
                 </div>
             </div>
 
