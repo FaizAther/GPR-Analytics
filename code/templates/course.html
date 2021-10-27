@@ -70,30 +70,24 @@
                 <a id="anchorpoint_course_staff" class="anchor"></a>
                 <div class="course-student">
                     <h5>Course Staff</h5>
-                    <div class=content_container id="course-id">
+                    <div style="padding-top:15px" class=content_container id="course-id">
                         <div class="staff">
                             <div class="info">
-                                <h4 class="staff_name">Dr Matthew D'Souza</h5>
-                                <p>Email: m.dsouza@uq.edu.au </p> 
-                                <p> Work Phone: 3365 7551</p> 
-                                <p>Office Location: General Purpose South</p> 
-                                <p>Course coordinator</p> 
-                            </div>
-                            <div class="profile_pic">
-                                <img src="../static/pages_img/course_staff/default_staff.png" alt="">
+                                <h4 class="staff_name">{{course.get_admin()}}</h5>
+                                <p>Course Coordinator</p>
                             </div>
                         </div>
+
+                        {% for tutor in course.get_tutors() %}
                         <div class="staff">
                             <div class="info">
-                                <h4 class="staff_name">Mr David Gwynne</h5>
-                                <p>Email: dlg@uq.edu.au  </p> 
-                                <p> Work Phone: 3365 3636</p> 
-                                <p>Office Location: General Purpose South</p> 
-                            </div>
-                            <div class="profile_pic">
-                                <img src="../static/pages_img/course_staff/default_staff.png" alt="">
+                                <h4 class="staff_name">{{tutor.get_name()}}</h5>
+                                <p>Tutor</p>
                             </div>
                         </div>
+                        {% endfor %}
+
+
                     </div>
                 </div>
                 <a id="anchorpoint_resources" class="anchor"></a>

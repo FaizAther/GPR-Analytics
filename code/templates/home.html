@@ -47,7 +47,7 @@
 
                     
                     <center>
-                        <font size="3px"><p style="">{{engagement.get_name()}} for {{course.get_name()}} - {{engagement.get_deadline()}}</p></font>
+                        <font size="3px"><p>{{engagement.get_name()}} for <b>{{course.get_name().replace("-","")}}</b> - {{engagement.get_deadline()}}</p></font>
                     </center>
                     
                     <hr style="margin-top:10px;" class="line">
@@ -68,7 +68,7 @@
                     <!-- Get all announcements for that course-->
                     {% for announcement in course.get_announcements() %}
                     <a class="buttons2">
-                        <p class="announcement-heading">{{announcement.get_name()}}</p>
+                        <p class="announcement-heading">{{course.get_name()}}</p>
                         <p class="announcement-heading">{{announcement.get_timestamp()}}</p>
                         <p class="announcement-content">
                             {{announcement.get_description()}}

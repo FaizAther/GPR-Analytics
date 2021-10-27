@@ -31,6 +31,9 @@ class Course(Base):
         self._events    :List[Event] = []
         self._announcements: List[Announcement] = []
 
+    def get_tutors(self):
+        return self._tutors
+
     def get_announcements(self):
         return self._announcements
 

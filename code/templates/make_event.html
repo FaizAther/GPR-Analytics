@@ -9,7 +9,7 @@
         var caller_object = document.getElementById(caller);
         var regex_check_pass = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(caller_object.value);
 
-        if (!regex_check_pass) {
+        if (!regex_check_pass && caller_object.value != "") {
             caller_object.value = "INVALID";
         }
     }
@@ -24,7 +24,7 @@
     <div id="fromControls" style="margin-top:30px; width:60%;visibility: visible;border-radius: 5px; background-color:#efefef" class="row justify-content-left l-form">
     <div style="padding:20px">
 
-        <center> <h2>Create Course Event</h2> </center>
+        <center> <h3>Create Course Event</h3> </center>
 
         <select id="course_selection" style="margin-top:15px;margin-bottom:15px" class="form-select" aria-label="Default select example">
             <option style="background-color: #DFDFDF" selected>Select Course</option>
@@ -34,7 +34,7 @@
         </select>
 
 
-        <label for="exampleInputEmail1">What kind of event are you creating for COURSE_NAME?</label>
+        <label for="exampleInputEmail1">What kind of event are you creating?</label>
 
         <select id="course_selection" style="margin-top:15px;margin-bottom:15px" class="form-select" aria-label="Default select example">
             <option style="background-color: #DFDFDF" id="event_type" selected>Event Type</option>
