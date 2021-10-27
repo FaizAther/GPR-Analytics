@@ -13,6 +13,26 @@
 {% endblock %}
 {% block my_body %}
 <body>
+
+    {% set marks = [] %} 
+    {% set assessment = [] %} 
+    {% set attendance = [] %}
+
+    {% for engagement in user.get_engagements() %} 
+        {% if engagement.get_event().get_name in ["ASSIGNMENT", "EXAM"] %}
+            
+        {% endif %}
+    {% endfor %}
+
+    {% for event in course.get_events() %}
+    <script> console.log("{{event}}" + "\n") </script>
+    {% endfor %}
+    <script>console.log("=========================")</script>
+    {% for engagement in user.get_engagements() %}
+    <script> console.log("{{engagement}}" + "\n" + "  {{engagement.get_event()}}" + "\n") </script>
+    {% endfor %}
+
+
     <script> console.log("{{course}}")</script>
     <main class="main">
         <!-- HOME PAGE -->
