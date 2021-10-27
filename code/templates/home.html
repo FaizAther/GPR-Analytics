@@ -12,6 +12,16 @@
 </head>
 {% endblock %}
 {% block my_body %}
+<script>
+    function get_semester_year(time_str) {
+        if (time_str.includes("-")) {
+            
+        }
+    }
+</script>
+
+
+
 <body>
     
     <main class="main">
@@ -22,69 +32,24 @@
                 <div class="course">
                     <div class="sem_header"></p>Semester 2, 2021</div>
                     <div class="courses">
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
+                        {% for course in user.get_enrollments() %}
+                        <div style="margin-top:15px;">
+                            <font size="5px">
+                        <a href="{{ url_for('course')}}?course={{course.get_name()}}">
+                            <p style="margin-bottom:15px;">{{course.get_name()}}</p>
                         </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                    </div>
-                    <div class="sem_header"></p>Semester 1, 2021</div>
-                    <div class="courses">
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                    </div>
-                    <div class="sem_header"></p>Semester 2, 2020</div>
-                    <div class="courses">
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                    </div>
-                    <div class="sem_header"></p>Semester 1, 2020</div>
-                    <div class="courses">
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[DECO3801] Design Computing Studio 3- Build (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP4500] Advanced Algorithms & Data Structures (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP3702] Artificial Intelligence (St Lucia & external). Semester 2, 2021</p>
-                        </a>
-                        <a href="specific_course_student.html">
-                            <p class="buttons">[COMP4702] Machine Learning (St Lucia & external). Semester 2, 2021</p>
-                        </a>
+                        </font>
+                        </div>
+                        <hr class="line">
+                        {% endfor %}
                     </div>
                 </div>
             </div>   
+
+
             <div class="content2">
                 <div class="notice">
-                    <h5 class="home_column"> <a href="notification_student.html" class="home_column-btn">Upcoming Deadlines</a></h5>
+                    <h5 class="home_column"> <a class="home_column-btn">Upcoming Deadlines</a></h5>
                     <a href="" class="buttons2">
                         <p class="notice-heading">DECO3801 Project due soon!</p>
                         <p class="notice-content">Make sure to keep up to date with the timeline 
@@ -118,6 +83,9 @@
                     <p class="notice-heading">You have no more notices!</p>
                 </div>
             </div>
+
+
+
             <div class="content3">
                 <div class="announcements">
                     <h5 class="home_column"> <a href="../student/announcement_student.html" class="home_column-btn">Announcements</h5>
@@ -128,60 +96,25 @@
                     {% for announcement in course.get_announcements() %}
                     <a class="buttons2">
                         <p class="announcement-heading">{{announcement.get_name()}}</p>
-                        <p class="announcement-content">{{announcement.get_timestamp()}}
-                            Hi Teams,
-                            This Thursday we have a guest lecture starting promptly at 5pm (Brisbane) 
-                            *NOTE the unusual time*. The guest speaker is Prof Caroline Jay, Head of Research ...
-                        </p>
-                    </a>
-                    <hr class="line">
-                    {% endfor %}
-                    {% endfor %}
-
-
-
-
-
-
-
-                    <a href="../student/specific_course_student.html#anchorpoint_announcement" class="buttons2">
-                        <p class="announcement-heading">COMP4500:</p>
-                        <p class="announcement-content">Week 10
-                            Posted on: Monday, 4 October 2021 4:39:04 PM AEST
-                            Hi everyone,
-                            Welcome back after the break! 
-                            The tutorial this week is on amortised analysis, that we covered before the break in week 9. In lectures we'll be starting to talk about complexity classes P and NP, and why there are interesting and relevant to programmers. 
-                            We also have Quiz 5 due on Friday ...
-                        </p>
-                    </a>
-                    <hr class="line">
-                    <a href="../student/specific_course_student.html#anchorpoint_announcement" class="buttons2">
-                    <p class="announcement-heading">COMP3702:</p>
-                        <p class="announcement-content">Tutorial 9 released
-                            Posted on: Monday, 4 October 2021 9:40:26 PM AEST
-                            Good evening COMP3702 students,
-                            I have uploaded this week's tutorial (Tutorial 9) on Multi-Armed Bandits and Reinforcement Learning to Blackboard.
-                            The last part of the tutorial ...
-                        </p>
-                    </a>
-                    <hr class="line">
-                    <a href="../student/specific_course_student.html#anchorpoint_announcement" class="buttons2">
-                        <p class="announcement-heading">DECO3801:</p>
+                        <p class="announcement-heading">{{announcement.get_timestamp()}}</p>
                         <p class="announcement-content">
-                            SETutor survey
-                            Posted on: Thursday, 30 September 2021 11:21:07 AM AEST
-                            Dear students
-                            UQ and ITEE takes pride in the quality of its teaching staff and encourages you to provide constructive feedback of the 
-                            ...
+                            {{announcement.get_description()}}
                         </p>
                     </a>
                     <hr class="line">
-
+                    {% endfor %}
+                    {% endfor %}
                 </div>
             </div>
+
+
+
+
+
+
             <div class="content4">
                 <h5 class="home_column_long">News Today</h2>
-                <div class="tech-slideshow">
+                <div style="margin-top: 1px;" class="tech-slideshow">
                     <div class="mover-1"></div>
                     <div class="mover-2"></div>
                 </div>
