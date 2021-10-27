@@ -52,6 +52,12 @@ for admin_query in admins_query:
             # print(course_query)
             my_course = my_fac.make_course(id=course_query['position'], name=course_query['name'])
 
+            annon_queries = sqldb.query_dict(f"Select * FROM Announcement WHERE course_id = {course_query['id']}")
+
+            # Add announcements
+            for annon_querry in annon_queries:
+                check_annon = my_course.make_announcement(annon_querry['position'], time=annon_querry['created_date'], description=annon_querry['description'])
+            print(my_course.get_announcements())
             # Enroll students
             enroll_querries = sqldb.query_dict(f"Select * FROM Enrollment WHERE course_id = {course_query['id']}")
             for enroll_query in enroll_querries:

@@ -7,6 +7,8 @@ from Instution.Base import Base
 from Instution.Users.UserType import UserType
 from Instution.Events.EventType import EventType
 from Instution.Events.Event import Event
+from Instution.Items.Announcement import Announcement
+
 
 if TYPE_CHECKING:
     from typing import List
@@ -15,7 +17,6 @@ if TYPE_CHECKING:
     from Instution.Users.Student import Student
     from Instution.Users.Tutor import Tutor
     from Instution.Users.Lecturer import Lecturer
-    from Instution.Items.Announcement import Announcement
 
 '''
     Course class
@@ -31,6 +32,12 @@ class Course(Base):
 
     def get_announcements(self):
         return self._announcements
+
+    def make_announcement(self, id, time=None, description=None):
+        annon = Announcement(id, time=time, description=description)
+        self.add_announcement(annon)
+        return annon
+
 
     def add_announcements(self, announcements: List[Announcement]) -> None:
         for a in announcements:
