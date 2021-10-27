@@ -74,13 +74,13 @@ for admin_query in admins_query:
             event_queries = sqldb.query_dict(f"Select * FROM Event WHERE course_id = {course_query['id']}")
             
             
-            deadline = datetime.datetime.fromisoformat(event_query['start_date'])
+            deadline = datetime.datetime.fromisoformat(event_queries[0]['start_date'])
             for event_query in event_queries:
                 event = my_course.make_event(event_query['position'], event_query['type'], \
                     event_query['name'], event_query['start_date'], event_query['end_date'], (30 if event_query['marked'] else 0), deadline=deadline)
                 if event_query['marked']:
                     deadline += datetime.timedelta(days=50)
-                print(deadline)
+                # print(deadline)
                 # print(event_query)
                 # print(event.get_invitees())
             
@@ -92,7 +92,7 @@ for admin_query in admins_query:
 # print(my_user.get_engagements())
 # for engagement in my_user.get_engagements():
 #     print(engagement)
-print(my_user.get_specific_engagement(my_course))
+# print(my_user.get_specific_engagement(my_course))
 # Populate University
 
 # Populate Faculty
