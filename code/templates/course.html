@@ -53,7 +53,9 @@
                 <div class="announcements">
                     <h5>Announcements</h5>
                     
+                    
                         <div style="padding: 20px; padding-left:10px;" class=content_container id="course-id">
+                            {% if user.get_type() == types.LECTURER %}
                             <form method="POST">
                                 {{ form.csrf_token }}
                                 <div class="input-group">
@@ -61,6 +63,7 @@
                                     <button type="submit" style="margin-right:150px;" class="btn btn-dark">Create Announcement</button>
                                 </div>
                             </form>
+                            {% endif %}
 
                             {% for announcement in course.get_announcements() %}
                             <div style="padding-top:10px" class="staff">
@@ -114,9 +117,11 @@
                     (30 if event_query['marked'] else 0), style="float:right;margin-right:60px;"
                     deadline=deadline) -->
                     <h5>Learning Resources 
+                        {% if user.get_type() == types.LECTURER %}
                         <button type="button" style="float:right;margin-right:60px;" class="btn btn-dark" 
                                 data-toggle="modal" onclick="showModal()">Create new Resource
                             </button>
+                        {% endif %}
                     </h5>
                     
                     <div id="newResource" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -125,8 +130,6 @@
                             <form method="POST">
 
                                 <h3>Create a new {{course.get_name().replace("-","")}} Resource</h3>
-
-   
 
                                 <label for="exampleInputEmail1">What kind of event are you creating?</label>
 
@@ -145,22 +148,29 @@
 
                                 <label for="exampleInputEmail1">What would you like to name this event?</label>
 
-                                <input style="margin-bottom:10px;" name="new_announcement_desc" type="text" class="form-control" id="exampleInputEmail1" placeholder="Name">
+                                <input style="margin-bottom:10px;" name="resource_name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Name">
                                 <div style="margin-bottom:10px;">
                                     <label for="exampleInputEmail1">When is the date of this event?</label>
                                 </div>
 
-                                <input style="margin-bottom:10px;" name="new_announcement_desc" type="text" class="form-control" id="exampleInputEmail1" placeholder="Date of Event">
+                                <input style="margin-bottom:10px;" name="resource_date" type="text" class="form-control" id="exampleInputEmail1" placeholder="Date of Event">
                                 
 
                                 <div style="margin-bottom:10px;">
                                     <label for="exampleInputEmail1">When does this event start and end?</label>
                                 </div>
                                 <div style="margin-top:10px;margin-bottom:10px;" class="input-group">
-                                    <input id="start" onfocusout="validate_time('start')" style="margin-right: 40px;" type="text" class="form-control" placeholder="Start"/>
+                                    <input id="resource_start_time" onfocusout="validate_time('start')" style="margin-right: 40px;" type="text" class="form-control" placeholder="Start"/>
                                     <span class="input-group-addon">to</span>
-                                    <input id="end" onfocusout="validate_time('end')" style="margin-left: 40px;" type="text" class="form-control" placeholder="End"/>
+                                    <input id="resource_end_time" onfocusout="validate_time('end')" style="margin-left: 40px;" type="text" class="form-control" placeholder="End"/>
                                 </div>
+
+
+                                <div style="margin-bottom:10px;">
+                                    <label for="exampleInputEmail1">Select the resource to upload for this event</label>
+                                </div>
+
+                                <input name="resource_file" type="file" class="form-control-file" id="exampleFormControlFile1">
 
 
                                 <button type="submit" style="margin-right:150px;" class="btn btn-dark">Create Resource</button>
