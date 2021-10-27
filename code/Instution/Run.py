@@ -14,6 +14,8 @@ from Instution.Events.Mark import Mark
 from Instution.Users.Sudo import Sudo
 from Instution.Database.Database import SqliteDB
 
+import datetime
+
 sqldb = SqliteDB()
 # sqldb.connection()
 
@@ -70,10 +72,15 @@ for admin_query in admins_query:
 
             # print(my_uni.get_users())
             event_queries = sqldb.query_dict(f"Select * FROM Event WHERE course_id = {course_query['id']}")
+            
+            
             for event_query in event_queries:
+                deadline = datetime.datetime.fromisoformat(event_query['start_date'])
                 event = my_course.make_event(event_query['position'], event_query['type'], \
-                    event_query['name'], event_query['start_date'], event_query['end_date'], (30 if event_query['marked'] else 0))
-                # print(event_query)
+                    event_query['name'], event_query['start_date'], event_query['end_date'], (30 if event_query['marked'] else 0), deadline=deadline)
+                if event_query['marked']:
+                    deadline += datetime.timedelta(days=50)
+                print(event_query)
                 # print(event.get_invitees())
             
 

@@ -15,14 +15,14 @@ if TYPE_CHECKING:
     Mark Class
 '''
 class Mark(Attendance):
-    def __init__(self, id, event, attendee, weighting, marker=None, course=None):
+    def __init__(self, id, event, attendee, weighting, marker=None, course=None, deadline=None):
         super().__init__(id, event, attendee, marker=marker, course=course)
 
         self._acheived      :int        = 0
         self._submission    :Dict[datetime, List] \
                                         = 0
 
-        self._deadline      :datetime   = 0
+        self._deadline      :datetime   = deadline
         self._penalty       :int        = 0
         self._weighting     :int        = weighting
         

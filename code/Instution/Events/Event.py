@@ -82,13 +82,13 @@ class Event(Base):
     def get_weighting(self) -> int:
         return self._weighting
 
-    def add_user(self, user: User, course: Course) -> None:
+    def add_user(self, user: User, course: Course, deadline=None) -> None:
         if user.get_type() == UserType.TUTOR:
             self.handle_tutor(user),
         elif user.get_type() == UserType.LECTURER:
             self.handle_lecturer(user)
         else:
-            self.handle_student(user, course)
+            self.handle_student(user, course, deadline)
 
     def add_users(self, users: List[User], course):
         Base.__DO_SOMETHINGS__(lambda u: self.add_user(u, course), users)
@@ -102,7 +102,7 @@ class Event(Base):
     def get_manager(self):
         return self._manager
 
-    def handle_student(self, user: Student, course: Course) -> None:
+    def handle_student(self, user: Student, course: Course, deadline=None) -> None:
         marker = self.find_marker()
         marker = self.get_manager() if marker == None else marker
         # print(user)
@@ -110,7 +110,7 @@ class Event(Base):
         if (self.get_weighting() <= 0):
             attendance = Attendance(id, self, user, marker=marker, course=course)
         else:
-            attendance = Mark(id, self, user, self.get_weighting(), marker=marker, course=course)
+            attendance = Mark(id, self, user, self.get_weighting(), marker=marker, course=course, deadline=deadline)
 
         Base.ADD_THING_TO(attendance, self.get_invitees())
 

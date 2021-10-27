@@ -60,7 +60,7 @@ class Course(Base):
     # 'time_of_day': 3, 'marked': 0}
     def make_event(self, id, type, name, \
             start_date, end_date, weighting, \
-            reacurring=False, description=None, creation=None, day_of_week=None, time_of_day=None):
+            reacurring=False, description=None, creation=None, day_of_week=None, time_of_day=None, deadline=None):
         start_date = datetime.fromisoformat(start_date)
         end_date = datetime.fromisoformat(end_date)
         event = Event(id, start_date, end_date, name=name, description=description, creation=creation, type=EventType(type))
@@ -89,7 +89,7 @@ class Course(Base):
     def get_users(self) -> List[User]:
         return self._users
 
-    def add_user(self, user: User) -> None:
+    def add_user(self, user: User, deadline=None) -> None:
         Base.ADD_THING_TO(user, self.get_users())
         user.add_engagement(self)
         if user.get_type() == UserType.LECTURER:
