@@ -24,7 +24,7 @@
     {% set types = user.get_user_types() %}
     <script>console.log("{{user.get_type()}}")</script>
 
-    {% if user.get_type() in [types.STUDENT, types.TUTOR, types.UNDERGRAD, types.POSTGRAD] %} 
+    {% if user.get_type() in [types.STUDENT, types.TUTOR, types.UNDERGRAD, types.POSTGRAD, types.EXCHANGE, types.PHD] %} 
       {% set courses = user.get_enrollments() %}
     {% endif %}
 

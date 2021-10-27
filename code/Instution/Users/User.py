@@ -20,8 +20,8 @@ class User(Base):
         import hashlib
         return hashlib.sha256(value.encode('utf-8')).hexdigest()
 
-    def __init__(self, id: int, type: UserType, name=None):
-        super().__init__(id, name=name)
+    def __init__(self, id: int, type: UserType, name=None, description=None):
+        super().__init__(id, name=name, description=description)
         self._engagements   :List       = []
         self._password      :str        = ""
         self._type          :UserType   = type
@@ -38,6 +38,7 @@ class User(Base):
 
     def is_type(self, target:UserType):
         students = [UserType.UNDERGRAD, UserType.POSTGRAD, UserType.PHD, UserType.EXCHANGE]
+        print(target, self.get_type() in students)
         if (target == UserType.STUDENT):
             return self.get_type() in students
         return self.get_type() == target

@@ -15,12 +15,12 @@ from Instution.Users.Sudo import Sudo
 from Instution.Database.Database import SqliteDB
 
 sqldb = SqliteDB()
-sqldb.connection()
+# sqldb.connection()
 
 # Create the sudo user
 
 my_sudo = Sudo()
-print(my_sudo)
+# print(my_sudo)
 
 # Populate admins
 
@@ -29,16 +29,47 @@ admins_query = sqldb.query(f"Select * FROM User WHERE type = {UserType.ADMIN.val
 for admin_query in admins_query:
     # Find Uni
     uni_query = sqldb.query(f"Select * FROM University WHERE admin = {admin_query[0]}")[0]
-    print(uni_query)
+    # print(uni_query)
     # Make admin
     my_admin = my_sudo.add_admin(name=uni_query[1], description=uni_query[3])
     my_uni = my_admin.get_university()
+    # Add Users
+
+    user_queries = sqldb.query_dict(f"Select * FROM User")
+    for user_query in user_queries:
+        my_user = my_uni.make_user(UserType(user_query['type']), name=user_query['name'], description=user_query['description'])
+        #print(my_user)
+
     # Find Faculties
     facs_query = sqldb.query(f"Select * FROM Faculty WHERE university_id = {uni_query[0]}")
     # print(facs_query)
     for fac_query in facs_query:
-        print(fac_query)
-        my_fac = my_uni.make_faculty()
+        # print(fac_query)
+        my_fac = my_uni.make_faculty(name=fac_query[3], description=fac_query[5])
+        # print("FUCK")
+        courses_query = sqldb.query_dict(f"Select * FROM Course WHERE faculty_id = {fac_query[0]}")
+        for course_query in courses_query:
+            # print(course_query)
+            my_course = my_fac.make_course(id=course_query['position'], name=course_query['name'])
+
+            # Enroll students
+            enroll_querries = sqldb.query_dict(f"Select * FROM Enrollment WHERE course_id = {course_query['id']}")
+            for enroll_query in enroll_querries:
+                # print("Enrollment -q", enroll_query)
+                user_querry = sqldb.query_dict(f"Select * FROM User where id = {enroll_query['user_id']}")[0]
+                # print("User -q", user_querry)
+                # print(my_uni.get_users()[user_querry['position']])
+                # print(my_course)
+                my_course.add_user(my_uni.get_users()[user_querry['position']])
+
+            # print(my_uni.get_users())
+            # event_queries = sqldb.query_dict(f"Select * FROM Event WHERE course_id = {course_query['position']}")
+            # for event_query in event_queries:
+            #     # print(event_query)
+            # pass
+        # print(my_fac.get_courses_list())
+        # print(my_fac)
+
 
 # Populate University
 
@@ -51,7 +82,7 @@ for admin_query in admins_query:
 
 # Populate Users for The University of Queensland
 
-users_query = sqldb.query(f"Select * FROM User")
+# users_query = sqldb.query(f"Select * FROM User")
 
 # for user_query in users_query:
     # print(user_query)

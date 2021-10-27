@@ -172,6 +172,7 @@ def home():
 
     # find user from session
     _user = my_sudo.find_user(session['university'], session['username'])
+    print(_user, _user.get_type())
     return render_template("home.html", user=_user)
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
@@ -359,7 +360,7 @@ if __name__ == "__main__":
     sociio = True    
 
     if sociio:
-        socketio.run(app, host="0.0.0.0", port='8888', debug=True)
+        socketio.run(app, host="0.0.0.0", port='80', debug=True)
     else:
         app.debug = True
-        app.run(host="0.0.0.0", port='8888', debug=True)
+        app.run(host="0.0.0.0", port='80', debug=True)

@@ -58,6 +58,14 @@ class SqliteDB(Database):
         self.cursor.execute(query)
         results = self.cursor.fetchall()
         return results
+    
+    def query_dict(self, query):
+        response = []
+        result = self.query(query)
+        for res in result:
+            # print(dir(self.cursor))
+            response.append(dict(zip([c[0] for c in self.cursor.description], res)))
+        return response
 """
 
 class GprDataBase():
