@@ -23,8 +23,8 @@ if TYPE_CHECKING:
 '''
 class Course(Base):
 
-    def __init__(self, id: int, admin: User=None, name=None):
-        super().__init__(id, name)
+    def __init__(self, id: int, admin: User=None, name=None, description=None):
+        super().__init__(id, name=name, description=description)
         self._admin     :User        = admin
         self._users     :List[User]  = []
         self._events    :List[Event] = []
