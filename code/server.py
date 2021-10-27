@@ -16,6 +16,7 @@ from werkzeug.utils import HTMLBuilder
 from Forms.LoginForm import LoginForm
 from Forms.SelectionForm import SelectionForm
 from Forms.AddForm import AddForm
+from Forms.AnnouncementForm import AnnouncementForm
 
 from Instution.Run import *
 
@@ -139,8 +140,7 @@ def course():
     if 'username' not in session:
         return redirect(url_for('login'))
 
-    if request.method == "POST":
-        print("asdfasdfasdfasdfasdf")
+    form = AnnouncementForm()
 
     # find user from session
     _uni = my_sudo.find_university(session['university'])
@@ -148,16 +148,22 @@ def course():
     target_fac_cour = request.args.get('course')
     target_fac, target_course = target_fac_cour.split('-')
 
-    print(_uni.get_faculties())
+    # print(_uni.get_faculties())
     _faculty = _uni.find_faculty(target_fac)
-    print(_faculty)
+    # print(_faculty)
     _course = _faculty.find_course(target_course)
     # _faculty.find
-    print(_course)
+    # print(_course)
+    if request.method == "POST":
+        # print("here")
+        _course.make_announcement(description=form.new_announcement_desc.data)
+        print(form.new_announcement_desc.data)
+        # print("asdfasdfasdfasdfasdf")
+
     if target_course == None:
         return redirect(url_for('login'))
 
-    return render_template("course.html", specified_course=target_fac_cour, user=_user, course=_course)
+    return render_template("course.html", specified_course=target_fac_cour, user=_user, course=_course, form=form)
 
 @app.route('/register_attendance')
 def register_attendance():

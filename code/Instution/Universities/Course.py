@@ -37,7 +37,8 @@ class Course(Base):
     def get_announcements(self):
         return self._announcements
 
-    def make_announcement(self, id, time=None, description=None):
+    def make_announcement(self, id=None, time=None, description=None):
+        id = id if not None else len(self.get_announcements())
         annon = Announcement(id, time=time, description=description)
         self.add_announcement(annon)
         return annon

@@ -40,11 +40,11 @@
                     <h5>Announcements</h5>
                     
                         <div style="padding: 20px; padding-left:10px;" class=content_container id="course-id">
-
                             <form method="POST">
+                                {{ form.csrf_token }}
                                 <div class="input-group">
-                                <input id="new_announcement_desc" type="text" style="margin-left:50px;" class="form-control" id="exampleInputEmail1" placeholder="New Announcement">
-                                <button type="submit" style="margin-right:150px;" class="btn btn-dark">Create Announcement</button>
+                                    <input name="new_announcement_desc" type="text" style="margin-left:50px;" class="form-control" id="exampleInputEmail1" placeholder="New Announcement">
+                                    <button type="submit" style="margin-right:150px;" class="btn btn-dark">Create Announcement</button>
                                 </div>
                             </form>
 
