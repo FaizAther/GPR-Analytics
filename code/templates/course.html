@@ -173,6 +173,13 @@
                                 <input name="resource_file" type="file" class="form-control-file" id="exampleFormControlFile1">
                             </div>
 
+                            <div style="margin-bottom:10px;">
+                                <label for="exampleInputEmail1">Enter the mark for this item (if applicable)</label>
+                            </div>
+
+                            <input style="margin-bottom:10px;" name="resource_mark" type="text" class="form-control" id="exampleInputEmail1" placeholder="Mark">
+                                
+
                                 <button name="form-resource" type="submit" style="margin-right:150px;" class="btn btn-dark">Create Resource</button>
 
 
@@ -205,56 +212,7 @@
                 </div>
                 <a id="anchorpoint_assessments" class="anchor"></a>
 
-                <h5>Assessment
-                    {% if user.get_type() == types.LECTURER %}
-                    <button type="button" style="float:right;margin-right:60px;" class="btn btn-dark" 
-                            data-toggle="modal" onclick="showModal('#newAssessment')">Add new Assessment
-                        </button>
-                    {% endif %}
-                    
-                </h5>
-
-                <div id="newAssessment" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div style="padding:20px;" class="modal-content">
-                        <form method="POST">
-
-                            <h3>Create a new {{course.get_name().replace("-","")}} Assessment</h3>
-
-                            <label for="exampleInputEmail1">What assessment item are you creating?</label>
-
-                            <select id="course_selection" style="margin-top:15px;margin-bottom:15px" class="form-select" aria-label="Default select example">
-                                <option style="background-color: #DFDFDF" id="event_type" selected>Type</option>
-                                <option value="0">Assignment</option>
-                                <option value="1">Exam</option>
-                            </select>
-
-                            <label for="exampleInputEmail1">What would you like to name this assessment?</label>
-
-                            <input style="margin-bottom:10px;" name="resource_name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Name">
-                            <div style="margin-bottom:10px;">
-                                <label for="exampleInputEmail1">When is this assessment due?</label>
-                            </div>
-
-                            <input style="margin-bottom:10px;" name="resource_date" type="text" class="form-control" id="exampleInputEmail1" placeholder="Due Date">
-
-
-                            <div style="margin-bottom:10px;">
-                                <label for="exampleInputEmail1">Select the resource to upload for this assessment</label>
-                            </div>
-                            <div style="margin-bottom:10px;">
-                            <input name="resource_file" type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-
-                            <button type="submit" style="margin-right:150px;" class="btn btn-dark">Create Assessment</button>
-
-
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-
-
+                <h5>Assessment</h5>
 
                 <div class="assessments">
                     <div class=content_container id="course-id">
