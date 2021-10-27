@@ -133,11 +133,14 @@ def home():
     return render_template("home.html", user=_user)
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
-@app.route('/course')
+@app.route('/course', methods=['GET', 'POST'])
 def course():
     # check user logged in
     if 'username' not in session:
         return redirect(url_for('login'))
+
+    if request.method == "POST":
+        print("asdfasdfasdfasdfasdf")
 
     # find user from session
     _uni = my_sudo.find_university(session['university'])
@@ -183,10 +186,7 @@ def course_mgmt():
         return redirect(url_for('forbidden'))
 
     _user = my_sudo.find_admin(session['university'])
-    print("///////////////////////////")
-    u = _user.get_university()
 
-    print("///////////////////////////")
     return render_template("course_mgmt.html", user=_user)
 
 # Create staff, remove staff, list staff
@@ -233,6 +233,16 @@ def make_event():
     _user = my_sudo.find_admin(session['university'])
 
     return render_template("make_event.html", user=_user)
+
+@app.route('/add_resource')
+def add_resource():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('forbidden'))
+    _user = my_sudo.find_admin(session['university'])
+
+    return render_template("add_resource.html", user=_user)
 
 
 

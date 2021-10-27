@@ -16,15 +16,6 @@
 
 
 
-    {% for event in course.get_events() %}
-    <script> console.log("{{event}}" + "\n") </script>
-    {% endfor %}
-    <script>console.log("=========================")</script>
-    {% for engagement in user.get_engagements() %}
-    <script> console.log("{{engagement}}" + "\n" + "  {{engagement.get_event()}}" + "\n") </script>
-    {% endfor %}
-
-
     <script> console.log("{{course}}")</script>
     <main class="main">
         <!-- HOME PAGE -->
@@ -49,10 +40,18 @@
                     <h5>Announcements</h5>
                     
                         <div style="padding: 20px; padding-left:10px;" class=content_container id="course-id">
+
+                            <form method="POST">
+                                <div class="input-group">
+                                <input id="new_announcement_desc" type="text" style="margin-left:50px;" class="form-control" id="exampleInputEmail1" placeholder="New Announcement">
+                                <button type="submit" style="margin-right:150px;" class="btn btn-dark">Create Announcement</button>
+                                </div>
+                            </form>
+
                             {% for announcement in course.get_announcements() %}
                             <div style="padding-top:10px" class="staff">
                                 <div class="info">
-                                    <p>Posted by: {{course.get_admin()}}</p>
+                                    <p>Posted by: {{course.get_admin().get_name()}}</p>
                                     <p>At time: {{announcement.get_timestamp()}}</p>
                                 </div>
                                 
@@ -73,7 +72,7 @@
                     <div style="padding-top:15px" class=content_container id="course-id">
                         <div class="staff">
                             <div class="info">
-                                <h4 class="staff_name">{{course.get_admin()}}</h5>
+                                <h4 class="staff_name">{{course.get_admin().get_name()}}</h5>
                                 <p>Course Coordinator</p>
                             </div>
                         </div>
@@ -94,199 +93,62 @@
                 <div class="resources">
                     <h5>Learning Resources</h5>
                     <div class=content_container id="course-id">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-link"></i> Lecture Recordings</a>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa folder-open"></i> Lecture Zoom Session</a>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Prac Zoom Sessions</a>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-link"></i> Course Outline</a>
-                            <p class="resources_content">
-                                Attached Files:
-                                File COMP3301_7308-Course-Outline.pdf (88.596 KB)
-                                A one-page PDF summarising the course content for the semester, including practicals and assessment items.
-                                No lecture in weeks 12.
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Vim Resources</a>
-                            <p class="resources_content">
-                                To access this link to the course overview, you will need to sign in with your uqconnect email address (this is the same one that you use to access MS Teams). It is far simpler for you to access this through Teams because we use the platform for unified content delivery. If you are however stuggling with access via a VPN then this link should work. If you are still having problems then your issue is more likely to be either your bandwidth or your browser. Access to MS Teams and MS 365 has been verified to work worldwide.
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Guides</a>
-                            <p class="resources_content">
-                                To access this link to the course weeklies, you will need to sign in with your uqconnect email address (this is the same one that you use to access MS Teams). It is far simpler for you to access this through Teams because we use the platform for unified content delivery. If you are however stuggling with access via a VPN then this link should work. If you are still having problems then your issue is more likely to be either your bandwidth or your browser. Access to MS Teams and MS 365 has been verified to work worldwide.
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 1 - Operating Systems Introduction and Structure</a>
-                            <p class="resources_content">
-                                Operating Systems Introduction and Structure. The following files are provided:-
-                                Introductory Powerpoint
-                                Textbook Chapter 1
-                                Textbook Chapter 2
-                                Tutorial Questions, week 1.
-                                No Practical - Prac sessions start in week 2</p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 2 - Processes and Threads</a>
-                            <p class="resources_content">
-                                Lecture Notes for Processes and Threads (Ch 3 and Ch4; ppt and PDF)
-                                Tutorial 1 discussed.
-                                Prac 1
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 3 - CPU Scheduling</a>
-                            <p class="resources_content">
-                                Lecture Notes CPU Scheduling (Ch 6) + Tutorial sheet to be discussed next week.
-                                Prac 2
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 4 - Synchronisation and Deadlocks</a>
-                            <p class="resources_content">
-                                Lecture Notes Synchronisation and Deadlocks
+                        
 
-                                Tutorial Sheet.
-                                No prac this week- non compulsory session is for consultation on assignment 1.
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 5 - Main Memory and Virtual Memory</a>
-                            <p class="resources_content">
-                                Lecture Notes Main Memory and Virtual Memory
-                                Assignment 1 due.  No session this week.
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 6 - Mass Storage</a>
-                            <p class="resources_content">
-                                Ch 10  - mass storage
-                                Prac  3
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 7 - File Systems</a>
-                            <p class="resources_content">
-                                Lecture Notes File Systems
-                                Tutorial
-                                Prac 4
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 8 - IO Systems</a>
-                            <p class="resources_content">
-                                Discussion of answers to last week's tutorial.
-                                Lecture on IO Systems (Ch 13).
-                                Tutorial 8 released.
 
-                                No prac this week- non compulsory session is for consultation on assignment 2.
+                        {% for event in course.get_events() %}
+                        {% if event.get_weighting() == 0 %}
 
-                            </p>
-                        </div>
-                        <hr class="resources_line">
+                        
                         <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 9 - Protection, Security and Virtual Machines</a>
+                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i>{{event.get_name()}}</a>
                             <p class="resources_content">
-                                Tutorial 8 questions discussed.
-                                Lecture on Ch 14, 15, and a little new material from Chapter 16 OS (virtualization).
-                                If we don't get through all the material, we can catch up later.
-                                Tutorial 9 released to be discussed.
-                                Assignment 2 due. You must attend your session, this week
+                                {{event.get_description()}}
                             </p>
                         </div>
                         <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 10 - Guest Lecture</a>
-                            <p class="resources_content">
-                                Guest Lecuture - Security
-                                Prac 6 is designed to help with assignment 3.
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 11 - Course Review</a>
-                            <p class="resources_content">
-                                A course review will be presented.
-                                Consultation Session for Assignment 3.
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Week 12 - No Lecture</a>
-                            <p class="resources_content">
-                                No Lecture or Tutorial
-                                No lab sessions, this week.
-                                Assignment 3 Due.  You must attend your session this week.
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                    </div>
+
+                        {% endif %}
+                        {% endfor %}
+
+
+                </div>
                 </div>
                 <a id="anchorpoint_assessments" class="anchor"></a>
+
+
+
                 <div class="assessments">
                     <h5>Assessment</h5>
                     <div class=content_container id="course-id">
+
+                        {% for event in course.get_events() %}
+                            
+                        {% if event.get_weighting() > 0 %}
+
                         <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-link"></i> Practical Assessments</a>
-                            <p class="resources_content">
-                                Access practical assessments here.
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-link"></i> Literature Review</a>
-                            <p class="resources_content">
-                                TurnItIn Submission.
-                            </p>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Assignment 1</a>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Assignment 2</a>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Assignment 3</a>
-                        </div>
-                        <hr class="resources_line">
-                        <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> Final Exam</a>
+                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> {{event.get_name()}}</a>
                         </div>
                         <hr class="resources_line">
 
+                        {% endif %} 
+                        {% endfor %}
+
+
                     </div>
                 </div>
+
+
+
+
+
                 <a id="anchorpoint_grades" class="anchor"></a>
                 <div class="grades">
                     <h5>My Grades</h5>
                     <div class=content_container id="course-id">
                         <div class="tabs">
                             <div class="tab_item">
-                                ITEM
+                                GRADED ITEMS
                             </div>
                             <div class="tabs_second">
                                 <div style="margin-right:70px;" class="tab_last_activity">

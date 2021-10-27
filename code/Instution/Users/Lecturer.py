@@ -17,6 +17,9 @@ class Lecturer(User):
     def add_engagement(self, engagement) -> None:
         return super().add_engagement(engagement)
 
+    def get_enrollments(self):
+        return self.get_engagements()
+
     def generate_html(self):
         return ""
     

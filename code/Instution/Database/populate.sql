@@ -27,24 +27,24 @@ INSERT INTO Faculty (position, university_id, name, dean_id, description) VALUES
 
 
 -- COMP
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (3301, 1, "COMP-3301", 2);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (4403, 1, "COMP-4403", 3);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (4506, 1, "COMP-4506", 4);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (3301, 1, "COMP-3301", 3);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (4403, 1, "COMP-4403", 4);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (4506, 1, "COMP-4506", 5);
 
 -- MATH
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1081, 2, "MATH-1081", 5);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1131, 2, "MATH-1131", 6);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1231, 2, "MATH-1231", 7);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1081, 2, "MATH-1081", 6);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1131, 2, "MATH-1131", 7);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1231, 2, "MATH-1231", 8);
 
 -- PHYS
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1111, 3, "PHYS-1111", 8);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2222, 3, "PHYS-2222", 9);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (3333, 3, "PHYS-3333", 10);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1111, 3, "PHYS-1111", 9);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2222, 3, "PHYS-2222", 10);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (3333, 3, "PHYS-3333", 11);
 
 -- STAT
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1100, 4, "STAT-1100", 11);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2200, 4, "STAT-2200", 12);
-INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (3300, 4, "STAT-3300", 13);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (1100, 4, "STAT-1100", 12);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (2200, 4, "STAT-2200", 13);
+INSERT INTO Course (position, faculty_id, name, coordinator_id) VALUES (3300, 4, "STAT-3300", 14);
 
 -- Add Lecturer
 
@@ -58,7 +58,7 @@ INSERT INTO User (position, university_id, name, type, password) VALUES (6, 1, "
 INSERT INTO User (position, university_id, name, type, password) VALUES (7, 1, "Albert Einstein", 0, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
 INSERT INTO User (position, university_id, name, type, password) VALUES (8, 1, "Nikola Tesla", 0, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
 INSERT INTO User (position, university_id, name, type, password) VALUES (9, 1, "Mohammad bin Nayeb", 0, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-INSERT INTO User (position, university_id, name, type, password) VALUES (10, 1, "Bin Salman", 0, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+INSERT INTO User (position, university_id, name, type, password) VALUES (10, 1, "Terry A. Davis", 0, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
 INSERT INTO User (position, university_id, name, type, password) VALUES (11, 1, "Ahsan Virani", 0, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
 
 -- Add Students

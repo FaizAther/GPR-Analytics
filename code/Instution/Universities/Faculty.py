@@ -57,6 +57,8 @@ class Faculty(Base):
             id = int(name.split('-')[1])
         course = Course(id, name=f"{identifier}", description=description, admin=admin)
         self.add_course(course)
+        if admin != None:
+            admin.add_engagement(course)
         self._count += 1
         return course
 
