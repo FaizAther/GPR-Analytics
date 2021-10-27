@@ -84,7 +84,7 @@
             </div>   
             <div class="content2">
                 <div class="notice">
-                    <h5 class="home_column"> <a href="notification_student.html" class="home_column-btn">Notice</a></h5>
+                    <h5 class="home_column"> <a href="notification_student.html" class="home_column-btn">Upcoming Deadlines</a></h5>
                     <a href="" class="buttons2">
                         <p class="notice-heading">DECO3801 Project due soon!</p>
                         <p class="notice-content">Make sure to keep up to date with the timeline 
@@ -115,14 +115,19 @@
                         <p class="notice-content">To access the personal exam timetable, check your email!</p>
                     </a>
                     <hr class="line">
-                    <p class="notice-heading">You have no more notice!</p>
+                    <p class="notice-heading">You have no more notices!</p>
                 </div>
             </div>
             <div class="content3">
                 <div class="announcements">
                     <h5 class="home_column"> <a href="../student/announcement_student.html" class="home_column-btn">Announcements</h5>
-                    <a href="../student/specific_course_student.html#anchorpoint_announcement" class="buttons2">
-                        <p class="announcement-heading">DECO3801:</p>
+
+                    <!-- Get all courses that user is in -->
+                    {% for course in user.get_enrollments() %}
+                    <!-- Get all announcements for that course-->
+                    {% for announcement in course.get_announcements() %}
+                    <a class="buttons2">
+                        <p class="announcement-heading">announcement.get_name()</p>
                         <p class="announcement-content">Week 10 Studio
                             Posted on: Tuesday, 5 October 2021 8:48:50 AM AEST
                             Hi Teams,
@@ -131,6 +136,15 @@
                         </p>
                     </a>
                     <hr class="line">
+                    {% endfor %}
+                    {% endfor %}
+
+
+
+
+
+
+
                     <a href="../student/specific_course_student.html#anchorpoint_announcement" class="buttons2">
                         <p class="announcement-heading">COMP4500:</p>
                         <p class="announcement-content">Week 10
