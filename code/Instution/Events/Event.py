@@ -69,6 +69,7 @@ class Event(Base):
     def get_invitees(self) -> List[Attendance]:
         return self._invitees
 
+    # contains tutors/guest lecturers - not lecturer themselves
     def get_organizers(self) -> List[User]:
         return self._organizers
 
