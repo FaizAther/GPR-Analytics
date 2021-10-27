@@ -140,13 +140,15 @@ def course():
         return redirect(url_for('login'))
 
     # find user from session
+    _uni = my_sudo.find_university(session['university'])
+    print(_uni)
     _user = my_sudo.find_user(session['university'], session['username'])
 
     target_course = request.args.get('course')
     if target_course == None:
         return redirect(url_for('login'))
 
-    return render_template("course.html", specified_course=target_course, user=_user)
+    return render_template("course.html", specified_course=target_course, user=_user, uni=_uni)
 
 @app.route('/register_attendance')
 def register_attendance():
