@@ -175,7 +175,7 @@ def course():
         # print(EventType(int(form1.resource_type.data)))
         pos = len(_course.get_events())
         event = _course.make_event(pos, int(form1.resource_type.data), \
-    form1.resource_name.data, form1.resource_start_time.data, form1.resource_end_time.data, (30 if False else 0), deadline=None)
+    form1.resource_name.data, form1.resource_start_time.data, form1.resource_end_time.data, int(form1.resource_mark.data), deadline=None)
         # print(event)
 
     # print(request.form)
