@@ -1,6 +1,6 @@
 var audioMuted = false;
 var videoMuted = false;
-
+/* Based off of code from https://github.com/sayantanDs/webrtc-videochat */
 document.addEventListener("DOMContentLoaded", (event)=>{
     var muteAudioField = document.getElementById("mute_audio_inp");
     var muteVideoField = document.getElementById("mute_video_inp");
