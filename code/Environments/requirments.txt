@@ -3,12 +3,14 @@ click==8.0.1
 Flask==2.0.1
 Flask-SocketIO==5.1.1
 Flask-SQLAlchemy==2.5.1
+Flask-WTF==0.15.1
 greenlet==1.1.0
 h11==0.12.0
 importlib-resources==5.2.2
 itsdangerous==2.0.1
 Jinja2==3.0.1
 MarkupSafe==2.0.1
+multipledispatch==0.6.0
 python-engineio==4.2.1
 python-socketio==5.4.0
 simple-websocket==0.3.0
@@ -17,4 +19,5 @@ SQLAlchemy==1.4.22
 typed-ast==1.4.3
 Werkzeug==2.0.1
 wsproto==1.0.0
+WTForms==2.3.3
 zipp==3.5.0
