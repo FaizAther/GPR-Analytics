@@ -14,7 +14,21 @@
 {% block my_body %}
 <body>
 
+    <script>
+        function showModal(id) {
+            $(id).modal('show')
+        }
 
+        function validate_time(caller) {
+            var caller_object = document.getElementById(caller);
+            var regex_check_pass = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(caller_object.value);
+
+            if (!regex_check_pass && caller_object.value != "") {
+                caller_object.value = "INVALID";
+            }
+        }
+
+    </script>
 
     <script> console.log("{{course}}")</script>
     <main class="main">
@@ -39,14 +53,17 @@
                 <div class="announcements">
                     <h5>Announcements</h5>
                     
+                    
                         <div style="padding: 20px; padding-left:10px;" class=content_container id="course-id">
+                            {% if user.get_type() == types.LECTURER %}
                             <form method="POST">
                                 {{ form.csrf_token }}
                                 <div class="input-group">
                                     <input name="new_announcement_desc" type="text" style="margin-left:50px;" class="form-control" id="exampleInputEmail1" placeholder="New Announcement">
-                                    <button type="submit" style="margin-right:150px;" class="btn btn-dark">Create Announcement</button>
+                                    <button name="form-announcement" type="submit" style="margin-right:150px;" class="btn btn-dark">Create Announcement</button>
                                 </div>
                             </form>
+                            {% endif %}
 
                             {% for announcement in course.get_announcements() %}
                             <div style="padding-top:10px" class="staff">
@@ -89,12 +106,91 @@
 
                     </div>
                 </div>
-                <a id="anchorpoint_resources" class="anchor"></a>
-                <div class="resources">
-                    <h5>Learning Resources</h5>
-                    <div class=content_container id="course-id">
-                        
 
+                <a id="anchorpoint_resources" class="anchor"></a>
+
+                <!--  event = my_course.make_event(event_query['position'],
+                    event_query['type'X], \
+                    event_query['name'X],
+                    event_query['start_date'X],
+                    event_query['end_date'X],
+                    (30 if event_query['marked'] else 0), style="float:right;margin-right:60px;"
+                    deadline=deadline) -->
+                    <h5>Learning Resources 
+                        {% if user.get_type() == types.LECTURER %}
+                        <button type="button" style="float:right;margin-right:60px;" class="btn btn-dark" 
+                                data-toggle="modal" onclick="showModal('#newResource')">Create new Resource
+                            </button>
+                        {% endif %}
+                    </h5>
+                    
+                    <div id="newResource" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                          <div style="padding:20px;" class="modal-content">
+                            <form method="POST">
+                                {{ form1.csrf_token }}
+                                <h3>Create a new {{course.get_name().replace("-","")}} Resource</h3>
+
+                                <label for="exampleInputEmail1">What kind of event are you creating?</label>
+
+                                <select name="resource_type"  id="course_selection" style="margin-top:15px;margin-bottom:15px" class="form-select" aria-label="Default select example">
+                                    <option style="background-color: #DFDFDF" id="event_type" selected>Event Type</option>
+                                    <option value="0">Lecture</option>
+                                    <option value="1">Tutorial</option>
+                                    <option value="2">Practical</option>
+                                    <option value="3">Assignment</option>
+                                    <option value="4">Project</option>
+                                    <option value="5">Examination</option>
+                                    <option value="6">Consultation</option>
+                                    <option value="7">Guest</option>
+                                    <option value="7">Default</option>
+                                </select>
+
+                                <label for="exampleInputEmail1">What would you like to name this event?</label>
+
+                                <input style="margin-bottom:10px;" name="resource_name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Name">
+                                <div style="margin-bottom:10px;">
+                                    <label for="exampleInputEmail1">When is the date of this event?</label>
+                                </div>
+
+                                <input style="margin-bottom:10px;" name="resource_date" type="text" class="form-control" id="exampleInputEmail1" placeholder="Date of Event">
+                                
+
+                                <div style="margin-bottom:10px;">
+                                    <label for="exampleInputEmail1">When does this event start and end?</label>
+                                </div>
+                                <div style="margin-top:10px;margin-bottom:10px;" class="input-group">
+                                    <input name="resource_start_time" onfocusout="validate_time('start')" style="margin-right: 40px;" type="text" class="form-control" placeholder="Start"/>
+                                    <span class="input-group-addon">to</span>
+                                    <input name="resource_end_time" onfocusout="validate_time('end')" style="margin-left: 40px;" type="text" class="form-control" placeholder="End"/>
+                                </div>
+
+
+                                <div style="margin-bottom:10px;">
+                                    <label for="exampleInputEmail1">Select the resource to upload for this event</label>
+                                </div>
+                                <div style="margin-bottom:10px;">
+                                <input name="resource_file" type="file" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+
+                            <div style="margin-bottom:10px;">
+                                <label for="exampleInputEmail1">Enter the mark for this item (if applicable)</label>
+                            </div>
+
+                            <input style="margin-bottom:10px;" name="resource_mark" type="text" class="form-control" id="exampleInputEmail1" placeholder="Mark">
+                                
+
+                                <button name="form-resource" type="submit" style="margin-right:150px;" class="btn btn-dark">Create Resource</button>
+
+
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
+                      
+                <div class="resources">
+                    <div class=content_container id="course-id">
 
                         {% for event in course.get_events() %}
                         {% if event.get_weighting() == 0 %}
@@ -116,10 +212,9 @@
                 </div>
                 <a id="anchorpoint_assessments" class="anchor"></a>
 
-
+                <h5>Assessment</h5>
 
                 <div class="assessments">
-                    <h5>Assessment</h5>
                     <div class=content_container id="course-id">
 
                         {% for event in course.get_events() %}
@@ -127,7 +222,7 @@
                         {% if event.get_weighting() > 0 %}
 
                         <div class="content_entry">
-                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> {{event.get_name()}}</a>
+                            <a href="#" class="settings-btn"><i class="fa fa-folder-open"></i> {{event.get_name()}} - {{event.get_weighting()}} marks</a>
                         </div>
                         <hr class="resources_line">
 
