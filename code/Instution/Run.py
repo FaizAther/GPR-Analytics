@@ -38,6 +38,7 @@ for admin_query in admins_query:
     # print(facs_query)
     for fac_query in facs_query:
         print(fac_query)
+        my_fac = my_uni.make_faculty()
 
 # Populate University
 
