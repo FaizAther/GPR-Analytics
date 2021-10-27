@@ -52,6 +52,9 @@ class Event(Base):
     def set_start_end(self, start_end):
         self._start_end = start_end
 
+    def get_end_date(self):
+        return self._end_date
+
     def get_type(self):
         return self._type
 

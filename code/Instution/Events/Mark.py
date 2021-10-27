@@ -38,6 +38,12 @@ class Mark(Attendance):
     def set_achieved(self, acheived):
         self._acheived = acheived
 
+    def get_deadline(self):
+        return self._deadline
+
+    def set_deadline(self, deadline):
+        self._deadline = deadline
+
     def handle_user(self, user: User) -> None:
         if (user.get_type() == UserType.TUTOR):
             user.student_assigned()

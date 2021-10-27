@@ -296,7 +296,7 @@
                             </div>
                             <div class="tabs_second">
                                 <div style="margin-right:70px;" class="tab_last_activity">
-                                    LAST ACTIVITY
+                                    DUE
                                 </div>
                                 <div class="tab_grade">
                                     GRADE
@@ -317,7 +317,7 @@
                                     <div class="activity_entry">
                                         <!--11/09/2021 11:35 AM
                                         GRADED-->
-                                        {{engagement}}<p> </p>{{engagement}}
+                                        {{engagement.get_event().get_end_date()}}
                                     </div>
                                     <div class="grade_entry">
                                         {{engagement.get_achieved()}}
@@ -327,94 +327,8 @@
                             {% endif %}
 
                             {% endfor %}    
+                        
 
-                            <div class="content_entry">
-                                <div class=item_entry>
-                                    <a href="#" class="settings-btn"><i class="fa fa-calendar-check"></i> Literature Review</a>
-                                </div>
-                                <div class="info_entries">
-                                    <div class="activity_entry">
-                                        10/09/2021 11:35 AM
-                                        GRADED
-                                    </div>
-                                    <div class="grade_entry">
-                                        PASS
-                                    </div>
-                                </div>
-                            </div>
-
-                            
-
-
-
-                            <div class="content_entry">
-                                <div class=item_entry>
-                                    <a href="#" class="settings-btn"><i class="fa fa-calendar-check"></i> Assignment 1</a>
-                                    <p>
-                                        DUE: 11/09/2021
-                                    </p>
-                                </div>
-                                <div class="info_entries">
-                                    <div class="activity_entry">
-                                        11/09/2021 11:35 AM
-                                        GRADED
-                                    </div>
-                                    <div class="grade_entry">
-                                        20/20
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content_entry">
-                                <div class=item_entry>
-                                    <a href="#" class="settings-btn"><i class="fa fa-calendar-check"></i> Assignment 2</a>
-                                    <p>
-                                        DUE: 12/10/2021
-                                    </p>
-                                </div>
-                                <div class="info_entries">
-                                    <div class="activity_entry">
-                                        12/10/2021 11:35 AM
-                                        GRADED
-                                    </div>
-                                    <div class="grade_entry">
-                                        20/20
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content_entry">
-                                <div class=item_entry>
-                                    <a href="#" class="settings-btn"><i class="fa fa-calendar-check"></i> Assignment 3</a>
-                                    <p>
-                                        DUE: 02/11/2021
-                                    </p>
-                                </div>
-                                <div class="info_entries">
-                                    <div class="activity_entry">
-                                        02/11/2021 11:35 AM
-                                        GRADED
-                                    </div>
-                                    <div class="grade_entry">
-                                        30/30
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content_entry">
-                                <div class=item_entry>
-                                    <a href="#" class="settings-btn"><i class="fa fa-calendar-check"></i> Final Exam</a>
-                                    <p>
-                                        DUE: 02/12/2021
-                                    </p>
-                                </div>
-                                <div class="info_entries">
-                                    <div class="activity_entry">
-                                        02/12/2021 11:35 AM
-                                        GRADED
-                                    </div>
-                                    <div class="grade_entry">
-                                        96/120
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
