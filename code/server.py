@@ -1,4 +1,5 @@
 import os
+import re
 
 from flask import (
     Flask, redirect, url_for,
@@ -16,6 +17,9 @@ from werkzeug.utils import HTMLBuilder
 from Forms.LoginForm import LoginForm
 from Forms.SelectionForm import SelectionForm
 from Forms.AddForm import AddForm
+from Forms.AnnouncementForm import AnnouncementForm
+from Forms.EventForm import EventForm
+
 
 from Instution.Run import *
 
@@ -49,7 +53,7 @@ def login():
         session.pop('username', None)
         user = university.find_user(form.username.data)
         validate = user != None and user.validate_password(form.password.data)
-        print(validate)
+        # print(validate)
         if validate:
             session['username'] = user.get_id()
             session['university'] = university.get_id()
@@ -129,24 +133,56 @@ def home():
 
     # find user from session
     _user = my_sudo.find_user(session['university'], session['username'])
-    print(_user, _user.get_type())
+    # print(_user, _user.get_type())
     return render_template("home.html", user=_user)
 
 # Needs to be passed username (for display) and list of courses they're enrolled in
-@app.route('/course')
+@app.route('/course', methods=['GET', 'POST'])
 def course():
     # check user logged in
     if 'username' not in session:
         return redirect(url_for('login'))
 
-    # find user from session
-    _user = my_sudo.find_user(session['university'], session['username'])
+    form = AnnouncementForm()
+    form1 = EventForm()
+    eventTypes = []
+    for i in range(0, 9):
+        eventTypes.append((i, EventType(i)))
+    form1.resource_type.choices = eventTypes
+    # print(eventTypes)
 
-    target_course = request.args.get('course')
+    # find user from session
+    _uni = my_sudo.find_university(session['university'])
+    _user = my_sudo.find_user(session['university'], session['username'])
+    target_fac_cour = request.args.get('course')
+    target_fac, target_course = target_fac_cour.split('-')
+
+    # print(_uni.get_faculties())
+    _faculty = _uni.find_faculty(target_fac)
+    # print(_faculty)
+    _course = _faculty.find_course(target_course)
+    # _faculty.find
+    # print(_course)
+    if request.method == "POST" and "form-announcement" in request.form and form.validate():
+        # print("here")
+        _course.make_announcement(description=form.new_announcement_desc.data)
+        print(form.new_announcement_desc.data)
+        # print("asdfasdfasdfasdfasdf")
+        print("for ZERO 000000")
+    elif request.method == "POST" and "form-resource" in request.form:
+        # print("form ONE 11")
+        # print(form1.resource_type.data, form1.resource_start_time, form1.resource_end_time, form1.resource_name)
+        # print(EventType(int(form1.resource_type.data)))
+        pos = len(_course.get_events())
+        event = _course.make_event(pos, int(form1.resource_type.data), \
+    form1.resource_name.data, form1.resource_start_time.data, form1.resource_end_time.data, int(form1.resource_mark.data), deadline=None)
+        # print(event)
+
+    # print(request.form)
     if target_course == None:
         return redirect(url_for('login'))
 
-    return render_template("course.html", specified_course=target_course, user=_user)
+    return render_template("course.html", specified_course=target_fac_cour, user=_user, course=_course, form=form, form1=form1)
 
 @app.route('/register_attendance')
 def register_attendance():
@@ -175,10 +211,7 @@ def course_mgmt():
         return redirect(url_for('forbidden'))
 
     _user = my_sudo.find_admin(session['university'])
-    print("///////////////////////////")
-    u = _user.get_university()
 
-    print("///////////////////////////")
     return render_template("course_mgmt.html", user=_user)
 
 # Create staff, remove staff, list staff
@@ -203,6 +236,40 @@ def user_mgmt():
     _user = my_sudo.find_admin(session['university'])
 
     return render_template("user_mgmt.html", user=_user)
+
+# Create announcement for specified course
+@app.route('/make_announcement')
+def make_announcement():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('forbidden'))
+    _user = my_sudo.find_admin(session['university'])
+
+    return render_template("make_announcement.html", user=_user)
+
+# Create event for specified course
+@app.route('/make_event')
+def make_event():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('forbidden'))
+    _user = my_sudo.find_admin(session['university'])
+
+    return render_template("make_event.html", user=_user)
+
+@app.route('/add_resource')
+def add_resource():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('forbidden'))
+    _user = my_sudo.find_admin(session['university'])
+
+    return render_template("add_resource.html", user=_user)
+
+
 
 @app.route('/forbidden')
 def forbidden():
@@ -309,7 +376,7 @@ if __name__ == "__main__":
     sociio = True    
 
     if sociio:
-        socketio.run(app, host="0.0.0.0", port='80', debug=True)
+        socketio.run(app, host="0.0.0.0", port='8888', debug=True)
     else:
         app.debug = True
-        app.run(host="0.0.0.0", port='80', debug=True)
+        app.run(host="0.0.0.0", port='8888', debug=True)

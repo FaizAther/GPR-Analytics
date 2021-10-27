@@ -24,7 +24,7 @@
     {% set types = user.get_user_types() %}
     <script>console.log("{{user.get_type()}}")</script>
 
-    {% if user.get_type() in [types.STUDENT, types.TUTOR, types.UNDERGRAD, types.POSTGRAD, types.EXCHANGE, types.PHD] %} 
+    {% if user.is_type(types.STUDENT) or user.is_type(types.LECTURER) %} 
       {% set courses = user.get_enrollments() %}
     {% endif %}
 
@@ -60,7 +60,7 @@
 
 
                   <!-- Engagements Item -->
-                  {% if user.get_type() in [types.STUDENT, types.TUTOR, types.UNDERGRAD, types.POSTGRAD, types.PHD, types.EXCHANGE] %} 
+                  {% if user.is_type(types.STUDENT) or user.is_type(types.LECTURER)  %}  
                   <!--<li class="nav-item">
                   </li>-->
                   <li class="nav-item dropdown">
@@ -96,13 +96,30 @@
                         </font>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{{ url_for('course_mgmt') }}">Courses</a></li>
-                        <li><a class="dropdown-item" href="{{ url_for('staff_mgmt') }}">Staff</a></li>
-                        <li><a class="dropdown-item" href="{{ url_for('user_mgmt') }}">Users</a></li>
+                        <li><a class="dropdown-item text-dark" href="{{ url_for('course_mgmt') }}">Courses</a></li>
+                        <li><a class="dropdown-item text-dark" href="{{ url_for('staff_mgmt') }}">Staff</a></li>
+                        <li><a class="dropdown-item text-dark" href="{{ url_for('user_mgmt') }}">Users</a></li>
                          <!-- <li><a class="dropdown-item" href="/register">Register</a></li> -->
                       </ul>
                   </li>
                   {% endif %}
+                  {% if user.get_type() == types.LECTURER %}
+                  <!-- Publish Content -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <font color="white" face="Raleway:wght@300">
+                        Content
+                      </font>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item text-dark" href="{{ url_for('make_announcement') }}">Announcement</a></li>
+                      <li><a class="dropdown-item text-dark" href="{{ url_for('make_event') }}">Event</a></li>
+                       <!-- <li><a class="dropdown-item" href="/register">Register</a></li> -->
+                    </ul>
+                </li>
+                {% endif %}
+
+                  
 
 
 

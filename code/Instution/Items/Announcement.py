@@ -23,6 +23,12 @@ class Announcement(Base):
         for r in resources:
             self.add_resource(r)
 
+    def get_timestamp(self):
+        return self._timestamp
+
+    def set_timestamp(self, timestamp):
+        self._timestamp = timestamp
+
     def __whitetest__(self, result=...) -> bool:
         return super().__whitetest__(result=result)
     

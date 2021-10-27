@@ -4,10 +4,12 @@ from typing import TYPE_CHECKING
 
 from abc import abstractmethod
 from Instution.Base import Base
+from Instution.Events.Attendance import Attendance
 from Instution.Users.UserType import UserType
 
 if TYPE_CHECKING:
     from typing import List
+    from Instution.Universities.Course import Course
 
 '''
     User class
@@ -54,6 +56,15 @@ class User(Base):
 
     def get_engagements(self) -> List:
         return self._engagements
+
+    def get_specific_engagement(self, course: Course):
+        ret = []
+        for engagement in self.get_engagements():
+            if isinstance(engagement, Attendance):
+                if engagement.get_course().get_id() == course.get_id():
+                    ret.append(engagement)
+        return ret
+
 
     def get_user_types(self) -> List:
         return UserType

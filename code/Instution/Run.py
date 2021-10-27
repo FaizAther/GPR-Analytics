@@ -14,6 +14,8 @@ from Instution.Events.Mark import Mark
 from Instution.Users.Sudo import Sudo
 from Instution.Database.Database import SqliteDB
 
+import datetime
+
 sqldb = SqliteDB()
 # sqldb.connection()
 
@@ -50,14 +52,19 @@ for admin_query in admins_query:
         courses_query = sqldb.query_dict(f"Select * FROM Course WHERE faculty_id = {fac_query[0]}")
         for course_query in courses_query:
             # print(course_query)
-            my_course = my_fac.make_course(id=course_query['position'], name=course_query['name'])
+            coordinator_id = course_query['coordinator_id']
+            coordinaotr_query = sqldb.query_dict(f"Select * FROM User WHERE id = {coordinator_id}")[0]
+            # print(coordinator_id, coordinaotr_query)
+            my_course_admin = my_uni.find_user(int(coordinaotr_query['position']))
+            # print(my_course_admin)
+            my_course = my_fac.make_course(id=course_query['position'], name=course_query['name'], admin=my_course_admin)
 
             annon_queries = sqldb.query_dict(f"Select * FROM Announcement WHERE course_id = {course_query['id']}")
 
             # Add announcements
             for annon_querry in annon_queries:
                 check_annon = my_course.make_announcement(annon_querry['position'], time=annon_querry['created_date'], description=annon_querry['description'])
-            print(my_course.get_announcements())
+            # print(my_course.get_announcements())
             # Enroll students
             enroll_querries = sqldb.query_dict(f"Select * FROM Enrollment WHERE course_id = {course_query['id']}")
             for enroll_query in enroll_querries:
@@ -74,14 +81,28 @@ for admin_query in admins_query:
     
 
             # print(my_uni.get_users())
-            # event_queries = sqldb.query_dict(f"Select * FROM Event WHERE course_id = {course_query['position']}")
-            # for event_query in event_queries:
-            #     # print(event_query)
+            event_queries = sqldb.query_dict(f"Select * FROM Event WHERE course_id = {course_query['id']}")
+            
+            
+            deadline = datetime.datetime.fromisoformat(event_queries[0]['start_date'])
+            for event_query in event_queries:
+                event = my_course.make_event(event_query['position'], event_query['type'], \
+                    event_query['name'], event_query['start_date'], event_query['end_date'], (30 if event_query['marked'] else 0), deadline=deadline)
+                if event_query['marked']:
+                    deadline += datetime.timedelta(days=50)
+                # print(deadline)
+                # print(event_query)
+                # print(event.get_invitees())
+            
+
             # pass
         # print(my_fac.get_courses_list())
         # print(my_fac)
 
-
+# print(my_user.get_engagements())
+# for engagement in my_user.get_engagements():
+#     print(engagement)
+# print(my_user.get_specific_engagement(my_course))
 # Populate University
 
 # Populate Faculty

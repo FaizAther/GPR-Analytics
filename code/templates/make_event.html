@@ -1,0 +1,75 @@
+{% extends "basic.html" %}
+{% block my_title %}Logged in{% endblock %}
+{% block my_h1 %}
+
+{% endblock %}
+{% block my_body %}
+<script>
+    function validate_time(caller) {
+        var caller_object = document.getElementById(caller);
+        var regex_check_pass = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(caller_object.value);
+
+        if (!regex_check_pass && caller_object.value != "") {
+            caller_object.value = "INVALID";
+        }
+    }
+</script>
+
+<body style="margin-top:3rem;">
+    <div class="row justify-content-center l-form">
+    <div class="col-md-7 col-lg-5">
+       <div style="margin-top:40px;"></div>
+       <form method="POST">
+    </div>
+    <div id="fromControls" style="margin-top:30px; width:60%;visibility: visible;border-radius: 5px; background-color:#efefef" class="row justify-content-left l-form">
+    <div style="padding:20px">
+
+        <center> <h3>Create Course Event</h3> </center>
+
+        <select id="course_selection" style="margin-top:15px;margin-bottom:15px" class="form-select" aria-label="Default select example">
+            <option style="background-color: #DFDFDF" selected>Select Course</option>
+            <option value="1">COURSE_ONE</option>
+            <option value="2">COURSE_TWO</option>
+            <option value="3">COURSE_THREE</option>
+        </select>
+
+
+        <label for="exampleInputEmail1">What kind of event are you creating?</label>
+
+        <select id="course_selection" style="margin-top:15px;margin-bottom:15px" class="form-select" aria-label="Default select example">
+            <option style="background-color: #DFDFDF" id="event_type" selected>Event Type</option>
+            <option value="0">Lecture</option>
+            <option value="1">Tutorial</option>
+            <option value="2">Practical</option>
+            <option value="3">Assignment</option>
+            <option value="4">Project</option>
+            <option value="5">Examination</option>
+            <option value="6">Consultation</option>
+            <option value="7">Guest</option>
+            <option value="7">Default</option>
+        </select>
+
+        <label for="exampleInputEmail1">When does this event start and end?</label>
+
+        <div style="margin-top:10px;margin-bottom:10px;" class="input-group">
+            <input id="start" onfocusout="validate_time('start')" style="margin-right: 40px;" type="text" class="form-control" placeholder="Start"/>
+            <span class="input-group-addon">to</span>
+            <input id="end" onfocusout="validate_time('end')" style="margin-left: 40px;" type="text" class="form-control" placeholder="End"/>
+        </div>
+
+        <labels for="exampleInputEmail1">Enter event details (if applicable)</label>
+
+        <div style="margin-top:10px;" class="input-group">
+            <div class="overflow-auto" style="height:200px; width:100%">
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+                </div>
+                    <div class="input-group" style="margin-top: 10px">
+                        <button style="float:right" type="button" class="float-right btn btn-outline-primary">Publish Event</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+{% endblock %}
