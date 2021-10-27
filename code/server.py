@@ -212,6 +212,30 @@ def user_mgmt():
 
     return render_template("user_mgmt.html", user=_user)
 
+# Create announcement for specified course
+@app.route('/make_announcement')
+def make_announcement():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('forbidden'))
+    _user = my_sudo.find_admin(session['university'])
+
+    return render_template("make_announcement.html", user=_user)
+
+# Create event for specified course
+@app.route('/make_event')
+def make_event():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('forbidden'))
+    _user = my_sudo.find_admin(session['university'])
+
+    return render_template("make_event.html", user=_user)
+
+
+
 @app.route('/forbidden')
 def forbidden():
     return render_template("403.html")

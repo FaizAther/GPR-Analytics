@@ -102,6 +102,20 @@
                          <!-- <li><a class="dropdown-item" href="/register">Register</a></li> -->
                       </ul>
                   </li>
+                  <!-- Publish Content -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <font color="white" face="Raleway:wght@300">
+                        Content
+                      </font>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="{{ url_for('make_announcement') }}">Announcement</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('make_event') }}">Event</a></li>
+                       <!-- <li><a class="dropdown-item" href="/register">Register</a></li> -->
+                    </ul>
+                </li>
+
                   {% endif %}
 
 

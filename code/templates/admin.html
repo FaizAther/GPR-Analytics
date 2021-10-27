@@ -3,14 +3,25 @@
 {% block my_h1 %}- Admin{% endblock %}
 {% block my_body %}
 <body style="margin-top:4rem;">
-<p>{{content}}</p>
-<div>
-    <form method="POST">
-        {{ form.csrf_token }}
-        {{ form.name }}
-        {{ form.selection }}
-        {{ form.type_selection }}
-        <button>Action</button>
-    </form>
-</div>
+<body style="margin-top:3rem;">
+    <div class="row justify-content-center l-form">
+    <div class="col-md-7 col-lg-5">
+       <div style="margin-top:40px;"></div>
+       <form method="POST">
+    </div>
+    <div id="fromControls" style="margin-top:30px; width:60%;visibility: visible;border-radius: 5px; background-color:#efefef" class="row justify-content-left l-form">
+    <div style="padding:20px">
+        <center> <h2>Quick Links</h2> 
+        <label style="margin-top:10px;" for="exampleInputEmail1"><a href="{{ url_for('course_mgmt')}}">Course Management</a></label>
+        <div style="margin-top:40px;"></div>
+        <label for="exampleInputEmail1"><a href="{{ url_for('user_mgmt')}}">User Management</a></label>
+        <div style="margin-top:40px;"></div>
+        <label for="exampleInputEmail1"><a href="{{ url_for('staff_mgmt')}}">Staff Management</a></label>
+        <div style="margin-top:40px;"></div>
+        <label for="exampleInputEmail1"><a href="{{ url_for('make_announcement')}}">Make Annoucement</a></label>
+        <div style="margin-top:40px;"></div>
+        <label for="exampleInputEmail1"><a href="{{ url_for('make_event')}}">Create Event</a></label>
+    </center>
+    </div>
+</body>
 {% endblock %}
