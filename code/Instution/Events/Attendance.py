@@ -28,10 +28,17 @@ class Attendance(Base):
 
         self._event     :Event  = event
         self._course    :Course = course
+        self._marked            = False
 
         for user in [attendee, marker]:
             if user != None:
                 self.add_user(user)
+
+    def set_marked(self):
+        self._marked = not self._marked
+
+    def is_marked(self):
+        return self._marked
 
     def get_course(self):
         return self._course

@@ -25,6 +25,8 @@ class Mark(Attendance):
         self._deadline      :datetime   = 0
         self._penalty       :int        = 0
         self._weighting     :int        = weighting
+        
+        self.set_marked()
 
     def add_user(self, user: User) -> None:
         super().add_user(user)
