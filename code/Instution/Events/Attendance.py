@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 '''
 class Attendance(Base):
 
-    def __init__(self, id, event, attendee, marker=None):
+    def __init__(self, id, event, attendee, marker=None, course=None):
         id = len(attendee.get_engagements())
         super().__init__(id)
 
@@ -27,10 +27,14 @@ class Attendance(Base):
         self._duration  :int    = 0
 
         self._event     :Event  = event
+        self._course    :Course = course
 
         for user in [attendee, marker]:
             if user != None:
                 self.add_user(user)
+
+    def get_course(self):
+        return self._course
 
     def get_marker(self):
         return self._marker

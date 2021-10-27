@@ -81,9 +81,10 @@ for admin_query in admins_query:
         # print(my_fac.get_courses_list())
         # print(my_fac)
 
-print(my_user.get_engagements())
-for engagement in my_user.get_engagements():
-    print(engagement)
+# print(my_user.get_engagements())
+# for engagement in my_user.get_engagements():
+#     print(engagement)
+print(my_user.get_specific_engagement(my_course))
 # Populate University
 
 # Populate Faculty

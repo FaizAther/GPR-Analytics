@@ -19,6 +19,8 @@ if TYPE_CHECKING:
     from Instution.Users.Student import Student
     from Instution.Users.Tutor import Tutor
     from Instution.Users.Lecturer import Lecturer
+    from Instution.Universities.Course import Course
+
 
 '''
     Event Class
@@ -76,16 +78,16 @@ class Event(Base):
     def get_weighting(self) -> int:
         return self._weighting
 
-    def add_user(self, user: User) -> None:
+    def add_user(self, user: User, course: Course) -> None:
         if user.get_type() == UserType.TUTOR:
             self.handle_tutor(user),
         elif user.get_type() == UserType.LECTURER:
             self.handle_lecturer(user)
         else:
-            self.handle_student(user)
+            self.handle_student(user, course)
 
-    def add_users(self, users: List[User]):
-        Base.__DO_SOMETHINGS__(lambda u: self.add_user(u), users)
+    def add_users(self, users: List[User], course):
+        Base.__DO_SOMETHINGS__(lambda u: self.add_user(u, course), users)
 
     def find_marker(self):
         return Base.FOLDL(lambda z, m: \
@@ -96,15 +98,15 @@ class Event(Base):
     def get_manager(self):
         return self._manager
 
-    def handle_student(self, user: Student) -> None:
+    def handle_student(self, user: Student, course: Course) -> None:
         marker = self.find_marker()
         marker = self.get_manager() if marker == None else marker
         # print(user)
         id = 0
         if (self.get_weighting() <= 0):
-            attendance = Attendance(id, self, user, marker=marker)
+            attendance = Attendance(id, self, user, marker=marker, course=course)
         else:
-            attendance = Mark(id, self, user, self.get_weighting(), marker=marker)
+            attendance = Mark(id, self, user, self.get_weighting(), marker=marker, course=course)
 
         Base.ADD_THING_TO(attendance, self.get_invitees())
 
