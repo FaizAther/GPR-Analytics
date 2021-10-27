@@ -13,7 +13,7 @@
 {% endblock %}
 {% block my_body %}
 <body>
-    
+    <script> console.log("{{course}}")</script>
     <main class="main">
         <!-- HOME PAGE -->
         <section class="home" id=home>
@@ -37,25 +37,16 @@
                     <h5>Announcements</h5>
                     
                         <div style="padding: 20px; padding-left:10px;" class=content_container id="course-id">
-                            {% for i in range(0,4) %}
+                            {% for announcement in course.get_announcements() %}
                             <div style="padding-top:10px" class="staff">
                                 <div class="info">
-                                    <p>ANNOUNCEMENT_AUTHOR</p>
-                                    <p>ANNOUNCEMENT_TIME</p>
+                                    <p>Posted by: {{course.get_admin()}}</p>
+                                    <p>At time: {{announcement.get_timestamp()}}</p>
                                 </div>
                                 
-                                <p style="padding-left:40px;margin-right:-10px;padding-right:-10px;">ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 
-                                ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 
-                                ANNOUCEMENT 1 ANNOUCEMENT 1 
-                                ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 
-                                ANNOUCEMENT 1
-                                ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 
-                                ANNOUCEMENT 1
-                                ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 
-                                ANNOUCEMENT 1
-                                ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 ANNOUCEMENT 1 
-                                ANNOUCEMENT 1
-                                
+                                <p style="padding-left:40px;margin-right:-10px;padding-right:-10px;">
+                                    {{announcement.get_description()}}
+                               
                                 </p> 
                             </div>
                             {% endfor %}

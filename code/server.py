@@ -154,7 +154,7 @@ def course():
     if target_course == None:
         return redirect(url_for('login'))
 
-    return render_template("course.html", specified_course=target_fac_cour, user=_user, course=course)
+    return render_template("course.html", specified_course=target_fac_cour, user=_user, course=_course)
 
 @app.route('/register_attendance')
 def register_attendance():
