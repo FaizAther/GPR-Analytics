@@ -52,7 +52,12 @@ for admin_query in admins_query:
         courses_query = sqldb.query_dict(f"Select * FROM Course WHERE faculty_id = {fac_query[0]}")
         for course_query in courses_query:
             # print(course_query)
-            my_course = my_fac.make_course(id=course_query['position'], name=course_query['name'])
+            coordinator_id = course_query['coordinator_id']
+            coordinaotr_query = sqldb.query_dict(f"Select * FROM User WHERE id = {coordinator_id}")[0]
+            print(coordinator_id, coordinaotr_query)
+            my_course_admin = my_uni.find_user(int(coordinaotr_query['position']))
+            print(my_course_admin)
+            my_course = my_fac.make_course(id=course_query['position'], name=course_query['name'], admin=my_course_admin)
 
             annon_queries = sqldb.query_dict(f"Select * FROM Announcement WHERE course_id = {course_query['id']}")
 

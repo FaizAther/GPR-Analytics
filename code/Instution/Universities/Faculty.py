@@ -51,11 +51,11 @@ class Faculty(Base):
                 break
         return add_course
 
-    def make_course(self, id:int=None, name=None, description=None) -> Course:
+    def make_course(self, id:int=None, name=None, description=None, admin=None) -> Course:
         identifier = f"{self.get_name()}-{id}" if name == None else name
         if id == None:
             id = int(name.split('-')[1])
-        course = Course(id, name=f"{identifier}", description=description)
+        course = Course(id, name=f"{identifier}", description=description, admin=admin)
         self.add_course(course)
         self._count += 1
         return course
