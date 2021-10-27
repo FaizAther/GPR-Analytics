@@ -90,8 +90,8 @@ class Event(Base):
         else:
             self.handle_student(user, course, deadline)
 
-    def add_users(self, users: List[User], course):
-        Base.__DO_SOMETHINGS__(lambda u: self.add_user(u, course), users)
+    def add_users(self, users: List[User], course, deadline=None):
+        Base.__DO_SOMETHINGS__(lambda u: self.add_user(u, course, deadline=deadline), users)
 
     def find_marker(self):
         return Base.FOLDL(lambda z, m: \

@@ -127,9 +127,8 @@
                     <!-- Get all announcements for that course-->
                     {% for announcement in course.get_announcements() %}
                     <a class="buttons2">
-                        <p class="announcement-heading">announcement.get_name()</p>
-                        <p class="announcement-content">Week 10 Studio
-                            Posted on: Tuesday, 5 October 2021 8:48:50 AM AEST
+                        <p class="announcement-heading">{{announcement.get_name()}}</p>
+                        <p class="announcement-content">{{announcement.get_timestamp()}}
                             Hi Teams,
                             This Thursday we have a guest lecture starting promptly at 5pm (Brisbane) 
                             *NOTE the unusual time*. The guest speaker is Prof Caroline Jay, Head of Research ...
