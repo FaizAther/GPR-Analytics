@@ -307,6 +307,7 @@
 
                             {% for engagement in user.get_specific_engagement(course) %}
                             
+                            {% if engagement.is_marked() %}
                             
                             <div class="content_entry">
                                 <div class=item_entry>
@@ -319,11 +320,11 @@
                                         {{engagement}}<p> </p>{{engagement}}
                                     </div>
                                     <div class="grade_entry">
-                                        PASS
+                                        {{engagement.get_achieved()}}
                                     </div>
                                 </div>
                             </div>
-
+                            {% endif %}
 
                             {% endfor %}    
 

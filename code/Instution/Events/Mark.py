@@ -32,6 +32,12 @@ class Mark(Attendance):
         super().add_user(user)
         self.handle_user(user)
 
+    def get_achieved(self):
+        return self._acheived
+
+    def set_achieved(self, acheived):
+        self._acheived = acheived
+
     def handle_user(self, user: User) -> None:
         if (user.get_type() == UserType.TUTOR):
             user.student_assigned()
