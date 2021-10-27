@@ -70,7 +70,7 @@ class Course(Base):
         else:
             event.set_weighting(weighting)
 
-        event.add_users(self.get_users(), self, deadline=deadline)
+        event.add_users(self.get_users(), self, deadline=deadline, name=name)
         self.add_event(event)
         return event
 

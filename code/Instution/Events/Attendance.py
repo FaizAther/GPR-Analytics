@@ -16,9 +16,9 @@ if TYPE_CHECKING:
 '''
 class Attendance(Base):
 
-    def __init__(self, id, event, attendee, marker=None, course=None):
+    def __init__(self, id, event, attendee, marker=None, course=None, name=None):
         id = len(attendee.get_engagements())
-        super().__init__(id)
+        super().__init__(id, name=name)
 
         self._attandee  :User   = attendee
         self._marker    :User   = marker
