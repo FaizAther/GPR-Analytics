@@ -1,6 +1,6 @@
 var myID;
 var _peer_list = {};
-
+/* Based off of code from https://github.com/sayantanDs/webrtc-videochat */
 // socketio 
 var protocol = window.location.protocol;
 var socket = io(protocol + '//' + document.domain + ':' + location.port, {autoConnect: false});

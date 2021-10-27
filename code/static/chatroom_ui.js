@@ -1,5 +1,5 @@
 var myVideo;
-
+/* Based off of code from https://github.com/sayantanDs/webrtc-videochat */
 document.addEventListener("DOMContentLoaded", (event)=>{
     myVideo = document.getElementById("local_vid");
     myVideo.onloadeddata = ()=>{console.log("W,H: ", myVideo.videoWidth, ", ", myVideo.videoHeight);};

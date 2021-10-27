@@ -70,54 +70,11 @@ def logout():
     session.pop('university', None)
     return redirect(url_for('login'))
 
-#deprecated
-"""@app.route('/engagements/')
-def engagements():
-    if 'username' in session:
-        user = my_sudo.find_user(session['university'], session['username'])
-        content = Base.__LIST_STR__(user.get_engagements(), "Engagements=")
-    elif 'admin' in session:
-        return redirect(url_for('admin', username="Admin"))
-    else:
-        return redirect(url_for("login"))
-    username = ""
-    return render_template("home.html", content=content, username=session['username'])
-"""
-
-"""
-@app.route('/university/', methods=['GET', 'POST'])
-def university():
-    uname = ""
-    if 'username' in session:
-        uname = session['username']
-    elif 'admin' in session:
-        uname = "Admin"
-    else:
-        uname = None
-
-    content = "Selection"
-    uni_form = SelectionForm()
-    #print(my_sudo.get_universities())
-    uni_form.selection.choices = my_sudo.get_selection()
-    print(my_sudo.get_selection())
-    
-    if request.method == 'POST':
-        content = BuilderHTML.generate(my_sudo.find_university(uni_form.selection.data))
-        print(content)
-        #content = uni0.find_faculty(int(path.split("=")[1])).__str__()
-
-    return render_template("university.html", content=content, form=uni_form, username=uname)
-"""
-
 def is_logged_in():
     return 'username' in session or 'admin' in session
 
 def is_admin():
     return 'admin' in session
-
-
-
-
 
 # deprecated
 @app.route('/')
@@ -207,9 +164,7 @@ def university():
     _user = my_sudo.find_user(session['university'], session['username'])
     return render_template("university.html", user=_user)
 
-
-
-
+#Staff pages
 # assign students to courses, assign staff to course, create courses, del courses
 @app.route('/course_mgmt')
 def course_mgmt():
@@ -248,20 +203,14 @@ def user_mgmt():
 
     return render_template("user_mgmt.html", user=_user)
 
-
-
-
-
-
-
-
-
 @app.route('/forbidden')
 def forbidden():
     return render_template("403.html")
 
 
-# Video chat
+
+
+# Video chat - Based off of code from https://github.com/sayantanDs/webrtc-videochat
 
 @app.route("/video", methods=["GET", "POST"])
 def video_index():
