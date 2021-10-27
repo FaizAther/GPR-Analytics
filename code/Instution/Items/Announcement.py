@@ -8,9 +8,9 @@ from datetime import date, datetime
 
 class Announcement(Base):
 
-    def __init__(self, id):
-        super().__init__(id)
-        self._timestamp = datetime.now()
+    def __init__(self, id, description, time):
+        super().__init__(id, description=description)
+        self._timestamp = datetime.now() if time == None else time
         self._reoucrces = []
 
     def get_reources(self):
@@ -27,7 +27,7 @@ class Announcement(Base):
         return super().__whitetest__(result=result)
     
     def __repr__(self) -> str:
-        return f"{super().__repr__()}"
+        return f"{super().__repr__()}, description={self.get_description()}"
     
     def generate_html(self) -> str:
         return super().generate_html()
