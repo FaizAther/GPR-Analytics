@@ -7,7 +7,7 @@ from Instution.Base import Base
 
 class Resource(Base):
 
-    def __init__(self, id, data=None):
+    def __init__(self, id=0, data=None):
         super().__init__(id)
         self._data = data
     

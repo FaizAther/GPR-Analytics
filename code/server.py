@@ -13,6 +13,9 @@ from flask_socketio import (
 from engineio.payload import Payload
 from flask import session
 from werkzeug.utils import HTMLBuilder
+from werkzeug.utils import secure_filename
+
+
 
 from Forms.LoginForm import LoginForm
 from Forms.SelectionForm import SelectionForm
@@ -30,6 +33,11 @@ app.secret_key = "gpr"
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 # DISABLES CACHING TO MAKE DEV EASIER. REMOVE B4 RELEASE
 socketio = SocketIO(app)
+
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif', '.pdf']
+app.config['UPLOAD_PATH'] = 'uploads'
+
 
 # Video chat
 _users_in_room = {} # stores room wise user list
@@ -173,16 +181,27 @@ def course():
         # print("form ONE 11")
         # print(form1.resource_type.data, form1.resource_start_time, form1.resource_end_time, form1.resource_name)
         # print(EventType(int(form1.resource_type.data)))
+        # f = request.files['resource_file']
+        # f.save(secure_filename(f.filename))
+        uploaded_file = request.files['resource_file']
+        filename = secure_filename(uploaded_file.filename)
+        uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+
         pos = len(_course.get_events())
         event = _course.make_event(pos, int(form1.resource_type.data), \
-    form1.resource_name.data, form1.resource_start_time.data, form1.resource_end_time.data, int(form1.resource_mark.data), deadline=None)
+    form1.resource_name.data, form1.resource_start_time.data, form1.resource_end_time.data, int(form1.resource_mark.data), deadline=None, filename=filename)
         # print(event)
 
     # print(request.form)
     if target_course == None:
         return redirect(url_for('login'))
 
-    return render_template("course.html", specified_course=target_fac_cour, user=_user, course=_course, form=form, form1=form1)
+    return render_template("course.html", specified_course=target_fac_cour, user=_user, course=_course, form=form, form1=form1, files=os.listdir(app.config['UPLOAD_PATH']))
+
+
+@app.route('/uploads/<filename>')
+def upload(filename):
+    return send_from_directory(app.config['UPLOAD_PATH'], filename)
 
 @app.route('/register_attendance')
 def register_attendance():

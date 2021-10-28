@@ -64,10 +64,10 @@ class Course(Base):
     # 'time_of_day': 3, 'marked': 0}
     def make_event(self, id, type, name, \
             start_date, end_date, weighting, \
-            reacurring=False, description=None, creation=None, day_of_week=None, time_of_day=None, deadline=None):
+            reacurring=False, description=None, creation=None, day_of_week=None, time_of_day=None, deadline=None, filename=None):
         start_date = datetime.fromisoformat(start_date)
         end_date = datetime.fromisoformat(end_date)
-        event = Event(id, start_date, end_date, name=name, description=description, creation=creation, type=EventType(type))
+        event = Event(id, start_date, end_date, name=name, description=description, creation=creation, type=EventType(type), filename=filename)
         dates = {}
         if reacurring:
             pass
