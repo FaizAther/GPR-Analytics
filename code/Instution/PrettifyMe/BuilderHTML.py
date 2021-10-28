@@ -34,7 +34,7 @@ class BuilderHTML():
     @dispatch(University)
     def generate(concrete: University):
         facultys_html = ''
-        print(concrete.get_faculties_list())
+        # print(concrete.get_faculties_list())
         for faculty in concrete.get_faculties_list():
             facultys_html += BuilderHTML.generate(faculty)
         return '<div><p>' + 'University: ' + concrete.get_name() + ' ID: ' + concrete.get_id().__str__() + facultys_html + '</p></div>'

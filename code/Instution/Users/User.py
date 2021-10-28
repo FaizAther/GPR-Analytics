@@ -40,7 +40,7 @@ class User(Base):
 
     def is_type(self, target:UserType):
         students = [UserType.UNDERGRAD, UserType.POSTGRAD, UserType.PHD, UserType.EXCHANGE]
-        print(target, self.get_type() in students)
+        # print(target, self.get_type() in students)
         if (target == UserType.STUDENT):
             return self.get_type() in students
         return self.get_type() == target

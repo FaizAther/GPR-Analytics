@@ -94,7 +94,22 @@ def index():
     if not is_logged_in:
         return redirect(url_for("login"))
     return redirect(url_for("home"))
-
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('home'))
+    form = AddForm()
+    username = ""
+    admin = my_sudo.find_admin(session['university'])
+    form.selection.choices = admin.get_functions()
+    form.type_selection.choices = list(map((lambda ut: (ut.value, ut.name)), list(UserType)))
+    if request.method == "POST":
+        # print(form.name.data)
+        admin.commit(int(form.selection.data), form.name.data, type_select=form.type_selection.data)
+    return render_template("admin.html", content=admin, form=form, username="Admin", user=admin)
+'''
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if 'admin' not in session and 'username' not in session:
@@ -112,6 +127,7 @@ def admin():
     elif request.method == "POST" and form_1 != None:
         admin.commit(int(form.selection.data), form.name.data, type_select=form_1.type_selection.data)
     return render_template("admin.html", content=admin, form=form, user=admin)
+'''
 
 
 @app.route('/public/<file>')
@@ -174,9 +190,9 @@ def course():
     if request.method == "POST" and "form-announcement" in request.form and form.validate():
         # print("here")
         _course.make_announcement(description=form.new_announcement_desc.data)
-        print(form.new_announcement_desc.data)
+        # print(form.new_announcement_desc.data)
         # print("asdfasdfasdfasdfasdf")
-        print("for ZERO 000000")
+        # print("for ZERO 000000")
     elif request.method == "POST" and "form-resource" in request.form:
         # print("form ONE 11")
         # print(form1.resource_type.data, form1.resource_start_time, form1.resource_end_time, form1.resource_name)
@@ -212,13 +228,35 @@ def register_attendance():
     _user = my_sudo.find_user(session['university'], session['username'])
     return render_template("register_attendance.html")
 
+@app.route('/university/', methods=['GET', 'POST'])
+def university():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    if 'admin' in session:
+        _user = my_sudo.find_admin(session['university'])
+    else:
+        _user = my_sudo.find_user(session['university'], session['username'])
 
+    content = "Selection"
+    uni_form = SelectionForm()
+    # print(my_sudo.get_universities())
+    uni_form.selection.choices = my_sudo.get_selection()
+    # print(my_sudo.get_selection())
+    username = ""
+    if request.method == 'POST':
+        content = BuilderHTML.generate(my_sudo.find_university(uni_form.selection.data))
+        # print(content)
+        #content = uni0.find_faculty(int(path.split("=")[1])).__str__()
+
+    return render_template("university.html", content=content, form=uni_form, user=_user)
+'''
 @app.route('/university')
 def university():
     if not is_admin():
         return redirect(url_for('forbidden'))
     _user = my_sudo.find_user(session['university'], session['username'])
     return render_template("university.html", user=_user)
+'''
 
 #Staff pages
 # assign students to courses, assign staff to course, create courses, del courses
@@ -294,7 +332,15 @@ def add_resource():
 def forbidden():
     return render_template("403.html")
 
-
+@app.route('/video_copy')
+def video_copy():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    if 'admin' in session:
+        _user = my_sudo.find_admin(session['university'])
+    else:
+        _user = my_sudo.find_user(session['university'], session['username'])
+    return render_template("video_copy.html", user=_user)
 
 
 # Video chat - Based off of code from https://github.com/sayantanDs/webrtc-videochat
