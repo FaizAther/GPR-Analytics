@@ -201,7 +201,9 @@ def course():
         # f.save(secure_filename(f.filename))
         uploaded_file = request.files['resource_file']
         filename = secure_filename(uploaded_file.filename)
-        uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+        print('FUCKKKKKK', filename)
+        if filename != '':
+            uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
 
         pos = len(_course.get_events())
         event = _course.make_event(pos, int(form1.resource_type.data), \
