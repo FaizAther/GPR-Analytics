@@ -201,7 +201,7 @@ def course():
         # f.save(secure_filename(f.filename))
         uploaded_file = request.files['resource_file']
         filename = secure_filename(uploaded_file.filename)
-        print('FUCKKKKKK', filename)
+
         if filename != '':
             uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
 
