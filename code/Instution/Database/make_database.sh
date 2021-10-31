@@ -10,3 +10,4 @@ cp gpr.db ../
 cp gpr.db ../../
 rm -rf $PYTHONPATH/uploads
 mkdir $PYTHONPATH/uploads
+touch $PYTHONPATH/uploads/.hello_world
