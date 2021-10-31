@@ -10,6 +10,7 @@ virtualenv deco-env
 source ./deco-env/bin/activate
 pip install -r ./requirments.txt
 cd ..
+export PYTHONPATH=`pwd | sed 's/\/Instution\/Database$//'`
 python3 server.py
 ```
 
