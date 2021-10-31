@@ -93,7 +93,7 @@ for admin_query in admins_query:
             # pass
         # print(my_fac.get_courses_list())
         # print(my_fac)
-
+my_admin2 = my_sudo.add_admin(name="University of New South Wales", description="Never stand still!")
 # print(my_user.get_engagements())
 # for engagement in my_user.get_engagements():
 #     print(engagement)

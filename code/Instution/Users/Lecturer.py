@@ -13,6 +13,13 @@ class Lecturer(User):
 
     def __init__(self, id: int, type: UserType=UserType.LECTURER, name=None, description=None):
         super().__init__(id, type, name=name, description=description)
+        self._markings = []
+
+    def get_markings(self):
+        return self._markings
+    
+    def add_markings(self, marking):
+        self.get_markings().append(marking)
 
     def add_engagement(self, engagement) -> None:
         return super().add_engagement(engagement)

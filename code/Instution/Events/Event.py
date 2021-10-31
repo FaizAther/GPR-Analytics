@@ -9,6 +9,7 @@ from Instution.Events.Attendance import Attendance
 from Instution.Events.EventType import EventType
 from Instution.Users.UserType import UserType
 from Instution.Events.Mark import Mark
+from Instution.Items.Resource import Resource
 
 if TYPE_CHECKING:
     from typing import Dict, List
@@ -28,7 +29,7 @@ if TYPE_CHECKING:
 class Event(Base):
 
     def __init__(self, id, start_date, end_date, name=None, description=None, creation=None, \
-        type=EventType.DEFAULT):
+        type=EventType.DEFAULT, filename=None):
         super().__init__(id, name=name, description=description)
 
         self._manager       :User               = None
@@ -41,10 +42,16 @@ class Event(Base):
 
         self._locations     :List[Location]     = []
         self._type          :EventType          = type
-        self._resources     :List               = []
+        self._resources     :List               = filename
         self._creation                          = creation if creation != None else datetime.now
         self._start_date = start_date if start_date != None else datetime.now
         self._end_date = end_date if end_date != None else datetime.now
+
+    def get_resources(self):
+        return self._resources
+    
+    # def make_resource(self, filename):
+    #     self._resources.append(Resource(data=filename))
 
     def get_start_end(self):
         return self._start_end

@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 class Admin(User):
 
     def __init__(self, id, name=None, description=None, type=UserType.ADMIN):
-        super().__init__(id, type)
+        super().__init__(id, type, name=name)
         self._university = University(id, admin=self, name=name, description=description)
 
     def get_university(self) -> University:
@@ -28,7 +28,12 @@ class Admin(User):
         elif action == 1:
             self._university.make_user(list(UserType)[int(type_select)], name=name)
         elif action == 2:
-            pass
+            try:
+                fac = self._university.find_faculty(name.split('-')[0])
+                # print(fac, "FUCL")
+                fac.make_course(0, name=name.split('-')[1])
+            except:
+                pass
 
     def add_engagement(self, engagement) -> None:
         return super().add_engagement(engagement)

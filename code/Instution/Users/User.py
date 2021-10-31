@@ -40,7 +40,7 @@ class User(Base):
 
     def is_type(self, target:UserType):
         students = [UserType.UNDERGRAD, UserType.POSTGRAD, UserType.PHD, UserType.EXCHANGE]
-        print(target, self.get_type() in students)
+        # print(target, self.get_type() in students)
         if (target == UserType.STUDENT):
             return self.get_type() in students
         return self.get_type() == target
@@ -59,10 +59,15 @@ class User(Base):
 
     def get_specific_engagement(self, course: Course):
         ret = []
-        for engagement in self.get_engagements():
+        values = self.get_engagements()
+        if self.is_type(UserType.LECTURER):
+            values = self.get_markings()
+        for engagement in values:
             if isinstance(engagement, Attendance):
                 if engagement.get_course().get_id() == course.get_id():
                     ret.append(engagement)
+
+
         return ret
 
 

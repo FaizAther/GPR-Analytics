@@ -127,7 +127,7 @@
                     <div id="newResource" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                           <div style="padding:20px;" class="modal-content">
-                            <form method="POST">
+                            <form method="POST" enctype="multipart/form-data">
                                 {{ form1.csrf_token }}
                                 <h3>Create a new {{course.get_name().replace("-","")}} Resource</h3>
 
@@ -202,8 +202,10 @@
                                 {{event.get_description()}}
                             </p>
                         </div>
+                        {% if event.get_resources() != None %}
+                            <a href="{{ url_for('upload', filename=event.get_resources()) }}">{{ event.get_resources() }} Click</a>
+                        {% endif %}
                         <hr class="resources_line">
-
                         {% endif %}
                         {% endfor %}
 
@@ -245,10 +247,17 @@
                             <div class="tab_item">
                                 GRADED ITEMS
                             </div>
+                            {% if user.is_type(types.LECTURER) %}
+                            <div style="margin-right:300px;" class="tab_makee">
+                                STUDENT
+                            </div>
+                            {% endif%}
                             <div class="tabs_second">
                                 <div style="margin-right:70px;" class="tab_last_activity">
                                     DUE
                                 </div>
+                                
+
                                 <div class="tab_grade">
                                     GRADE
                                 </div>
@@ -264,6 +273,11 @@
                                 <div class=item_entry>
                                     <a href="#" class="settings-btn"><i class="fa fa-calendar-check"></i> {{engagement.get_name()}}</a>
                                 </div>
+                                {% if user.is_type(types.LECTURER) %}
+                                <div style="margin-right:300px;" class="tab_makee">
+                                    {{engagement.get_attendee().get_name()}}
+                                </div>
+                                {% endif%}
                                 <div class="info_entries">
                                     <div class="activity_entry">
                                         <!--11/09/2021 11:35 AM

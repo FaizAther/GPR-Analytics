@@ -58,7 +58,7 @@ class Base(ABC):
     def __init__(self, id: int, name: str=None, description: str=None, html=None):
         self._id:           int = id
         self._name:         str = str(id)
-        self._description:  str = "N.A."
+        self._description:  str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         self._html:         str = "N.A."
         self.set_name(name)
         self.set_description(description)

@@ -13,6 +13,9 @@ from flask_socketio import (
 from engineio.payload import Payload
 from flask import session
 from werkzeug.utils import HTMLBuilder
+from werkzeug.utils import secure_filename
+
+
 
 from Forms.LoginForm import LoginForm
 from Forms.SelectionForm import SelectionForm
@@ -30,6 +33,11 @@ app.secret_key = "gpr"
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 # DISABLES CACHING TO MAKE DEV EASIER. REMOVE B4 RELEASE
 socketio = SocketIO(app)
+
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif', '.pdf']
+app.config['UPLOAD_PATH'] = 'uploads'
+
 
 # Video chat
 _users_in_room = {} # stores room wise user list
@@ -86,7 +94,22 @@ def index():
     if not is_logged_in:
         return redirect(url_for("login"))
     return redirect(url_for("home"))
-
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    elif 'admin' not in session:
+        return redirect(url_for('home'))
+    form = AddForm()
+    username = ""
+    admin = my_sudo.find_admin(session['university'])
+    form.selection.choices = admin.get_functions()
+    form.type_selection.choices = list(map((lambda ut: (ut.value, ut.name)), list(UserType)))
+    if request.method == "POST":
+        # print(form.name.data)
+        admin.commit(int(form.selection.data), form.name.data, type_select=form.type_selection.data)
+    return render_template("admin.html", content=admin, form=form, username="Admin", user=admin)
+'''
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if 'admin' not in session and 'username' not in session:
@@ -104,6 +127,7 @@ def admin():
     elif request.method == "POST" and form_1 != None:
         admin.commit(int(form.selection.data), form.name.data, type_select=form_1.type_selection.data)
     return render_template("admin.html", content=admin, form=form, user=admin)
+'''
 
 
 @app.route('/public/<file>')
@@ -166,23 +190,36 @@ def course():
     if request.method == "POST" and "form-announcement" in request.form and form.validate():
         # print("here")
         _course.make_announcement(description=form.new_announcement_desc.data)
-        print(form.new_announcement_desc.data)
+        # print(form.new_announcement_desc.data)
         # print("asdfasdfasdfasdfasdf")
-        print("for ZERO 000000")
+        # print("for ZERO 000000")
     elif request.method == "POST" and "form-resource" in request.form:
         # print("form ONE 11")
         # print(form1.resource_type.data, form1.resource_start_time, form1.resource_end_time, form1.resource_name)
         # print(EventType(int(form1.resource_type.data)))
+        # f = request.files['resource_file']
+        # f.save(secure_filename(f.filename))
+        uploaded_file = request.files['resource_file']
+        filename = secure_filename(uploaded_file.filename)
+
+        if filename != '':
+            uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+
         pos = len(_course.get_events())
         event = _course.make_event(pos, int(form1.resource_type.data), \
-    form1.resource_name.data, form1.resource_start_time.data, form1.resource_end_time.data, int(form1.resource_mark.data), deadline=None)
+    form1.resource_name.data, form1.resource_start_time.data, form1.resource_end_time.data, int(form1.resource_mark.data), deadline=None, filename=filename)
         # print(event)
 
     # print(request.form)
     if target_course == None:
         return redirect(url_for('login'))
 
-    return render_template("course.html", specified_course=target_fac_cour, user=_user, course=_course, form=form, form1=form1)
+    return render_template("course.html", specified_course=target_fac_cour, user=_user, course=_course, form=form, form1=form1, files=os.listdir(app.config['UPLOAD_PATH']))
+
+
+@app.route('/uploads/<filename>')
+def upload(filename):
+    return send_from_directory(app.config['UPLOAD_PATH'], filename)
 
 @app.route('/register_attendance')
 def register_attendance():
@@ -193,13 +230,35 @@ def register_attendance():
     _user = my_sudo.find_user(session['university'], session['username'])
     return render_template("register_attendance.html")
 
+@app.route('/university/', methods=['GET', 'POST'])
+def university():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    if 'admin' in session:
+        _user = my_sudo.find_admin(session['university'])
+    else:
+        _user = my_sudo.find_user(session['university'], session['username'])
 
+    content = "Selection"
+    uni_form = SelectionForm()
+    # print(my_sudo.get_universities())
+    uni_form.selection.choices = my_sudo.get_selection()
+    # print(my_sudo.get_selection())
+    username = ""
+    if request.method == 'POST':
+        content = BuilderHTML.generate(my_sudo.find_university(uni_form.selection.data))
+        # print(content)
+        #content = uni0.find_faculty(int(path.split("=")[1])).__str__()
+
+    return render_template("university.html", content=content, form=uni_form, user=_user)
+'''
 @app.route('/university')
 def university():
     if not is_admin():
         return redirect(url_for('forbidden'))
     _user = my_sudo.find_user(session['university'], session['username'])
     return render_template("university.html", user=_user)
+'''
 
 #Staff pages
 # assign students to courses, assign staff to course, create courses, del courses
@@ -275,7 +334,15 @@ def add_resource():
 def forbidden():
     return render_template("403.html")
 
-
+@app.route('/video_copy')
+def video_copy():
+    if 'admin' not in session and 'username' not in session:
+        return redirect(url_for("login"))
+    if 'admin' in session:
+        _user = my_sudo.find_admin(session['university'])
+    else:
+        _user = my_sudo.find_user(session['university'], session['username'])
+    return render_template("video_copy.html", user=_user)
 
 
 # Video chat - Based off of code from https://github.com/sayantanDs/webrtc-videochat
@@ -376,7 +443,7 @@ if __name__ == "__main__":
     sociio = True    
 
     if sociio:
-        socketio.run(app, host="0.0.0.0", port='80', debug=True)
+        socketio.run(app, host="0.0.0.0", port='8888', debug=True)
     else:
         app.debug = True
-        app.run(host="0.0.0.0", port='80', debug=True)
+        app.run(host="0.0.0.0", port='8888', debug=True)

@@ -47,7 +47,14 @@
                 </li>
 
                 <!-- ADMIN nav bar items -->
-
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="{{ url_for('university') }}"><font color="white">University</font></a>
+                </li>
+                {% if user.is_type(types.ADMIN) %} 
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="{{ url_for('admin') }}"><font color="white">Admin</font></a>
+                </li>
+                {% endif %}
 
                 <!-- LECTURER/STAFF nav bar items -->
 

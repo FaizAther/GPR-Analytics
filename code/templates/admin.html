@@ -21,6 +21,15 @@
         <label for="exampleInputEmail1"><a href="{{ url_for('make_announcement')}}">Make Annoucement</a></label>
         <div style="margin-top:40px;"></div>
         <label for="exampleInputEmail1"><a href="{{ url_for('make_event')}}">Create Event</a></label>
+        <div>
+            <form method="POST">
+                {{ form.csrf_token }}
+                {{ form.name }}
+                {{ form.selection }}
+                {{ form.type_selection }}
+                <button>Action</button>
+            </form>
+        </div>
     </center>
     </div>
 </body>

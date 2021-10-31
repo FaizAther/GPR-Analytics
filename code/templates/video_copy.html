@@ -1,0 +1,30 @@
+{% extends "basic.html" %}
+{% block my_title %}Video{% endblock %}
+{% block my_h1 %}- Local video playback{% endblock %}
+{% block my_body %}
+    <p>{{content}}</p>
+    <div>
+        <video id="gum-local" autoplay playsinline></video>
+        <button id="showVideo">Open camera</button>
+    
+        <div id="errorMsg"></div>
+    
+        <p>Display the video stream from <code>getUserMedia()</code> in a video element.</p>
+    
+        <p>The <code>MediaStream</code> object <code>stream</code> passed to the <code>getUserMedia()</code> callback is in
+            global scope, so you can inspect it from the console.</p>
+    </div>
+    <div>
+        <video id="gum-local" autoplay playsinline muted></video>
+        <button id="startButton" disabled>Start</button>
+    
+        <div id="errorMsg"></div>
+    
+        <p>Display the screensharing stream from <code>getDisplayMedia()</code> in a video element.</p>
+    </div>
+{% endblock %}
+{% block my_footer %}
+    <script src=public/adapter.js></script>
+    <script src=public/screenshare.js></script>
+    <script src=public/client.js></script>
+{% endblock %}

@@ -33,6 +33,13 @@ class Attendance(Base):
         for user in [attendee, marker]:
             if user != None:
                 self.add_user(user)
+        
+        if marker == None and course != None and course.get_admin() != None:
+            # print(course.get_admin())
+            course.get_admin().add_markings(self)
+
+    def get_attendee(self):
+        return self._attandee
 
     def set_marked(self):
         self._marked = not self._marked
