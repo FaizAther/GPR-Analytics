@@ -56,6 +56,8 @@ You may also observe a ```events.sql``` that populate the events of each course 
 
 ![UML Diagram](https://raw.githubusercontent.com/FaizAther/GPR-Analytics/main/code/Design/gpr_uml.drawio.png)
 
+[UML Diagram - FULL SIZE - CLICK HERE](https://raw.githubusercontent.com/FaizAther/GPR-Analytics/main/code/Design/gpr_uml.drawio.png)
+
 The classes follow a few *adaptations* of well known design patters, you may observe excessive use of the, 
 
 - singleton design pattern,	When creating classes
