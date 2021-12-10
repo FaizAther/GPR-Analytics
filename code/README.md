@@ -75,8 +75,6 @@ The **Sudo** user creates **admin** of different **university**/ies and **admin*
 
 [Adding a faculty - Clink Here](https://raw.githubusercontent.com/FaizAther/GPR-Analytics/classes/code/Design/create_faculty.gif)
 
-https://raw.githubusercontent.com/FaizAther/GPR-Analytics/classes/code/Design/create_faculty.gif
-
 ##### Event Management
 
 Refer to ```Instution/Events/Event.py``` from which publically accessible events like lectures, tutes and for more refer to ```Instution/Events/EventType.py```.
