@@ -73,18 +73,18 @@ Refer to ```Instution/Users/User.py``` from which all the rest of the users exte
 The **Sudo** user has no login password and everything must be defined statically in code, but the **admin** has a login and can interact with the system through the frontend.
 The **Sudo** user creates **admin** of different **university**/ies and **admin** of each **university** may create faculties and users and courses and set **course** authority and **faculty** deans.
 
-[Adding a faculty - Clink Here](https://raw.githubusercontent.com/FaizAther/GPR-Analytics/classes/Design/create_faculty.gif)
+[Adding a faculty - Clink Here](https://raw.githubusercontent.com/FaizAther/GPR-Analytics/main/Design/create_faculty.gif)
 
 ##### Event Management
 
 Refer to ```Instution/Events/Event.py``` from which publically accessible events like lectures, tutes and for more refer to ```Instution/Events/EventType.py```.
 For **assignment** items there are separate classes that follow the singleton pattern to decide and lock an invitee and marker of the attendance, using the *factory pattern* on a new **event** creation like a lecture by lecturer, an **attendance** object is created and locks all the enrolled students with the lecturer as the marker of that attendance and is not only available in the students in engagements but also in the lecturer engagements attributes.
 
-[A lecturer adding announcement and lecture item - Clink Here](https://raw.githubusercontent.com/FaizAther/GPR-Analytics/classes/Design/create_resource.gif)
+[A lecturer adding announcement and lecture item - Clink Here](https://raw.githubusercontent.com/FaizAther/GPR-Analytics/main/Design/create_resource.gif)
 
 Then being viewed by a student enrolled in that course.
 
-[A lecturer adding an assignment item - Clink Here](https://raw.githubusercontent.com/FaizAther/GPR-Analytics/classes/Design/make_assignment.gif)
+[A lecturer adding an assignment item - Clink Here](https://raw.githubusercontent.com/FaizAther/GPR-Analytics/main/Design/make_assignment.gif)
 
 All students enrolled in this course must be marked by the lecturer so all students show up in the lecturers grade section as Assignment 5. Also there is backend functionality that shift the grader to a tutor in that course but this has not been linked with the frontend, refer to
 ```python
@@ -125,7 +125,7 @@ The system as it currently is only has events creation and attendance/mark displ
 
 The current tracker can allow lecturers to view all the students enrolled and all students they have to mark off. It can also be ported to work with tutors and has all the backend functionality to allow the lecturer to dynamically allocate the accessible items ownership to the tutors in the course. The tutors as well as the lecturers can also have buttons to nudge students and the students can have notification trays or a pokes section that gets filled when they are poked or nudged that gets emptied when they have watched a lecture or submitted the assignment they were being nufged for.
 
-![Tracker](https://raw.githubusercontent.com/FaizAther/GPR-Analytics/classes/Design/tracker.png)
+![Tracker](https://raw.githubusercontent.com/FaizAther/GPR-Analytics/main/Design/tracker.png)
 
 As you should see in the image below this staff view of the course shows all the students enrolled and have pending accessible items to be marked off. The buttons for the nudge should be placed have and call the necessary notify function in the backend.
 
